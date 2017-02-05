@@ -1,0 +1,71 @@
+﻿1.1. Interfejs graficzny - okno 1:
+- tabela Nx4:
+	+ wiersz:
+		- nazwy plików (w nawiasie liczba linii kodu)
+		- procentowe podobieństwo (suma podobnych linii w obu plikach przez sume linii)
+		- liczba podobnych linii
+	+ wyróżnienie wierszy z dużym procentem podobieństwa
+	+ podświetlane kliknietego wiersza
+	+ po dwukrotnym kliknięciu przejście do okna 2
+- wczytanie bazy (ścieżka do katalogu zdefiniowana w pliku .txt)
+- wskazanie projektu (katalogu) do porównania:
+	+ wyświetlenie ścieżki do wybranego katalogu
+- przycisk start
+
+
+1.2. Interfejs graficzny - okno 2:
+- przejście do okna 1
+- tabela Nx2:
+	+ wypełniana po kliknięcu na dany wiersz w poprzedniej tabeli
+	+ scrollbar
+	+ nagłówki w pierwszym wierszu tabeli - nazwy plików
+	+ wiersze zawierające przedziały numerów linii z podobnym kodem
+	+ podświetlane kliknietego wiersza
+	+ gdy nie jest wypełnione wyświetlić wiadomość: "select pair of files from list"
+- dwa pola pokazujące kod pary plików:
+	+ okna pionowe
+	+ scrollbar
+	+ nagłówki - ramka z nazwą pliku i numerami podobnych linii
+	+ wyświetlenie całego pliku
+	+ automatyczne scrollowanie do miejsca z podobnym kodem
+	+ wyróżnienie podobnego kodu
+
+
+1.3. Interfejs graficzny - inne:
+- menu:
+	+ opcje:
+		- wybór minimalnej długości łańcuchów
+		- wybór procentu podobieństwa łańcuchów
+		- minimalny procent podobieństwa pary plików
+	+ zmiana katalogu z bazą
+	+ help - opis wszystkich kolumn tabel itp.
+
+
+2. Tokenizacja i sposób porównywania:
+- spis tokenów i odpowiadających im typów
+- sprawdzić wszystkie możliwe typy w javie np. interfejs
+- ustalić znak końca linii - enter (zależny od systemu) lub średnik (pomijać tekst w cudzysłowiu i \")
+- usunięcie z kodu komentarzy, znaków białych (użyć biblioteki?)
+- wybór minimalnej długości łańcuchów
+- wybór procentu podobieństwa łańcuchów
+- algorytm porównujący:
+	+ zasada działania:
+		- z pary plików otrzymujemy dwa gigantyczne ciągi tokenów
+		- szukamy takich samych fragmentów tokenów pomiędzy obydwoma ciągami, np. algorytm Karp-Rabin
+	+ bierze pod uwagę minimalną długość fragmentu
+	+ raz znalezione identyczne tokeny, nie mogą być użyte do dalszych porównań
+	+ bierze pod uwagę procentowe podobieństwo fragmentów
+		- niepodobny kod na początku i końcu fragmentu jest pomijany
+	+ zwraca numery linii fragmentów z podobnym kodem
+	+ sprawdzić czy podobne strumienie tokenów mają podobnie wyglądające linie (spradzić numery linii kodu)
+
+
+3. Dodatkowe pomysły:
+- wyświetlenie paska postępu i przeminiętego czasu
+- szybkie porównanie:
+	+ sprawdza tylko procentowe podobieństwo (suma różnic takich samych linii w obu plikach przez sume linii)
+	+ nie bierze pod uwagę minimalnej długości fragmentu kodu
+- statystyki:
+	+ czas wykonania programu
+	+ liczba identycznych tokenów
+	+ inne
