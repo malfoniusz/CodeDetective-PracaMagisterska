@@ -1,7 +1,6 @@
-package main;
+package controller;
 
 import java.net.URL;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -13,16 +12,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.TableFiles;
 
-public class MainController implements Initializable {
+public class TableFilesController implements Initializable {
 
-    // Define TableFiles
     @FXML TableView<TableFiles> iTableFiles;
     @FXML TableColumn<TableFiles, String> iFile1;
     @FXML TableColumn<TableFiles, String> iFile2;
     @FXML TableColumn<TableFiles, Integer> iLines;
     @FXML TableColumn<TableFiles, String> iMatched;
 
-    // create table data
     final ObservableList<TableFiles> data = FXCollections.observableArrayList(
         new TableFiles("plik1 (365)", "plik3 (566)", 222267, "58%"),
         new TableFiles("plik2 (205)", "plik3 (566)", 144187, "95%")
@@ -40,19 +37,16 @@ public class MainController implements Initializable {
 
     public void addTableFilesItem(TableFiles item) {
         data.add(item);
-        sortTable();
+        sortTableByMatched();
     }
 
     public void addTableFilesItems(ObservableList<TableFiles> items) {
         data.addAll(items);
-        sortTable();
+        sortTableByMatched();
     }
 
-    private void sortTable() {
-        Comparator<TableFiles> comparator =
-                (TableFiles o1, TableFiles o2)->o2.getRMatched().compareTo(o1.getRMatched());
-        ObservableList<TableFiles> sortedData = data.sorted(comparator);
-        iTableFiles.setItems(sortedData);
+    private void sortTableByMatched() {
+        iTableFiles.getSortOrder().add(iMatched);
     }
 
 }

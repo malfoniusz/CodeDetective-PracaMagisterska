@@ -1,9 +1,4 @@
 
-.root {
-    -fx-focus-color: transparent;   /* Remove blue focus ring */
-}
-
-/* TableFiles */
 #table-files .table-column {
     -fx-padding: 3 5;
 }

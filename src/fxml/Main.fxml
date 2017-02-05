@@ -4,11 +4,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+<AnchorPane fx:id="tablefilesController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
       <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -26,16 +24,9 @@
       </MenuBar>
       <SplitPane dividerPositions="0.5" layoutY="24.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
          <items>
-            <SplitPane dividerPositions="0.332, 0.5977" prefHeight="384.0" prefWidth="1198.0">
+            <SplitPane dividerPositions="0.3327, 0.6561" prefHeight="384.0" prefWidth="1198.0">
               <items>
-                  <TableView id="table-files" fx:id="iTableFiles" prefHeight="198.0" prefWidth="113.0">
-                    <columns>
-                      <TableColumn id="column-file1" fx:id="iFile1" prefWidth="142.0" resizable="false" text="File1 (Total lines)" />
-                      <TableColumn id="column-file2" fx:id="iFile2" minWidth="0.0" prefWidth="121.0" resizable="false" text="File2 (Total lines)" />
-                        <TableColumn id="column-lines" fx:id="iLines" prefWidth="65.0" resizable="false" text="Lines" />
-                        <TableColumn id="column-matched" fx:id="iMatched" prefWidth="66.0" resizable="false" text="Matched" />
-                    </columns>
-                  </TableView>
+                  <fx:include fx:id="tableFiles" source="../fxml/TableFiles.fxml" />
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
               </items>

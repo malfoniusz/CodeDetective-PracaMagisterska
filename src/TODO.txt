@@ -1,20 +1,16 @@
-﻿1.1. Interfejs graficzny - okno 1:
+﻿1.1. Interfejs graficzny - część 1:
 - tabela Nx4:
 	+ wiersz:
 		- nazwy plików (w nawiasie liczba linii kodu)
-		- procentowe podobieństwo (suma podobnych linii w obu plikach przez sume linii)
-		- liczba podobnych linii
 	+ wyróżnienie wierszy z dużym procentem podobieństwa
-	+ podświetlane kliknietego wiersza
-	+ po dwukrotnym kliknięciu przejście do okna 2
 - wczytanie bazy (ścieżka do katalogu zdefiniowana w pliku .txt)
 - wskazanie projektu (katalogu) do porównania:
 	+ wyświetlenie ścieżki do wybranego katalogu
 - przycisk start
+- po dwukrotnym kliknięciu na wiersz pierwszej tabeli wyświetlić drugą tabelę
 
 
-1.2. Interfejs graficzny - okno 2:
-- przejście do okna 1
+1.2. Interfejs graficzny - część 2:
 - tabela Nx2:
 	+ wypełniana po kliknięcu na dany wiersz w poprzedniej tabeli
 	+ scrollbar
