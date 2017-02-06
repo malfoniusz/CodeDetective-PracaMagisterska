@@ -1,7 +1,5 @@
 ﻿1.1. Interfejs graficzny - część 1:
 - tabela Nx4:
-	+ wiersz:
-		- nazwy plików (w nawiasie liczba linii kodu)
 	+ wyróżnienie wierszy z dużym procentem podobieństwa
 - wczytanie bazy (ścieżka do katalogu zdefiniowana w pliku .txt)
 - wskazanie projektu (katalogu) do porównania:
@@ -29,12 +27,13 @@
 
 1.3. Interfejs graficzny - inne:
 - menu:
-	+ opcje:
+	+ opcje (w oddzielnym tab'ie?):
 		- wybór minimalnej długości łańcuchów
 		- wybór procentu podobieństwa łańcuchów
 		- minimalny procent podobieństwa pary plików
 	+ zmiana katalogu z bazą
 	+ help - opis wszystkich kolumn tabel itp.
+	+ nazwy plików podane przez użytkownika, które nie będą sprawdzane
 
 
 2. Tokenizacja i sposób porównywania:

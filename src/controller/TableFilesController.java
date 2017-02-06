@@ -21,8 +21,8 @@ public class TableFilesController implements Initializable {
     @FXML TableColumn<TableFiles, String> iMatched;
 
     final ObservableList<TableFiles> data = FXCollections.observableArrayList(
-        new TableFiles("plik1 (365)", "plik3 (566)", 222267, "58%"),
-        new TableFiles("plik2 (205)", "plik3 (566)", 144187, "95%")
+        new TableFiles("MySuperClassController", 365, "MainSourceController", 566, 222267, 58),
+        new TableFiles("plik2", 205, "plik3", 566, 144187, 95)
     );
 
     @Override
