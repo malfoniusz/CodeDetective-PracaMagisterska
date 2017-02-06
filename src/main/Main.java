@@ -29,8 +29,8 @@ public class Main extends Application {
         tableFilesController = mainController.getTableFilesController();
 
         ObservableList<TableFiles> items = FXCollections.observableArrayList(
-            new TableFiles("plik45", 274, "plik31", 233, 376, 89),
-            new TableFiles("plik12", 538, "plik32", 466, 254, 23)
+            new TableFiles("plik45", 274, "Project2", "plik31", 233, 376, 89),
+            new TableFiles("plik12", 538, "Project1", "plik32", 466, 254, 23)
         );
 
         tableFilesController.addTableFilesItems(items);

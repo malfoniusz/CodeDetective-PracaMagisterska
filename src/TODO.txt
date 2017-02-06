@@ -1,21 +1,26 @@
-﻿1.1. Interfejs graficzny - część 1:
-- tabela Nx4:
-	+ wyróżnienie wierszy z dużym procentem podobieństwa
-- wczytanie bazy (ścieżka do katalogu zdefiniowana w pliku .txt)
-- wskazanie projektu (katalogu) do porównania:
-	+ wyświetlenie ścieżki do wybranego katalogu
-- przycisk start
-- po dwukrotnym kliknięciu na wiersz pierwszej tabeli wyświetlić drugą tabelę
+﻿
+1.1. Interfejs graficzny - część 1:
+- menubar:
+    + wskazanie projektu (katalogu) do porównania:
+        - wyświetlenie ścieżki do wybranego katalogu
+    + wczytanie bazy (ścieżka do katalogu zapamiętana w pliku .txt)
+    + przycisk start
+- tabela 1 - przechowywać ścieżki do plików (dla drugiej tabeli)
+- w miejsce niewczytanej tabeli 1 wstawić:
+    + choose directory containing all other projects 
+    + choose directory containing project that will be compared with other projects
+    + start program
 
 
 1.2. Interfejs graficzny - część 2:
-- tabela Nx2:
-	+ wypełniana po kliknięcu na dany wiersz w poprzedniej tabeli
+- dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane)
+- tabela 2:
 	+ scrollbar
 	+ nagłówki w pierwszym wierszu tabeli - nazwy plików
 	+ wiersze zawierające przedziały numerów linii z podobnym kodem
 	+ podświetlane kliknietego wiersza
 	+ gdy nie jest wypełnione wyświetlić wiadomość: "select pair of files from list"
+	+ po kliknięciu na wiersz pierwszej tabeli wyświetlić tą tabelę
 - dwa pola pokazujące kod pary plików:
 	+ okna pionowe
 	+ scrollbar
@@ -23,17 +28,17 @@
 	+ wyświetlenie całego pliku
 	+ automatyczne scrollowanie do miejsca z podobnym kodem
 	+ wyróżnienie podobnego kodu
+	+ po kliknięciu na wiersz drugiej tabeli wyświetlić te okna
+	+ po kliknięciu na wiersz pierwszej tabeli schować te okna
 
 
-1.3. Interfejs graficzny - inne:
-- menu:
-	+ opcje (w oddzielnym tab'ie?):
-		- wybór minimalnej długości łańcuchów
-		- wybór procentu podobieństwa łańcuchów
-		- minimalny procent podobieństwa pary plików
-	+ zmiana katalogu z bazą
-	+ help - opis wszystkich kolumn tabel itp.
-	+ nazwy plików podane przez użytkownika, które nie będą sprawdzane
+1.3. Interfejs graficzny - menu:
+- opcje (w oddzielnym tab'ie?):
+	+ wybór minimalnej długości łańcuchów
+	+ wybór procentu podobieństwa łańcuchów
+	+ wyświetlanie tylko par plików z minimalnym procentem podobieństwa
+- zmiana katalogu z bazą
+- help - opis wszystkich kolumn tabel itp.
 
 
 2. Tokenizacja i sposób porównywania:
@@ -64,3 +69,4 @@
 	+ czas wykonania programu
 	+ liczba identycznych tokenów
 	+ inne
+- nazwy/szablony plików lub ścieżki podane przez użytkownika, które nie będą sprawdzane

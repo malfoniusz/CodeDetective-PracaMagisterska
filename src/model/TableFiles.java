@@ -8,6 +8,8 @@ public class TableFiles {
     private String file1Name;
     private int file1Lines;
 
+    private final SimpleStringProperty rProject;
+
     private final SimpleStringProperty rFile2;
     private String file2Name;
     private int file2Lines;
@@ -17,10 +19,12 @@ public class TableFiles {
     private int matchedValue;
     private final SimpleStringProperty rMatched;
 
-    public TableFiles(String file1Name, int file1Lines, String file2Name, int file2Lines, int sLines, int matchedValue) {
+    public TableFiles(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue) {
         this.file1Name = file1Name;
         this.file1Lines = file1Lines;
         this.rFile1 = new SimpleStringProperty(file1Name + " (" + file1Lines + ")");
+
+        this.rProject = new SimpleStringProperty(project);
 
         this.file2Name = file2Name;
         this.file2Lines = file2Lines;
@@ -58,6 +62,14 @@ public class TableFiles {
         updateRFile1();
     }
 
+
+    public String getRProject() {
+        return rProject.get();
+    }
+
+    public void setRProject(String value) {
+        rProject.set(value);
+    }
 
 
     public String getRFile2() {
