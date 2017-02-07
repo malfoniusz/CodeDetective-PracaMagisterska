@@ -1,5 +1,8 @@
 package main;
+import java.io.IOException;
+
 import controller.MainController;
+import controller.MenuController;
 import controller.TableFilesController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -13,20 +16,21 @@ import model.TableFiles;
 public class Main extends Application {
 
     private final String SCENE_FILE_NAME = "../fxml/Main.fxml";
+    private final String PROGRAM_NAME = "CodeDetective";
 
     private MainController mainController;
+    private MenuController menuController;
     private TableFilesController tableFilesController;
+
+    private Parent root;
 
 	public static void main(String[] args) {
 	    launch(args);
 	}
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(SCENE_FILE_NAME));
-        Parent root = (Parent) loader.load();
-        mainController = loader.getController();
-        tableFilesController = mainController.getTableFilesController();
+    public void start(Stage stage) throws Exception {
+        initialize(stage);
 
         ObservableList<TableFiles> items = FXCollections.observableArrayList(
             new TableFiles("plik45", 274, "Project2", "plik31", 233, 376, 89),
@@ -36,9 +40,19 @@ public class Main extends Application {
         tableFilesController.addTableFilesItems(items);
 
         Scene scene = new Scene(root);
-        primaryStage.setTitle("My title");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setTitle(PROGRAM_NAME);
+        stage.setScene(scene);
+        stage.show();
     }
 
+    private void initialize(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(SCENE_FILE_NAME));
+        root = (Parent) loader.load();
+
+        mainController = loader.getController();
+        menuController = mainController.getMenuController();
+        tableFilesController = mainController.getTableFilesController();
+
+        menuController.setMainStage(stage);
+    }
 }

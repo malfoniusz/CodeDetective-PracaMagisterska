@@ -1,19 +1,20 @@
 ﻿
-1.1. Interfejs graficzny - część 1:
+1. Interfejs graficzny - część 1:
 - menubar:
-    + wskazanie projektu (katalogu) do porównania:
-        - wczytać wszystkie pliki .java czy tylko te w katalogu src? - zrobić z tego opcje?
     + wczytanie bazy (ścieżka do katalogu zapamiętana w pliku .txt)
-    + małe pole na dole ekranu z informacją o aktualnie wybranym projekcie i bazie
-    + wyłączyć przyciski jeśli nie zostały wczytane odpowiednie dane
-- tabela 1 - przechowywać ścieżki do plików (dla drugiej tabeli)
+    + wyłączyć start jeśli nie został wczytany projekt i baza
+- plik z opcjami (jeśli nie ma to utworzyć) - zapisać ścieżke do projektu i bazy (poszukać jak się profesjonalnie zapisuje opcje)
+- w głównym oknie wyświetlić drzewa z wczytanym projektem i bazą (tylko foldery z plikami .java?)
+	+ na dole lub na górze drzewa wydzielić miejsce na wyświetlnie ścieżki do folderu
 - w miejsce niewczytanej tabeli 1 wstawić:
     + choose directory containing all other projects 
     + choose directory containing project that will be compared with other projects
     + start program
+- dodaj ikonkę do głównego okna
+- tabela 1 - przechowywać ścieżki do plików (dla drugiej tabeli)?
 
 
-1.2. Interfejs graficzny - część 2:
+2. Interfejs graficzny - część 2:
 - dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane)
 - tabela 2:
 	+ scrollbar
@@ -33,22 +34,15 @@
 	+ po kliknięciu na wiersz pierwszej tabeli schować te okna
 
 
-1.3. Interfejs graficzny - menu:
-- opcje (w oddzielnym tab'ie?):
-	+ wybór minimalnej długości łańcuchów
-	+ wybór procentu podobieństwa łańcuchów
-	+ wyświetlanie tylko par plików z minimalnym procentem podobieństwa
-- zmiana katalogu z bazą
-- help - opis wszystkich kolumn tabel itp.
-
-
-2. Tokenizacja i sposób porównywania:
+3. Tokenizacja i sposób porównywania:
 - spis tokenów i odpowiadających im typów
 - sprawdzić wszystkie możliwe typy w javie np. interfejs
 - ustalić znak końca linii - enter (zależny od systemu) lub średnik (pomijać tekst w cudzysłowiu i \")
 - usunięcie z kodu komentarzy, znaków białych (użyć biblioteki?)
-- wybór minimalnej długości łańcuchów
-- wybór procentu podobieństwa łańcuchów
+- plik z opcjami:
+	+ wybór minimalnej długości łańcuchów
+	+ wybór procentu podobieństwa łańcuchów
+	+ wyświetlanie tylko par plików z minimalnym procentem podobieństwa
 - algorytm porównujący:
 	+ zasada działania:
 		- z pary plików otrzymujemy dwa gigantyczne ciągi tokenów
@@ -59,9 +53,10 @@
 		- niepodobny kod na początku i końcu fragmentu jest pomijany
 	+ zwraca numery linii fragmentów z podobnym kodem
 	+ sprawdzić czy podobne strumienie tokenów mają podobnie wyglądające linie (spradzić numery linii kodu)
+- help - opis wszystkiego m.in. kolumn tabel
 
 
-3. Dodatkowe pomysły:
+X. Dodatkowe pomysły:
 - wyświetlenie paska postępu i przeminiętego czasu
 - szybkie porównanie:
 	+ sprawdza tylko procentowe podobieństwo (suma różnic takich samych linii w obu plikach przez sume linii)
