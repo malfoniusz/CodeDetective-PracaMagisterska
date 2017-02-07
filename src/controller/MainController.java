@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 
 public class MainController implements Initializable {
 
+    @FXML private MenuController menuController;
     @FXML private TableFilesController tableFilesController;
 
     @Override

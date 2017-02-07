@@ -2,9 +2,10 @@
 1.1. Interfejs graficzny - część 1:
 - menubar:
     + wskazanie projektu (katalogu) do porównania:
-        - wyświetlenie ścieżki do wybranego katalogu
+        - wczytać wszystkie pliki .java czy tylko te w katalogu src? - zrobić z tego opcje?
     + wczytanie bazy (ścieżka do katalogu zapamiętana w pliku .txt)
-    + przycisk start
+    + małe pole na dole ekranu z informacją o aktualnie wybranym projekcie i bazie
+    + wyłączyć przyciski jeśli nie zostały wczytane odpowiednie dane
 - tabela 1 - przechowywać ścieżki do plików (dla drugiej tabeli)
 - w miejsce niewczytanej tabeli 1 wstawić:
     + choose directory containing all other projects 
