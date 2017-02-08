@@ -1,13 +1,11 @@
 package controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import main.Algorithm;
-import model.Project;
 
 public class MainController implements Initializable {
 
@@ -18,7 +16,14 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        menuController.setMainController(this);
+        algorithm = new Algorithm();
+
+        menuController.setDataFromMainController(this);
+        menuController.updateIItemStart();
+    }
+
+    public void runAlgorithm() {
+        algorithm.runAlgorithm();
     }
 
     public MenuController getMenuController() {
@@ -29,9 +34,12 @@ public class MainController implements Initializable {
         return this.tableFilesController;
     }
 
-    public void runAlgorithm(Project chosenProject, ArrayList<Project> chosenBase) {
-        algorithm = new Algorithm(chosenProject, chosenBase);
-        algorithm.runAlgorithm();
+    public Algorithm getAlgorithm() {
+        return algorithm;
+    }
+
+    public void setAlgorithm(Algorithm algorithm) {
+        this.algorithm = algorithm;
     }
 
 }

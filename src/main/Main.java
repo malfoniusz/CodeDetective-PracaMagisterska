@@ -40,12 +40,7 @@ public class Main extends Application {
 
         tableFilesController.addTableFilesItems(items);
 
-        Scene scene = new Scene(root);
-        stage.setTitle(PROGRAM_NAME);
-        Image icon = new Image(ClassLoader.getSystemResource("detective.png").toString());
-        stage.getIcons().add(icon);
-        stage.setScene(scene);
-        stage.show();
+        prepareStage(stage);
     }
 
     private void initialize(Stage stage) throws IOException {
@@ -57,5 +52,14 @@ public class Main extends Application {
         tableFilesController = mainController.getTableFilesController();
 
         menuController.setMainStage(stage);
+    }
+
+    private void prepareStage(Stage stage) {
+        Scene scene = new Scene(root);
+        stage.setTitle(PROGRAM_NAME);
+        Image icon = new Image(ClassLoader.getSystemResource("detective.png").toString());
+        stage.getIcons().add(icon);
+        stage.setScene(scene);
+        stage.show();
     }
 }

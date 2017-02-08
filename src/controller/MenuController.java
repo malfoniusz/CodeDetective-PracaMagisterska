@@ -2,7 +2,6 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -11,29 +10,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import model.Project;
+import main.Algorithm;
 
 public class MenuController implements Initializable {
 
     @FXML MenuItem iItemStart;
 
     private MainController mainController;
+    private Algorithm algorithm;
     private Stage mainStage;
-
-    private Project chosenProject;
-    private ArrayList<Project> chosenBase;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        chosenProject = null;
-        chosenBase = null;
 
-        updateIItemStart();
     }
 
     @FXML
     private void startAction(ActionEvent event) {
-        mainController.runAlgorithm(chosenProject, chosenBase);
+        mainController.runAlgorithm();
     }
 
     @FXML
@@ -43,7 +37,7 @@ public class MenuController implements Initializable {
         File directory = dirChooser.showDialog(mainStage);
 
         if (directory != null) {
-            chosenProject = new Project(directory);
+            algorithm.setProject(directory);
             updateIItemStart();
         }
     }
@@ -55,31 +49,22 @@ public class MenuController implements Initializable {
         File directory = dirChooser.showDialog(mainStage);
 
         if (directory != null) {
-            chosenBase = new ArrayList<Project>();
-
-            File[] files = directory.listFiles();
-
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    Project project = new Project(file);
-                    chosenBase.add(project);
-                }
-            }
-
+            algorithm.setBase(directory);
             updateIItemStart();
         }
     }
 
-    private void updateIItemStart() {
-        if (chosenProject != null && chosenBase != null) {
+    public void updateIItemStart() {
+        if (algorithm.getProject() != null && algorithm.getBase() != null) {
             iItemStart.setDisable(false);
         } else {
             iItemStart.setDisable(true);
         }
     }
 
-    public void setMainController(MainController mainController) {
+    public void setDataFromMainController(MainController mainController) {
         this.mainController = mainController;
+        this.algorithm = mainController.getAlgorithm();
     }
 
     public void setMainStage(Stage mainStage) {
