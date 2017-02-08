@@ -1,8 +1,8 @@
 ﻿
 1. Interfejs graficzny - część 1:
 - menubar:
-    + wczytanie bazy (ścieżka do katalogu zapamiętana w pliku .txt)
     + wyłączyć start jeśli nie został wczytany projekt i baza
+- dodaj ikonkę do głównego okna
 - plik z opcjami (jeśli nie ma to utworzyć) - zapisać ścieżke do projektu i bazy (poszukać jak się profesjonalnie zapisuje opcje)
 - w głównym oknie wyświetlić drzewa z wczytanym projektem i bazą (tylko foldery z plikami .java?)
 	+ na dole lub na górze drzewa wydzielić miejsce na wyświetlnie ścieżki do folderu
@@ -10,7 +10,6 @@
     + choose directory containing all other projects 
     + choose directory containing project that will be compared with other projects
     + start program
-- dodaj ikonkę do głównego okna
 - tabela 1 - przechowywać ścieżki do plików (dla drugiej tabeli)?
 
 

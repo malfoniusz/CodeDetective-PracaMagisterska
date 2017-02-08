@@ -56,4 +56,12 @@ public class Project {
         this.javaFiles = javaFiles;
     }
 
+    @Override
+    public String toString() {
+        String str = directory.getPath() + "\n";
+        for (File file : javaFiles) {
+            str += file.getPath() + "\n";
+        }
+        return str;
+    }
 }

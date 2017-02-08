@@ -37,12 +37,29 @@ public class MenuController implements Initializable {
         dirChooser.setTitle("Open Project Folder");
         File directory = dirChooser.showDialog(mainStage);
 
-        chosenProject = new Project(directory);
+        if (directory != null) {
+            chosenProject = new Project(directory);
+        }
     }
 
     @FXML
     private void chooseBaseAction(ActionEvent event) {
-        // TODO: chooseBaseAction
+        DirectoryChooser dirChooser = new DirectoryChooser();
+        dirChooser.setTitle("Open Base Folder");
+        File directory = dirChooser.showDialog(mainStage);
+
+        if (directory != null) {
+            chosenBase = new ArrayList<Project>();
+
+            File[] files = directory.listFiles();
+
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    Project project = new Project(file);
+                    chosenBase.add(project);
+                }
+            }
+        }
     }
 
     public void setMainController(MainController mainController) {
