@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.TableFiles;
 
@@ -41,6 +42,8 @@ public class Main extends Application {
 
         Scene scene = new Scene(root);
         stage.setTitle(PROGRAM_NAME);
+        Image icon = new Image(ClassLoader.getSystemResource("detective.png").toString());
+        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
     }
