@@ -9,7 +9,7 @@
   <menus>
     <Menu mnemonicParsing="false" text="Program">
       <items>
-        <MenuItem mnemonicParsing="false" onAction="#startAction" text="Start" />
+        <MenuItem fx:id="iItemStart" mnemonicParsing="false" onAction="#startAction" text="Start" />
         <MenuItem mnemonicParsing="false" onAction="#chooseProjectAction" text="Choose Project" />
         <MenuItem mnemonicParsing="false" onAction="#chooseBaseAction" text="Choose Base" />
       </items>

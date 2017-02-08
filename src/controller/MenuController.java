@@ -8,11 +8,14 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.Project;
 
 public class MenuController implements Initializable {
+
+    @FXML MenuItem iItemStart;
 
     private MainController mainController;
     private Stage mainStage;
@@ -24,6 +27,8 @@ public class MenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         chosenProject = null;
         chosenBase = null;
+
+        updateIItemStart();
     }
 
     @FXML
@@ -39,6 +44,7 @@ public class MenuController implements Initializable {
 
         if (directory != null) {
             chosenProject = new Project(directory);
+            updateIItemStart();
         }
     }
 
@@ -59,6 +65,16 @@ public class MenuController implements Initializable {
                     chosenBase.add(project);
                 }
             }
+
+            updateIItemStart();
+        }
+    }
+
+    private void updateIItemStart() {
+        if (chosenProject != null && chosenBase != null) {
+            iItemStart.setDisable(false);
+        } else {
+            iItemStart.setDisable(true);
         }
     }
 

@@ -1,9 +1,7 @@
 ﻿
 1. Interfejs graficzny - część 1:
-- menubar:
-    + wyłączyć start jeśli nie został wczytany projekt i baza
 - dodaj ikonkę do głównego okna
-- plik z opcjami (jeśli nie ma to utworzyć) - zapisać ścieżke do projektu i bazy (poszukać jak się profesjonalnie zapisuje opcje)
+- plik z opcjami (jeśli nie ma to utworzyć) (czytany przy inicializacji controllerów) - zapisać ścieżke do projektu i bazy (poszukać jak się profesjonalnie zapisuje opcje)
 - w głównym oknie wyświetlić drzewa z wczytanym projektem i bazą (tylko foldery z plikami .java?)
 	+ na dole lub na górze drzewa wydzielić miejsce na wyświetlnie ścieżki do folderu
 - w miejsce niewczytanej tabeli 1 wstawić:
