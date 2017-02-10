@@ -6,16 +6,16 @@ import java.util.prefs.Preferences;
 
 public class Settings {
 
-    private final static Preferences preferences = Preferences.userRoot();
+    private final Preferences preferences;
 
-    private final static String PROJECT_PATH_NAME = "project_path";
-    private final static String BASE_PATH_NAME = "base_path";
+    private final String PROJECT_PATH_NAME = "project_path";
+    private final String BASE_PATH_NAME = "base_path";
 
-    private Settings() {
-        // This is a static class
+    public Settings() {
+        preferences = Preferences.userRoot();
     }
 
-    public static void clear() {
+    public void clear() {
         try {
             preferences.clear();
         } catch (BackingStoreException e) {
@@ -23,7 +23,7 @@ public class Settings {
         }
     }
 
-    public static String getProjectPath() {
+    public String getProjectPath() {
         String projectPath = preferences.get(PROJECT_PATH_NAME, null);
 
         if (projectPath != null) {
@@ -31,18 +31,18 @@ public class Settings {
 
             // Checks if settings aren't pointing to a file that was deleted
             if (fileProject.exists() == false) {
-                setProjectPath(null);
+                preferences.remove(PROJECT_PATH_NAME);
             }
         }
 
         return preferences.get(PROJECT_PATH_NAME, null);
     }
 
-    public static void setProjectPath(String projectPath) {
+    public void setProjectPath(String projectPath) {
         preferences.put(PROJECT_PATH_NAME, projectPath);
     }
 
-    public static String getBasePath() {
+    public String getBasePath() {
         String basePath = preferences.get(BASE_PATH_NAME, null);
 
         if (basePath != null) {
@@ -50,14 +50,14 @@ public class Settings {
 
             // Checks if settings aren't pointing to a file that was deleted
             if (fileBase.exists() == false) {
-                setBasePath(null);
+                preferences.remove(BASE_PATH_NAME);
             }
         }
 
         return preferences.get(BASE_PATH_NAME, null);
     }
 
-    public static void setBasePath(String basePath) {
+    public void setBasePath(String basePath) {
         preferences.put(BASE_PATH_NAME, basePath);
     }
 

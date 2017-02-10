@@ -1,14 +1,8 @@
 ﻿
 1. Interfejs graficzny - część 1:
-- wszucić instance obiektu Settings do klasy Algorithm
 - wyodrębnić wszystko z klasy Algorithm do osobnej klasy i dać instancje tej klasy do klasy Algorithm
 - w głównym oknie wyświetlić drzewa z wczytanym projektem i bazą (tylko foldery z plikami .java?)
 	+ na dole lub na górze drzewa wydzielić miejsce na wyświetlnie ścieżki do folderu
-- w miejsce niewczytanej tabeli 1 wstawić:
-    + choose directory containing all other projects 
-    + choose directory containing project that will be compared with other projects
-    + start program
-- tabela 1 - przechowywać ścieżki do plików (dla drugiej tabeli)?
 
 
 2. Interfejs graficzny - część 2:

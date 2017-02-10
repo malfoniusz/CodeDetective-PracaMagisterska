@@ -8,10 +8,13 @@ import model.Settings;
 
 public class Algorithm {
 
+    private Settings settings;
+
     private Project project;
     private Projects base;
 
     public Algorithm() {
+        settings = new Settings();
         loadSettings();
     }
 
@@ -32,7 +35,7 @@ public class Algorithm {
     }
 
     private void loadSettingsProjectPath() {
-        String projectPath = Settings.getProjectPath();
+        String projectPath = settings.getProjectPath();
 
         if (projectPath == null) {
             this.project = null;
@@ -44,7 +47,7 @@ public class Algorithm {
     }
 
     private void loadSettingsBasePath() {
-        String basePath = Settings.getBasePath();
+        String basePath = settings.getBasePath();
 
         if (basePath == null) {
             this.base = null;
@@ -61,7 +64,7 @@ public class Algorithm {
 
     public void setProject(File directory) {
         this.project = new Project(directory);
-        Settings.setProjectPath(directory.getAbsolutePath());
+        settings.setProjectPath(directory.getAbsolutePath());
     }
 
     public Projects getBase() {
@@ -70,7 +73,7 @@ public class Algorithm {
 
     public void setBase(File directory) {
         this.base = new Projects(directory);
-        Settings.setBasePath(base.getDirectory().getAbsolutePath());
+        settings.setBasePath(base.getDirectory().getAbsolutePath());
     }
 
 }
