@@ -1,6 +1,5 @@
 ﻿
 1. Interfejs graficzny - część 1:
-- wyodrębnić wszystko z klasy Algorithm do osobnej klasy i dać instancje tej klasy do klasy Algorithm
 - w głównym oknie wyświetlić drzewa z wczytanym projektem i bazą (tylko foldery z plikami .java?)
 	+ na dole lub na górze drzewa wydzielić miejsce na wyświetlnie ścieżki do folderu
 
