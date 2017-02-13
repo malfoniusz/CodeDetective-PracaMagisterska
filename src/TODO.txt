@@ -1,10 +1,7 @@
 ﻿
 2. Interfejs graficzny - część 2:
 - tabela 2:
-	+ nagłówki w pierwszym wierszu tabeli - nazwy plików
-	+ wiersze zawierające przedziały numerów linii z podobnym kodem
-	+ dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane)
-	+ gdy nie jest wypełnione wyświetlić wiadomość: "select pair of files from list"
+	+ dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane) (czy można zrobić nagłówek tabeli na dwie linie?)
 	+ po kliknięciu na wiersz pierwszej tabeli wyświetlić tą tabelę
 - dwa pola pokazujące kod pary plików:
 	+ nagłówki - ramka z nazwą pliku i numerami podobnych linii

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="tableFragments" prefHeight="400.0" prefWidth="594.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TableFragmentsController">
+   <center>
+      <TableView fx:id="iTableFragments" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/TableFragments.css" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="iFile1Fragment" prefWidth="297.0" text="File1 Fragment" />
+          <TableColumn fx:id="iFile2Fragment" minWidth="0.0" prefWidth="297.0" text="File2 Fragment" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

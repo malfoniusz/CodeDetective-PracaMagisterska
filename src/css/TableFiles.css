@@ -1,10 +1,12 @@
 
-#table-files .table-column {
+.table-column {
     -fx-padding: 3 5;
 }
-#table-files #column-lines {
+
+#column-lines {
     -fx-alignment: top-right;
 }
-#table-files #column-matched {
+
+#column-matched {
     -fx-alignment: top-center;
 }

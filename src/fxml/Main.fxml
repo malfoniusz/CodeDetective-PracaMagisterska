@@ -10,8 +10,8 @@
          <items>
             <SplitPane dividerPositions="0.5" prefHeight="384.0" prefWidth="1198.0">
               <items>
-                  <fx:include fx:id="tableFiles" source="../fxml/TableFiles.fxml" />
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <fx:include fx:id="tableFiles" source="TableFiles.fxml" />
+                  <fx:include fx:id="tableFragments" source="TableFragments.fxml" />
               </items>
             </SplitPane>
             <SplitPane dividerPositions="0.5" prefHeight="384.0" prefWidth="1198.0">

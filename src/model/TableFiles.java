@@ -4,36 +4,44 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class TableFiles {
 
+    // Column File1
     private final SimpleStringProperty rFile1;
     private String file1Name;
     private int file1Lines;
 
+    // Column Project
     private final SimpleStringProperty rProject;
 
+    // Column File2
     private final SimpleStringProperty rFile2;
     private String file2Name;
     private int file2Lines;
 
+    // Column Lines
     private final SimpleIntegerProperty rLines;
 
+    // Column Matched
     private int matchedValue;
     private final SimpleStringProperty rMatched;
 
     public TableFiles(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue) {
         this.file1Name = file1Name;
         this.file1Lines = file1Lines;
-        this.rFile1 = new SimpleStringProperty(file1Name + " (" + file1Lines + ")");
+        this.rFile1 = new SimpleStringProperty();
+        updateRFile1();
 
         this.rProject = new SimpleStringProperty(project);
 
         this.file2Name = file2Name;
         this.file2Lines = file2Lines;
-        this.rFile2 = new SimpleStringProperty(file2Name + " (" + file2Lines + ")");
+        this.rFile2 = new SimpleStringProperty();
+        updateRFile2();
 
         this.rLines = new SimpleIntegerProperty(sLines);
 
         this.matchedValue = matchedValue;
-        this.rMatched = new SimpleStringProperty(matchedValue + "%");
+        this.rMatched = new SimpleStringProperty();
+        updateRMatched();
     }
 
     public String getRFile1() {
