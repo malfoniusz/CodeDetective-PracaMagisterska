@@ -11,6 +11,8 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import main.Algorithm;
+import model.Project;
+import model.Projects;
 
 public class MenuController implements Initializable {
 
@@ -37,7 +39,8 @@ public class MenuController implements Initializable {
         File directory = dirChooser.showDialog(mainStage);
 
         if (directory != null) {
-            algorithm.setProject(directory);
+            Project project = new Project(directory);
+            algorithm.setProject(project);
             updateIItemStart();
         }
     }
@@ -49,7 +52,8 @@ public class MenuController implements Initializable {
         File directory = dirChooser.showDialog(mainStage);
 
         if (directory != null) {
-            algorithm.setBase(directory);
+            Projects projects = new Projects(directory);
+            algorithm.setBase(projects);
             updateIItemStart();
         }
     }

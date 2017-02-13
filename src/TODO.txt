@@ -1,21 +1,12 @@
 ﻿
-1. Interfejs graficzny - część 1:
-- w głównym oknie wyświetlić drzewa z wczytanym projektem i bazą (tylko foldery z plikami .java?)
-	+ na dole lub na górze drzewa wydzielić miejsce na wyświetlnie ścieżki do folderu
-
-
 2. Interfejs graficzny - część 2:
-- dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane)
 - tabela 2:
-	+ scrollbar
 	+ nagłówki w pierwszym wierszu tabeli - nazwy plików
 	+ wiersze zawierające przedziały numerów linii z podobnym kodem
-	+ podświetlane kliknietego wiersza
+	+ dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane)
 	+ gdy nie jest wypełnione wyświetlić wiadomość: "select pair of files from list"
 	+ po kliknięciu na wiersz pierwszej tabeli wyświetlić tą tabelę
 - dwa pola pokazujące kod pary plików:
-	+ okna pionowe
-	+ scrollbar
 	+ nagłówki - ramka z nazwą pliku i numerami podobnych linii
 	+ wyświetlenie całego pliku
 	+ automatyczne scrollowanie do miejsca z podobnym kodem

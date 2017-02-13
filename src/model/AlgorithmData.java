@@ -11,24 +11,7 @@ public class AlgorithmData {
 
     public AlgorithmData() {
         settings = new Settings();
-        loadSettings();
-    }
-
-    private void loadSettings() {
-        loadSettingsProjectPath();
         loadSettingsBasePath();
-    }
-
-    private void loadSettingsProjectPath() {
-        String projectPath = settings.getProjectPath();
-
-        if (projectPath == null) {
-            this.project = null;
-        }
-        else {
-            File fileProject = new File(projectPath);
-            this.setProject(fileProject);
-        }
     }
 
     private void loadSettingsBasePath() {
@@ -39,7 +22,8 @@ public class AlgorithmData {
         }
         else {
             File fileBase = new File(basePath);
-            this.setBase(fileBase);
+            Projects projects = new Projects(fileBase);
+            this.setBase(projects);
         }
     }
 
@@ -55,17 +39,16 @@ public class AlgorithmData {
         return project;
     }
 
-    public void setProject(File directory) {
-        this.project = new Project(directory);
-        settings.setProjectPath(directory.getAbsolutePath());
+    public void setProject(Project project) {
+        this.project = new Project(project.getDirectory());
     }
 
     public Projects getBase() {
         return base;
     }
 
-    public void setBase(File directory) {
-        this.base = new Projects(directory);
+    public void setBase(Projects projects) {
+        this.base = new Projects(projects.getDirectory());
         settings.setBasePath(base.getDirectory().getAbsolutePath());
     }
 
