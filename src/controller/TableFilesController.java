@@ -14,7 +14,7 @@ import model.TableFiles;
 
 public class TableFilesController implements Initializable {
 
-    @FXML TableView<TableFiles> iTableFiles;
+    @FXML TableView<TableFiles> tableFiles;
     @FXML TableColumn<TableFiles, String> iFile1;
     @FXML TableColumn<TableFiles, String> iProject;
     @FXML TableColumn<TableFiles, String> iFile2;
@@ -34,7 +34,7 @@ public class TableFilesController implements Initializable {
         iLines.setCellValueFactory(new PropertyValueFactory<TableFiles, Integer>("rLines"));
         iMatched.setCellValueFactory(new PropertyValueFactory<TableFiles, String>("rMatched"));
 
-        iTableFiles.setItems(data);
+        tableFiles.setItems(data);
     }
 
     public void addTableFilesItem(TableFiles item) {
@@ -48,7 +48,7 @@ public class TableFilesController implements Initializable {
     }
 
     private void sortTableByMatched() {
-        iTableFiles.getSortOrder().add(iMatched);
+        tableFiles.getSortOrder().add(iMatched);
     }
 
     public ObservableList<TableFiles> getData() {

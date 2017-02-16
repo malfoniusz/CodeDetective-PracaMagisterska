@@ -14,7 +14,7 @@ import model.TableFragments;
 
 public class TableFragmentsController implements Initializable {
 
-    @FXML TableView<TableFragments> iTableFragments;
+    @FXML TableView<TableFragments> tableFragments;
     @FXML TableColumn<TableFragments, String> iFile1Fragment;
     @FXML TableColumn<TableFragments, String> iFile2Fragment;
 
@@ -28,7 +28,7 @@ public class TableFragmentsController implements Initializable {
         iFile1Fragment.setCellValueFactory(new PropertyValueFactory<TableFragments, String>("rFile1Fragment"));
         iFile2Fragment.setCellValueFactory(new PropertyValueFactory<TableFragments, String>("rFile2Fragment"));
 
-        iTableFragments.setItems(data);
+        tableFragments.setItems(data);
     }
 
 }

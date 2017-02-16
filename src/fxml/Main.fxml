@@ -14,12 +14,7 @@
                   <fx:include fx:id="tableFragments" source="TableFragments.fxml" />
               </items>
             </SplitPane>
-            <SplitPane dividerPositions="0.5" prefHeight="384.0" prefWidth="1198.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-              </items>
-            </SplitPane>
+            <fx:include fx:id="codesView" source="CodesView.fxml" />
          </items>
       </SplitPane>
    </children>

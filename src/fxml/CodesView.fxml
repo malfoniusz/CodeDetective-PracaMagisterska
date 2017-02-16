@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+
+<SplitPane fx:id="codesView" dividerPositions="0.5" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CodesViewController">
+  <items>
+      <TextArea fx:id="iCode1" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+      <TextArea fx:id="iCode2" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+  </items>
+</SplitPane>
