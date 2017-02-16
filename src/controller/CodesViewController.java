@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -22,7 +24,7 @@ public class CodesViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setCodes(file1, 32, 52, file2, 36, 49);
+        setCodes(file1, 20, 38, file2, 74, 100);
     }
 
     public void setCodes(File file1, int file1FromLine, int file1ToLine, File file2, int file2FromLine, int file2ToLine) {
@@ -31,37 +33,64 @@ public class CodesViewController implements Initializable {
     }
 
     private void setCode1(File file1, int file1FromLine, int file1ToLine) {
-        Text code1 = readFile(file1);
-        iCode1.getChildren().add(code1);
+        TextFlow code1 = readFile(file1, file1FromLine, file1ToLine);
+        updateFlow(iCode1, code1);
     }
 
     private void setCode2(File file2, int file2FromLine, int file2ToLine) {
-        Text code2 = readFile(file2);
-        iCode2.getChildren().add(code2);
+        TextFlow code2 = readFile(file2, file2FromLine, file2ToLine);
+        updateFlow(iCode2, code2);
     }
 
-    private Text readFile(File file) {
-        String result = "";
+    private TextFlow readFile(File file, int fromLine, int toLine) {
+        TextFlow flow = new TextFlow();
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sbBefore = new StringBuilder();
+            StringBuilder sbBetween = new StringBuilder();
+            StringBuilder sbAfter = new StringBuilder();
+
             String line = br.readLine();
             int lineNumber = 1;
-            String lineFormated = "";
 
             while (line != null) {
-                lineFormated = String.format("%-10d%s", lineNumber, line);
-                sb.append(lineFormated);
-                sb.append(System.lineSeparator());
+                String lineFormated = String.format("%-10d%s", lineNumber, line);
+
+                // BEFORE
+                if (lineNumber < fromLine) {
+                    sbBefore.append(lineFormated);
+                    sbBefore.append(System.lineSeparator());
+                }
+                // AFTER
+                else if (lineNumber > toLine) {
+                    sbAfter.append(lineFormated);
+                    sbAfter.append(System.lineSeparator());
+                }
+                // BETWEEN - last because least likely
+                else {
+                    sbBetween.append(lineFormated);
+                    sbBetween.append(System.lineSeparator());
+                }
+
                 line = br.readLine();
                 lineNumber++;
             }
 
-            result = sb.toString();
+            Text textBefore = new Text(sbBefore.toString());
+            Text textBetween = new Text(sbBetween.toString());
+            textBetween.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+            Text textAfter = new Text(sbAfter.toString());
+
+            flow.getChildren().addAll(textBefore, textBetween, textAfter);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return new Text(result);
+        return flow;
+    }
+
+    private void updateFlow(TextFlow flow, TextFlow newData) {
+        flow.getChildren().clear();
+        flow.getChildren().addAll(newData);
     }
 }
