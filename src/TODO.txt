@@ -4,10 +4,9 @@
 	+ dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane) (czy można zrobić nagłówek tabeli na dwie linie?)
 	+ po kliknięciu na wiersz pierwszej tabeli wyświetlić tą tabelę
 - dwa pola pokazujące kod pary plików:
-	+ nagłówki - ramka z nazwą pliku i numerami podobnych linii
-	+ wyświetlenie całego pliku
+    + wyróżnienie podobnego kodu
 	+ automatyczne scrollowanie do miejsca z podobnym kodem
-	+ wyróżnienie podobnego kodu
+	+ nagłówki - ramka z nazwą pliku i numerami podobnych linii
 	+ po kliknięciu na wiersz drugiej tabeli wyświetlić te okna
 	+ po kliknięciu na wiersz pierwszej tabeli schować te okna
 
