@@ -8,12 +8,12 @@
   <items>
       <ScrollPane>
          <content>
-            <TextFlow fx:id="iCode1" />
+            <TextFlow fx:id="iCode1" style="-fx-background-color: white;" />
          </content>
       </ScrollPane>
       <ScrollPane>
          <content>
-            <TextFlow fx:id="iCode2" />
+            <TextFlow fx:id="iCode2" style="-fx-background-color: white;" />
          </content>
       </ScrollPane>
   </items>

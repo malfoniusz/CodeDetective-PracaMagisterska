@@ -9,8 +9,8 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -78,7 +78,8 @@ public class CodesViewController implements Initializable {
 
             Text textBefore = new Text(sbBefore.toString());
             Text textBetween = new Text(sbBetween.toString());
-            textBetween.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+            textBetween.setFont(Font.font("Verdana", 11));
+            textBetween.setFill(Color.CRIMSON);
             Text textAfter = new Text(sbAfter.toString());
 
             flow.getChildren().addAll(textBefore, textBetween, textAfter);

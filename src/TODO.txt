@@ -1,9 +1,28 @@
 ﻿
+- usunąć ostatnią linijkę wyświetlanego kodu
+
+- usunąć border focus z tabel:
+
+.scroll-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .corner {
+    -fx-background-insets: 0;
+}
+
+
 2. Interfejs graficzny - część 2:
 - tabela 2:
 	+ dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane) (czy można zrobić nagłówek tabeli na dwie linie?)
 - dwa pola pokazujące kod pary plików:
-    + poprawić wygląd wyróżnienia
+    + możliwość zaznaczenia i skopiowania tekstu
+    + zmiana kursora
 	+ automatyczne scrollowanie do miejsca z podobnym kodem
 	+ nagłówki - ramka z nazwą pliku i numerami podobnych linii
 - interakcja:
