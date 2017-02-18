@@ -43,51 +43,46 @@ public class CodesViewController implements Initializable {
     }
 
     private TextFlow readFile(File file, int fromLine, int toLine) {
-        TextFlow flow = new TextFlow();
+        Text textBefore = read(file, 1, fromLine - 1);
 
+        Text textBetween = read(file, fromLine, toLine);
+        textBetween.setFont(Font.font("Verdana", 11));
+        textBetween.setFill(Color.CRIMSON);
+
+        Text textAfter = read(file, toLine + 1, -1);
+        String strAfterTrimmed = textAfter.getText().trim();
+        textAfter.setText(strAfterTrimmed);
+
+        return new TextFlow(textBefore, textBetween, textAfter);
+    }
+
+    private Text read(File file, final int fromLine, final int toLine) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            StringBuilder sbBefore = new StringBuilder();
-            StringBuilder sbBetween = new StringBuilder();
-            StringBuilder sbAfter = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             String line = br.readLine();
             int lineNumber = 1;
 
             while (line != null) {
-                String lineFormated = String.format("%-10d%s", lineNumber, line);
-
-                // BEFORE
-                if (lineNumber < fromLine) {
-                    sbBefore.append(lineFormated);
-                    sbBefore.append(System.lineSeparator());
+                if (toLine > 0 && lineNumber > toLine) {
+                    break;
                 }
-                // AFTER
-                else if (lineNumber > toLine) {
-                    sbAfter.append(lineFormated);
-                    sbAfter.append(System.lineSeparator());
-                }
-                // BETWEEN - last because least likely
-                else {
-                    sbBetween.append(lineFormated);
-                    sbBetween.append(System.lineSeparator());
+                else if (lineNumber >= fromLine) {
+                    String lineFormated = String.format("%-10d%s", lineNumber, line);
+                    sb.append(lineFormated);
+                    sb.append(System.lineSeparator());
                 }
 
                 line = br.readLine();
                 lineNumber++;
             }
 
-            Text textBefore = new Text(sbBefore.toString());
-            Text textBetween = new Text(sbBetween.toString());
-            textBetween.setFont(Font.font("Verdana", 11));
-            textBetween.setFill(Color.CRIMSON);
-            Text textAfter = new Text(sbAfter.toString());
-
-            flow.getChildren().addAll(textBefore, textBetween, textAfter);
+            return new Text(sb.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return flow;
+        return null;
     }
 
     private void updateFlow(TextFlow flow, TextFlow newData) {

@@ -1,6 +1,4 @@
 ﻿
-- usunąć ostatnią linijkę wyświetlanego kodu
-
 - usunąć border focus z tabel:
 
 .scroll-pane {
