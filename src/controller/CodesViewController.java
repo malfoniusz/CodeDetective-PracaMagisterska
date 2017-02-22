@@ -8,7 +8,6 @@ import java.io.LineNumberReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -19,37 +18,30 @@ import javafx.scene.text.TextFlow;
 
 public class CodesViewController implements Initializable {
 
-    @FXML ScrollPane iScrollPane1;
-    @FXML ScrollPane iScrollPane2;
+    @FXML private ScrollPane iScrollPane1;
+    @FXML private ScrollPane iScrollPane2;
 
-    @FXML TextFlow iCode1;
-    @FXML TextFlow iCode2;
-
-    // TODO: usun
-    final File FILE_1 = new File("F:\\Desktop\\Game.java");
-    final int FROM_LINE_1 = 20;
-    final int TO_LINE_1 = 38;
-    final File FILE_2 = new File("F:\\Desktop\\Drawing.java");
-    final int FROM_LINE_2 = 74;
-    final int TO_LINE_2 = 100;
+    @FXML private TextFlow iCode1;
+    @FXML private TextFlow iCode2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setCodes(FILE_1, FROM_LINE_1, TO_LINE_1, FILE_2, FROM_LINE_2, TO_LINE_2);
-    }
-
-    // TODO: usun
-    @FXML
-    private void test(ActionEvent event) {
-        scrollToLine(FILE_1, FROM_LINE_1, iScrollPane1, iCode1);
-        scrollToLine(FILE_2, FROM_LINE_2, iScrollPane2, iCode2);
     }
 
     public void setCodes(File file1, int fromLine1, int toLine1, File file2, int fromLine2, int toLine2) {
-        setCode1(file1, fromLine1, toLine1);
-        setCode2(file2, fromLine2, toLine2);
+        setCode(iCode1, file1, fromLine1, toLine1);
+        setCode(iCode2, file2, fromLine2, toLine2);
+
+        scrollToLine(file1, fromLine1, iScrollPane1, iCode1);
+        scrollToLine(file2, fromLine2, iScrollPane2, iCode2);
     }
 
+    public void clearCodes() {
+        iCode1.getChildren().clear();
+        iCode2.getChildren().clear();
+    }
+
+    // UWAGA: okno musi być zainicializowane przed wywołaniem tej funkcji
     private void scrollToLine(File file, int lineNumber, ScrollPane scrollPane, TextFlow textFlow) {
         int fixedLineNumber = lineNumber - 1;   // Zawsze scrolluje o jedną linijkę za dużo
 
@@ -64,14 +56,12 @@ public class CodesViewController implements Initializable {
         scrollPane.setVvalue(s);
     }
 
-    private void setCode1(File file1, int fromLine1, int toLine1) {
-        TextFlow code1 = readFile(file1, fromLine1, toLine1);
-        updateFlow(iCode1, code1);
-    }
+    private void setCode(TextFlow textFlow, File file, int fromLine, int toLine) {
+        TextFlow code = readFile(file, fromLine, toLine);
+        textFlow.getChildren().setAll(code);
 
-    private void setCode2(File file2, int fromLine2, int toLine2) {
-        TextFlow code2 = readFile(file2, fromLine2, toLine2);
-        updateFlow(iCode2, code2);
+        // Powiadomienie programu o zmianie rozmiaru okna
+        textFlow.autosize();
     }
 
     private TextFlow readFile(File file, int fromLine, int toLine) {
@@ -115,11 +105,6 @@ public class CodesViewController implements Initializable {
         }
 
         return null;
-    }
-
-    private void updateFlow(TextFlow flow, TextFlow newData) {
-        flow.getChildren().clear();
-        flow.getChildren().addAll(newData);
     }
 
     private int totalLines(File file) {

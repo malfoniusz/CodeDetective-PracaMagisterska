@@ -3,16 +3,12 @@ import java.io.IOException;
 
 import controller.MainController;
 import controller.MenuController;
-import controller.TableFilesController;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.TableFiles;
 
 public class Main extends Application {
 
@@ -21,7 +17,6 @@ public class Main extends Application {
 
     private MainController mainController;
     private MenuController menuController;
-    private TableFilesController tableFilesController;
 
     private Parent root;
 
@@ -32,14 +27,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         initialize(stage);
-
-        ObservableList<TableFiles> items = FXCollections.observableArrayList(
-            new TableFiles("plik45", 274, "Project2", "plik31", 233, 376, 89),
-            new TableFiles("plik12", 538, "Project1", "plik32", 466, 254, 23)
-        );
-
-        tableFilesController.addTableFilesItems(items);
-
         prepareStage(stage);
     }
 
@@ -48,9 +35,8 @@ public class Main extends Application {
         root = (Parent) loader.load();
 
         mainController = loader.getController();
-        menuController = mainController.getMenuController();
-        tableFilesController = mainController.getTableFilesController();
 
+        menuController = mainController.getMenuController();
         menuController.setMainStage(stage);
     }
 
@@ -62,4 +48,5 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
 }

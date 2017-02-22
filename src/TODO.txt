@@ -1,11 +1,12 @@
 ﻿
+- zmienic w modelu tableFragment file1FromLine na fromLine1, to samo dla file1ToLine
+- zrobic osobna klase zawierajaca: File file1 = new File("F:\\Desktop\\Game.java"); int fromLine1 = 20; int toLine1 = 38;
+- nazwy klas plików na ViewFiles, ViewFragments, ViewCode
+
 2. Interfejs graficzny - część 2:
 - tabela 2:
 	+ dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane) (czy można zrobić nagłówek tabeli na dwie linie?)
-- interakcja:
-    + po kliknięciu na wiersz pierwszej tabeli wyświetlić drugą tabelę
-    + po kliknięciu na wiersz pierwszej tabeli schować trzecie okna
-    + po kliknięciu na wiersz drugiej tabeli wyświetlić trzecie okna
+
 
 3. Tokenizacja i sposób porównywania:
 - spis tokenów i odpowiadających im typów

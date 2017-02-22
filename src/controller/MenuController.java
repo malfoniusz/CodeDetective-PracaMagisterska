@@ -16,7 +16,7 @@ import model.Projects;
 
 public class MenuController implements Initializable {
 
-    @FXML MenuItem iItemStart;
+    @FXML private MenuItem iItemStart;
 
     private MainController mainController;
     private Algorithm algorithm;
@@ -34,9 +34,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private void chooseProjectAction(ActionEvent event) {
-        DirectoryChooser dirChooser = new DirectoryChooser();
-        dirChooser.setTitle("Open Project Folder");
-        File directory = dirChooser.showDialog(mainStage);
+        File directory = chooseDirectory("Open Project Folder");
 
         if (directory != null) {
             Project project = new Project(directory);
@@ -47,15 +45,19 @@ public class MenuController implements Initializable {
 
     @FXML
     private void chooseBaseAction(ActionEvent event) {
-        DirectoryChooser dirChooser = new DirectoryChooser();
-        dirChooser.setTitle("Open Base Folder");
-        File directory = dirChooser.showDialog(mainStage);
+        File directory = chooseDirectory("Open Base Folder");
 
         if (directory != null) {
             Projects projects = new Projects(directory);
             algorithm.setBase(projects);
             updateIItemStart();
         }
+    }
+
+    private File chooseDirectory(String title) {
+        DirectoryChooser dirChooser = new DirectoryChooser();
+        dirChooser.setTitle(title);
+        return dirChooser.showDialog(mainStage);
     }
 
     public void updateIItemStart() {
@@ -66,9 +68,12 @@ public class MenuController implements Initializable {
         }
     }
 
-    public void setDataFromMainController(MainController mainController) {
+    public void setMainController(MainController mainController) {
         this.mainController = mainController;
-        this.algorithm = mainController.getAlgorithm();
+    }
+
+    public void setAlgorithm(Algorithm algorithm) {
+        this.algorithm = algorithm;
     }
 
     public void setMainStage(Stage mainStage) {

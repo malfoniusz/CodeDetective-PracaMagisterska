@@ -1,4 +1,6 @@
 package model;
+import java.util.ArrayList;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -24,7 +26,10 @@ public class TableFiles {
     private int matchedValue;
     private final SimpleStringProperty rMatched;
 
-    public TableFiles(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue) {
+    // Informacje, które będą wyświetlone na kolejnym oknie
+    private ArrayList<TableFragments> tableFragments;
+
+    public TableFiles(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue, ArrayList<TableFragments> tableFragments) {
         this.file1Name = file1Name;
         this.file1Lines = file1Lines;
         this.rFile1 = new SimpleStringProperty();
@@ -42,6 +47,8 @@ public class TableFiles {
         this.matchedValue = matchedValue;
         this.rMatched = new SimpleStringProperty();
         updateRMatched();
+
+        this.tableFragments = tableFragments;
     }
 
     public String getRFile1() {
@@ -71,6 +78,7 @@ public class TableFiles {
     }
 
 
+
     public String getRProject() {
         return rProject.get();
     }
@@ -78,6 +86,7 @@ public class TableFiles {
     public void setRProject(String value) {
         rProject.set(value);
     }
+
 
 
     public String getRFile2() {
@@ -133,5 +142,14 @@ public class TableFiles {
     public void setMatchedValue(int value) {
         matchedValue = value;
         updateRMatched();
+    }
+
+
+    public ArrayList<TableFragments> getTableFragments() {
+        return tableFragments;
+    }
+
+    public void setTableFragments(ArrayList<TableFragments> tableFragments) {
+        this.tableFragments = tableFragments;
     }
 }
