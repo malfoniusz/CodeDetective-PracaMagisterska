@@ -21,15 +21,15 @@ public class TableFragmentsController implements Initializable {
     private CodesViewController codesViewController;
 
     @FXML private TableView<TableFragments> tableFragments;
-    @FXML private TableColumn<TableFragments, String> iFile1Fragment;
-    @FXML private TableColumn<TableFragments, String> iFile2Fragment;
+    @FXML private TableColumn<TableFragments, String> iFileFragment1;
+    @FXML private TableColumn<TableFragments, String> iFileFragment2;
 
     private final ObservableList<TableFragments> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        iFile1Fragment.setCellValueFactory(new PropertyValueFactory<TableFragments, String>("rFile1Fragment"));
-        iFile2Fragment.setCellValueFactory(new PropertyValueFactory<TableFragments, String>("rFile2Fragment"));
+        iFileFragment1.setCellValueFactory(new PropertyValueFactory<TableFragments, String>("rFileFragment1"));
+        iFileFragment2.setCellValueFactory(new PropertyValueFactory<TableFragments, String>("rFileFragment2"));
 
         tableFragments.setItems(data);
 
@@ -44,11 +44,11 @@ public class TableFragmentsController implements Initializable {
                     TableFragments tableFragments = tableRow.getItem();
 
                     File file1 = tableFragments.getFile1();
-                    int fromLine1 = tableFragments.getFile1FromLine();
-                    int toLine1 = tableFragments.getFile1ToLine();
+                    int fromLine1 = tableFragments.getFromLine1();
+                    int toLine1 = tableFragments.getToLine1();
                     File file2 = tableFragments.getFile2();
-                    int fromLine2 = tableFragments.getFile2FromLine();
-                    int toLine2 = tableFragments.getFile2ToLine();
+                    int fromLine2 = tableFragments.getFromLine2();
+                    int toLine2 = tableFragments.getToLine2();
 
                     codesViewController.setCodes(file1, fromLine1, toLine1, file2, fromLine2, toLine2);
                 }

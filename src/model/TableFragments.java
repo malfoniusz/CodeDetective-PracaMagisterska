@@ -7,41 +7,37 @@ import javafx.beans.property.SimpleStringProperty;
 public class TableFragments {
 
     // Column File1Fragment
-    private final SimpleStringProperty rFile1Fragment;
+    private final SimpleStringProperty rFileFragment1;
     private File file1;
-    private String file1FragmentName;
-    private int file1FromLine;
-    private int file1ToLine;
+    private int fromLine1;
+    private int toLine1;
 
     // Column File2Fragment
-    private final SimpleStringProperty rFile2Fragment;
+    private final SimpleStringProperty rFileFragment2;
     private File file2;
-    private String file2FragmentName;
-    private int file2FromLine;
-    private int file2ToLine;
+    private int fromLine2;
+    private int toLine2;
 
-    public TableFragments(File file1, int file1FromLine, int file1ToLine, File file2, int file2FromLine, int file2ToLine) {
+    public TableFragments(File file1, int fromLine1, int toLine1, File file2, int fromLine2, int toLine2) {
         this.file1 = file1;
-        this.file1FragmentName = file1.getName();
-        this.file1FromLine = file1FromLine;
-        this.file1ToLine = file1ToLine;
-        this.rFile1Fragment = new SimpleStringProperty();
-        updateRFile1Fragment();
+        this.fromLine1 = fromLine1;
+        this.toLine1 = toLine1;
+        this.rFileFragment1 = new SimpleStringProperty();
+        updateRFileFragment1();
 
         this.file2 = file2;
-        this.file2FragmentName = file2.getName();
-        this.file2FromLine = file2FromLine;
-        this.file2ToLine = file2ToLine;
-        this.rFile2Fragment = new SimpleStringProperty();
-        updateRFile2Fragment();
+        this.fromLine2 = fromLine2;
+        this.toLine2 = toLine2;
+        this.rFileFragment2 = new SimpleStringProperty();
+        updateRFileFragment2();
     }
 
-    public String getRFile1Fragment() {
-        return rFile1Fragment.get();
+    public String getRFileFragment1() {
+        return rFileFragment1.get();
     }
 
-    private void updateRFile1Fragment() {
-        this.rFile1Fragment.set(file1FragmentName + " [" + file1FromLine + "-" + file1ToLine + "]");
+    private void updateRFileFragment1() {
+        this.rFileFragment1.set(file1.getName() + " [" + fromLine1 + "-" + toLine1 + "]");
     }
 
     public File getFile1() {
@@ -52,41 +48,32 @@ public class TableFragments {
         this.file1 = file1;
     }
 
-    public String getFile1FragmentName() {
-        return file1FragmentName;
+    public int getFromLine1() {
+        return fromLine1;
     }
 
-    public void setFile1FragmentName(String file1FragmentName) {
-        this.file1FragmentName = file1FragmentName;
-        updateRFile1Fragment();
+    public void setFromLine1(int fromLine1) {
+        this.fromLine1 = fromLine1;
+        updateRFileFragment1();
     }
 
-    public int getFile1FromLine() {
-        return file1FromLine;
+    public int getToLine1() {
+        return toLine1;
     }
 
-    public void setFile1FromLine(int file1FromLine) {
-        this.file1FromLine = file1FromLine;
-        updateRFile1Fragment();
-    }
-
-    public int getFile1ToLine() {
-        return file1ToLine;
-    }
-
-    public void setFile1ToLine(int file1ToLine) {
-        this.file1ToLine = file1ToLine;
-        updateRFile1Fragment();
+    public void setToLine1(int toLine1) {
+        this.toLine1 = toLine1;
+        updateRFileFragment1();
     }
 
 
 
-    public String getRFile2Fragment() {
-        return rFile2Fragment.get();
+    public String getRFileFragment2() {
+        return rFileFragment2.get();
     }
 
-    private void updateRFile2Fragment() {
-        this.rFile2Fragment.set(file2FragmentName + " [" + file2FromLine + "-" + file2ToLine + "]");
+    private void updateRFileFragment2() {
+        this.rFileFragment2.set(file2.getName() + " [" + fromLine2 + "-" + toLine2 + "]");
     }
 
     public File getFile2() {
@@ -97,31 +84,22 @@ public class TableFragments {
         this.file2 = file2;
     }
 
-    public String getFile2FragmentName() {
-        return file2FragmentName;
+    public int getFromLine2() {
+        return fromLine2;
     }
 
-    public void setFile2FragmentName(String file2FragmentName) {
-        this.file2FragmentName = file2FragmentName;
-        updateRFile2Fragment();
+    public void setFromLine2(int fromLine2) {
+        this.fromLine2 = fromLine2;
+        updateRFileFragment2();
     }
 
-    public int getFile2FromLine() {
-        return file2FromLine;
+    public int getToLine2() {
+        return toLine2;
     }
 
-    public void setFile2FromLine(int file2FromLine) {
-        this.file2FromLine = file2FromLine;
-        updateRFile2Fragment();
-    }
-
-    public int getFile2ToLine() {
-        return file2ToLine;
-    }
-
-    public void setFile2ToLine(int file2ToLine) {
-        this.file2ToLine = file2ToLine;
-        updateRFile2Fragment();
+    public void setToLine2(int toLine2) {
+        this.toLine2 = toLine2;
+        updateRFileFragment2();
     }
 
 }

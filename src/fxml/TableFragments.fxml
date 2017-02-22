@@ -2,11 +2,10 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
 
 <TableView fx:id="tableFragments" prefHeight="200.0" prefWidth="594.0" stylesheets="@../css/TableFragments.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TableFragmentsController">
   <columns>
-    <TableColumn fx:id="iFile1Fragment" prefWidth="297.0" text="File1 Fragment" />
-    <TableColumn fx:id="iFile2Fragment" minWidth="0.0" prefWidth="297.0" text="File2 Fragment" />
+    <TableColumn fx:id="iFileFragment1" prefWidth="297.0" text="File1 Fragment" />
+    <TableColumn fx:id="iFileFragment2" minWidth="0.0" prefWidth="297.0" text="File2 Fragment" />
   </columns>
 </TableView>

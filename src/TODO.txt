@@ -1,5 +1,4 @@
 ﻿
-- zmienic w modelu tableFragment file1FromLine na fromLine1, to samo dla file1ToLine
 - zrobic osobna klase zawierajaca: File file1 = new File("F:\\Desktop\\Game.java"); int fromLine1 = 20; int toLine1 = 38;
 - nazwy klas plików na ViewFiles, ViewFragments, ViewCode
 

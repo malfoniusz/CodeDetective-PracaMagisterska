@@ -6,12 +6,12 @@
 
 <SplitPane fx:id="codesView" dividerPositions="0.5" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CodesViewController">
   <items>
-      <ScrollPane fx:id="iScrollPane1">
+      <ScrollPane fx:id="iScrollPane1" pannable="true">
          <content>
             <TextFlow fx:id="iCode1" style="-fx-background-color: white;" />
          </content>
       </ScrollPane>
-      <ScrollPane fx:id="iScrollPane2">
+      <ScrollPane fx:id="iScrollPane2" pannable="true">
          <content>
             <TextFlow fx:id="iCode2" style="-fx-background-color: white;" />
          </content>
