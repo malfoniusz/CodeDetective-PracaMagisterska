@@ -7,12 +7,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import main.Algorithm;
-import model.Files;
+import model.CompareFiles;
 
 public class MainController implements Initializable {
 
     @FXML private MenuController menuController;
-    @FXML private FilesController filesController;
+    @FXML private CompareFilesController compareFilesController;
     @FXML private TableFragmentsController tableFragmentsController;
     @FXML private CodesViewController codesViewController;
 
@@ -26,17 +26,17 @@ public class MainController implements Initializable {
         menuController.setAlgorithm(algorithm);
         menuController.updateIItemStart();
 
-        filesController.setTableFragmentsController(tableFragmentsController);
-        filesController.setCodesViewController(codesViewController);
+        compareFilesController.setTableFragmentsController(tableFragmentsController);
+        compareFilesController.setCodesViewController(codesViewController);
 
         tableFragmentsController.setCodesViewController(codesViewController);
     }
 
     public void runAlgorithm() {
-        ArrayList<Files> files = algorithm.runAlgorithm();
+        ArrayList<CompareFiles> compareFiles = algorithm.runAlgorithm();
 
-        if (files != null) {
-            filesController.setData(files);
+        if (compareFiles != null) {
+            compareFilesController.setData(compareFiles);
         }
     }
 
@@ -44,8 +44,8 @@ public class MainController implements Initializable {
         return this.menuController;
     }
 
-    public FilesController getFilesController() {
-        return this.filesController;
+    public CompareFilesController getCompareFilesController() {
+        return this.compareFilesController;
     }
 
     public Algorithm getAlgorithm() {

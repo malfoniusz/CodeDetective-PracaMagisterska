@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Files {
+public class CompareFiles {
 
     // Column File1
     private final SimpleStringProperty rFile1;
@@ -29,7 +29,7 @@ public class Files {
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<TableFragments> tableFragments;
 
-    public Files(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue, ArrayList<TableFragments> tableFragments) {
+    public CompareFiles(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue, ArrayList<TableFragments> tableFragments) {
         this.file1Name = file1Name;
         this.file1Lines = file1Lines;
         this.rFile1 = new SimpleStringProperty();

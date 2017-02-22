@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import model.AlgorithmData;
+import model.CompareFiles;
 import model.FileMarked;
-import model.Files;
 import model.TableFragments;
 
 public class Algorithm extends AlgorithmData {
@@ -14,7 +14,7 @@ public class Algorithm extends AlgorithmData {
         super();
     }
 
-    public ArrayList<Files> runAlgorithm() {
+    public ArrayList<CompareFiles> runAlgorithm() {
         if (getProject() == null || getBase() == null) {
             return null;
         }
@@ -25,7 +25,7 @@ public class Algorithm extends AlgorithmData {
         return test();
     }
 
-    private ArrayList<Files> test() {
+    private ArrayList<CompareFiles> test() {
         FileMarked fileMarked1 = new FileMarked(new File("F:\\Desktop\\Game.java"), 20, 38);
         FileMarked fileMarked2 = new FileMarked(new File("F:\\Desktop\\Drawing.java"), 74, 100);
 
@@ -41,12 +41,12 @@ public class Algorithm extends AlgorithmData {
         tableFragments2.add(fragments3);
         tableFragments2.add(fragments4);
 
-        ArrayList<Files> files = new ArrayList<>();
-        Files files1 = new Files("MySuperClassController", 365, "Project1", "MainSourceController", 566, 222267, 58, tableFragments1);
-        Files files2 = new Files("plik2", 205, "MassiveOnlineUtopia", "plik3", 566, 144187, 95, tableFragments2);
-        files.add(files1);
-        files.add(files2);
+        ArrayList<CompareFiles> compareFiles = new ArrayList<>();
+        CompareFiles compareFiles1 = new CompareFiles("MySuperClassController", 365, "Project1", "MainSourceController", 566, 222267, 58, tableFragments1);
+        CompareFiles compareFiles2 = new CompareFiles("plik2", 205, "MassiveOnlineUtopia", "plik3", 566, 144187, 95, tableFragments2);
+        compareFiles.add(compareFiles1);
+        compareFiles.add(compareFiles2);
 
-        return files;
+        return compareFiles;
     }
 }

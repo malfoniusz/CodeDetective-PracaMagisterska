@@ -3,7 +3,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView id="table-files" fx:id="files" prefHeight="400.0" prefWidth="587.0" stylesheets="@../css/Files.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FilesController">
+<TableView id="table-files" fx:id="compareFiles" prefHeight="400.0" prefWidth="587.0" stylesheets="@../css/CompareFiles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CompareFilesController">
   <columns>
     <TableColumn fx:id="iProject" prefWidth="100.0" text="File1 Project" />
     <TableColumn id="column-file1" fx:id="iFile1" prefWidth="170.0" text="File1 (Total lines)" />
