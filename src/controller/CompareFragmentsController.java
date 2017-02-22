@@ -17,7 +17,7 @@ import model.CompareFragments;
 
 public class CompareFragmentsController implements Initializable {
 
-    private CodesViewController codesViewController;
+    private CompareCodesController compareCodesController;
 
     @FXML private TableView<CompareFragments> compareFragments;
     @FXML private TableColumn<CompareFragments, String> iFileFragment1;
@@ -41,7 +41,7 @@ public class CompareFragmentsController implements Initializable {
             tableRow.setOnMouseClicked(event -> {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     CompareFragments compareFragments = tableRow.getItem();
-                    codesViewController.setCodes(compareFragments.getFileMarked1(), compareFragments.getFileMarked2());
+                    compareCodesController.setCodes(compareFragments.getFileMarked1(), compareFragments.getFileMarked2());
                 }
             });
             return tableRow ;
@@ -52,7 +52,7 @@ public class CompareFragmentsController implements Initializable {
         data.setAll(items);
     }
 
-    public void setCodesViewController(CodesViewController codesViewController) {
-        this.codesViewController = codesViewController;
+    public void setCompareCodesController(CompareCodesController compareCodesController) {
+        this.compareCodesController = compareCodesController;
     }
 }

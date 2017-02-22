@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import model.FileMarked;
 
-public class CodesViewController implements Initializable {
+public class CompareCodesController implements Initializable {
 
     @FXML private ScrollPane iScrollPane1;
     @FXML private ScrollPane iScrollPane2;

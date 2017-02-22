@@ -18,7 +18,7 @@ import model.CompareFiles;
 public class CompareFilesController implements Initializable {
 
     private CompareFragmentsController compareFragmentsController;
-    private CodesViewController codesViewController;
+    private CompareCodesController compareCodesController;
 
     @FXML private TableView<CompareFiles> compareFiles;
     @FXML private TableColumn<CompareFiles, String> iFile1;
@@ -52,7 +52,7 @@ public class CompareFilesController implements Initializable {
                     compareFragmentsController.setData(compareFiles.getCompareFragments());
 
                     // Wyczysc kod
-                    codesViewController.clearCodes();
+                    compareCodesController.clearCodes();
                 }
             });
             return tableRow ;
@@ -80,8 +80,8 @@ public class CompareFilesController implements Initializable {
         this.compareFragmentsController = compareFragmentsController;
     }
 
-    public void setCodesViewController(CodesViewController codesViewController) {
-        this.codesViewController = codesViewController;
+    public void setCompareCodesController(CompareCodesController compareCodesController) {
+        this.compareCodesController = compareCodesController;
     }
 
 }

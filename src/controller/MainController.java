@@ -14,7 +14,7 @@ public class MainController implements Initializable {
     @FXML private MenuController menuController;
     @FXML private CompareFilesController compareFilesController;
     @FXML private CompareFragmentsController compareFragmentsController;
-    @FXML private CodesViewController codesViewController;
+    @FXML private CompareCodesController compareCodesController;
 
     private Algorithm algorithm;
 
@@ -27,9 +27,9 @@ public class MainController implements Initializable {
         menuController.updateIItemStart();
 
         compareFilesController.setCompareFragmentsController(compareFragmentsController);
-        compareFilesController.setCodesViewController(codesViewController);
+        compareFilesController.setCompareCodesController(compareCodesController);
 
-        compareFragmentsController.setCodesViewController(codesViewController);
+        compareFragmentsController.setCompareCodesController(compareCodesController);
     }
 
     public void runAlgorithm() {

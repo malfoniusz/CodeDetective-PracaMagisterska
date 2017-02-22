@@ -14,7 +14,7 @@
                   <fx:include fx:id="compareFragments" source="CompareFragments.fxml" />
               </items>
             </SplitPane>
-            <fx:include fx:id="codesView" source="CodesView.fxml" />
+            <fx:include fx:id="compareCodes" source="CompareCodes.fxml" />
          </items>
       </SplitPane>
    </children>
