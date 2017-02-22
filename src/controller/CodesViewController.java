@@ -4,11 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -16,29 +19,58 @@ import javafx.scene.text.TextFlow;
 
 public class CodesViewController implements Initializable {
 
+    @FXML ScrollPane iScrollPane1;
+    @FXML ScrollPane iScrollPane2;
+
     @FXML TextFlow iCode1;
     @FXML TextFlow iCode2;
 
-    final File file1 = new File("F:\\Desktop\\Game.java");
-    final File file2 = new File("F:\\Desktop\\Drawing.java");
+    // TODO: usun
+    final File FILE_1 = new File("F:\\Desktop\\Game.java");
+    final int FROM_LINE_1 = 20;
+    final int TO_LINE_1 = 38;
+    final File FILE_2 = new File("F:\\Desktop\\Drawing.java");
+    final int FROM_LINE_2 = 74;
+    final int TO_LINE_2 = 100;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setCodes(file1, 20, 38, file2, 74, 100);
+        setCodes(FILE_1, FROM_LINE_1, TO_LINE_1, FILE_2, FROM_LINE_2, TO_LINE_2);
     }
 
-    public void setCodes(File file1, int file1FromLine, int file1ToLine, File file2, int file2FromLine, int file2ToLine) {
-        setCode1(file1, file1FromLine, file1ToLine);
-        setCode2(file2, file2FromLine, file2ToLine);
+    // TODO: usun
+    @FXML
+    private void test(ActionEvent event) {
+        scrollToLine(FILE_1, FROM_LINE_1, iScrollPane1, iCode1);
+        scrollToLine(FILE_2, FROM_LINE_2, iScrollPane2, iCode2);
     }
 
-    private void setCode1(File file1, int file1FromLine, int file1ToLine) {
-        TextFlow code1 = readFile(file1, file1FromLine, file1ToLine);
+    public void setCodes(File file1, int fromLine1, int toLine1, File file2, int fromLine2, int toLine2) {
+        setCode1(file1, fromLine1, toLine1);
+        setCode2(file2, fromLine2, toLine2);
+    }
+
+    private void scrollToLine(File file, int lineNumber, ScrollPane scrollPane, TextFlow textFlow) {
+        int fixedLineNumber = lineNumber - 1;   // Zawsze scrolluje o jedną linijkę za dużo
+
+        int totalLines = totalLines(file);
+        double position = fixedLineNumber / (double) totalLines;    // Procentowy poziom, na którym jest linijka
+
+        double v = textFlow.getHeight();    // Wysokość całego tekstu
+        double t = position * v;            // Wysokość linijki
+        double o = scrollPane.getHeight();  // Wysokość pojedyńczego okna, na którym wyświetlany jest tekst
+        double s = t / (v-o);               // Wartość przesunięcia scrollbara
+
+        scrollPane.setVvalue(s);
+    }
+
+    private void setCode1(File file1, int fromLine1, int toLine1) {
+        TextFlow code1 = readFile(file1, fromLine1, toLine1);
         updateFlow(iCode1, code1);
     }
 
-    private void setCode2(File file2, int file2FromLine, int file2ToLine) {
-        TextFlow code2 = readFile(file2, file2FromLine, file2ToLine);
+    private void setCode2(File file2, int fromLine2, int toLine2) {
+        TextFlow code2 = readFile(file2, fromLine2, toLine2);
         updateFlow(iCode2, code2);
     }
 
@@ -88,5 +120,20 @@ public class CodesViewController implements Initializable {
     private void updateFlow(TextFlow flow, TextFlow newData) {
         flow.getChildren().clear();
         flow.getChildren().addAll(newData);
+    }
+
+    private int totalLines(File file) {
+        try {
+            LineNumberReader lnr = new LineNumberReader(new FileReader(file));
+            lnr.skip(Long.MAX_VALUE);
+
+            int lineNumber = lnr.getLineNumber() + 1;   // Add 1 because line index starts at 0
+            lnr.close();
+            return lineNumber;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 }
