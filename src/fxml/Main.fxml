@@ -10,7 +10,7 @@
          <items>
             <SplitPane dividerPositions="0.5" prefHeight="384.0" prefWidth="1198.0">
               <items>
-                  <fx:include fx:id="tableFiles" source="TableFiles.fxml" />
+                  <fx:include fx:id="files" source="Files.fxml" />
                   <fx:include fx:id="tableFragments" source="TableFragments.fxml" />
               </items>
             </SplitPane>

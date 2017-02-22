@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import model.AlgorithmData;
 import model.FileMarked;
-import model.TableFiles;
+import model.Files;
 import model.TableFragments;
 
 public class Algorithm extends AlgorithmData {
@@ -14,7 +14,7 @@ public class Algorithm extends AlgorithmData {
         super();
     }
 
-    public ArrayList<TableFiles> runAlgorithm() {
+    public ArrayList<Files> runAlgorithm() {
         if (getProject() == null || getBase() == null) {
             return null;
         }
@@ -25,7 +25,7 @@ public class Algorithm extends AlgorithmData {
         return test();
     }
 
-    private ArrayList<TableFiles> test() {
+    private ArrayList<Files> test() {
         FileMarked fileMarked1 = new FileMarked(new File("F:\\Desktop\\Game.java"), 20, 38);
         FileMarked fileMarked2 = new FileMarked(new File("F:\\Desktop\\Drawing.java"), 74, 100);
 
@@ -41,12 +41,12 @@ public class Algorithm extends AlgorithmData {
         tableFragments2.add(fragments3);
         tableFragments2.add(fragments4);
 
-        ArrayList<TableFiles> tableFiles = new ArrayList<>();
-        TableFiles files1 = new TableFiles("MySuperClassController", 365, "Project1", "MainSourceController", 566, 222267, 58, tableFragments1);
-        TableFiles files2 = new TableFiles("plik2", 205, "MassiveOnlineUtopia", "plik3", 566, 144187, 95, tableFragments2);
-        tableFiles.add(files1);
-        tableFiles.add(files2);
+        ArrayList<Files> files = new ArrayList<>();
+        Files files1 = new Files("MySuperClassController", 365, "Project1", "MainSourceController", 566, 222267, 58, tableFragments1);
+        Files files2 = new Files("plik2", 205, "MassiveOnlineUtopia", "plik3", 566, 144187, 95, tableFragments2);
+        files.add(files1);
+        files.add(files2);
 
-        return tableFiles;
+        return files;
     }
 }

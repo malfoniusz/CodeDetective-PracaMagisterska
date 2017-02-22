@@ -3,9 +3,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView id="table-files" fx:id="tableFiles" prefHeight="400.0" prefWidth="587.0" stylesheets="@../css/TableFiles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TableFilesController">
+<TableView id="table-files" fx:id="files" prefHeight="400.0" prefWidth="587.0" stylesheets="@../css/Files.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FilesController">
   <columns>
-      <TableColumn fx:id="iProject" prefWidth="100.0" text="File1 Project" />
+    <TableColumn fx:id="iProject" prefWidth="100.0" text="File1 Project" />
     <TableColumn id="column-file1" fx:id="iFile1" prefWidth="170.0" text="File1 (Total lines)" />
     <TableColumn id="column-file2" fx:id="iFile2" minWidth="0.0" prefWidth="170.0" text="File2 (Total lines)" />
     <TableColumn id="column-lines" fx:id="iLines" prefWidth="65.0" text="Lines" />
