@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import model.AlgorithmData;
+import model.FileMarked;
 import model.TableFiles;
 import model.TableFragments;
 
@@ -25,22 +26,18 @@ public class Algorithm extends AlgorithmData {
     }
 
     private ArrayList<TableFiles> test() {
-        File file1 = new File("F:\\Desktop\\Game.java");
-        int fromLine1 = 20;
-        int toLine1 = 38;
-        File file2 = new File("F:\\Desktop\\Drawing.java");
-        int fromLine2 = 74;
-        int toLine2 = 100;
+        FileMarked fileMarked1 = new FileMarked(new File("F:\\Desktop\\Game.java"), 20, 38);
+        FileMarked fileMarked2 = new FileMarked(new File("F:\\Desktop\\Drawing.java"), 74, 100);
 
         ArrayList<TableFragments> tableFragments1 = new ArrayList<>();
-        TableFragments fragments1 = new TableFragments(file1, fromLine1, toLine1, file1, fromLine1, toLine1);
-        TableFragments fragments2 = new TableFragments(file1, fromLine1, toLine1, file2, fromLine2, toLine2);
+        TableFragments fragments1 = new TableFragments(fileMarked1, fileMarked1);
+        TableFragments fragments2 = new TableFragments(fileMarked1, fileMarked2);
         tableFragments1.add(fragments1);
         tableFragments1.add(fragments2);
 
         ArrayList<TableFragments> tableFragments2 = new ArrayList<>();
-        TableFragments fragments3 = new TableFragments(file2, fromLine2, toLine2, file1, fromLine1, toLine1);
-        TableFragments fragments4 = new TableFragments(file2, fromLine2, toLine2, file2, fromLine2, toLine2);
+        TableFragments fragments3 = new TableFragments(fileMarked2, fileMarked1);
+        TableFragments fragments4 = new TableFragments(fileMarked2, fileMarked2);
         tableFragments2.add(fragments3);
         tableFragments2.add(fragments4);
 

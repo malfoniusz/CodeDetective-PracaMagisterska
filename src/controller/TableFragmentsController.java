@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -42,15 +41,7 @@ public class TableFragmentsController implements Initializable {
             tableRow.setOnMouseClicked(event -> {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     TableFragments tableFragments = tableRow.getItem();
-
-                    File file1 = tableFragments.getFile1();
-                    int fromLine1 = tableFragments.getFromLine1();
-                    int toLine1 = tableFragments.getToLine1();
-                    File file2 = tableFragments.getFile2();
-                    int fromLine2 = tableFragments.getFromLine2();
-                    int toLine2 = tableFragments.getToLine2();
-
-                    codesViewController.setCodes(file1, fromLine1, toLine1, file2, fromLine2, toLine2);
+                    codesViewController.setCodes(tableFragments.getFileMarked1(), tableFragments.getFileMarked2());
                 }
             });
             return tableRow ;

@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import model.FileMarked;
 
 public class CodesViewController implements Initializable {
 
@@ -28,12 +29,12 @@ public class CodesViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void setCodes(File file1, int fromLine1, int toLine1, File file2, int fromLine2, int toLine2) {
-        setCode(iCode1, file1, fromLine1, toLine1);
-        setCode(iCode2, file2, fromLine2, toLine2);
+    public void setCodes(FileMarked fileMarked1, FileMarked fileMarked2) {
+        setCode(iCode1, fileMarked1);
+        setCode(iCode2, fileMarked2);
 
-        scrollToLine(file1, fromLine1, iScrollPane1, iCode1);
-        scrollToLine(file2, fromLine2, iScrollPane2, iCode2);
+        scrollToLine(fileMarked1.getFile(), fileMarked1.getFromLine(), iScrollPane1, iCode1);
+        scrollToLine(fileMarked2.getFile(), fileMarked2.getFromLine(), iScrollPane2, iCode2);
     }
 
     public void clearCodes() {
@@ -56,15 +57,19 @@ public class CodesViewController implements Initializable {
         scrollPane.setVvalue(s);
     }
 
-    private void setCode(TextFlow textFlow, File file, int fromLine, int toLine) {
-        TextFlow code = readFile(file, fromLine, toLine);
+    private void setCode(TextFlow textFlow, FileMarked fileMarked) {
+        TextFlow code = readFile(fileMarked);
         textFlow.getChildren().setAll(code);
 
         // Powiadomienie programu o zmianie rozmiaru okna
         textFlow.autosize();
     }
 
-    private TextFlow readFile(File file, int fromLine, int toLine) {
+    private TextFlow readFile(FileMarked fileMarked) {
+        File file = fileMarked.getFile();
+        int fromLine = fileMarked.getFromLine();
+        int toLine = fileMarked.getToLine();
+        
         Text textBefore = read(file, 1, fromLine - 1);
 
         Text textBetween = read(file, fromLine, toLine);

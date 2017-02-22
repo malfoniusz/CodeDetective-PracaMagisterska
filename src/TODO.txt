@@ -1,5 +1,4 @@
 ﻿
-- zrobic osobna klase zawierajaca: File file1 = new File("F:\\Desktop\\Game.java"); int fromLine1 = 20; int toLine1 = 38;
 - nazwy klas plików na ViewFiles, ViewFragments, ViewCode
 
 2. Interfejs graficzny - część 2:
