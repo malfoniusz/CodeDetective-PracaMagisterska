@@ -2,7 +2,7 @@ package model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class TableFragments {
+public class CompareFragments {
 
     // Column File1Fragment
     private final SimpleStringProperty rFileFragment1;
@@ -12,7 +12,7 @@ public class TableFragments {
     private final SimpleStringProperty rFileFragment2;
     private FileMarked fileMarked2;
 
-    public TableFragments(FileMarked fileMarked1, FileMarked fileMarked2) {
+    public CompareFragments(FileMarked fileMarked1, FileMarked fileMarked2) {
         this.fileMarked1 = fileMarked1;
         this.rFileFragment1 = new SimpleStringProperty();
         updateRFileFragment1();

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView fx:id="tableFragments" prefHeight="200.0" prefWidth="594.0" stylesheets="@../css/TableFragments.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TableFragmentsController">
+<TableView fx:id="compareFragments" prefHeight="200.0" prefWidth="594.0" stylesheets="@../css/CompareFragments.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CompareFragmentsController">
   <columns>
     <TableColumn fx:id="iFileFragment1" prefWidth="297.0" text="File1 Fragment" />
     <TableColumn fx:id="iFileFragment2" minWidth="0.0" prefWidth="297.0" text="File2 Fragment" />

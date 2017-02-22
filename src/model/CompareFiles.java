@@ -27,9 +27,9 @@ public class CompareFiles {
     private final SimpleStringProperty rMatched;
 
     // Informacje, które będą wyświetlone na kolejnym oknie
-    private ArrayList<TableFragments> tableFragments;
+    private ArrayList<CompareFragments> compareFragments;
 
-    public CompareFiles(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue, ArrayList<TableFragments> tableFragments) {
+    public CompareFiles(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue, ArrayList<CompareFragments> compareFragments) {
         this.file1Name = file1Name;
         this.file1Lines = file1Lines;
         this.rFile1 = new SimpleStringProperty();
@@ -48,7 +48,7 @@ public class CompareFiles {
         this.rMatched = new SimpleStringProperty();
         updateRMatched();
 
-        this.tableFragments = tableFragments;
+        this.compareFragments = compareFragments;
     }
 
     public String getRFile1() {
@@ -145,11 +145,11 @@ public class CompareFiles {
     }
 
 
-    public ArrayList<TableFragments> getTableFragments() {
-        return tableFragments;
+    public ArrayList<CompareFragments> getCompareFragments() {
+        return compareFragments;
     }
 
-    public void setTableFragments(ArrayList<TableFragments> tableFragments) {
-        this.tableFragments = tableFragments;
+    public void setCompareFragments(ArrayList<CompareFragments> compareFragments) {
+        this.compareFragments = compareFragments;
     }
 }

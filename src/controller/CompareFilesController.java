@@ -17,7 +17,7 @@ import model.CompareFiles;
 
 public class CompareFilesController implements Initializable {
 
-    private TableFragmentsController tableFragmentsController;
+    private CompareFragmentsController compareFragmentsController;
     private CodesViewController codesViewController;
 
     @FXML private TableView<CompareFiles> compareFiles;
@@ -49,7 +49,7 @@ public class CompareFilesController implements Initializable {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     // Wyswietl fragmenty
                     CompareFiles compareFiles = tableRow.getItem();
-                    tableFragmentsController.setData(compareFiles.getTableFragments());
+                    compareFragmentsController.setData(compareFiles.getCompareFragments());
 
                     // Wyczysc kod
                     codesViewController.clearCodes();
@@ -76,8 +76,8 @@ public class CompareFilesController implements Initializable {
         data.setAll(value);
     }
 
-    public void setTableFragmentsController(TableFragmentsController tableFragmentsController) {
-        this.tableFragmentsController = tableFragmentsController;
+    public void setCompareFragmentsController(CompareFragmentsController compareFragmentsController) {
+        this.compareFragmentsController = compareFragmentsController;
     }
 
     public void setCodesViewController(CodesViewController codesViewController) {
