@@ -47,8 +47,8 @@ public class Algorithm extends AlgorithmData {
         compareFragments2.add(fragments4);
 
         ArrayList<CompareFiles> compareFiles = new ArrayList<>();
-        CompareFiles compareFiles1 = new CompareFiles(file1, 365, "Project1", file2, 566, 222267, 58, compareFragments1);
-        CompareFiles compareFiles2 = new CompareFiles(new File("myPath/plik2"), 205, "MassiveOnlineUtopia", new File("myPath/plik3"), 566, 144187, 95, compareFragments2);
+        CompareFiles compareFiles1 = new CompareFiles("Project1", file1, 365, file2, 566, 222267, 58, compareFragments1);
+        CompareFiles compareFiles2 = new CompareFiles("MassiveOnlineUtopia", new File("myPath/plik2"), 205, new File("myPath/plik3"), 566, 144187, 95, compareFragments2);
         compareFiles.add(compareFiles1);
         compareFiles.add(compareFiles2);
 
