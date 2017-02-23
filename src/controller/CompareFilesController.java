@@ -47,8 +47,12 @@ public class CompareFilesController implements Initializable {
             TableRow<CompareFiles> tableRow = new TableRow<>();
             tableRow.setOnMouseClicked(event -> {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
-                    // Wyswietl fragmenty
                     CompareFiles compareFiles = tableRow.getItem();
+                    // Ustaw naglowek tabel
+                    compareFragmentsController.setColumnName(1, compareFiles.getFile1().getPath());
+                    compareFragmentsController.setColumnName(2, compareFiles.getFile2().getPath());
+
+                    // Wyswietl fragmenty
                     compareFragmentsController.setData(compareFiles.getCompareFragments());
 
                     // Wyczysc kod

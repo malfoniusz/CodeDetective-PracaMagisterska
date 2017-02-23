@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -50,6 +51,17 @@ public class CompareFragmentsController implements Initializable {
 
     public void setData(ArrayList<CompareFragments> items) {
         data.setAll(items);
+    }
+
+    public void setColumnName(int columnNumber, String title) {
+        Label headerLabel = new Label(title);
+
+        if (columnNumber == 1) {
+            iFileFragment1.setGraphic(headerLabel);
+        }
+        else if (columnNumber == 2) {
+            iFileFragment2.setGraphic(headerLabel);
+        }
     }
 
     public void setCompareCodesController(CompareCodesController compareCodesController) {

@@ -1,9 +1,9 @@
 ﻿
-- nazwy klas plików na ViewFiles, ViewFragments, ViewCode
+- compareFiles - zmienić kolejnośc argumentów dla konstruktora
+- compareFiles - zmienić m.in. file1Name na fileName1
 
 2. Interfejs graficzny - część 2:
-- tabela 2:
-	+ dwa pola tekstowe nad drugą tabelą ze ścieżkami do plików (nie użyć splitPane) (czy można zrobić nagłówek tabeli na dwie linie?)
+- tekst w pustych tabelach zmienic na "Select project and base, then click start"
 
 
 3. Tokenizacja i sposób porównywania:

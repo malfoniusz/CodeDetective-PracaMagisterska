@@ -1,4 +1,5 @@
 package model;
+import java.io.File;
 import java.util.ArrayList;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -8,6 +9,7 @@ public class CompareFiles {
 
     // Column File1
     private final SimpleStringProperty rFile1;
+    private File file1;
     private String file1Name;
     private int file1Lines;
 
@@ -16,6 +18,7 @@ public class CompareFiles {
 
     // Column File2
     private final SimpleStringProperty rFile2;
+    private File file2;
     private String file2Name;
     private int file2Lines;
 
@@ -29,15 +32,17 @@ public class CompareFiles {
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<CompareFragments> compareFragments;
 
-    public CompareFiles(String file1Name, int file1Lines, String project, String file2Name, int file2Lines, int sLines, int matchedValue, ArrayList<CompareFragments> compareFragments) {
-        this.file1Name = file1Name;
+    public CompareFiles(File file1, int file1Lines, String project, File file2, int file2Lines, int sLines, int matchedValue, ArrayList<CompareFragments> compareFragments) {
+        this.file1 = file1;
+        this.file1Name = file1.getName();
         this.file1Lines = file1Lines;
         this.rFile1 = new SimpleStringProperty();
         updateRFile1();
 
         this.rProject = new SimpleStringProperty(project);
 
-        this.file2Name = file2Name;
+        this.file2 = file2;
+        this.file2Name = file2.getName();
         this.file2Lines = file2Lines;
         this.rFile2 = new SimpleStringProperty();
         updateRFile2();
@@ -57,6 +62,16 @@ public class CompareFiles {
 
     private void updateRFile1() {
         rFile1.set(file1Name + " (" + file1Lines + ")");
+    }
+
+    public File getFile1() {
+        return file1;
+    }
+
+    public void setFile1(File file1) {
+        this.file1 = file1;
+        this.file1Name = file1.getName();
+        updateRFile1();
     }
 
     public String getFile1Name() {
@@ -95,6 +110,16 @@ public class CompareFiles {
 
     private void updateRFile2() {
         rFile2.set(file2Name + " (" + file2Lines + ")");
+    }
+
+    public File getFile2() {
+        return file2;
+    }
+
+    public void setFile2(File file2) {
+        this.file2 = file2;
+        this.file2Name = file2.getName();
+        updateRFile2();
     }
 
     public String getFile2Name() {
