@@ -31,6 +31,7 @@ public class CompareFragmentsController implements Initializable {
         iFileFragment1.setCellValueFactory(new PropertyValueFactory<CompareFragments, String>("rFileFragment1"));
         iFileFragment2.setCellValueFactory(new PropertyValueFactory<CompareFragments, String>("rFileFragment2"));
 
+        compareFragments.setPlaceholder(new Label(""));
         compareFragments.setItems(data);
 
         setRowFactory(compareFragments);

@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -37,6 +38,7 @@ public class CompareFilesController implements Initializable {
         iLines.setCellValueFactory(new PropertyValueFactory<CompareFiles, Integer>("rLines"));
         iMatched.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rMatched"));
 
+        compareFiles.setPlaceholder(new Label("From menu:\nChoose Base\nChoose Project\nPress Start"));
         compareFiles.setItems(data);
 
         setRowFactory(compareFiles);

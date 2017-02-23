@@ -1,8 +1,4 @@
 ﻿
-2. Interfejs graficzny - część 2:
-- tekst w pustych tabelach zmienic na "Select project and base, then click start"
-
-
 3. Tokenizacja i sposób porównywania:
 - spis tokenów i odpowiadających im typów
 - sprawdzić wszystkie możliwe typy w javie np. interfejs
