@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import main.Algorithm;
 import model.CompareFiles;
 
 public class MainController implements Initializable {

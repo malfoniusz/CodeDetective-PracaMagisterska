@@ -1,4 +1,4 @@
-package main;
+package controller;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,8 +26,8 @@ public class Algorithm extends AlgorithmData {
     }
 
     private ArrayList<CompareFiles> test() {
-        File file1 = new File("F:\\Desktop\\Game.java");
-        File file2 = new File("F:\\Desktop\\Drawing.java");
+        File file1 = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Game.java");
+        File file2 = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Drawing.java");
 
         FileMarked fileMarked1a = new FileMarked(file1, 20, 38);
         FileMarked fileMarked1b = new FileMarked(file1, 30, 40);

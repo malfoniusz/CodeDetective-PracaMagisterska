@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import main.Algorithm;
 import model.Project;
 import model.Projects;
 

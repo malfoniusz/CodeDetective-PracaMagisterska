@@ -1,31 +1,56 @@
 ﻿
 3. Tokenizacja i sposób porównywania:
-- spis tokenów i odpowiadających im typów
-- sprawdzić wszystkie możliwe typy w javie np. interfejs
-- ustalić znak końca linii - enter (zależny od systemu) lub średnik (pomijać tekst w cudzysłowiu i \")
-- usunięcie z kodu komentarzy, znaków białych (użyć biblioteki?)
-- plik z opcjami:
-	+ wybór minimalnej długości łańcuchów
-	+ wybór procentu podobieństwa łańcuchów
-	+ wyświetlanie tylko par plików z minimalnym procentem podobieństwa
+- tokenizacja:
+	+ if, while, do while - zrobić tylko token, że wystąpiło (pominąć gdzie się zaczyna i kończy)
+	+ ustalić znak końca linii - średnik (pomijać tekst w cudzysłowiu i \")
+	+ spis tokenów (sprawdzić typy w javie np. interfejs):
+        - public class Foo - CLASS,
+        - public void funkcja(int a, String b) - FUNCTION_DEF
+        - funkcja(), System.out.println() - FUNCTION_USE
+        - int, long, double - NUMBER
+        - liczba++ - ASSIGN
+        - int i = 0 - NUMBER, ASSIGN
+        - String, char - TEXT
+        - MyClass myClass = new MyClass() - VAR, ASSIGN
+        - if, switch - CONDITION
+        - for, while, do while - LOOP
+        - try, catch - EXCEPTION
+        - ignorowanie const
+    + usunięcie z kodu (użyć biblioteki?):
+	    - komentarzy - //, /*, *, */
+	    - znaków białych (spacji, tabulatorów)
+	    - niebezpiecznych znaków (twarda spacja, itp.)
+	    - include, import, package
+	+ przeparsowanie pliku i wyświetlenie ciągu tokenów uzyskanych z pliku
+- opcje - wybór minimalnej długości łańcuchów
 - algorytm porównujący:
 	+ zasada działania:
 		- z pary plików otrzymujemy dwa gigantyczne ciągi tokenów
-		- szukamy takich samych fragmentów tokenów pomiędzy obydwoma ciągami, np. algorytm Karp-Rabin
+		- szukamy takich samych fragmentów tokenów pomiędzy obydwoma ciągami, np. Rabin–Karp algorithm - porównać mniejszy string z większym, Rabin fingerprint, Dynamic pattern matching and hashing to B buckets
+		- przeszukujemy gigantyczne ciągi i osobno zliczamy liczbę podobnych linii kodu (puste linii lub zawierające tylko nawias klamrowy, nie zaliczać do podobnych linii)
 	+ bierze pod uwagę minimalną długość fragmentu
 	+ raz znalezione identyczne tokeny, nie mogą być użyte do dalszych porównań
-	+ bierze pod uwagę procentowe podobieństwo fragmentów
-		- niepodobny kod na początku i końcu fragmentu jest pomijany
-	+ zwraca numery linii fragmentów z podobnym kodem
-	+ sprawdzić czy podobne strumienie tokenów mają podobnie wyglądające linie (spradzić numery linii kodu)
+	+ bierze pod uwagę procentowe podobieństwo fragmentów (niepodobny kod na początku i końcu fragmentu jest pomijany)
+	+ zwraca dane (numery linii z podobnymi fragmentami kodów)
+- (w przypadku zbyt dużej liczby fałszywych wyników):
+    + sprecyzować tokeny: NUMBER - NUMBER_WHOLE, NUMBER_DECIMAL - INT, LONG, FLOAT, DOUBLE
+    + sprawdzać argumenty w definiowanych i wywoływanych funkcjach i klasach - sprawdzać również kolejność argumentów
+    + sprawdzać argumenty w warunkach, np. if (i < 10), while (x == 0)
+- opcje(2):
+    + wybór procentu podobieństwa łańcuchów
+    + wyświetlanie tylko par plików z minimalnym procentem podobieństwa
 - help - opis wszystkiego m.in. kolumn tabel
 
 
 X. Dodatkowe pomysły:
 - wyświetlenie paska postępu i przeminiętego czasu
-- szybkie porównanie:
-	+ sprawdza tylko procentowe podobieństwo (suma różnic takich samych linii w obu plikach przez sume linii)
-	+ nie bierze pod uwagę minimalnej długości fragmentu kodu
+- algorytm dodatkowe:
+	+ dla linii kodu wykrytych jako podobne (tokeny), sprawdzić czy ich kod jest taki sam (jeśli taki sam to bardziej prawdopodobne, że plagiat)
+	+ opcje:
+	   - dokładna tokenizacja: LICZBA rozbić na INT, LONG, SHORT
+	+ szybkie porównanie:
+		- sprawdza tylko procentowe podobieństwo (suma różnic takich samych linii w obu plikach przez sume linii)
+		- nie bierze pod uwagę minimalnej długości fragmentu kodu
 - statystyki:
 	+ czas wykonania programu
 	+ liczba identycznych tokenów
