@@ -29,6 +29,9 @@ public class MainController implements Initializable {
         compareFilesController.setCompareCodesController(compareCodesController);
 
         compareFragmentsController.setCompareCodesController(compareCodesController);
+
+        // TODO: delete
+        runAlgorithm();
     }
 
     public void runAlgorithm() {

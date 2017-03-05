@@ -1,6 +1,4 @@
 ﻿
-- powiększenie (wypełnienie) tabel przy powiększaniu okien
-
 3. Tokenizacja pliku:
 - usunięcie z kodu (użyć biblioteki?):
     + zachować numeracje linii kodu

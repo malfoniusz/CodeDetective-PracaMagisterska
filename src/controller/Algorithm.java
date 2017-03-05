@@ -15,9 +15,10 @@ public class Algorithm extends AlgorithmData {
     }
 
     public ArrayList<CompareFiles> runAlgorithm() {
-        if (getProject() == null || getBase() == null) {
+        // TODO: uncomment
+        /*if (getProject() == null || getBase() == null) {
             return null;
-        }
+        }*/
 
         // TODO: algorithm
         System.out.println("Algorithm - runAlgorithm - HEJKA");
