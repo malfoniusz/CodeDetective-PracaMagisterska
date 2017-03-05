@@ -1,13 +1,6 @@
 ﻿
 3. Tokenizacja pliku:
-- usunięcie z kodu (użyć biblioteki?):
-    + zachować numeracje linii kodu (nie usuwać linii, zostawić entery)
-    + komentarzy - //, /*, *, */
-    + znaków białych (spacji, tabulatorów)
-    + niebezpiecznych znaków (twarda spacja, itp.)
-    + include, import, package
-    + tekstu w cydzysłowiach "tekst" (uwaga na \")
-- spis tokenów (sprawdzić typy w c++):
+- spis tokenów:
     + class Foo - CLASS,
     + void funkcja(int a, String b) - FUNCTION_DEF
     + funkcja(), cout << "hejka" - FUNCTION_USE
@@ -22,8 +15,10 @@
     + try, catch - EXCEPTION
     + ignorowanie const
     + if, while, do while - zrobić tylko token, że wystąpiło (pominąć gdzie się zaczyna i kończy)
+- sprawdzić instrukcje w c++ pod kątem czyszczenia kodu i tokenizacji
 - ustalić znak końca linii - średnik
 - przeparsowanie pliku i wyświetlenie ciągu tokenów uzyskanych z pliku
+- przetestowac tokenizacje dla roznych plikow
 
 
 4. Algorytm:
@@ -61,3 +56,4 @@ X. Dodatkowe pomysły:
     + liczba identycznych tokenów
     + inne
 - nazwy/szablony plików lub ścieżki podane przez użytkownika, które nie będą sprawdzane
+- usuniecie niebezpiecznych znaków przed tokenizacja (twarda spacja, nieznane znaki unicode)
