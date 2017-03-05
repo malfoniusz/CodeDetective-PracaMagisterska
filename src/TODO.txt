@@ -1,25 +1,30 @@
 ﻿
+- powiększenie (wypełnienie) tabel przy powiększaniu okien
+
 3. Tokenizacja pliku:
-- spis tokenów (sprawdzić typy w javie np. interfejs):
-    + public class Foo - CLASS,
-    + public void funkcja(int a, String b) - FUNCTION_DEF
-    + funkcja(), System.out.println() - FUNCTION_USE
+- usunięcie z kodu (użyć biblioteki?):
+    + zachować numeracje linii kodu
+    + komentarzy - //, /*, *, */
+    + znaków białych (spacji, tabulatorów)
+    + niebezpiecznych znaków (twarda spacja, itp.)
+    + include, import, package
+    + tekstu w cydzysłowiach "tekst" (uwaga na \")
+- spis tokenów (sprawdzić typy w c++):
+    + class Foo - CLASS,
+    + void funkcja(int a, String b) - FUNCTION_DEF
+    + funkcja(), cout << "hejka" - FUNCTION_USE
     + int, long, double - NUMBER
     + liczba++ - ASSIGN
     + int i = 0 - NUMBER, ASSIGN
-    + String, char - TEXT
+    + string, char - TEXT
+    + int* wsk, int *wsk - POINTER
     + MyClass myClass = new MyClass() - VAR, ASSIGN
     + if, switch - CONDITION
     + for, while, do while - LOOP
     + try, catch - EXCEPTION
     + ignorowanie const
     + if, while, do while - zrobić tylko token, że wystąpiło (pominąć gdzie się zaczyna i kończy)
-- usunięcie z kodu (użyć biblioteki?):
-    + komentarzy - //, /*, *, */
-    + znaków białych (spacji, tabulatorów)
-    + niebezpiecznych znaków (twarda spacja, itp.)
-    + include, import, package
-- ustalić znak końca linii - średnik (pomijać tekst w cudzysłowiu i \")
+- ustalić znak końca linii - średnik
 - przeparsowanie pliku i wyświetlenie ciągu tokenów uzyskanych z pliku
 
 

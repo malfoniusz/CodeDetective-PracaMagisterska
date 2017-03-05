@@ -26,8 +26,8 @@ public class Algorithm extends AlgorithmData {
     }
 
     private ArrayList<CompareFiles> test() {
-        File file1 = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Game.java");
-        File file2 = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Drawing.java");
+        File file1 = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Algorytmy1\\Algorytmy L Cw1\\main.cpp");
+        File file2 = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Algorytmy1\\Algorytmy L Cw1\\Plecak.cpp");
 
         FileMarked fileMarked1a = new FileMarked(file1, 20, 38);
         FileMarked fileMarked1b = new FileMarked(file1, 30, 40);
