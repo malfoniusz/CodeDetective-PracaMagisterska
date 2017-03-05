@@ -1,20 +1,15 @@
-package model;
+package staticc;
 
 import java.io.File;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-public class Settings {
+public final class Settings {
 
-    private final Preferences preferences;
+    private static final Preferences preferences = Preferences.userRoot();
+    private static final String BASE_PATH_NAME = "base_path";
 
-    private final String BASE_PATH_NAME = "base_path";
-
-    public Settings() {
-        preferences = Preferences.userRoot();
-    }
-
-    public void clear() {
+    public static void clear() {
         try {
             preferences.clear();
         } catch (BackingStoreException e) {
@@ -22,7 +17,7 @@ public class Settings {
         }
     }
 
-    public String getBasePath() {
+    public static String getBasePath() {
         String basePath = preferences.get(BASE_PATH_NAME, null);
 
         if (basePath != null) {
@@ -37,7 +32,7 @@ public class Settings {
         return preferences.get(BASE_PATH_NAME, null);
     }
 
-    public void setBasePath(String basePath) {
+    public static void setBasePath(String basePath) {
         preferences.put(BASE_PATH_NAME, basePath);
     }
 

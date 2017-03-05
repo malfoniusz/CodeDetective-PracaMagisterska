@@ -2,20 +2,19 @@ package model;
 
 import java.io.File;
 
-public class AlgorithmData {
+import staticc.Settings;
 
-    private Settings settings;
+public class AlgorithmData {
 
     private Project project;    // Wybrany projekt do porównania
     private Projects projects;  // Baza projektów, z którymi projekt bedzie porównywany
 
     public AlgorithmData() {
-        settings = new Settings();
         loadSettingsBasePath();
     }
 
     private void loadSettingsBasePath() {
-        String basePath = settings.getBasePath();
+        String basePath = Settings.getBasePath();
 
         if (basePath == null) {
             this.projects = null;
@@ -25,14 +24,6 @@ public class AlgorithmData {
             Projects projects = new Projects(fileBase);
             this.setProjects(projects);
         }
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public void setSettings(Settings settings) {
-        this.settings = settings;
     }
 
     public Project getProject() {
@@ -49,7 +40,7 @@ public class AlgorithmData {
 
     public void setProjects(Projects projects) {
         this.projects = new Projects(projects.getDirectory());
-        settings.setBasePath(projects.getDirectory().getAbsolutePath());
+        Settings.setBasePath(projects.getDirectory().getAbsolutePath());
     }
 
 }

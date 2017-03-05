@@ -1,6 +1,4 @@
 ﻿
-- zrobic Settings statyczne (http://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods)
-
 3. Tokenizacja pliku:
 - usunięcie z kodu (użyć biblioteki?):
     + zachować numeracje linii kodu (nie usuwać linii, zostawić entery)
