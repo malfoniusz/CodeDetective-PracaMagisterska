@@ -11,10 +11,13 @@ import model.Project;
 import model.token.TokenFile;
 import staticc.Tokenization;
 
-public class Algorithm extends AlgorithmData {
+public class Algorithm {
+
+    private AlgorithmData algorithmData;
 
     public Algorithm() {
         super();
+        algorithmData = new AlgorithmData();
     }
 
     public ArrayList<CompareFiles> runAlgorithm() {
@@ -23,10 +26,10 @@ public class Algorithm extends AlgorithmData {
             return null;
         }*/
         //TODO: usun
-        setProject(new Project(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Algorytmy1")));
+        algorithmData.setProject(new Project(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Algorytmy1")));
 
-        ArrayList<TokenFile> projectTokens = Tokenization.tokenProject(getProject());
-        ArrayList<TokenFile> baseTokens = Tokenization.tokenProjects(getBase());
+        ArrayList<TokenFile> projectTokens = Tokenization.tokenProject(algorithmData.getProject());
+        ArrayList<TokenFile> baseTokens = Tokenization.tokenProjects(algorithmData.getProjects());
 
         return test();
     }
@@ -60,4 +63,13 @@ public class Algorithm extends AlgorithmData {
 
         return compareFiles;
     }
+
+    public AlgorithmData getAlgorithmData() {
+        return algorithmData;
+    }
+
+    public void setAlgorithmData(AlgorithmData algorithmData) {
+        this.algorithmData = algorithmData;
+    }
+
 }

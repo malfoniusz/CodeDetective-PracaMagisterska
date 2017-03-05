@@ -6,8 +6,8 @@ public class AlgorithmData {
 
     private Settings settings;
 
-    private Project project;
-    private Projects base;
+    private Project project;    // Wybrany projekt do porównania
+    private Projects projects;  // Baza projektów, z którymi projekt bedzie porównywany
 
     public AlgorithmData() {
         settings = new Settings();
@@ -18,12 +18,12 @@ public class AlgorithmData {
         String basePath = settings.getBasePath();
 
         if (basePath == null) {
-            this.base = null;
+            this.projects = null;
         }
         else {
             File fileBase = new File(basePath);
             Projects projects = new Projects(fileBase);
-            this.setBase(projects);
+            this.setProjects(projects);
         }
     }
 
@@ -43,13 +43,13 @@ public class AlgorithmData {
         this.project = new Project(project.getDirectory());
     }
 
-    public Projects getBase() {
-        return base;
+    public Projects getProjects() {
+        return projects;
     }
 
-    public void setBase(Projects projects) {
-        this.base = new Projects(projects.getDirectory());
-        settings.setBasePath(base.getDirectory().getAbsolutePath());
+    public void setProjects(Projects projects) {
+        this.projects = new Projects(projects.getDirectory());
+        settings.setBasePath(projects.getDirectory().getAbsolutePath());
     }
 
 }

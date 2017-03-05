@@ -1,6 +1,5 @@
 ﻿
 - zrobic Settings statyczne (http://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods)
-- zmien nazwe base na projects i wszystkie jej referencje oraz dodaj w projects komentarz ze jest to baza
 
 3. Tokenizacja pliku:
 - usunięcie z kodu (użyć biblioteki?):

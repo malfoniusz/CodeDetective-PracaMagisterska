@@ -37,7 +37,7 @@ public class MenuController implements Initializable {
 
         if (directory != null) {
             Project project = new Project(directory);
-            algorithm.setProject(project);
+            algorithm.getAlgorithmData().setProject(project);
             updateIItemStart();
         }
     }
@@ -48,7 +48,7 @@ public class MenuController implements Initializable {
 
         if (directory != null) {
             Projects projects = new Projects(directory);
-            algorithm.setBase(projects);
+            algorithm.getAlgorithmData().setProjects(projects);
             updateIItemStart();
         }
     }
@@ -60,7 +60,7 @@ public class MenuController implements Initializable {
     }
 
     public void updateIItemStart() {
-        if (algorithm.getProject() != null && algorithm.getBase() != null) {
+        if (algorithm.getAlgorithmData().getProject() != null && algorithm.getAlgorithmData().getProjects() != null) {
             iItemStart.setDisable(false);
         } else {
             iItemStart.setDisable(true);
