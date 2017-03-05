@@ -7,6 +7,9 @@ import model.AlgorithmData;
 import model.CompareFiles;
 import model.CompareFragments;
 import model.FileMarked;
+import model.Project;
+import model.token.TokenFile;
+import staticc.Tokenization;
 
 public class Algorithm extends AlgorithmData {
 
@@ -19,9 +22,11 @@ public class Algorithm extends AlgorithmData {
         /*if (getProject() == null || getBase() == null) {
             return null;
         }*/
+        //TODO: usun
+        setProject(new Project(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Algorytmy1")));
 
-        // TODO: algorithm
-        System.out.println("Algorithm - runAlgorithm - HEJKA");
+        ArrayList<TokenFile> projectTokens = Tokenization.tokenProject(getProject());
+        ArrayList<TokenFile> baseTokens = Tokenization.tokenProjects(getBase());
 
         return test();
     }
