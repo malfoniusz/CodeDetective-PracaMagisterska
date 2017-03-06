@@ -4,11 +4,11 @@
     + class Foo - CLASS,
     + void funkcja(int a, String b) - FUNCTION_DEF
     + funkcja(), cout << "hejka" - FUNCTION_USE
-    + int, long, double - NUMBER
     + liczba++ - ASSIGN
     + int i = 0 - NUMBER, ASSIGN
     + string, char - TEXT
     + int* wsk, int *wsk - POINTER
+    + new, delete - POINTER_MEM
     + MyClass myClass = new MyClass() - VAR, ASSIGN
     + if, switch - CONDITION
     + for, while, do while - LOOP

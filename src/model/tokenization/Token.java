@@ -1,4 +1,4 @@
-package model.token;
+package model.tokenization;
 
 public enum Token {
     NUMBER,

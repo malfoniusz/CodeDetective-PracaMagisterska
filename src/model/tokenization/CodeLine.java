@@ -1,4 +1,4 @@
-package model.token;
+package model.tokenization;
 
 public class CodeLine {
 
@@ -12,9 +12,7 @@ public class CodeLine {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(lineNumber + "\t" + code);
-        return sb.toString();
+        return new String(lineNumber + "\t" + code);
     }
 
 }

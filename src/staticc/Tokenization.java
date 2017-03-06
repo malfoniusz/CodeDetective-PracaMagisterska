@@ -9,34 +9,34 @@ import java.util.ArrayList;
 import javafx.util.Pair;
 import model.Project;
 import model.Projects;
-import model.token.CodeLine;
-import model.token.Token;
-import model.token.TokenFile;
-import model.token.TokenLine;
+import model.tokenization.CodeFile;
+import model.tokenization.CodeLine;
+import model.tokenization.Token;
+import model.tokenization.TokenFile;
+import model.tokenization.TokenLine;
 
 public final class Tokenization {
 
     private static boolean testPrint = true;
 
     public static TokenFile tokenization(File file) {
-        ArrayList<CodeLine> codeLines = cleanUpFile(file);
+        CodeFile codeFile = prepareForTokenization(file);
+        TokenFile tokenFile = convertTokenFile(codeFile);
 
         // TODO: usun
         if (file.getPath().contains("Algorytmy L Cw1\\Plecak.cpp") && testPrint == true) {
             testPrint = false;
-            for (CodeLine codeLine : codeLines) {
-                System.out.println(codeLine.toString());
-            }
+            //System.out.println(codeFile.toString());
+            System.out.println(tokenFile.toString());
         }
 
-        TokenFile tokenFile = convertTokenFile(codeLines);
         return tokenFile;
     }
 
-    private static TokenFile convertTokenFile(ArrayList<CodeLine> codeLines) {
+    private static TokenFile convertTokenFile(CodeFile codeFile) {
         ArrayList<TokenLine> tokenLines = new ArrayList<>();
 
-        for (CodeLine codeLine : codeLines) {
+        for (CodeLine codeLine : codeFile.codeLines) {
             ArrayList<Token> tokens = convertTokenLine(codeLine.code);
             TokenLine tokenLine = new TokenLine(codeLine.lineNumber, tokens);
             tokenLines.add(tokenLine);
@@ -48,12 +48,19 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-
+        if (line.startsWith("short") ||
+                line.startsWith("int") ||
+                line.startsWith("long") ||
+                line.startsWith("float") ||
+                line.startsWith("double")) {
+            tokens.add(Token.NUMBER);
+        }
 
         return tokens;
     }
 
-    private static ArrayList<CodeLine> cleanUpFile(File file) {
+    // Trims code, removes comments, etc.
+    private static CodeFile prepareForTokenization(File file) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             ArrayList<CodeLine> codeLines = new ArrayList<>();
 
@@ -79,7 +86,8 @@ public final class Tokenization {
                 line = br.readLine();
             }
 
-            return codeLines;
+            CodeFile codeFile = new CodeFile(codeLines);
+            return codeFile;
         } catch (IOException e) {
             e.printStackTrace();
             return null;

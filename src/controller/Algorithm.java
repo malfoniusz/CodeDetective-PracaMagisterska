@@ -8,7 +8,7 @@ import model.CompareFiles;
 import model.CompareFragments;
 import model.FileMarked;
 import model.Project;
-import model.token.TokenFile;
+import model.tokenization.TokenFile;
 import staticc.Tokenization;
 
 public class Algorithm {
