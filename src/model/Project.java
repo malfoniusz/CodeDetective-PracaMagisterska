@@ -18,6 +18,11 @@ public class Project {
         this.files = searchForCppFiles(directory);
     }
 
+    public Project(File directory, ArrayList<File> files) {
+        this.directory = directory;
+        this.files = files;
+    }
+
     private ArrayList<File> searchForCppFiles(File directory) {
         ArrayList<File> javaFiles = new ArrayList<File>();
 

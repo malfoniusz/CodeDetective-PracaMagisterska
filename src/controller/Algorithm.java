@@ -8,7 +8,6 @@ import model.CompareFiles;
 import model.CompareFragments;
 import model.FileMarked;
 import model.Project;
-import model.tokenization.TokenFile;
 import staticc.Tokenization;
 
 public class Algorithm {
@@ -21,15 +20,21 @@ public class Algorithm {
     }
 
     public ArrayList<CompareFiles> runAlgorithm() {
-        // TODO: uncomment
-        /*if (getProject() == null || getBase() == null) {
+        if (algorithmData.getProject() == null || algorithmData.getProjects() == null) {
             return null;
-        }*/
-        //TODO: usun
-        algorithmData.setProject(new Project(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Algorytmy1")));
+        }
 
-        ArrayList<TokenFile> projectTokens = Tokenization.tokenProject(algorithmData.getProject());
-        ArrayList<TokenFile> baseTokens = Tokenization.tokenProjects(algorithmData.getProjects());
+        // TODO: usun
+        ArrayList<File> files = new ArrayList<>();
+        files.add(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Plecak.cpp"));
+        //files.add(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\LAB02.cpp"));
+        File directory = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów");
+        Project project = new Project(directory, files);
+        Tokenization.tokenProject(project);
+
+        // TODO: uncomment
+        // ArrayList<TokenFile> projectTokens = Tokenization.tokenProject(algorithmData.getProject());
+        // ArrayList<TokenFile> baseTokens = Tokenization.tokenProjects(algorithmData.getProjects());
 
         return test();
     }

@@ -17,18 +17,13 @@ import model.tokenization.TokenLine;
 
 public final class Tokenization {
 
-    private static boolean testPrint = true;
-
     public static TokenFile tokenization(File file) {
         CodeFile codeFile = prepareForTokenization(file);
         TokenFile tokenFile = convertTokenFile(codeFile);
 
         // TODO: usun
-        if (file.getPath().contains("Algorytmy L Cw1\\Plecak.cpp") && testPrint == true) {
-            testPrint = false;
-            System.out.println(codeFile.toString());
-            //System.out.println(tokenFile.toString());
-        }
+        System.out.println(codeFile.toString());
+        //System.out.println(tokenFile.toString());
 
         return tokenFile;
     }
@@ -48,13 +43,7 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        if (line.startsWith("short") ||
-                line.startsWith("int") ||
-                line.startsWith("long") ||
-                line.startsWith("float") ||
-                line.startsWith("double")) {
-            tokens.add(Token.NUMBER);
-        }
+        // TODO: pobieraj słowo po słowie i podejmuj kolejne decyzje na podstawie aktualnego słowa
 
         return tokens;
     }
@@ -74,9 +63,6 @@ public final class Tokenization {
                 Pair<String, Boolean> pair = clearComments(line, commentStarted);
                 line = pair.getKey();
                 commentStarted = pair.getValue();
-
-                line = line.replace('{', ' ');
-                line = line.replace('}', ' ');
 
                 // std::string Plecak::wypiszWszystko() -> std::string wypiszWszystko() -> string wypiszWszystko()
                 line = line.replaceAll(" .*::", " ");
