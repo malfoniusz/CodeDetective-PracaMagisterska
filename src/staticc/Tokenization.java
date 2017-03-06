@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javafx.util.Pair;
 import model.Project;
 import model.Projects;
+import model.token.CodeLine;
+import model.token.Token;
 import model.token.TokenFile;
 import model.token.TokenLine;
 
@@ -17,23 +19,43 @@ public final class Tokenization {
     private static boolean testPrint = true;
 
     public static TokenFile tokenization(File file) {
-        String text = cleanUpFile(file);
+        ArrayList<CodeLine> codeLines = cleanUpFile(file);
 
         // TODO: usun
         if (file.getPath().contains("Algorytmy L Cw1\\Plecak.cpp") && testPrint == true) {
             testPrint = false;
-            System.out.println(text);
+            for (CodeLine codeLine : codeLines) {
+                System.out.println(codeLine.toString());
+            }
         }
 
-        // TODO: tokenizacja
-        ArrayList<TokenLine> tokenLines = new ArrayList<>();
-        TokenFile tokenFile = new TokenFile(tokenLines);
+        TokenFile tokenFile = convertTokenFile(codeLines);
         return tokenFile;
     }
 
-    private static String cleanUpFile(File file) {
+    private static TokenFile convertTokenFile(ArrayList<CodeLine> codeLines) {
+        ArrayList<TokenLine> tokenLines = new ArrayList<>();
+
+        for (CodeLine codeLine : codeLines) {
+            ArrayList<Token> tokens = convertTokenLine(codeLine.code);
+            TokenLine tokenLine = new TokenLine(codeLine.lineNumber, tokens);
+            tokenLines.add(tokenLine);
+        }
+
+        return new TokenFile(tokenLines);
+    }
+
+    private static ArrayList<Token> convertTokenLine(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+
+
+        return tokens;
+    }
+
+    private static ArrayList<CodeLine> cleanUpFile(File file) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            StringBuilder sb = new StringBuilder();
+            ArrayList<CodeLine> codeLines = new ArrayList<>();
 
             int lineNumber = 1;
             boolean commentStarted = false;
@@ -51,12 +73,13 @@ public final class Tokenization {
                     line = "";
                 }
 
-                sb.append(lineNumber + "\t" + line + "\n");
-                lineNumber++; // TODO: usun
+                CodeLine codeLine = new CodeLine(lineNumber, line);
+                codeLines.add(codeLine);
+                lineNumber++;
                 line = br.readLine();
             }
 
-            return sb.toString();
+            return codeLines;
         } catch (IOException e) {
             e.printStackTrace();
             return null;

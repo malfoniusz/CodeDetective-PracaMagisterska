@@ -16,9 +16,7 @@
     + ignorowanie const
     + if, while, do while - zrobić tylko token, że wystąpiło (pominąć gdzie się zaczyna i kończy)
 - sprawdzić instrukcje w c++ pod kątem czyszczenia kodu i tokenizacji
-- ustalić znak końca linii - średnik
-- przeparsowanie pliku i wyświetlenie ciągu tokenów uzyskanych z pliku
-- przetestowac tokenizacje dla roznych plikow
+- przetestowac tokenizacje dla roznych plikow (wyświetlić i sprawdzić poprawność tokenizacji)
 
 
 4. Algorytm:
@@ -57,3 +55,4 @@ X. Dodatkowe pomysły:
     + inne
 - nazwy/szablony plików lub ścieżki podane przez użytkownika, które nie będą sprawdzane
 - usuniecie niebezpiecznych znaków przed tokenizacja (twarda spacja, nieznane znaki unicode)
+- ustawić znak końca linii jako średnik?
