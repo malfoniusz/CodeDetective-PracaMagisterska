@@ -78,8 +78,13 @@ public final class Tokenization {
                 line = line.replace('{', ' ');
                 line = line.replace('}', ' ');
 
+                // std::string Plecak::wypiszWszystko() -> std::string wypiszWszystko() -> string wypiszWszystko()
+                line = line.replaceAll(" .*::", " ");
+                line = line.replaceAll(".*::", " ");
+
                 line = line.trim();
-                if ((line.startsWith("#") || line.startsWith("using"))) { // #include, #endif, using std::cout
+                if ((line.startsWith("#") ||
+                        line.startsWith("using "))) { // #include, #endif, using std::cout
                     line = "";
                 }
 
