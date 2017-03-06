@@ -26,8 +26,8 @@ public final class Tokenization {
         // TODO: usun
         if (file.getPath().contains("Algorytmy L Cw1\\Plecak.cpp") && testPrint == true) {
             testPrint = false;
-            //System.out.println(codeFile.toString());
-            System.out.println(tokenFile.toString());
+            System.out.println(codeFile.toString());
+            //System.out.println(tokenFile.toString());
         }
 
         return tokenFile;
@@ -69,11 +69,14 @@ public final class Tokenization {
             String line = br.readLine();
             while (line != null) {
                 // Nie przestawiać kolejności wywoływania instrukcji
-                line = clearText(line);
+                line = clearStrings(line);
 
                 Pair<String, Boolean> pair = clearComments(line, commentStarted);
                 line = pair.getKey();
                 commentStarted = pair.getValue();
+
+                line = line.replace('{', ' ');
+                line = line.replace('}', ' ');
 
                 line = line.trim();
                 if ((line.startsWith("#") || line.startsWith("using"))) { // #include, #endif, using std::cout
@@ -94,7 +97,7 @@ public final class Tokenization {
         }
     }
 
-    private static String clearText(String line) {
+    private static String clearStrings(String line) {
         if (line.contains("\"")) {  // "tes\"st" = ""
             line = line.replace("\\\"", "");
             line = line.replaceAll("\".*?\"", "\"\"");

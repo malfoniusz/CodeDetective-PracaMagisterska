@@ -15,6 +15,7 @@
     + try, catch - EXCEPTION
     + ignorowanie const
     + if, while, do while - zrobić tylko token, że wystąpiło (pominąć gdzie się zaczyna i kończy)
+    + EMPTY
 - sprawdzić instrukcje w c++ pod kątem czyszczenia kodu i tokenizacji
 - przetestowac tokenizacje dla roznych plikow (wyświetlić i sprawdzić poprawność tokenizacji)
 
