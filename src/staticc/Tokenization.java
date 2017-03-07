@@ -56,6 +56,10 @@ public final class Tokenization {
             int lineNumber = 1;
             boolean commentStarted = false;
             String line = br.readLine();
+
+            String combinedLine = "";
+            int combinedLineNumber = 0;
+
             while (line != null) {
                 // Nie przestawiać kolejności wywoływania instrukcji
                 line = clearStrings(line);
@@ -65,17 +69,61 @@ public final class Tokenization {
                 commentStarted = pair.getValue();
 
                 // std::string Plecak::wypiszWszystko() -> std::string wypiszWszystko() -> string wypiszWszystko()
-                line = line.replaceAll(" .*::", " ");
-                line = line.replaceAll(".*::", " ");
+                if (line.contains("::")) {
+                    line = line.replaceAll(" .*::", " ");
+                    line = line.replaceAll(".*::", "");
+                }
 
-                line = line.trim();
-                if ((line.startsWith("#") ||
-                        line.startsWith("using "))) { // #include, #endif, using std::cout
+                line = line.replace("}", "");
+
+                if ((line.indexOf('#') != -1 ||
+                        line.contains("using "))) { // #include, #endif, using std::cout
                     line = "";
                 }
 
-                CodeLine codeLine = new CodeLine(lineNumber, line);
-                codeLines.add(codeLine);
+                line = line.trim();
+                if (line.isEmpty() == false) {
+                    int length = line.length();
+                    if (line.indexOf(';') == -1 && line.indexOf('{') == -1) {
+                        // Kod nie kończy się w danej linii np. int [ENTER]
+                        combinedLine += line + " ";
+                        if (combinedLineNumber == 0) {
+                            combinedLineNumber = lineNumber;
+                        }
+                    }
+                    else if (line.indexOf(';') + 1 < length && line.indexOf('{') + 1 < length) {
+                        // Kod zawiera kilka linii np. int a; int b;
+                        // Pierwsza linia jest zapisywana, a reszta ponownie przetwarzana
+                        String splitLine;
+                        if (line.indexOf(';') != -1) {
+                            splitLine = line.substring(0, line.indexOf(';') + 1);
+                            line = line.substring(line.indexOf(';') + 1);
+                        }
+                        else {
+                            splitLine = line.substring(0, line.indexOf('{') + 1);
+                            line = line.substring(line.indexOf('{') + 1);
+                        }
+
+                        CodeLine codeLine = new CodeLine(lineNumber, splitLine);
+                        codeLines.add(codeLine);
+
+                        continue;
+                    }
+                    else if (combinedLine.isEmpty()) {
+                        // Kod kończy się w danej linii np. int a;
+                        CodeLine codeLine = new CodeLine(lineNumber, line);
+                        codeLines.add(codeLine);
+                    }
+                    else {
+                        // Kod rozpoczęty we wcześniejszej linii kończy się np. int [ENTER] a;
+                        CodeLine codeLine = new CodeLine(combinedLineNumber, combinedLine + line);
+                        codeLines.add(codeLine);
+
+                        combinedLine = "";
+                        combinedLineNumber = 0;
+                    }
+                }
+
                 lineNumber++;
                 line = br.readLine();
             }

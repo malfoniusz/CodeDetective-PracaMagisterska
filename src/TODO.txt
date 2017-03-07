@@ -1,6 +1,10 @@
 ﻿
 3. Tokenizacja pliku:
-- przygotowanie tokenizacji - linijka kodu kończy się na { lub ; - uwaga na #include i komentarze - uwaga na podwójne linijki int liczba; int liczba2; - uwaga na }
+- poprawic: usuwanie komentarzy - std::string pomoc = "Pojemnosc plecaka: " + std::to_string((_Longlong)(pojemnosc)) + "\n"; /* 
+- poprawic: konsola - pomoc to_string((_Longlong)(przedmiot[i].numer + 1)) + "" + to_string((_Longlong)(przedmiot[i].rozmiar)) + to_string( (_Longlong)(przedmiot[i].wartosc)) + "";
+- refaktoryzacja - czytelny kod, tak żeby wiadomo było co kązdy if dokładnie robi
+- przy usuwaniu komentarzy przekazac buffer?
+
 - spis tokenów:
     + class Foo - CLASS,
     + void funkcja(int a, String b) - FUNCTION_DEF
