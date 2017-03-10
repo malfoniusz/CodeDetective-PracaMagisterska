@@ -1,7 +1,5 @@
 ﻿
-- poprawic: konsola - pomoc to_string((_Longlong)(przedmiot[i].numer + 1)) + "" + to_string((_Longlong)(przedmiot[i].rozmiar)) + to_string( (_Longlong)(przedmiot[i].wartosc)) + "";
-- refaktoryzacja - czytelny kod, tak żeby wiadomo było co każdy if dokładnie robi
-- przy usuwaniu komentarzy przekazac buffer?
+- usunac komentarze wielolinijkowe
 - przeslac literature prowadzacemu
 - napiszac czesc dokumentacji odnosnie tokenizacji i porownywania tokenow; przeslac prowadzacemu
 - rownolegle pisac dokumentacje (tylko pojedyncze zdania przyporzadkowane do danych rozdzialow)
@@ -68,4 +66,4 @@ X. Dodatkowe pomysły:
 - wyświetlenie paska postępu i przeminiętego czasu
 - statystyki (czas wykonania programu, liczba identycznych tokenów, inne)
 - usuniecie niebezpiecznych znaków przed tokenizacja (twarda spacja, nieznane znaki unicode)
-- poprawic: usuwanie komentarzy - int liczba; /* 
+- poprawic normalizacje kodu: usuwanie komentarzy i instrukcje kilkulinijkowe

@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javafx.util.Pair;
 import model.Project;
 import model.Projects;
 import model.tokenization.CodeFile;
@@ -49,80 +48,23 @@ public final class Tokenization {
     }
 
     // Trim, remove comments, etc.
-    @SuppressWarnings ("unused")
     private static CodeFile codeNormalization(File file) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             ArrayList<CodeLine> codeLines = new ArrayList<>();
 
             int lineNumber = 1;
-            boolean commentStarted = false;
             String line = br.readLine();
 
-            String combinedLine = "";
-            int combinedLineNumber = 0;
-
             while (line != null) {
-                // Nie przestawiać kolejności wywoływania instrukcji
-                line = clearStrings(line);
+                line = clearLine(line);
 
-                Pair<String, Boolean> pair = clearComments(line, commentStarted);
-                line = pair.getKey();
-                commentStarted = pair.getValue();
-
-                line = line.replace("}", "");   // {
-
-                line = clearAccess(line);       // public, protected, private
-
-                line = line.trim();
-                if ((line.startsWith("import") ||   // import javax.swing.JButton;
-                        line.startsWith("@") )) {   // @Override. itp.
-                    line = "";
+                if (line.trim().isEmpty() == false) {
+                    CodeLine codeLine = new CodeLine(lineNumber, line);
+                    codeLines.add(codeLine);
                 }
 
-                if (line.isEmpty() == false) {
-                    int length = line.length();
-                    if (line.indexOf(';') == -1 && line.indexOf('{') == -1) {
-                        // Kod nie kończy się w danej linii np. int [ENTER]
-                        combinedLine += line + " ";
-                        if (combinedLineNumber == 0) {
-                            combinedLineNumber = lineNumber;
-                        }
-                    }
-                    else if (line.indexOf(';') + 1 < length && line.indexOf('{') + 1 < length) {
-                        // Kod zawiera kilka linii np. int a; int b;
-                        // Pierwsza linia jest zapisywana, a reszta ponownie przetwarzana
-                        String splitLine;
-                        if (line.indexOf(';') != -1) {
-                            splitLine = line.substring(0, line.indexOf(';') + 1);
-                            line = line.substring(line.indexOf(';') + 1);
-                        }
-                        else {
-                            splitLine = line.substring(0, line.indexOf('{') + 1);
-                            line = line.substring(line.indexOf('{') + 1);
-                        }
-
-                        CodeLine codeLine = new CodeLine(lineNumber, splitLine);
-                        codeLines.add(codeLine);
-
-                        continue;
-                    }
-                    else if (combinedLine.isEmpty()) {
-                        // Kod kończy się w danej linii np. int a;
-                        CodeLine codeLine = new CodeLine(lineNumber, line);
-                        codeLines.add(codeLine);
-                    }
-                    else {
-                        // Kod rozpoczęty we wcześniejszej linii kończy się np. int [ENTER] a;
-                        CodeLine codeLine = new CodeLine(combinedLineNumber, combinedLine + line);
-                        codeLines.add(codeLine);
-
-                        combinedLine = "";
-                        combinedLineNumber = 0;
-                    }
-                }
-
-                lineNumber++;
                 line = br.readLine();
+                lineNumber++;
             }
 
             CodeFile codeFile = new CodeFile(codeLines);
@@ -131,6 +73,24 @@ public final class Tokenization {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static String clearLine(String line) {
+        // UWAGA przy przestawianiu kolejności wywoływanych instrukcji
+        line = clearStrings(line);
+        line = clearComment(line);
+        line = line.replace("}", "");
+        line = clearAccess(line);
+
+        line = line.trim();
+        if (line.startsWith("import")) {
+            line = "";
+        }
+        if (line.startsWith("@")) {
+            line = "";
+        }
+
+        return line;
     }
 
     private static String clearAccess(String line) {
@@ -146,6 +106,7 @@ public final class Tokenization {
             line = line.replace("\\\"", "");
             line = line.replaceAll("\".*?\"", "\"\"");
         }
+
         if (line.contains("\'")) {  // '\'' = ''
             line = line.replace("\\\'", "");
             line = line.replaceAll("\'.*?\'", "\'\'");
@@ -154,44 +115,22 @@ public final class Tokenization {
         return line;
     }
 
-    private static Pair<String, Boolean> clearComments(String line, boolean commentStarted) {
-        while (true) {
-            int commentStart = line.indexOf("/*");
-            int commentEnd = line.indexOf("*/");
-
-            if (line.contains("//")) {
-                line = line.replaceAll("\\/\\/.*", "");
-                continue;
-            }
-
-            if (commentStart != -1 && commentEnd == -1) {       // Komentarz sie zaczyna
-                line = line.replaceAll("\\/\\*.*", "");
-                commentStarted = true;
-                continue;
-            }
-            else if (commentStart == -1 && commentEnd != -1) {  // Komentarz sie konczy
-                line = line.replaceAll(".*\\*\\/", "");
-                commentStarted = false;
-                continue;
-            }
-            else if (commentStart < commentEnd) {               // Komentarz sie zaczyna i konczy
-                line = line.replaceAll("\\/\\*.*\\*\\/", "");
-                continue;
-            }
-            else if (commentStart > commentEnd) {               // komentarz konczy sie i zaczyna
-                line = line.replaceAll("\\*\\/.*\\/\\*", "");
-                continue;
-            }
-            else if (commentStarted == true) {
-                line = "";
-                break;
-            }
-            else {
-                break;
-            }
+    private static String clearComment(String line) {
+        if (line.contains("//")) {
+            line = line.replaceAll("\\/\\/.*", "");
         }
 
-        return new Pair<>(line, commentStarted);
+        line = clearMultiComment(line);
+
+        return line;
+    }
+
+    private static String clearMultiComment(String line) {
+        if (line.indexOf("/*") != -1 && line.indexOf("*/") != -1) {
+            line = line.replaceAll("\\/\\*.*\\*\\/", "");
+        }
+
+        return line;
     }
 
     public static ArrayList<TokenFile> tokenProject(Project project) {
