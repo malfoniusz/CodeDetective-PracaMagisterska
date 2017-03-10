@@ -49,6 +49,7 @@ public final class Tokenization {
     }
 
     // Trim, remove comments, etc.
+    @SuppressWarnings ("unused")
     private static CodeFile codeNormalization(File file) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             ArrayList<CodeLine> codeLines = new ArrayList<>();
@@ -68,13 +69,16 @@ public final class Tokenization {
                 line = pair.getKey();
                 commentStarted = pair.getValue();
 
-                line = line.replace("}", "");
+                line = line.replace("}", "");   // {
 
-                if ((line.trim().startsWith("import "))) { // import javax.swing.JButton;
+                line = clearAccess(line);       // public, protected, private
+
+                line = line.trim();
+                if ((line.startsWith("import") ||   // import javax.swing.JButton;
+                        line.startsWith("@") )) {   // @Override. itp.
                     line = "";
                 }
 
-                line = line.trim();
                 if (line.isEmpty() == false) {
                     int length = line.length();
                     if (line.indexOf(';') == -1 && line.indexOf('{') == -1) {
@@ -127,6 +131,14 @@ public final class Tokenization {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static String clearAccess(String line) {
+        line = line.replace("public ", "");
+        line = line.replace("protected ", "");
+        line = line.replace("private ", "");
+
+        return line;
     }
 
     private static String clearStrings(String line) {

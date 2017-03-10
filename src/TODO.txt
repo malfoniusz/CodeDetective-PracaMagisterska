@@ -1,6 +1,4 @@
 ﻿
-- usunac @Override i inne
-- usunac public i inne - public nie musi byc na poczatku (
 - poprawic: konsola - pomoc to_string((_Longlong)(przedmiot[i].numer + 1)) + "" + to_string((_Longlong)(przedmiot[i].rozmiar)) + to_string( (_Longlong)(przedmiot[i].wartosc)) + "";
 - refaktoryzacja - czytelny kod, tak żeby wiadomo było co każdy if dokładnie robi
 - przy usuwaniu komentarzy przekazac buffer?
@@ -11,8 +9,12 @@
 3. Tokenizacja pliku:
 - spis tokenów:
     + class Foo - CLASS,
-    + void funkcja(int a, String b) - FUNCTION_DEF
-    + funkcja(), cout << "hejka" - FUNCTION_USE
+    + void funkcja() - FUNCTION_DEF
+    + void funkcja(int a, String b) - FUNCTION_DEF, ARG, ARG
+    + funkcja() - FUNCTION_USE
+    + System.out.println() - FUNCTION_USE
+    + System.out.println("hejka") - FUNCTION_USE, ARG
+    + public Konstruktor() - CONSTRUCTOR
     + int, long, double - NUMBER
     + bool - BOOL
     + liczba++ - ASSIGN
@@ -29,6 +31,7 @@
     + pusta linia lub samo { lub samo } - EMPTY
     + static - STATIC
     + final - FINAL
+    + extends, implements
 - sprawdzić instrukcje w c++ pod kątem czyszczenia kodu i tokenizacji
 - przetestowac tokenizacje dla pojedynczych plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
 
