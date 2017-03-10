@@ -32,8 +32,8 @@ public class MainController implements Initializable {
 
         compareFragmentsController.setCompareCodesController(compareCodesController);
 
-        // TODO: delete
-        algorithm.getAlgorithmData().setProject(new Project(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestów\\Algorytmy1")));
+        // TODO: usun
+        algorithm.getAlgorithmData().setProject(new Project(new File("D:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Tic-Tac-Toe")));
         runAlgorithm();
     }
 

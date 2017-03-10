@@ -18,7 +18,7 @@ import model.tokenization.TokenLine;
 public final class Tokenization {
 
     public static TokenFile tokenization(File file) {
-        CodeFile codeFile = prepareForTokenization(file);
+        CodeFile codeFile = codeNormalization(file);
         TokenFile tokenFile = convertTokenFile(codeFile);
 
         // TODO: usun
@@ -48,8 +48,8 @@ public final class Tokenization {
         return tokens;
     }
 
-    // Trims code, removes comments, etc.
-    private static CodeFile prepareForTokenization(File file) {
+    // Trim, remove comments, etc.
+    private static CodeFile codeNormalization(File file) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             ArrayList<CodeLine> codeLines = new ArrayList<>();
 
@@ -68,16 +68,9 @@ public final class Tokenization {
                 line = pair.getKey();
                 commentStarted = pair.getValue();
 
-                // std::string Plecak::wypiszWszystko() -> std::string wypiszWszystko() -> string wypiszWszystko()
-                if (line.contains("::")) {
-                    line = line.replaceAll(" .*::", " ");
-                    line = line.replaceAll(".*::", "");
-                }
-
                 line = line.replace("}", "");
 
-                if ((line.indexOf('#') != -1 ||
-                        line.contains("using "))) { // #include, #endif, using std::cout
+                if ((line.trim().startsWith("import "))) { // import javax.swing.JButton;
                     line = "";
                 }
 

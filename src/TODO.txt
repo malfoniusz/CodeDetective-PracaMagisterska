@@ -1,10 +1,14 @@
 ﻿
-3. Tokenizacja pliku:
-- poprawic: usuwanie komentarzy - std::string pomoc = "Pojemnosc plecaka: " + std::to_string((_Longlong)(pojemnosc)) + "\n"; /* 
+- usunac @Override i inne
+- usunac public i inne - public nie musi byc na poczatku (
 - poprawic: konsola - pomoc to_string((_Longlong)(przedmiot[i].numer + 1)) + "" + to_string((_Longlong)(przedmiot[i].rozmiar)) + to_string( (_Longlong)(przedmiot[i].wartosc)) + "";
-- refaktoryzacja - czytelny kod, tak żeby wiadomo było co kązdy if dokładnie robi
+- refaktoryzacja - czytelny kod, tak żeby wiadomo było co każdy if dokładnie robi
 - przy usuwaniu komentarzy przekazac buffer?
+- przeslac literature prowadzacemu
+- napiszac czesc dokumentacji odnosnie tokenizacji i porownywania tokenow; przeslac prowadzacemu
+- rownolegle pisac dokumentacje (tylko pojedyncze zdania przyporzadkowane do danych rozdzialow)
 
+3. Tokenizacja pliku:
 - spis tokenów:
     + class Foo - CLASS,
     + void funkcja(int a, String b) - FUNCTION_DEF
@@ -23,8 +27,8 @@
     + ignorowanie const
     + if, while, do while - zrobić tylko token, że wystąpiło (pominąć gdzie się zaczyna i kończy)
     + pusta linia lub samo { lub samo } - EMPTY
-    + cout - COUT
-    + cin - CIN
+    + static - STATIC
+    + final - FINAL
 - sprawdzić instrukcje w c++ pod kątem czyszczenia kodu i tokenizacji
 - przetestowac tokenizacje dla pojedynczych plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
 
@@ -51,18 +55,14 @@
 
 
 X. Dodatkowe pomysły:
+- zmodyfikowac algorytm karpa-rabina (zeby bylo cos zrobionego wlasnego w tej pracy)
+- dodatkowe sprawdzenie wynikow - dla linii kodu wykrytych jako podobne (tokeny), sprawdzić czy ich kod jest taki sam (jeśli taki sam to bardziej prawdopodobne, że plagiat)
+- sprawdzic efektywnosc tokenizacji dla precyzyjnych tokenow: token LICZBA rozbić na INT, LONG, SHORT
+- wykrywanie podobienstwa na roznych poziomach:
+	+ 1 do 1 - nie ma znaczenia minimalna liczba kolejno podobnych linii kodu
+	+ po wyczyszczeniu pliku 1 do 1 - nie ma znaczenia minimalna... 
+
 - wyświetlenie paska postępu i przeminiętego czasu
-- algorytm dodatkowe:
-    + dla linii kodu wykrytych jako podobne (tokeny), sprawdzić czy ich kod jest taki sam (jeśli taki sam to bardziej prawdopodobne, że plagiat)
-    + opcje:
-       - dokładna tokenizacja: LICZBA rozbić na INT, LONG, SHORT
-    + szybkie porównanie:
-        - sprawdza tylko procentowe podobieństwo (suma różnic takich samych linii w obu plikach przez sume linii)
-        - nie bierze pod uwagę minimalnej długości fragmentu kodu
-- statystyki:
-    + czas wykonania programu
-    + liczba identycznych tokenów
-    + inne
-- nazwy/szablony plików lub ścieżki podane przez użytkownika, które nie będą sprawdzane
+- statystyki (czas wykonania programu, liczba identycznych tokenów, inne)
 - usuniecie niebezpiecznych znaków przed tokenizacja (twarda spacja, nieznane znaki unicode)
-- ustawić znak końca linii jako średnik?
+- poprawic: usuwanie komentarzy - int liczba; /* 

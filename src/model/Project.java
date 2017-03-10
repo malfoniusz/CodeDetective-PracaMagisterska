@@ -15,7 +15,7 @@ public class Project {
 
     public Project(File directory) {
         this.directory = directory;
-        this.files = searchForCppFiles(directory);
+        this.files = searchForFiles(directory);
     }
 
     public Project(File directory, ArrayList<File> files) {
@@ -23,14 +23,14 @@ public class Project {
         this.files = files;
     }
 
-    private ArrayList<File> searchForCppFiles(File directory) {
+    private ArrayList<File> searchForFiles(File directory) {
         ArrayList<File> javaFiles = new ArrayList<File>();
 
         String path = directory.getAbsolutePath();
         try {
             @SuppressWarnings("resource")
             Stream<Path> paths = Files.walk(Paths.get(path));
-            paths = paths.filter(p -> p.toString().endsWith(".cpp"));
+            paths = paths.filter(p -> p.toString().endsWith(".java"));
 
             paths.forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
