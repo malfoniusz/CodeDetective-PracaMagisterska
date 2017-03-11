@@ -55,12 +55,41 @@ public final class Tokenization {
             int lineNumber = 1;
             String line = br.readLine();
 
-            while (line != null) {
-                line = clearLine(line);
+            String combinedLine = "";
+            int combinedLineNumber = 0;
 
-                if (line.trim().isEmpty() == false) {
-                    CodeLine codeLine = new CodeLine(lineNumber, line);
-                    codeLines.add(codeLine);
+            while (line != null) {
+                line = clearLine(line).trim();
+
+                if (line.indexOf(";") != -1 || line.indexOf("{") != -1) {
+                    if (combinedLine.isEmpty() && line.isEmpty() == false) {
+                        CodeLine codeLine = new CodeLine(lineNumber, line);
+                        codeLines.add(codeLine);
+                    }
+                    else {
+                        line = combinedLine + " " + line;
+
+                        CodeLine codeLine = new CodeLine(combinedLineNumber, line);
+                        codeLines.add(codeLine);
+
+                        combinedLine = "";
+                        combinedLineNumber = 0;
+                    }
+                }
+                else if (line.isEmpty() == false) {
+                    combinedLine += " " + line;
+
+                    String combinedLineCleared = clearMultiComment(combinedLine);
+                    if (combinedLine.equals(combinedLineCleared) == false) {
+                        combinedLineNumber = 0;
+                        combinedLine = combinedLineCleared;
+                    }
+
+                    if (combinedLineNumber == 0) {
+                        combinedLineNumber = lineNumber;
+                    }
+
+                    combinedLine = combinedLine.trim();
                 }
 
                 line = br.readLine();

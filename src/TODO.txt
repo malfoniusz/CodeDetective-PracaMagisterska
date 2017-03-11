@@ -1,8 +1,7 @@
 ﻿
-- usunac komentarze wielolinijkowe
 - przeslac literature prowadzacemu
-- napiszac czesc dokumentacji odnosnie tokenizacji i porownywania tokenow; przeslac prowadzacemu
 - rownolegle pisac dokumentacje (tylko pojedyncze zdania przyporzadkowane do danych rozdzialow)
+- napiszac czesc dokumentacji odnosnie tokenizacji i porownywania tokenow; przeslac prowadzacemu
 
 3. Tokenizacja pliku:
 - spis tokenów:
