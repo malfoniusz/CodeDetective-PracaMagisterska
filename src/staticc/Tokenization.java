@@ -22,7 +22,8 @@ public final class Tokenization {
 
         // TODO: usun
         System.out.println(codeFile.toString());
-        //System.out.println(tokenFile.toString());
+        System.out.println();
+        System.out.println(tokenFile.toString());
 
         return tokenFile;
     }
@@ -42,7 +43,24 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        // TODO: pobieraj słowo po słowie i podejmuj kolejne decyzje na podstawie aktualnego słowa
+        String[] words = line.split(" ");
+        for (String str : words) {
+            if (str.equals("int") || str.equals("short") || str.equals("long")) {
+                tokens.add(Token.NUMBER_DEC);
+            }
+            else if (str.equals("double") || str.equals("float")) {
+                tokens.add(Token.NUMBER_POINT);
+            }
+            else if (str.equals("boolean")) {
+                tokens.add(Token.BOOLEAN);
+            }
+            else if (str.contains("++")) {
+                tokens.add(Token.INCREMENT);
+            }
+            else if (str.contains("--")) {
+                tokens.add(Token.DECREMENT);
+            }
+        }
 
         return tokens;
     }
@@ -61,7 +79,9 @@ public final class Tokenization {
             while (line != null) {
                 line = clearLine(line).trim();
 
-                if (line.indexOf(";") != -1 || line.indexOf("{") != -1) {
+                // Koniec linii kodu
+                if (line.indexOf(";") != -1 || line.indexOf("{") != -1 ||
+                        (line.startsWith("if") || line.startsWith("else") || line.startsWith("while") || line.startsWith("for")) && line.endsWith(")")) {
                     if (combinedLine.isEmpty() && line.isEmpty() == false) {
                         CodeLine codeLine = new CodeLine(lineNumber, line);
                         codeLines.add(codeLine);

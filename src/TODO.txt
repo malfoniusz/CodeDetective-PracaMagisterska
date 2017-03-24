@@ -1,35 +1,32 @@
 ﻿
-- przeslac literature prowadzacemu
-- rownolegle pisac dokumentacje (tylko pojedyncze zdania przyporzadkowane do danych rozdzialow)
-- napiszac czesc dokumentacji odnosnie tokenizacji i porownywania tokenow; przeslac prowadzacemu
-
 3. Tokenizacja pliku:
 - spis tokenów:
+    + String, char - TEXT
+    + byte - BYTE
+    + int[] a, String[] s - TABLE
+    + String[][] ss - TABLE TABLE
+    
+    + https://www.tutorialspoint.com/java/java_basic_operators.htm
+    + int i = 0 - NUMBER, ASSIGN
+
+    + if, else if, else, switch - CONDITIONAL (pominąć warunki wewnątrz)
+    + for, while, do while - LOOP
+    + try, catch - EXCEPTION
+    
     + class Foo - CLASS,
+    + MyClass myClass = new MyClass() - VAR, ASSIGN
+    + public Konstruktor() - CONSTRUCTOR
+    
+    + static - STATIC
+    + final - FINAL
+    + extends, implements - ???
+    
     + void funkcja() - FUNCTION_DEF
     + void funkcja(int a, String b) - FUNCTION_DEF, ARG, ARG
     + funkcja() - FUNCTION_USE
     + System.out.println() - FUNCTION_USE
     + System.out.println("hejka") - FUNCTION_USE, ARG
-    + public Konstruktor() - CONSTRUCTOR
-    + int, long, double - NUMBER
-    + bool - BOOL
-    + liczba++ - ASSIGN
-    + int i = 0 - NUMBER, ASSIGN
-    + string, char - TEXT
-    + int* wsk, int *wsk - POINTER
-    + new, delete - POINTER_MEM
-    + MyClass myClass = new MyClass() - VAR, ASSIGN
-    + if, switch - CONDITION
-    + for, while, do while - LOOP
-    + try, catch - EXCEPTION
-    + ignorowanie const
-    + if, while, do while - zrobić tylko token, że wystąpiło (pominąć gdzie się zaczyna i kończy)
-    + pusta linia lub samo { lub samo } - EMPTY
-    + static - STATIC
-    + final - FINAL
-    + extends, implements
-- sprawdzić instrukcje w c++ pod kątem czyszczenia kodu i tokenizacji
+- sprawdzić instrukcje w javie pod kątem czyszczenia kodu i tokenizacji
 - przetestowac tokenizacje dla pojedynczych plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
 
 
@@ -53,16 +50,19 @@
     + wyświetlanie tylko par plików z minimalnym procentem podobieństwa
 - help - opis wszystkiego m.in. kolumn tabel
 
+5. Rozbudowa:
+- zmniejszyć interfejs
+- zmiana ustawień np. minimalna długość fragmentu
+- rodzaje tokenizacji
+	+ normalna np. LICZBA = int, long, short
+	+ ogólna np. LICZBA = float, double, int, long, short
+	+ prezycyjna np. INT = int
+	+ biorąca pod uwagę początek i koniec np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
+- zmodyfikowac algorytm karpa-rabina (zeby bylo cos zrobionego wlasnego w tej pracy)
 
 X. Dodatkowe pomysły:
-- zmodyfikowac algorytm karpa-rabina (zeby bylo cos zrobionego wlasnego w tej pracy)
-- dodatkowe sprawdzenie wynikow - dla linii kodu wykrytych jako podobne (tokeny), sprawdzić czy ich kod jest taki sam (jeśli taki sam to bardziej prawdopodobne, że plagiat)
-- sprawdzic efektywnosc tokenizacji dla precyzyjnych tokenow: token LICZBA rozbić na INT, LONG, SHORT
-- wykrywanie podobienstwa na roznych poziomach:
-	+ 1 do 1 - nie ma znaczenia minimalna liczba kolejno podobnych linii kodu
-	+ po wyczyszczeniu pliku 1 do 1 - nie ma znaczenia minimalna... 
-
 - wyświetlenie paska postępu i przeminiętego czasu
 - statystyki (czas wykonania programu, liczba identycznych tokenów, inne)
+- dodatkowe sprawdzenie wynikow - dla linii kodu wykrytych jako podobne (tokeny), sprawdzić czy ich kod jest taki sam (jeśli taki sam to bardziej prawdopodobne, że plagiat)
 - usuniecie niebezpiecznych znaków przed tokenizacja (twarda spacja, nieznane znaki unicode)
 - poprawic normalizacje kodu: usuwanie komentarzy i instrukcje kilkulinijkowe

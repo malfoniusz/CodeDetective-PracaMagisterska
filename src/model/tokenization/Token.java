@@ -1,5 +1,9 @@
 package model.tokenization;
 
 public enum Token {
-    NUMBER,
+    NUMBER_DEC,
+    NUMBER_POINT,
+    BOOLEAN,
+    INCREMENT,
+    DECREMENT,
 }
