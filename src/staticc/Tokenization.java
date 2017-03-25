@@ -45,8 +45,10 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
         String[] words = line.split(" ");
+
         for (String str : words) {
             // Types
+
             if (str.matches(".*(?<!\\w)(int|short|long)(?!\\w).*")) {
                 tokens.add(Token.NUMBER_DEC);
             }
@@ -64,39 +66,100 @@ public final class Tokenization {
             }
 
             // Table
-            int count = StringUtils.countMatches(str, "[]");
-            if (count > 0) {
-                for (int i = 0; i < count; i++) {
-                    tokens.add(Token.TABLE);
-                }
-            }
+            tokens.addAll(tokensInString(str, "[]", Token.TABLE));
 
-            // Operators - nie zmieniaj kolejnosci wywolan poszczegolnych blokow
+            // Operators - UWAGA: przy zmianie kolejnosci wywolan
+            // Assign 1
+            tokens.addAll(tokensInString(str, "<<=", Token.OP_ASSIGN));
+            str = str.replace("<<=", " ");
+            tokens.addAll(tokensInString(str, ">>=", Token.OP_ASSIGN));
+            str = str.replace(">>=", " ");
             // Bitwise 1
-            if (StringUtils.containsAny(str, "<<", ">>", ">>>")) {
-                tokens.add(Token.OP_BITWISE);
-            }
-            // Relation
-            else if (StringUtils.containsAny(str, "==", "!=", ">", "<", ">=", "<=")) {
-                tokens.add(Token.OP_RELATION);
-            }
-            // Logic
-            else if (StringUtils.containsAny(str, "&&", "||", "!")) {
-                tokens.add(Token.OP_LOGIC);
-            }
-            // Assign
-            else if (StringUtils.containsAny(str, "=")) {    // +=, -=, *=, /=, %=, <<=, >>=, &=, ^=, |=
-                tokens.add(Token.OP_ASSIGN);
-            }
-            // Arithmetic
-            else if (StringUtils.containsAny(str, "+", "-", "*", "/", "%")) { //  ++, --
-                tokens.add(Token.OP_ARITHMETIC);
-            }
-            // Bitwise 2
-            else if (StringUtils.containsAny(str, "&", "|", "^", "~")) {
-                tokens.add(Token.OP_BITWISE);
-            }
+            tokens.addAll(tokensInString(str, "<<", Token.OP_BITWISE));
+            str = str.replace("<<", " ");
+            tokens.addAll(tokensInString(str, ">>>", Token.OP_BITWISE));
+            str = str.replace(">>>", " ");
+            tokens.addAll(tokensInString(str, ">>", Token.OP_BITWISE));
+            str = str.replace(">>", " ");
 
+            // Relation
+            tokens.addAll(tokensInString(str, "==", Token.OP_RELATION));
+            str = str.replace("==", " ");
+            tokens.addAll(tokensInString(str, "!=", Token.OP_RELATION));
+            str = str.replace("!=", " ");
+            tokens.addAll(tokensInString(str, ">=", Token.OP_RELATION));
+            str = str.replace(">=", " ");
+            tokens.addAll(tokensInString(str, "<=", Token.OP_RELATION));
+            str = str.replace("<=", " ");
+            tokens.addAll(tokensInString(str, ">", Token.OP_RELATION));
+            str = str.replace(">", " ");
+            tokens.addAll(tokensInString(str, "<", Token.OP_RELATION));
+            str = str.replace("<", " ");
+
+            // Logic
+            tokens.addAll(tokensInString(str, "&&", Token.OP_LOGIC));
+            str = str.replace("&&", " ");
+            tokens.addAll(tokensInString(str, "||", Token.OP_LOGIC));
+            str = str.replace("||", " ");
+            tokens.addAll(tokensInString(str, "!", Token.OP_LOGIC));
+            str = str.replace("!", " ");
+
+            // Assign 2
+            tokens.addAll(tokensInString(str, "+=", Token.OP_ASSIGN));
+            str = str.replace("+=", " ");
+            tokens.addAll(tokensInString(str, "-=", Token.OP_ASSIGN));
+            str = str.replace("-=", " ");
+            tokens.addAll(tokensInString(str, "*=", Token.OP_ASSIGN));
+            str = str.replace("*=", " ");
+            tokens.addAll(tokensInString(str, "/=", Token.OP_ASSIGN));
+            str = str.replace("/=", " ");
+            tokens.addAll(tokensInString(str, "%=", Token.OP_ASSIGN));
+            str = str.replace("%=", " ");
+            tokens.addAll(tokensInString(str, "&=", Token.OP_ASSIGN));
+            str = str.replace("&=", " ");
+            tokens.addAll(tokensInString(str, "^=", Token.OP_ASSIGN));
+            str = str.replace("^=", " ");
+            tokens.addAll(tokensInString(str, "|=", Token.OP_ASSIGN));
+            str = str.replace("|=", " ");
+            tokens.addAll(tokensInString(str, "=", Token.OP_ASSIGN));
+            str = str.replace("=", " ");
+
+            // Arithmetic
+            tokens.addAll(tokensInString(str, "++", Token.OP_ARITHMETIC));
+            str = str.replace("++", " ");
+            tokens.addAll(tokensInString(str, "--", Token.OP_ARITHMETIC));
+            str = str.replace("--", " ");
+            tokens.addAll(tokensInString(str, "+", Token.OP_ARITHMETIC));
+            str = str.replace("+", " ");
+            tokens.addAll(tokensInString(str, "-", Token.OP_ARITHMETIC));
+            str = str.replace("-", " ");
+            tokens.addAll(tokensInString(str, "*", Token.OP_ARITHMETIC));
+            str = str.replace("*", " ");
+            tokens.addAll(tokensInString(str, "/", Token.OP_ARITHMETIC));
+            str = str.replace("/", " ");
+            tokens.addAll(tokensInString(str, "%", Token.OP_ARITHMETIC));
+            str = str.replace("%", " ");
+
+            // Bitwise 2
+            tokens.addAll(tokensInString(str, "&", Token.OP_BITWISE));
+            str = str.replace("&", " ");
+            tokens.addAll(tokensInString(str, "|", Token.OP_BITWISE));
+            str = str.replace("|", " ");
+            tokens.addAll(tokensInString(str, "^", Token.OP_BITWISE));
+            str = str.replace("^", " ");
+            tokens.addAll(tokensInString(str, "~", Token.OP_BITWISE));
+            str = str.replace("~", " ");
+        }
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> tokensInString(String str, String pattern, Token token) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        int count = StringUtils.countMatches(str, pattern);
+        for (int i = 0; i < count; i++) {
+            tokens.add(token);
         }
 
         return tokens;
@@ -114,7 +177,7 @@ public final class Tokenization {
             int combinedLineNumber = 0;
 
             while (line != null) {
-                line = clearLine(line).trim();
+                line = clearLine(line);
 
                 // Koniec linii kodu
                 if (line.indexOf(";") != -1 || line.indexOf("{") != -1 ||
@@ -175,6 +238,9 @@ public final class Tokenization {
         if (line.startsWith("@")) {
             line = "";
         }
+
+        // Usuwa niepotrzebne spacje
+        line = line.replaceAll("(?<!\\w)(\\s)|(\\s)(?!\\w)", "");
 
         return line;
     }

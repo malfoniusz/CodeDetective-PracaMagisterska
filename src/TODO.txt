@@ -50,7 +50,7 @@
 - rodzaje tokenizacji
 	+ normalna np. LICZBA = int, long, short
 	+ ogólna np. LICZBA = float, double, int, long, short
-	+ prezycyjna np. INT = int; class(int a, float b) - rozróżniać argumenty i uodpornić na zmiane kolejności argumentów (albo sprawdzanie kolejności sobie odpuścić)
+	+ prezycyjna np. INT = int; class(int a, float b) - rozróżniać argumenty i kolejność argumentów jest ustalana na podstawie kolejności sprawdzania typów argumentów
 	+ biorąca pod uwagę początek i koniec np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
 - zmodyfikowac algorytm karpa-rabina (zeby bylo cos zrobionego wlasnego w tej pracy)
 
