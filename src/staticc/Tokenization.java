@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import model.Project;
 import model.Projects;
 import model.tokenization.CodeFile;
@@ -42,24 +44,59 @@ public final class Tokenization {
 
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
-
         String[] words = line.split(" ");
         for (String str : words) {
-            if (str.equals("int") || str.equals("short") || str.equals("long")) {
+            // Types
+            if (str.matches(".*(?<!\\w)(int|short|long)(?!\\w).*")) {
                 tokens.add(Token.NUMBER_DEC);
             }
-            else if (str.equals("double") || str.equals("float")) {
+            else if (str.matches(".*(?<!\\w)(double|float)(?!\\w).*")) {
                 tokens.add(Token.NUMBER_POINT);
             }
-            else if (str.equals("boolean")) {
+            else if (str.matches(".*(?<!\\w)(String|char)(?!\\w).*")) {
+                tokens.add(Token.TEXT);
+            }
+            else if (str.matches(".*(?<!\\w)(boolean)(?!\\w).*")) {
                 tokens.add(Token.BOOLEAN);
             }
-            else if (str.contains("++")) {
-                tokens.add(Token.INCREMENT);
+            else if (str.matches(".*(?<!\\w)(byte)(?!\\w).*")) {
+                tokens.add(Token.BYTE);
             }
-            else if (str.contains("--")) {
-                tokens.add(Token.DECREMENT);
+
+            // Table
+            int count = StringUtils.countMatches(str, "[]");
+            if (count > 0) {
+                for (int i = 0; i < count; i++) {
+                    tokens.add(Token.TABLE);
+                }
             }
+
+            // Operators - nie zmieniaj kolejnosci wywolan poszczegolnych blokow
+            // Bitwise 1
+            if (StringUtils.containsAny(str, "<<", ">>", ">>>")) {
+                tokens.add(Token.OP_BITWISE);
+            }
+            // Relation
+            else if (StringUtils.containsAny(str, "==", "!=", ">", "<", ">=", "<=")) {
+                tokens.add(Token.OP_RELATION);
+            }
+            // Logic
+            else if (StringUtils.containsAny(str, "&&", "||", "!")) {
+                tokens.add(Token.OP_LOGIC);
+            }
+            // Assign
+            else if (StringUtils.containsAny(str, "=")) {    // +=, -=, *=, /=, %=, <<=, >>=, &=, ^=, |=
+                tokens.add(Token.OP_ASSIGN);
+            }
+            // Arithmetic
+            else if (StringUtils.containsAny(str, "+", "-", "*", "/", "%")) { //  ++, --
+                tokens.add(Token.OP_ARITHMETIC);
+            }
+            // Bitwise 2
+            else if (StringUtils.containsAny(str, "&", "|", "^", "~")) {
+                tokens.add(Token.OP_BITWISE);
+            }
+
         }
 
         return tokens;

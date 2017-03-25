@@ -1,17 +1,11 @@
 ﻿
 3. Tokenizacja pliku:
 - spis tokenów:
-    + String, char - TEXT
-    + byte - BYTE
-    + int[] a, String[] s - TABLE
-    + String[][] ss - TABLE TABLE
-    
-    + https://www.tutorialspoint.com/java/java_basic_operators.htm
-    + int i = 0 - NUMBER, ASSIGN
-
     + if, else if, else, switch - CONDITIONAL (pominąć warunki wewnątrz)
+    + UWAGA: if (), if()
     + for, while, do while - LOOP
     + try, catch - EXCEPTION
+    + break - BREAK
     
     + class Foo - CLASS,
     + MyClass myClass = new MyClass() - VAR, ASSIGN
@@ -56,13 +50,7 @@
 - rodzaje tokenizacji
 	+ normalna np. LICZBA = int, long, short
 	+ ogólna np. LICZBA = float, double, int, long, short
-	+ prezycyjna np. INT = int
+	+ prezycyjna np. INT = int; class(int a, float b) - rozróżniać argumenty i uodpornić na zmiane kolejności argumentów (albo sprawdzanie kolejności sobie odpuścić)
 	+ biorąca pod uwagę początek i koniec np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
 - zmodyfikowac algorytm karpa-rabina (zeby bylo cos zrobionego wlasnego w tej pracy)
 
-X. Dodatkowe pomysły:
-- wyświetlenie paska postępu i przeminiętego czasu
-- statystyki (czas wykonania programu, liczba identycznych tokenów, inne)
-- dodatkowe sprawdzenie wynikow - dla linii kodu wykrytych jako podobne (tokeny), sprawdzić czy ich kod jest taki sam (jeśli taki sam to bardziej prawdopodobne, że plagiat)
-- usuniecie niebezpiecznych znaków przed tokenizacja (twarda spacja, nieznane znaki unicode)
-- poprawic normalizacje kodu: usuwanie komentarzy i instrukcje kilkulinijkowe

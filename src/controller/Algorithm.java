@@ -26,9 +26,9 @@ public class Algorithm {
 
         // TODO: usun
         ArrayList<File> files = new ArrayList<>();
-        //files.add(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Game.java"));
-        files.add(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Drawing.java"));
-        File directory = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestow");
+        //files.add(new File("D:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Game.java"));
+        files.add(new File("D:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Drawing.java"));
+        File directory = new File("D:\\Documents\\_Praca magisterska\\ProjektyDoTestow");
         Project project = new Project(directory, files);
         Tokenization.tokenProject(project);
 
@@ -41,8 +41,8 @@ public class Algorithm {
 
     private ArrayList<CompareFiles> test() {
         // TODO: usun
-        File file1 = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Tic-Tac-Toe\\src\\Drawing.java");
-        File file2 = new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Tic-Tac-Toe\\src\\Game.java");
+        File file1 = new File("D:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Tic-Tac-Toe\\src\\Drawing.java");
+        File file2 = new File("D:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Tic-Tac-Toe\\src\\Game.java");
 
         FileMarked fileMarked1a = new FileMarked(file1, 20, 38);
         FileMarked fileMarked1b = new FileMarked(file1, 30, 40);
