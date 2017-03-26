@@ -1,25 +1,24 @@
 ﻿
+- refaktoryzacja normalizacji - jeśli się da
+- ; w for przeszkadzaja w normalizacji - co z tym zrobic?
+- case - pominac?
+
 3. Tokenizacja pliku:
 - spis tokenów:
-    + if, else if, else, switch - CONDITIONAL (pominąć warunki wewnątrz)
-    + UWAGA: if (), if()
-    + for, while, do while - LOOP
     + try, catch - EXCEPTION
-    + break - BREAK
-    
-    + class Foo - CLASS,
-    + MyClass myClass = new MyClass() - VAR, ASSIGN
-    + public Konstruktor() - CONSTRUCTOR
     
     + static - STATIC
     + final - FINAL
     + extends, implements - ???
+    + class Foo - CLASS
     
     + void funkcja() - FUNCTION_DEF
     + void funkcja(int a, String b) - FUNCTION_DEF, ARG, ARG
+    
+    + MyClass myClass = new MyClass() - CLASS_VAR, ASSIGN
     + funkcja() - FUNCTION_USE
-    + System.out.println() - FUNCTION_USE
     + System.out.println("hejka") - FUNCTION_USE, ARG
+    + public Konstruktor(){ - CONSTRUCTOR - nie ma reguły ich wykrywania, odpuścić sobie?
 - sprawdzić instrukcje w javie pod kątem czyszczenia kodu i tokenizacji
 - przetestowac tokenizacje dla pojedynczych plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
 
