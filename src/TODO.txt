@@ -1,7 +1,6 @@
 ﻿
-- refaktoryzacja normalizacji - jeśli się da
-- ; w for przeszkadzaja w normalizacji - co z tym zrobic?
-- case - pominac?
+- przy tokenizacji ustawic czy maja byc brane argumenty w if() for() pod uwage
+- zaznaczac puste linie(+linie z samym { ) przy normalizacji
 
 3. Tokenizacja pliku:
 - spis tokenów:

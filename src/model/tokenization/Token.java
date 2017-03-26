@@ -12,9 +12,12 @@ public enum Token {
     OP_ASSIGN,      // <<=, >>=, +=, -=, *=, /=, %=, &=, ^=, |=, =
     OP_ARITHMETIC,  // ++, --, +, -, *, /, %
     OP_BITWISE,     // <<, >>>, >>, &, |, ^, ~
-    STATEMENT,      // if, else, else if, switch
-    LOOP,           // for, while, do while
-    BREAK,
+    STATEMENT,      // if, else, else if
+    LOOP,           // for, while, do
+    SWITCH,
+    CASE,
+    DEFAULT,
     CONTINUE,
+    BREAK,
     RETURN,
 }

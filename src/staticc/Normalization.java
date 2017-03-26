@@ -23,39 +23,33 @@ public final class Normalization {
 
             while (line != null) {
                 line = clearLine(line);
-                line = clearUnnecesarySpaces(line);
-                boolean lineEnd = codeLineEnds(line);
+                combinedLine += " " + line;
+                combinedLine = clearUnnecesarySpaces(combinedLine);
 
+                boolean lineEnd = codeLineEnds(combinedLine);
                 if (lineEnd) {
-                    if (combinedLine.isEmpty() == false) {
-                        line = combinedLine + " " + line;
-                        line = clearUnnecesarySpaces(line);
-                        combinedLine = "";
-                    }
-                    else {
-                        savedLineNumber = lineNumber;
-                    }
-
-                    CodeLine codeLine = new CodeLine(savedLineNumber, line);
-                    codeLines.add(codeLine);
-
-                    savedLineNumber = 0;
-
-                }
-                else if (line.isEmpty() == false) {
-                    combinedLine += " " + line;
-
-                    String combinedLineCleared = clearMultiComment(combinedLine);
-                    if (combinedLine.equals(combinedLineCleared) == false && savedLineNumber == 0) {
-                        savedLineNumber = 0;
-                    }
-                    combinedLine = combinedLineCleared;
-
                     if (savedLineNumber == 0) {
                         savedLineNumber = lineNumber;
                     }
 
-                    combinedLine = combinedLine.trim();
+                    CodeLine codeLine = new CodeLine(savedLineNumber, combinedLine);
+                    codeLines.add(codeLine);
+
+                    combinedLine = "";
+                    savedLineNumber = 0;
+                }
+                else if (combinedLine.isEmpty() == false) {
+                    boolean isMultiComment = isMultiComment(combinedLine);
+                    if (isMultiComment) {
+                        combinedLine = clearMultiComment(combinedLine);
+                    }
+
+                    if (isMultiComment && savedLineNumber == 0) {
+                        savedLineNumber = 0;
+                    }
+                    else if (savedLineNumber == 0) {
+                        savedLineNumber = lineNumber;
+                    }
                 }
 
                 line = br.readLine();
@@ -135,8 +129,16 @@ public final class Normalization {
         return line;
     }
 
-    private static String clearMultiComment(String line) {
+    private static boolean isMultiComment(String line) {
         if (line.indexOf("/*") != -1 && line.indexOf("*/") != -1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static String clearMultiComment(String line) {
+        if (isMultiComment(line)) {
             line = line.replaceAll("\\/\\*.*\\*\\/", "");
         }
 

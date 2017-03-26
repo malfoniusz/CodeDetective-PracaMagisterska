@@ -41,32 +41,71 @@ public final class Tokenization {
 
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
+
+        line = removeArgumentsFromStatements(line);
+        line = removeArgumentsFromLoops(line);
+
         String[] words = line.split(" ");
-
         for (String word : words) {
-            // TODO: uwzglednic if() liczba = 2; - usunac wszystko w (...)
-            // TODO: uwzglednic if() if() liczba = 2; - sprawdzic czy nie ma kilku if
-
-            // Statements
-            if (line.startsWith("if(") || line.equals("else") || line.equals("else{") || line.startsWith("else if(") || line.startsWith("switch(")) {
-                tokens.add(Token.STATEMENT);
-                break;  // Niesprawdzanie warunkow wewnatrz
-            }
-            // Loops
-            if (line.startsWith("for(") || line.startsWith("while(") || line.startsWith("do{")) {
-                tokens.add(Token.LOOP);
-                break;  // Niesprawdzanie warunkow wewnatrz
-            }
-            // Types
             tokens.addAll(typesTokenization(word));
-            // Other
+
             tokens.addAll(tokensInString(word, "[]", Token.TABLE));
-            tokens.addAll(tokensInString(word, "break;", Token.BREAK));
+
+            tokens.addAll(statementsTokenization(word));
+
+            tokens.addAll(tokensInString(word, "for(", Token.LOOP));
+            tokens.addAll(tokensInString(word, "while(", Token.LOOP));
+            tokens.addAll(tokensInString(word, "do{", Token.LOOP));
+
+            tokens.addAll(tokensInString(word, "switch(", Token.SWITCH));
+            tokens.addAll(tokensInString(word, "case", Token.CASE));
+            tokens.addAll(tokensInString(word, "default:", Token.DEFAULT));
+
             tokens.addAll(tokensInString(word, "continue;", Token.CONTINUE));
+            tokens.addAll(tokensInString(word, "break;", Token.BREAK));
+
             tokens.addAll(tokensInString(word, "return;", Token.RETURN));
-            // Operators
+
             tokens.addAll(operatorsTokenization(word));
         }
+
+        return tokens;
+    }
+
+    private static String removeArgumentsFromStatements(String line) {
+        String clearedLine = "";
+
+        // TODO: uzupelnij
+        // else if
+        // else{
+        // if(
+        // else
+
+        return clearedLine;
+    }
+
+    private static String removeArgumentsFromLoops(String line) {
+        String clearedLine = "";
+
+        // TODO: uzupelnij
+        // for(
+        // while(
+
+        return clearedLine;
+    }
+
+    private static ArrayList<Token> statementsTokenization(String word) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        // UWAGA: przy zmianie kolejnosci wywolan
+        tokens.addAll(tokensInString(word, "else if(", Token.STATEMENT));
+        word = word.replace("else if(", " ");
+        tokens.addAll(tokensInString(word, "else{", Token.STATEMENT));
+        word = word.replace("else{", " ");
+        tokens.addAll(tokensInString(word, "if(", Token.STATEMENT));
+        word = word.replace("if(", " ");
+        tokens.addAll(tokensInString(word, "else", Token.STATEMENT));
+        word = word.replace("else", " ");
 
         return tokens;
     }
@@ -96,7 +135,7 @@ public final class Tokenization {
     private static ArrayList<Token> operatorsTokenization(String word) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        // Operators - UWAGA: przy zmianie kolejnosci wywolan
+        // UWAGA: przy zmianie kolejnosci wywolan
         // Assign 1
         tokens.addAll(tokensInString(word, "<<=", Token.OP_ASSIGN));
         word = word.replace("<<=", " ");
