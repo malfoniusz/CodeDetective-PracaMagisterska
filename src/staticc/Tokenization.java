@@ -44,7 +44,11 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        tokens.addAll(statementsTokenization(line));
+        tokens.addAll(tokensInString(line, "else{", Token.STATEMENT));
+        tokens.addAll(tokensInString(line, "if(", Token.STATEMENT));
+        if (line.equals("else")) {
+            tokens.add(Token.STATEMENT);
+        }
 
         tokens.addAll(tokensInString(line, "for(", Token.LOOP));
         tokens.addAll(tokensInString(line, "while(", Token.LOOP));
@@ -69,22 +73,6 @@ public final class Tokenization {
         tokens.addAll(tokensInString(line, "return;", Token.RETURN));
 
         tokens.addAll(operatorsTokenization(line));
-
-        return tokens;
-    }
-
-    private static ArrayList<Token> statementsTokenization(String line) {
-        ArrayList<Token> tokens = new ArrayList<>();
-
-        // UWAGA: przy zmianie kolejnosci wywolan
-        tokens.addAll(tokensInString(line, "else if(", Token.STATEMENT));
-        line = line.replace("else if(", " ");
-        tokens.addAll(tokensInString(line, "else{", Token.STATEMENT));
-        line = line.replace("else{", " ");
-        tokens.addAll(tokensInString(line, "if(", Token.STATEMENT));
-        line = line.replace("if(", " ");
-        tokens.addAll(tokensInString(line, "else", Token.STATEMENT));
-        line = line.replace("else", " ");
 
         return tokens;
     }

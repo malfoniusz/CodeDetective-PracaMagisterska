@@ -56,6 +56,14 @@ public final class Normalization {
                 lineNumber++;
             }
 
+            // Usuniecie linii zawierajacy samo { - problem z normalizacja: else <br> {
+            for (int i = 0; i < codeLines.size(); i++) {
+                if (codeLines.get(i).code.equals("{")) {
+                    codeLines.remove(i);
+                    i--;
+                }
+            }
+
             CodeFile codeFile = new CodeFile(codeLines);
             return codeFile;
         } catch (IOException e) {
@@ -87,6 +95,7 @@ public final class Normalization {
         line = clearComment(line);
         line = line.replace("}", "");
         line = clearAccess(line);
+        line = clearLonelyNegativeNumbers(line);
 
         line = line.trim();
         if (line.startsWith("import")) {
@@ -97,6 +106,11 @@ public final class Normalization {
         }
 
         return line;
+    }
+
+    private static String clearLonelyNegativeNumbers(String line) {
+        // Negatywne liczby sa usuwane, aby nie zaklocaly w procesie wykrywania operacji arytmetycznych
+        return line.replaceAll("([^\\w])-[0-9]", "$1");
     }
 
     private static String clearUnnecesarySpaces(String line) {

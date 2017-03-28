@@ -1,7 +1,4 @@
 ﻿
-- tokenizacja - statements: nie rozroznic if od else if
-- normalizacja: usunac liczby dodatnie i ujemne?
-
 3. Tokenizacja pliku:
 - spis tokenów:
     + try, catch - EXCEPTION
@@ -11,7 +8,7 @@
     + extends, implements - ???
     + class Foo - CLASS
     
-    + void funkcja() - FUNCTION_DEF
+    + void funkcja() { - FUNCTION_DEF - rozpoznać po { na samym końcu
     + void funkcja(int a, String b) - FUNCTION_DEF, ARG, ARG
     
     + MyClass myClass = new MyClass() - CLASS_VAR, ASSIGN
