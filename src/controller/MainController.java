@@ -33,7 +33,7 @@ public class MainController implements Initializable {
         compareFragmentsController.setCompareCodesController(compareCodesController);
 
         // TODO: usun
-        algorithm.getAlgorithmData().setProject(new Project(new File("D:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Tic-Tac-Toe")));
+        algorithm.getAlgorithmData().setProject(new Project(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Tic-Tac-Toe")));
         runAlgorithm();
     }
 

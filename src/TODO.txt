@@ -1,6 +1,6 @@
 ﻿
-- przy tokenizacji ustawic czy maja byc brane argumenty w if() for() pod uwage
-- zaznaczac puste linie(+linie z samym { ) przy normalizacji
+- tokenizacja - statements: nie rozroznic if od else if
+- normalizacja: usunac liczby dodatnie i ujemne?
 
 3. Tokenizacja pliku:
 - spis tokenów:
@@ -16,7 +16,7 @@
     
     + MyClass myClass = new MyClass() - CLASS_VAR, ASSIGN
     + funkcja() - FUNCTION_USE
-    + System.out.println("hejka") - FUNCTION_USE, ARG
+    + System.out.println("hejka") - SYSTEM_OUT
     + public Konstruktor(){ - CONSTRUCTOR - nie ma reguły ich wykrywania, odpuścić sobie?
 - sprawdzić instrukcje w javie pod kątem czyszczenia kodu i tokenizacji
 - przetestowac tokenizacje dla pojedynczych plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)

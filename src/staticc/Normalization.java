@@ -71,6 +71,12 @@ public final class Normalization {
         else if (line.indexOf("{") != -1) {
             return true;
         }
+        else if (line.startsWith("if(") || line.startsWith("else{") || line.equals("else")) {
+            return true;
+        }
+        else if (line.startsWith("for(") || line.startsWith("while(")) {
+            return true;
+        }
 
         return false;
     }

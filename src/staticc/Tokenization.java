@@ -15,6 +15,8 @@ import model.tokenization.TokenLine;
 
 public final class Tokenization {
 
+    final static boolean SKIP_ARG_IN_STATEMENT_AND_LOOP = true;
+
     public static TokenFile tokenization(File file) {
         CodeFile codeFile = Normalization.codeNormalization(file);
         TokenFile tokenFile = convertTokenFile(codeFile);
@@ -42,180 +44,157 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        line = removeArgumentsFromStatements(line);
-        line = removeArgumentsFromLoops(line);
+        tokens.addAll(statementsTokenization(line));
 
-        String[] words = line.split(" ");
-        for (String word : words) {
-            tokens.addAll(typesTokenization(word));
+        tokens.addAll(tokensInString(line, "for(", Token.LOOP));
+        tokens.addAll(tokensInString(line, "while(", Token.LOOP));
+        tokens.addAll(tokensInString(line, "do{", Token.LOOP));
 
-            tokens.addAll(tokensInString(word, "[]", Token.TABLE));
+        tokens.addAll(tokensInString(line, "switch(", Token.SWITCH));
 
-            tokens.addAll(statementsTokenization(word));
-
-            tokens.addAll(tokensInString(word, "for(", Token.LOOP));
-            tokens.addAll(tokensInString(word, "while(", Token.LOOP));
-            tokens.addAll(tokensInString(word, "do{", Token.LOOP));
-
-            tokens.addAll(tokensInString(word, "switch(", Token.SWITCH));
-            tokens.addAll(tokensInString(word, "case", Token.CASE));
-            tokens.addAll(tokensInString(word, "default:", Token.DEFAULT));
-
-            tokens.addAll(tokensInString(word, "continue;", Token.CONTINUE));
-            tokens.addAll(tokensInString(word, "break;", Token.BREAK));
-
-            tokens.addAll(tokensInString(word, "return;", Token.RETURN));
-
-            tokens.addAll(operatorsTokenization(word));
+        if (SKIP_ARG_IN_STATEMENT_AND_LOOP && tokens.isEmpty() == false) {
+            return tokens;
         }
+
+        tokens.addAll(typesTokenization(line));
+
+        tokens.addAll(tokensInString(line, "[]", Token.TABLE));
+
+        tokens.addAll(tokensInString(line, "case", Token.CASE));
+        tokens.addAll(tokensInString(line, "default:", Token.DEFAULT));
+
+        tokens.addAll(tokensInString(line, "continue;", Token.CONTINUE));
+        tokens.addAll(tokensInString(line, "break;", Token.BREAK));
+
+        tokens.addAll(tokensInString(line, "return;", Token.RETURN));
+
+        tokens.addAll(operatorsTokenization(line));
 
         return tokens;
     }
 
-    private static String removeArgumentsFromStatements(String line) {
-        String clearedLine = "";
-
-        // TODO: uzupelnij
-        // else if
-        // else{
-        // if(
-        // else
-
-        return clearedLine;
-    }
-
-    private static String removeArgumentsFromLoops(String line) {
-        String clearedLine = "";
-
-        // TODO: uzupelnij
-        // for(
-        // while(
-
-        return clearedLine;
-    }
-
-    private static ArrayList<Token> statementsTokenization(String word) {
+    private static ArrayList<Token> statementsTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
         // UWAGA: przy zmianie kolejnosci wywolan
-        tokens.addAll(tokensInString(word, "else if(", Token.STATEMENT));
-        word = word.replace("else if(", " ");
-        tokens.addAll(tokensInString(word, "else{", Token.STATEMENT));
-        word = word.replace("else{", " ");
-        tokens.addAll(tokensInString(word, "if(", Token.STATEMENT));
-        word = word.replace("if(", " ");
-        tokens.addAll(tokensInString(word, "else", Token.STATEMENT));
-        word = word.replace("else", " ");
+        tokens.addAll(tokensInString(line, "else if(", Token.STATEMENT));
+        line = line.replace("else if(", " ");
+        tokens.addAll(tokensInString(line, "else{", Token.STATEMENT));
+        line = line.replace("else{", " ");
+        tokens.addAll(tokensInString(line, "if(", Token.STATEMENT));
+        line = line.replace("if(", " ");
+        tokens.addAll(tokensInString(line, "else", Token.STATEMENT));
+        line = line.replace("else", " ");
 
         return tokens;
     }
 
-    private static ArrayList<Token> typesTokenization(String word) {
+    private static ArrayList<Token> typesTokenization(String str) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        if (word.matches(".*(?<!\\w)(int|short|long)(?!\\w).*")) {
+        if (str.matches(".*(?<!\\w)(int|short|long)(?!\\w).*")) {
             tokens.add(Token.NUMBER_DEC);
         }
-        else if (word.matches(".*(?<!\\w)(double|float)(?!\\w).*")) {
+        else if (str.matches(".*(?<!\\w)(double|float)(?!\\w).*")) {
             tokens.add(Token.NUMBER_POINT);
         }
-        else if (word.matches(".*(?<!\\w)(String|char)(?!\\w).*")) {
+        else if (str.matches(".*(?<!\\w)(String|char)(?!\\w).*")) {
             tokens.add(Token.TEXT);
         }
-        else if (word.matches(".*(?<!\\w)(boolean)(?!\\w).*")) {
+        else if (str.matches(".*(?<!\\w)(boolean)(?!\\w).*")) {
             tokens.add(Token.BOOLEAN);
         }
-        else if (word.matches(".*(?<!\\w)(byte)(?!\\w).*")) {
+        else if (str.matches(".*(?<!\\w)(byte)(?!\\w).*")) {
             tokens.add(Token.BYTE);
         }
 
         return tokens;
     }
 
-    private static ArrayList<Token> operatorsTokenization(String word) {
+    private static ArrayList<Token> operatorsTokenization(String str) {
         ArrayList<Token> tokens = new ArrayList<>();
 
         // UWAGA: przy zmianie kolejnosci wywolan
         // Assign 1
-        tokens.addAll(tokensInString(word, "<<=", Token.OP_ASSIGN));
-        word = word.replace("<<=", " ");
-        tokens.addAll(tokensInString(word, ">>=", Token.OP_ASSIGN));
-        word = word.replace(">>=", " ");
+        tokens.addAll(tokensInString(str, "<<=", Token.OP_ASSIGN));
+        str = str.replace("<<=", " ");
+        tokens.addAll(tokensInString(str, ">>=", Token.OP_ASSIGN));
+        str = str.replace(">>=", " ");
         // Bitwise 1
-        tokens.addAll(tokensInString(word, "<<", Token.OP_BITWISE));
-        word = word.replace("<<", " ");
-        tokens.addAll(tokensInString(word, ">>>", Token.OP_BITWISE));
-        word = word.replace(">>>", " ");
-        tokens.addAll(tokensInString(word, ">>", Token.OP_BITWISE));
-        word = word.replace(">>", " ");
+        tokens.addAll(tokensInString(str, "<<", Token.OP_BITWISE));
+        str = str.replace("<<", " ");
+        tokens.addAll(tokensInString(str, ">>>", Token.OP_BITWISE));
+        str = str.replace(">>>", " ");
+        tokens.addAll(tokensInString(str, ">>", Token.OP_BITWISE));
+        str = str.replace(">>", " ");
 
         // Relation
-        tokens.addAll(tokensInString(word, "==", Token.OP_RELATION));
-        word = word.replace("==", " ");
-        tokens.addAll(tokensInString(word, "!=", Token.OP_RELATION));
-        word = word.replace("!=", " ");
-        tokens.addAll(tokensInString(word, ">=", Token.OP_RELATION));
-        word = word.replace(">=", " ");
-        tokens.addAll(tokensInString(word, "<=", Token.OP_RELATION));
-        word = word.replace("<=", " ");
-        tokens.addAll(tokensInString(word, ">", Token.OP_RELATION));
-        word = word.replace(">", " ");
-        tokens.addAll(tokensInString(word, "<", Token.OP_RELATION));
-        word = word.replace("<", " ");
+        tokens.addAll(tokensInString(str, "==", Token.OP_RELATION));
+        str = str.replace("==", " ");
+        tokens.addAll(tokensInString(str, "!=", Token.OP_RELATION));
+        str = str.replace("!=", " ");
+        tokens.addAll(tokensInString(str, ">=", Token.OP_RELATION));
+        str = str.replace(">=", " ");
+        tokens.addAll(tokensInString(str, "<=", Token.OP_RELATION));
+        str = str.replace("<=", " ");
+        tokens.addAll(tokensInString(str, ">", Token.OP_RELATION));
+        str = str.replace(">", " ");
+        tokens.addAll(tokensInString(str, "<", Token.OP_RELATION));
+        str = str.replace("<", " ");
 
         // Logic
-        tokens.addAll(tokensInString(word, "&&", Token.OP_LOGIC));
-        word = word.replace("&&", " ");
-        tokens.addAll(tokensInString(word, "||", Token.OP_LOGIC));
-        word = word.replace("||", " ");
-        tokens.addAll(tokensInString(word, "!", Token.OP_LOGIC));
-        word = word.replace("!", " ");
+        tokens.addAll(tokensInString(str, "&&", Token.OP_LOGIC));
+        str = str.replace("&&", " ");
+        tokens.addAll(tokensInString(str, "||", Token.OP_LOGIC));
+        str = str.replace("||", " ");
+        tokens.addAll(tokensInString(str, "!", Token.OP_LOGIC));
+        str = str.replace("!", " ");
 
         // Assign 2
-        tokens.addAll(tokensInString(word, "+=", Token.OP_ASSIGN));
-        word = word.replace("+=", " ");
-        tokens.addAll(tokensInString(word, "-=", Token.OP_ASSIGN));
-        word = word.replace("-=", " ");
-        tokens.addAll(tokensInString(word, "*=", Token.OP_ASSIGN));
-        word = word.replace("*=", " ");
-        tokens.addAll(tokensInString(word, "/=", Token.OP_ASSIGN));
-        word = word.replace("/=", " ");
-        tokens.addAll(tokensInString(word, "%=", Token.OP_ASSIGN));
-        word = word.replace("%=", " ");
-        tokens.addAll(tokensInString(word, "&=", Token.OP_ASSIGN));
-        word = word.replace("&=", " ");
-        tokens.addAll(tokensInString(word, "^=", Token.OP_ASSIGN));
-        word = word.replace("^=", " ");
-        tokens.addAll(tokensInString(word, "|=", Token.OP_ASSIGN));
-        word = word.replace("|=", " ");
-        tokens.addAll(tokensInString(word, "=", Token.OP_ASSIGN));
-        word = word.replace("=", " ");
+        tokens.addAll(tokensInString(str, "+=", Token.OP_ASSIGN));
+        str = str.replace("+=", " ");
+        tokens.addAll(tokensInString(str, "-=", Token.OP_ASSIGN));
+        str = str.replace("-=", " ");
+        tokens.addAll(tokensInString(str, "*=", Token.OP_ASSIGN));
+        str = str.replace("*=", " ");
+        tokens.addAll(tokensInString(str, "/=", Token.OP_ASSIGN));
+        str = str.replace("/=", " ");
+        tokens.addAll(tokensInString(str, "%=", Token.OP_ASSIGN));
+        str = str.replace("%=", " ");
+        tokens.addAll(tokensInString(str, "&=", Token.OP_ASSIGN));
+        str = str.replace("&=", " ");
+        tokens.addAll(tokensInString(str, "^=", Token.OP_ASSIGN));
+        str = str.replace("^=", " ");
+        tokens.addAll(tokensInString(str, "|=", Token.OP_ASSIGN));
+        str = str.replace("|=", " ");
+        tokens.addAll(tokensInString(str, "=", Token.OP_ASSIGN));
+        str = str.replace("=", " ");
 
         // Arithmetic
-        tokens.addAll(tokensInString(word, "++", Token.OP_ARITHMETIC));
-        word = word.replace("++", " ");
-        tokens.addAll(tokensInString(word, "--", Token.OP_ARITHMETIC));
-        word = word.replace("--", " ");
-        tokens.addAll(tokensInString(word, "+", Token.OP_ARITHMETIC));
-        word = word.replace("+", " ");
-        tokens.addAll(tokensInString(word, "-", Token.OP_ARITHMETIC));
-        word = word.replace("-", " ");
-        tokens.addAll(tokensInString(word, "*", Token.OP_ARITHMETIC));
-        word = word.replace("*", " ");
-        tokens.addAll(tokensInString(word, "/", Token.OP_ARITHMETIC));
-        word = word.replace("/", " ");
-        tokens.addAll(tokensInString(word, "%", Token.OP_ARITHMETIC));
-        word = word.replace("%", " ");
+        tokens.addAll(tokensInString(str, "++", Token.OP_ARITHMETIC));
+        str = str.replace("++", " ");
+        tokens.addAll(tokensInString(str, "--", Token.OP_ARITHMETIC));
+        str = str.replace("--", " ");
+        tokens.addAll(tokensInString(str, "+", Token.OP_ARITHMETIC));
+        str = str.replace("+", " ");
+        tokens.addAll(tokensInString(str, "-", Token.OP_ARITHMETIC));
+        str = str.replace("-", " ");
+        tokens.addAll(tokensInString(str, "*", Token.OP_ARITHMETIC));
+        str = str.replace("*", " ");
+        tokens.addAll(tokensInString(str, "/", Token.OP_ARITHMETIC));
+        str = str.replace("/", " ");
+        tokens.addAll(tokensInString(str, "%", Token.OP_ARITHMETIC));
+        str = str.replace("%", " ");
 
         // Bitwise 2
-        tokens.addAll(tokensInString(word, "&", Token.OP_BITWISE));
-        word = word.replace("&", " ");
-        tokens.addAll(tokensInString(word, "|", Token.OP_BITWISE));
-        word = word.replace("|", " ");
-        tokens.addAll(tokensInString(word, "^", Token.OP_BITWISE));
-        word = word.replace("^", " ");
-        tokens.addAll(tokensInString(word, "~", Token.OP_BITWISE));
-        word = word.replace("~", " ");
+        tokens.addAll(tokensInString(str, "&", Token.OP_BITWISE));
+        str = str.replace("&", " ");
+        tokens.addAll(tokensInString(str, "|", Token.OP_BITWISE));
+        str = str.replace("|", " ");
+        tokens.addAll(tokensInString(str, "^", Token.OP_BITWISE));
+        str = str.replace("^", " ");
+        tokens.addAll(tokensInString(str, "~", Token.OP_BITWISE));
+        str = str.replace("~", " ");
 
         return tokens;
     }
