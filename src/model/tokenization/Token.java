@@ -1,12 +1,13 @@
 package model.tokenization;
 
 public enum Token {
+    CLASS,
+    VOID,
     NUMBER_DEC,     // int, long, short
     NUMBER_POINT,   // double, float
     TEXT,           // String, char
     BOOLEAN,
     BYTE,
-    CLASS,
     TABLE,
     OP_RELATION,    // ==, !=, >=, <=, >, <
     OP_LOGIC,       // &&, ||, !
@@ -27,4 +28,5 @@ public enum Token {
     FINAL,
     EXTENDS,
     IMPLEMENTS,
+    FUNCTION_DEF,
 }

@@ -1,15 +1,13 @@
 ﻿
 3. Tokenizacja pliku:
 - spis tokenów:
-    + void funkcja() { - FUNCTION_DEF - rozpoznać po { na samym końcu
-    + void funkcja(int a, String b) - FUNCTION_DEF, ARG, ARG
+    + MyClass myClass - CLASS_VAR
+    + MyClass myClass = new MyClass() - CLASS_VAR, ASSIGN, NEW?
     
-    + MyClass myClass = new MyClass() - CLASS_VAR, ASSIGN
     + funkcja() - FUNCTION_USE
-    + System.out.println("hejka") - SYSTEM_OUT
-    + public Konstruktor(){ - CONSTRUCTOR - nie ma reguły ich wykrywania, odpuścić sobie?
-- sprawdzić instrukcje w javie pod kątem czyszczenia kodu i tokenizacji
-- przetestowac tokenizacje dla pojedynczych plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
+    + System.out.println("hejka") - FUNCTION_USE
+- poszukac w Internecie innych Tokenow do Javy
+- przetestowac tokenizacje dla plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
 
 
 4. Algorytm:
@@ -35,10 +33,11 @@
 5. Rozbudowa:
 - zmniejszyć interfejs
 - zmiana ustawień np. minimalna długość fragmentu
-- rodzaje tokenizacji
-	+ normalna np. LICZBA = int, long, short
+- modyfikacje tokenizacji
 	+ ogólna np. LICZBA = float, double, int, long, short
 	+ prezycyjna np. INT = int; class(int a, float b) - rozróżniać argumenty i kolejność argumentów jest ustalana na podstawie kolejności sprawdzania typów argumentów
-	+ biorąca pod uwagę początek i koniec np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
+	+ "branie/nie branie" pod uwagę początek { i koniec } np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
+	+ "branie/nie branie" pod uwagę argumentow w np. if(), for(), while()
+	+ "branie/nie branie" pod uwage argumentow w definicjach u wywolaniach funkcji 
 - zmodyfikowac algorytm karpa-rabina (zeby bylo cos zrobionego wlasnego w tej pracy)
 
