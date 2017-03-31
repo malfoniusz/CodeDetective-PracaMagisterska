@@ -1,4 +1,6 @@
 ﻿
+- poprawić szukanie tokenow dla [] i wszystkiego ponizej; nie wykrywa [2]; latwo oszukac np. int areturn;
+
 3. Tokenizacja pliku:
 - spis tokenów:
     + MyClass myClass - CLASS_VAR

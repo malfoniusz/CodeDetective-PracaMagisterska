@@ -46,51 +46,52 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        tokens.addAll(tokensInStringSeq(line, "else{", Token.STATEMENT));
-        tokens.addAll(tokensInStringSeq(line, "if(", Token.STATEMENT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)else\\{", Token.STATEMENT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)if\\(", Token.STATEMENT));
         if (line.equals("else")) {
             tokens.add(Token.STATEMENT);
         }
 
-        tokens.addAll(tokensInStringSeq(line, "for(", Token.LOOP));
-        tokens.addAll(tokensInStringSeq(line, "while(", Token.LOOP));
-        tokens.addAll(tokensInStringSeq(line, "do{", Token.LOOP));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)for\\(", Token.LOOP));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)while\\(", Token.LOOP));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)do\\{", Token.LOOP));
 
-        tokens.addAll(tokensInStringSeq(line, "switch(", Token.SWITCH));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)switch\\(", Token.SWITCH));
 
-        tokens.addAll(tokensInStringSeq(line, "try{", Token.TRY));
-        tokens.addAll(tokensInStringSeq(line, "catch(", Token.CATCH));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)try\\{", Token.TRY));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)catch\\(", Token.CATCH));
 
         if (SKIP_ARG_IN_STATEMENT_AND_LOOP && tokens.isEmpty() == false) {
             return tokens;
         }
 
         if (tokens.isEmpty()) {
-            tokens.addAll(tokensInStringRegex(line, "\\w\\(.*\\)\\{", Token.FUNCTION_DEF));
+            tokens.addAll(findTokensRegex(line, "\\w\\(.*\\)\\{", Token.FUNCTION_DEF));
         }
 
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(extends)(?!\\w)", Token.EXTENDS));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(implements)(?!\\w)", Token.IMPLEMENTS));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(extends)(?!\\w)", Token.EXTENDS));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(implements)(?!\\w)", Token.IMPLEMENTS));
 
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(class)(?!\\w)", Token.CLASS));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(int|short|long)(?!\\w)", Token.NUMBER_DEC));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(double|float)(?!\\w)", Token.NUMBER_POINT));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(String|char)(?!\\w)", Token.TEXT));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(boolean)(?!\\w)", Token.BOOLEAN));
-        tokens.addAll(tokensInStringRegex(line, "(?<!\\w)(byte)(?!\\w)", Token.BYTE));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(class)(?!\\w)", Token.CLASS));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(int|short|long)(?!\\w)", Token.NUMBER_DEC));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(double|float)(?!\\w)", Token.NUMBER_POINT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(String|char)(?!\\w)", Token.TEXT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(boolean)(?!\\w)", Token.BOOLEAN));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(byte)(?!\\w)", Token.BYTE));
 
-        tokens.addAll(tokensInStringSeq(line, "[]", Token.TABLE));
+        tokens.addAll(findTokensSequence(line, "[]", Token.TABLE));
 
-        tokens.addAll(tokensInStringSeq(line, "case", Token.CASE));
-        tokens.addAll(tokensInStringSeq(line, "default:", Token.DEFAULT));
+        // case'A':
+        tokens.addAll(findTokensSequence(line, "case", Token.CASE));
+        tokens.addAll(findTokensSequence(line, "default:", Token.DEFAULT));
 
-        tokens.addAll(tokensInStringSeq(line, "continue;", Token.CONTINUE));
-        tokens.addAll(tokensInStringSeq(line, "break;", Token.BREAK));
+        tokens.addAll(findTokensSequence(line, "continue;", Token.CONTINUE));
+        tokens.addAll(findTokensSequence(line, "break;", Token.BREAK));
 
-        tokens.addAll(tokensInStringSeq(line, "return;", Token.RETURN));
+        tokens.addAll(findTokensSequence(line, "return;", Token.RETURN));
 
         tokens.addAll(operatorsTokenization(line));
 
@@ -102,90 +103,90 @@ public final class Tokenization {
 
         // UWAGA: przy zmianie kolejnosci wywolan
         // Assign 1
-        tokens.addAll(tokensInStringSeq(str, "<<=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "<<=", Token.OP_ASSIGN));
         str = str.replace("<<=", " ");
-        tokens.addAll(tokensInStringSeq(str, ">>=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, ">>=", Token.OP_ASSIGN));
         str = str.replace(">>=", " ");
         // Bitwise 1
-        tokens.addAll(tokensInStringSeq(str, "<<", Token.OP_BITWISE));
+        tokens.addAll(findTokensSequence(str, "<<", Token.OP_BITWISE));
         str = str.replace("<<", " ");
-        tokens.addAll(tokensInStringSeq(str, ">>>", Token.OP_BITWISE));
+        tokens.addAll(findTokensSequence(str, ">>>", Token.OP_BITWISE));
         str = str.replace(">>>", " ");
-        tokens.addAll(tokensInStringSeq(str, ">>", Token.OP_BITWISE));
+        tokens.addAll(findTokensSequence(str, ">>", Token.OP_BITWISE));
         str = str.replace(">>", " ");
 
         // Relation
-        tokens.addAll(tokensInStringSeq(str, "==", Token.OP_RELATION));
+        tokens.addAll(findTokensSequence(str, "==", Token.OP_RELATION));
         str = str.replace("==", " ");
-        tokens.addAll(tokensInStringSeq(str, "!=", Token.OP_RELATION));
+        tokens.addAll(findTokensSequence(str, "!=", Token.OP_RELATION));
         str = str.replace("!=", " ");
-        tokens.addAll(tokensInStringSeq(str, ">=", Token.OP_RELATION));
+        tokens.addAll(findTokensSequence(str, ">=", Token.OP_RELATION));
         str = str.replace(">=", " ");
-        tokens.addAll(tokensInStringSeq(str, "<=", Token.OP_RELATION));
+        tokens.addAll(findTokensSequence(str, "<=", Token.OP_RELATION));
         str = str.replace("<=", " ");
-        tokens.addAll(tokensInStringSeq(str, ">", Token.OP_RELATION));
+        tokens.addAll(findTokensSequence(str, ">", Token.OP_RELATION));
         str = str.replace(">", " ");
-        tokens.addAll(tokensInStringSeq(str, "<", Token.OP_RELATION));
+        tokens.addAll(findTokensSequence(str, "<", Token.OP_RELATION));
         str = str.replace("<", " ");
 
         // Logic
-        tokens.addAll(tokensInStringSeq(str, "&&", Token.OP_LOGIC));
+        tokens.addAll(findTokensSequence(str, "&&", Token.OP_LOGIC));
         str = str.replace("&&", " ");
-        tokens.addAll(tokensInStringSeq(str, "||", Token.OP_LOGIC));
+        tokens.addAll(findTokensSequence(str, "||", Token.OP_LOGIC));
         str = str.replace("||", " ");
-        tokens.addAll(tokensInStringSeq(str, "!", Token.OP_LOGIC));
+        tokens.addAll(findTokensSequence(str, "!", Token.OP_LOGIC));
         str = str.replace("!", " ");
 
         // Assign 2
-        tokens.addAll(tokensInStringSeq(str, "+=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "+=", Token.OP_ASSIGN));
         str = str.replace("+=", " ");
-        tokens.addAll(tokensInStringSeq(str, "-=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "-=", Token.OP_ASSIGN));
         str = str.replace("-=", " ");
-        tokens.addAll(tokensInStringSeq(str, "*=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "*=", Token.OP_ASSIGN));
         str = str.replace("*=", " ");
-        tokens.addAll(tokensInStringSeq(str, "/=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "/=", Token.OP_ASSIGN));
         str = str.replace("/=", " ");
-        tokens.addAll(tokensInStringSeq(str, "%=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "%=", Token.OP_ASSIGN));
         str = str.replace("%=", " ");
-        tokens.addAll(tokensInStringSeq(str, "&=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "&=", Token.OP_ASSIGN));
         str = str.replace("&=", " ");
-        tokens.addAll(tokensInStringSeq(str, "^=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "^=", Token.OP_ASSIGN));
         str = str.replace("^=", " ");
-        tokens.addAll(tokensInStringSeq(str, "|=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "|=", Token.OP_ASSIGN));
         str = str.replace("|=", " ");
-        tokens.addAll(tokensInStringSeq(str, "=", Token.OP_ASSIGN));
+        tokens.addAll(findTokensSequence(str, "=", Token.OP_ASSIGN));
         str = str.replace("=", " ");
 
         // Arithmetic
-        tokens.addAll(tokensInStringSeq(str, "++", Token.OP_ARITHMETIC));
+        tokens.addAll(findTokensSequence(str, "++", Token.OP_ARITHMETIC));
         str = str.replace("++", " ");
-        tokens.addAll(tokensInStringSeq(str, "--", Token.OP_ARITHMETIC));
+        tokens.addAll(findTokensSequence(str, "--", Token.OP_ARITHMETIC));
         str = str.replace("--", " ");
-        tokens.addAll(tokensInStringSeq(str, "+", Token.OP_ARITHMETIC));
+        tokens.addAll(findTokensSequence(str, "+", Token.OP_ARITHMETIC));
         str = str.replace("+", " ");
-        tokens.addAll(tokensInStringSeq(str, "-", Token.OP_ARITHMETIC));
+        tokens.addAll(findTokensSequence(str, "-", Token.OP_ARITHMETIC));
         str = str.replace("-", " ");
-        tokens.addAll(tokensInStringSeq(str, "*", Token.OP_ARITHMETIC));
+        tokens.addAll(findTokensSequence(str, "*", Token.OP_ARITHMETIC));
         str = str.replace("*", " ");
-        tokens.addAll(tokensInStringSeq(str, "/", Token.OP_ARITHMETIC));
+        tokens.addAll(findTokensSequence(str, "/", Token.OP_ARITHMETIC));
         str = str.replace("/", " ");
-        tokens.addAll(tokensInStringSeq(str, "%", Token.OP_ARITHMETIC));
+        tokens.addAll(findTokensSequence(str, "%", Token.OP_ARITHMETIC));
         str = str.replace("%", " ");
 
         // Bitwise 2
-        tokens.addAll(tokensInStringSeq(str, "&", Token.OP_BITWISE));
+        tokens.addAll(findTokensSequence(str, "&", Token.OP_BITWISE));
         str = str.replace("&", " ");
-        tokens.addAll(tokensInStringSeq(str, "|", Token.OP_BITWISE));
+        tokens.addAll(findTokensSequence(str, "|", Token.OP_BITWISE));
         str = str.replace("|", " ");
-        tokens.addAll(tokensInStringSeq(str, "^", Token.OP_BITWISE));
+        tokens.addAll(findTokensSequence(str, "^", Token.OP_BITWISE));
         str = str.replace("^", " ");
-        tokens.addAll(tokensInStringSeq(str, "~", Token.OP_BITWISE));
+        tokens.addAll(findTokensSequence(str, "~", Token.OP_BITWISE));
         str = str.replace("~", " ");
 
         return tokens;
     }
 
-    private static ArrayList<Token> tokensInStringSeq(String str, String charSequence, Token token) {
+    private static ArrayList<Token> findTokensSequence(String str, String charSequence, Token token) {
         ArrayList<Token> tokens = new ArrayList<>();
 
         int count = StringUtils.countMatches(str, charSequence);
@@ -196,7 +197,7 @@ public final class Tokenization {
         return tokens;
     }
 
-    private static ArrayList<Token> tokensInStringRegex(String str, String regex, Token token) {
+    private static ArrayList<Token> findTokensRegex(String str, String regex, Token token) {
         ArrayList<Token> tokens = new ArrayList<>();
 
         Pattern pattern = Pattern.compile(regex);
