@@ -56,11 +56,15 @@ public final class Tokenization {
 
         tokens.addAll(tokensInString(line, "switch(", Token.SWITCH));
 
+        tokens.addAll(tokensInString(line, "try{", Token.TRY));
+        tokens.addAll(tokensInString(line, "catch(", Token.CATCH));
+
         if (SKIP_ARG_IN_STATEMENT_AND_LOOP && tokens.isEmpty() == false) {
             return tokens;
         }
 
         tokens.addAll(typesTokenization(line));
+        tokens.addAll(modifiersTokenization(line));
 
         tokens.addAll(tokensInString(line, "[]", Token.TABLE));
 
@@ -94,6 +98,31 @@ public final class Tokenization {
         }
         else if (str.matches(".*(?<!\\w)(byte)(?!\\w).*")) {
             tokens.add(Token.BYTE);
+        }
+        else if (str.matches(".*(?<!\\w)(class)(?!\\w).*")) {
+            tokens.add(Token.CLASS);
+        }
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> modifiersTokenization(String str) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        if (str.matches(".*(?<!\\w)(static)(?!\\w).*")) {
+            tokens.add(Token.STATIC);
+        }
+
+        if (str.matches(".*(?<!\\w)(final)(?!\\w).*")) {
+            tokens.add(Token.FINAL);
+        }
+
+        if (str.matches(".*(?<!\\w)(extends)(?!\\w).*")) {
+            tokens.add(Token.EXTENDS);
+        }
+
+        if (str.matches(".*(?<!\\w)(implements)(?!\\w).*")) {
+            tokens.add(Token.IMPLEMENTS);
         }
 
         return tokens;

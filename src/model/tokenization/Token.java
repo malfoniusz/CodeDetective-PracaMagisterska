@@ -6,6 +6,7 @@ public enum Token {
     TEXT,           // String, char
     BOOLEAN,
     BYTE,
+    CLASS,
     TABLE,
     OP_RELATION,    // ==, !=, >=, <=, >, <
     OP_LOGIC,       // &&, ||, !
@@ -20,4 +21,10 @@ public enum Token {
     CONTINUE,
     BREAK,
     RETURN,
+    TRY,
+    CATCH,
+    STATIC,
+    FINAL,
+    EXTENDS,
+    IMPLEMENTS,
 }

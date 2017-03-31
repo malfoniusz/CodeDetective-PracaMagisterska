@@ -1,13 +1,6 @@
 ﻿
 3. Tokenizacja pliku:
 - spis tokenów:
-    + try, catch - EXCEPTION
-    
-    + static - STATIC
-    + final - FINAL
-    + extends, implements - ???
-    + class Foo - CLASS
-    
     + void funkcja() { - FUNCTION_DEF - rozpoznać po { na samym końcu
     + void funkcja(int a, String b) - FUNCTION_DEF, ARG, ARG
     
