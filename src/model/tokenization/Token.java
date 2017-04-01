@@ -2,6 +2,9 @@ package model.tokenization;
 
 public enum Token {
     CLASS,
+    CLASS_VAR,
+    NEW,
+    CONSTRUCTOR_USE,
     VOID,
     NUMBER_DEC,     // int, long, short
     NUMBER_POINT,   // double, float

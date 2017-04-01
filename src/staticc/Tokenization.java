@@ -44,6 +44,7 @@ public final class Tokenization {
     }
 
     private static ArrayList<Token> convertTokenLine(String line) {
+        // UWAGA przy zmianie kolejnosci instrukcji
         ArrayList<Token> tokens = new ArrayList<>();
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)else\\{", Token.STATEMENT));
@@ -66,7 +67,7 @@ public final class Tokenization {
         }
 
         if (tokens.isEmpty()) {
-            tokens.addAll(findTokensRegex(line, "\\w\\(.*\\)\\{", Token.FUNCTION_DEF));
+            tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*\\(.*\\)\\{", Token.FUNCTION_DEF));
         }
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
@@ -82,6 +83,10 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(boolean)(?!\\w)", Token.BOOLEAN));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(byte)(?!\\w)", Token.BYTE));
 
+        tokens.addAll(classVarTokenization(line, tokens));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(new)(?!\\w)", Token.NEW));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)[A-Z]\\w*\\(", Token.CONSTRUCTOR_USE));
+
         tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE));
 
         tokens.addAll(findTokensRegex(line, "case.*:", Token.CASE));
@@ -93,6 +98,18 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)return;", Token.RETURN));
 
         tokens.addAll(operatorsTokenization(line));
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> classVarTokenization(String str, ArrayList<Token> tokensSource) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        // Ochrona przed bledym wykryciem CLASS_VAR dla linii zawierajacych extends lub implements
+        if (tokensSource.contains(Token.CLASS) == false) {
+            str = str.replace("String", "");
+            tokens.addAll(findTokensRegex(str, "[A-Z]\\w* \\w+", Token.CLASS_VAR));
+        }
 
         return tokens;
     }

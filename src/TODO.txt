@@ -1,9 +1,6 @@
 ﻿
 3. Tokenizacja pliku:
 - spis tokenów:
-    + MyClass myClass - CLASS_VAR
-    + MyClass myClass = new MyClass() - CLASS_VAR, ASSIGN, NEW?
-    
     + funkcja() - FUNCTION_USE
     + System.out.println("hejka") - FUNCTION_USE
 - poszukac w Internecie innych Tokenow do Javy
