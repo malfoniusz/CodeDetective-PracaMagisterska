@@ -82,16 +82,15 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(boolean)(?!\\w)", Token.BOOLEAN));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(byte)(?!\\w)", Token.BYTE));
 
-        tokens.addAll(findTokensSequence(line, "[]", Token.TABLE));
+        tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE));
 
-        // case'A':
-        tokens.addAll(findTokensSequence(line, "case", Token.CASE));
+        tokens.addAll(findTokensRegex(line, "case.*:", Token.CASE));
         tokens.addAll(findTokensSequence(line, "default:", Token.DEFAULT));
 
-        tokens.addAll(findTokensSequence(line, "continue;", Token.CONTINUE));
-        tokens.addAll(findTokensSequence(line, "break;", Token.BREAK));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)continue;", Token.CONTINUE));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)break;", Token.BREAK));
 
-        tokens.addAll(findTokensSequence(line, "return;", Token.RETURN));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)return;", Token.RETURN));
 
         tokens.addAll(operatorsTokenization(line));
 
