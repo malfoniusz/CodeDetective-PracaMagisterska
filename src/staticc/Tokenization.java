@@ -60,6 +60,10 @@ public final class Tokenization {
 
         tokens.addAll(othersTokenization(line));
 
+        if (tokens.isEmpty()) {
+            tokens.add(Token.UNKNOWN);
+        }
+
         return tokens;
     }
 
@@ -82,6 +86,7 @@ public final class Tokenization {
         ArrayList<Token> tokens = new ArrayList<>();
 
         tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE));
+        tokens.addAll(findTokensRegex(line, "<\\w*>", Token.GENERIC));
 
         tokens.addAll(findTokensRegex(line, "case.*:", Token.CASE));
         tokens.addAll(findTokensSequence(line, "default:", Token.DEFAULT));
@@ -96,13 +101,14 @@ public final class Tokenization {
     private static ArrayList<Token> singleWordsTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(enum)(?!\\w)", Token.ENUM));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(new)(?!\\w)", Token.NEW));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(class)(?!\\w)", Token.CLASS));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(extends)(?!\\w)", Token.EXTENDS));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(implements)(?!\\w)", Token.IMPLEMENTS));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throws)(?!\\w)", Token.THROWS));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throw|throws)(?!\\w)", Token.THROW));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(int|short|long)(?!\\w)", Token.NUMBER_DEC));

@@ -1,8 +1,13 @@
 ﻿
-3. Tokenizacja pliku:
-- poszukac w Internecie innych Tokenow do Javy
-- przetestowac tokenizacje dla plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
+- normalizacja: fact.getFactSlot().toString() -> toString
+- normalizacja: usunac wszystko w (...) - uwzglednic w tokenizacji if()
 
+3. Tokenizacja pliku:
+- przetestowac tokenizacje dla plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
+- przygotować test dla tokenizacji:
+    + scalic kilka plikow z roznych zrodel w jedne plik z kilkoma tysiacami linii kodu
+    + umiescic ten plik w projekcie
+    + przygotowac test tokenizacji
 
 4. Algorytm:
 - algorytm porównujący:

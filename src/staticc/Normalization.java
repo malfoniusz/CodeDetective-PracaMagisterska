@@ -104,6 +104,9 @@ public final class Normalization {
         if (line.startsWith("import")) {
             line = "";
         }
+        if (line.startsWith("package")) {
+            line = "";
+        }
         if (line.startsWith("@")) {
             line = "";
         }

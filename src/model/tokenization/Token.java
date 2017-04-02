@@ -11,13 +11,14 @@ public enum Token {
     FUNCTION_USE,
     CONSTRUCTOR_USE,
 
+    ENUM,
     NEW,
     CLASS,
     EXTENDS,
     IMPLEMENTS,
     STATIC,
     FINAL,
-    THROWS,
+    THROW,
     VOID,
     NUMBER_DEC,     // int, long, short
     NUMBER_POINT,   // double, float
@@ -34,9 +35,12 @@ public enum Token {
     CLASS_VAR,
 
     TABLE,
+    GENERIC,        // <...>
     CASE,
     DEFAULT,
     CONTINUE,
     BREAK,
     RETURN,
+
+    UNKNOWN,
 }
