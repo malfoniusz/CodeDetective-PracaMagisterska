@@ -67,7 +67,11 @@ public final class Tokenization {
         }
 
         if (tokens.isEmpty()) {
-            tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*\\(.*\\)\\{", Token.FUNCTION_DEF));
+            tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(.*\\)\\{", Token.FUNCTION_DEF));
+
+            if(tokens.isEmpty()) {
+                tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(", Token.FUNCTION_USE));
+            }
         }
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
@@ -85,7 +89,6 @@ public final class Tokenization {
 
         tokens.addAll(classVarTokenization(line, tokens));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(new)(?!\\w)", Token.NEW));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)[A-Z]\\w*\\(", Token.CONSTRUCTOR_USE));
 
         tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE));
 

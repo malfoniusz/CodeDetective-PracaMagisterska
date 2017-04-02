@@ -85,6 +85,9 @@ public final class Normalization {
         else if (line.startsWith("for(") || line.startsWith("while(")) {
             return true;
         }
+        else if (line.startsWith("case") || line.startsWith("default:")) {
+            return true;
+        }
 
         return false;
     }

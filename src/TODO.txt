@@ -1,8 +1,5 @@
 ﻿
 3. Tokenizacja pliku:
-- spis tokenów:
-    + funkcja() - FUNCTION_USE
-    + System.out.println("hejka") - FUNCTION_USE
 - poszukac w Internecie innych Tokenow do Javy
 - przetestowac tokenizacje dla plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
 
