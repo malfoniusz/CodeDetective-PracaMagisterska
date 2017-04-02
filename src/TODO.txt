@@ -5,7 +5,6 @@
 
 
 4. Algorytm:
-- opcje - wybór minimalnej długości łańcuchów
 - algorytm porównujący:
     + zasada działania:
         - z pary plików otrzymujemy dwa gigantyczne ciągi tokenów
@@ -19,7 +18,8 @@
     + sprecyzować tokeny: NUMBER - NUMBER_WHOLE, NUMBER_DECIMAL - INT, LONG, FLOAT, DOUBLE
     + sprawdzać argumenty w definiowanych i wywoływanych funkcjach i klasach - sprawdzać również kolejność argumentów
     + sprawdzać argumenty w warunkach, np. if (i < 10), while (x == 0)
-- opcje(2):
+- opcje:
+    + wybór minimalnej długości łańcuchów lub wybór minimalnej liczby podobnych kolejnych tokenów
     + wybór procentu podobieństwa łańcuchów
     + wyświetlanie tylko par plików z minimalnym procentem podobieństwa
 - help - opis wszystkiego m.in. kolumn tabel

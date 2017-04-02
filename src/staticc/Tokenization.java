@@ -17,7 +17,7 @@ import model.tokenization.TokenLine;
 
 public final class Tokenization {
 
-    final static boolean SKIP_ARG_IN_STATEMENT_AND_LOOP = true;
+    final static boolean SKIP_ARG_IN_COMPOUND_STATEMENTS = true;
 
     public static TokenFile tokenization(File file) {
         CodeFile codeFile = Normalization.codeNormalization(file);
@@ -44,13 +44,83 @@ public final class Tokenization {
     }
 
     private static ArrayList<Token> convertTokenLine(String line) {
-        // UWAGA przy zmianie kolejnosci instrukcji
         ArrayList<Token> tokens = new ArrayList<>();
 
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)else\\{", Token.STATEMENT));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)if\\(", Token.STATEMENT));
+        boolean newTokens = tokens.addAll(compoundStatmentsTokenization(line));
+
+        if (SKIP_ARG_IN_COMPOUND_STATEMENTS && newTokens) {
+            return tokens;
+        }
+
+        tokens.addAll(functionsTokenization(line, newTokens));
+
+        tokens.addAll(singleWordsTokenization(line));
+        tokens.addAll(operatorsTokenization(line));
+        tokens.addAll(classVarTokenization(line, tokens));
+
+        tokens.addAll(othersTokenization(line));
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> functionsTokenization(String line, boolean newTokens) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        if (newTokens == false) {
+            boolean foundTokens = tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(.*\\)\\{", Token.FUNCTION_DEF));
+
+            if (foundTokens == false) {
+                tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*\\(", Token.FUNCTION_USE));
+                tokens.addAll(findTokensRegex(line, "(?<!\\w)[A-Z]\\w*\\(", Token.CONSTRUCTOR_USE));
+            }
+        }
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> othersTokenization(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE));
+
+        tokens.addAll(findTokensRegex(line, "case.*:", Token.CASE));
+        tokens.addAll(findTokensSequence(line, "default:", Token.DEFAULT));
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)continue;", Token.CONTINUE));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)break;", Token.BREAK));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)return;", Token.RETURN));
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> singleWordsTokenization(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(new)(?!\\w)", Token.NEW));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(class)(?!\\w)", Token.CLASS));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(extends)(?!\\w)", Token.EXTENDS));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(implements)(?!\\w)", Token.IMPLEMENTS));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throws)(?!\\w)", Token.THROWS));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(int|short|long)(?!\\w)", Token.NUMBER_DEC));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(double|float)(?!\\w)", Token.NUMBER_POINT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(String|char)(?!\\w)", Token.TEXT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(boolean)(?!\\w)", Token.BOOLEAN));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(byte)(?!\\w)", Token.BYTE));
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> compoundStatmentsTokenization(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)else\\{", Token.CONDITIONAL_STATEMENT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)if\\(", Token.CONDITIONAL_STATEMENT));
         if (line.equals("else")) {
-            tokens.add(Token.STATEMENT);
+            tokens.add(Token.CONDITIONAL_STATEMENT);
         }
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)for\\(", Token.LOOP));
@@ -62,145 +132,105 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)try\\{", Token.TRY));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)catch\\(", Token.CATCH));
 
-        if (SKIP_ARG_IN_STATEMENT_AND_LOOP && tokens.isEmpty() == false) {
-            return tokens;
-        }
-
-        if (tokens.isEmpty()) {
-            tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(.*\\)\\{", Token.FUNCTION_DEF));
-
-            if(tokens.isEmpty()) {
-                tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(", Token.FUNCTION_USE));
-            }
-        }
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(extends)(?!\\w)", Token.EXTENDS));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(implements)(?!\\w)", Token.IMPLEMENTS));
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(class)(?!\\w)", Token.CLASS));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(int|short|long)(?!\\w)", Token.NUMBER_DEC));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(double|float)(?!\\w)", Token.NUMBER_POINT));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(String|char)(?!\\w)", Token.TEXT));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(boolean)(?!\\w)", Token.BOOLEAN));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(byte)(?!\\w)", Token.BYTE));
-
-        tokens.addAll(classVarTokenization(line, tokens));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(new)(?!\\w)", Token.NEW));
-
-        tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE));
-
-        tokens.addAll(findTokensRegex(line, "case.*:", Token.CASE));
-        tokens.addAll(findTokensSequence(line, "default:", Token.DEFAULT));
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)continue;", Token.CONTINUE));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)break;", Token.BREAK));
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)return;", Token.RETURN));
-
-        tokens.addAll(operatorsTokenization(line));
-
         return tokens;
     }
 
-    private static ArrayList<Token> classVarTokenization(String str, ArrayList<Token> tokensSource) {
+    private static ArrayList<Token> classVarTokenization(String line, ArrayList<Token> tokensSource) {
         ArrayList<Token> tokens = new ArrayList<>();
 
         // Ochrona przed bledym wykryciem CLASS_VAR dla linii zawierajacych extends lub implements
         if (tokensSource.contains(Token.CLASS) == false) {
-            str = str.replace("String", "");
-            tokens.addAll(findTokensRegex(str, "[A-Z]\\w* \\w+", Token.CLASS_VAR));
+            line = line.replace("String", "");
+            tokens.addAll(findTokensRegex(line, "[A-Z]\\w* \\w+", Token.CLASS_VAR));
         }
 
         return tokens;
     }
 
-    private static ArrayList<Token> operatorsTokenization(String str) {
+    private static ArrayList<Token> operatorsTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
         // UWAGA: przy zmianie kolejnosci wywolan
         // Assign 1
-        tokens.addAll(findTokensSequence(str, "<<=", Token.OP_ASSIGN));
-        str = str.replace("<<=", " ");
-        tokens.addAll(findTokensSequence(str, ">>=", Token.OP_ASSIGN));
-        str = str.replace(">>=", " ");
+        tokens.addAll(findTokensSequence(line, "<<=", Token.OP_ASSIGN));
+        line = line.replace("<<=", " ");
+        tokens.addAll(findTokensSequence(line, ">>=", Token.OP_ASSIGN));
+        line = line.replace(">>=", " ");
         // Bitwise 1
-        tokens.addAll(findTokensSequence(str, "<<", Token.OP_BITWISE));
-        str = str.replace("<<", " ");
-        tokens.addAll(findTokensSequence(str, ">>>", Token.OP_BITWISE));
-        str = str.replace(">>>", " ");
-        tokens.addAll(findTokensSequence(str, ">>", Token.OP_BITWISE));
-        str = str.replace(">>", " ");
+        tokens.addAll(findTokensSequence(line, "<<", Token.OP_BITWISE));
+        line = line.replace("<<", " ");
+        tokens.addAll(findTokensSequence(line, ">>>", Token.OP_BITWISE));
+        line = line.replace(">>>", " ");
+        tokens.addAll(findTokensSequence(line, ">>", Token.OP_BITWISE));
+        line = line.replace(">>", " ");
 
         // Relation
-        tokens.addAll(findTokensSequence(str, "==", Token.OP_RELATION));
-        str = str.replace("==", " ");
-        tokens.addAll(findTokensSequence(str, "!=", Token.OP_RELATION));
-        str = str.replace("!=", " ");
-        tokens.addAll(findTokensSequence(str, ">=", Token.OP_RELATION));
-        str = str.replace(">=", " ");
-        tokens.addAll(findTokensSequence(str, "<=", Token.OP_RELATION));
-        str = str.replace("<=", " ");
-        tokens.addAll(findTokensSequence(str, ">", Token.OP_RELATION));
-        str = str.replace(">", " ");
-        tokens.addAll(findTokensSequence(str, "<", Token.OP_RELATION));
-        str = str.replace("<", " ");
+        tokens.addAll(findTokensSequence(line, "==", Token.OP_RELATION));
+        line = line.replace("==", " ");
+        tokens.addAll(findTokensSequence(line, "!=", Token.OP_RELATION));
+        line = line.replace("!=", " ");
+        tokens.addAll(findTokensSequence(line, ">=", Token.OP_RELATION));
+        line = line.replace(">=", " ");
+        tokens.addAll(findTokensSequence(line, "<=", Token.OP_RELATION));
+        line = line.replace("<=", " ");
+        tokens.addAll(findTokensSequence(line, ">", Token.OP_RELATION));
+        line = line.replace(">", " ");
+        tokens.addAll(findTokensSequence(line, "<", Token.OP_RELATION));
+        line = line.replace("<", " ");
 
         // Logic
-        tokens.addAll(findTokensSequence(str, "&&", Token.OP_LOGIC));
-        str = str.replace("&&", " ");
-        tokens.addAll(findTokensSequence(str, "||", Token.OP_LOGIC));
-        str = str.replace("||", " ");
-        tokens.addAll(findTokensSequence(str, "!", Token.OP_LOGIC));
-        str = str.replace("!", " ");
+        tokens.addAll(findTokensSequence(line, "&&", Token.OP_LOGIC));
+        line = line.replace("&&", " ");
+        tokens.addAll(findTokensSequence(line, "||", Token.OP_LOGIC));
+        line = line.replace("||", " ");
+        tokens.addAll(findTokensSequence(line, "!", Token.OP_LOGIC));
+        line = line.replace("!", " ");
 
         // Assign 2
-        tokens.addAll(findTokensSequence(str, "+=", Token.OP_ASSIGN));
-        str = str.replace("+=", " ");
-        tokens.addAll(findTokensSequence(str, "-=", Token.OP_ASSIGN));
-        str = str.replace("-=", " ");
-        tokens.addAll(findTokensSequence(str, "*=", Token.OP_ASSIGN));
-        str = str.replace("*=", " ");
-        tokens.addAll(findTokensSequence(str, "/=", Token.OP_ASSIGN));
-        str = str.replace("/=", " ");
-        tokens.addAll(findTokensSequence(str, "%=", Token.OP_ASSIGN));
-        str = str.replace("%=", " ");
-        tokens.addAll(findTokensSequence(str, "&=", Token.OP_ASSIGN));
-        str = str.replace("&=", " ");
-        tokens.addAll(findTokensSequence(str, "^=", Token.OP_ASSIGN));
-        str = str.replace("^=", " ");
-        tokens.addAll(findTokensSequence(str, "|=", Token.OP_ASSIGN));
-        str = str.replace("|=", " ");
-        tokens.addAll(findTokensSequence(str, "=", Token.OP_ASSIGN));
-        str = str.replace("=", " ");
+        tokens.addAll(findTokensSequence(line, "+=", Token.OP_ASSIGN));
+        line = line.replace("+=", " ");
+        tokens.addAll(findTokensSequence(line, "-=", Token.OP_ASSIGN));
+        line = line.replace("-=", " ");
+        tokens.addAll(findTokensSequence(line, "*=", Token.OP_ASSIGN));
+        line = line.replace("*=", " ");
+        tokens.addAll(findTokensSequence(line, "/=", Token.OP_ASSIGN));
+        line = line.replace("/=", " ");
+        tokens.addAll(findTokensSequence(line, "%=", Token.OP_ASSIGN));
+        line = line.replace("%=", " ");
+        tokens.addAll(findTokensSequence(line, "&=", Token.OP_ASSIGN));
+        line = line.replace("&=", " ");
+        tokens.addAll(findTokensSequence(line, "^=", Token.OP_ASSIGN));
+        line = line.replace("^=", " ");
+        tokens.addAll(findTokensSequence(line, "|=", Token.OP_ASSIGN));
+        line = line.replace("|=", " ");
+        tokens.addAll(findTokensSequence(line, "=", Token.OP_ASSIGN));
+        line = line.replace("=", " ");
 
         // Arithmetic
-        tokens.addAll(findTokensSequence(str, "++", Token.OP_ARITHMETIC));
-        str = str.replace("++", " ");
-        tokens.addAll(findTokensSequence(str, "--", Token.OP_ARITHMETIC));
-        str = str.replace("--", " ");
-        tokens.addAll(findTokensSequence(str, "+", Token.OP_ARITHMETIC));
-        str = str.replace("+", " ");
-        tokens.addAll(findTokensSequence(str, "-", Token.OP_ARITHMETIC));
-        str = str.replace("-", " ");
-        tokens.addAll(findTokensSequence(str, "*", Token.OP_ARITHMETIC));
-        str = str.replace("*", " ");
-        tokens.addAll(findTokensSequence(str, "/", Token.OP_ARITHMETIC));
-        str = str.replace("/", " ");
-        tokens.addAll(findTokensSequence(str, "%", Token.OP_ARITHMETIC));
-        str = str.replace("%", " ");
+        tokens.addAll(findTokensSequence(line, "++", Token.OP_ARITHMETIC));
+        line = line.replace("++", " ");
+        tokens.addAll(findTokensSequence(line, "--", Token.OP_ARITHMETIC));
+        line = line.replace("--", " ");
+        tokens.addAll(findTokensSequence(line, "+", Token.OP_ARITHMETIC));
+        line = line.replace("+", " ");
+        tokens.addAll(findTokensSequence(line, "-", Token.OP_ARITHMETIC));
+        line = line.replace("-", " ");
+        tokens.addAll(findTokensSequence(line, "*", Token.OP_ARITHMETIC));
+        line = line.replace("*", " ");
+        tokens.addAll(findTokensSequence(line, "/", Token.OP_ARITHMETIC));
+        line = line.replace("/", " ");
+        tokens.addAll(findTokensSequence(line, "%", Token.OP_ARITHMETIC));
+        line = line.replace("%", " ");
 
         // Bitwise 2
-        tokens.addAll(findTokensSequence(str, "&", Token.OP_BITWISE));
-        str = str.replace("&", " ");
-        tokens.addAll(findTokensSequence(str, "|", Token.OP_BITWISE));
-        str = str.replace("|", " ");
-        tokens.addAll(findTokensSequence(str, "^", Token.OP_BITWISE));
-        str = str.replace("^", " ");
-        tokens.addAll(findTokensSequence(str, "~", Token.OP_BITWISE));
-        str = str.replace("~", " ");
+        tokens.addAll(findTokensSequence(line, "&", Token.OP_BITWISE));
+        line = line.replace("&", " ");
+        tokens.addAll(findTokensSequence(line, "|", Token.OP_BITWISE));
+        line = line.replace("|", " ");
+        tokens.addAll(findTokensSequence(line, "^", Token.OP_BITWISE));
+        line = line.replace("^", " ");
+        tokens.addAll(findTokensSequence(line, "~", Token.OP_BITWISE));
+        line = line.replace("~", " ");
 
         return tokens;
     }
