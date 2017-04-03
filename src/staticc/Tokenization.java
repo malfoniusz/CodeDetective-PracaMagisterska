@@ -71,7 +71,7 @@ public final class Tokenization {
         ArrayList<Token> tokens = new ArrayList<>();
 
         if (newTokens == false) {
-            boolean foundTokens = tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(.*\\)\\{", Token.FUNCTION_DEF));
+            boolean foundTokens = tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(.*\\).*\\{", Token.FUNCTION_DEF));
 
             if (foundTokens == false) {
                 tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*\\(", Token.FUNCTION_USE));
@@ -86,14 +86,14 @@ public final class Tokenization {
         ArrayList<Token> tokens = new ArrayList<>();
 
         tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE));
-        tokens.addAll(findTokensRegex(line, "<\\w*>", Token.GENERIC));
 
         tokens.addAll(findTokensRegex(line, "case.*:", Token.CASE));
         tokens.addAll(findTokensSequence(line, "default:", Token.DEFAULT));
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)continue;", Token.CONTINUE));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)break;", Token.BREAK));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)return;", Token.RETURN));
+
+        tokens.addAll(findTokensRegex(line, "[^\\w]\\(\\w+\\)", Token.CASTING));
 
         return tokens;
     }
@@ -110,6 +110,7 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(throw|throws)(?!\\w)", Token.THROW));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(return)(?!\\w)", Token.RETURN));
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(int|short|long)(?!\\w)", Token.NUMBER_DEC));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(double|float)(?!\\w)", Token.NUMBER_POINT));
@@ -144,11 +145,8 @@ public final class Tokenization {
     private static ArrayList<Token> classVarTokenization(String line, ArrayList<Token> tokensSource) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        // Ochrona przed bledym wykryciem CLASS_VAR dla linii zawierajacych extends lub implements
-        if (tokensSource.contains(Token.CLASS) == false) {
-            line = line.replace("String", "");
-            tokens.addAll(findTokensRegex(line, "[A-Z]\\w* \\w+", Token.CLASS_VAR));
-        }
+        line = line.replace("String", "");
+        tokens.addAll(findTokensRegex(line, "[A-Z]\\w*\\s\\w+[;=,)]", Token.CLASS_VAR));
 
         return tokens;
     }
@@ -169,6 +167,10 @@ public final class Tokenization {
         line = line.replace(">>>", " ");
         tokens.addAll(findTokensSequence(line, ">>", Token.OP_BITWISE));
         line = line.replace(">>", " ");
+
+        // Generic
+        tokens.addAll(findTokensRegex(line, "<\\w*>", Token.GENERIC));
+        line = line.replaceAll("<\\w*>", "");
 
         // Relation
         tokens.addAll(findTokensSequence(line, "==", Token.OP_RELATION));

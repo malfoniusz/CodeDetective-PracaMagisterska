@@ -122,7 +122,9 @@ public final class Normalization {
     }
 
     private static String clearUnnecesarySpaces(String line) {
-        return line.replaceAll("(?<!\\w)(\\s)|(\\s)(?!\\w)", "");
+        line = line.replaceAll("(?<!\\w)(\\s)", "");
+        line = line.replaceAll("(\\s)(?!\\w)", "");
+        return line;
     }
 
     private static String clearAccess(String line) {

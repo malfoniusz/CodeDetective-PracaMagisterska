@@ -7,7 +7,7 @@ public enum Token {
     TRY,
     CATCH,
 
-    FUNCTION_DEF,
+    FUNCTION_DEF,   // function def + constructor
     FUNCTION_USE,
     CONSTRUCTOR_USE,
 
@@ -20,6 +20,7 @@ public enum Token {
     FINAL,
     THROW,
     VOID,
+    RETURN,
     NUMBER_DEC,     // int, long, short
     NUMBER_POINT,   // double, float
     TEXT,           // String, char
@@ -40,7 +41,7 @@ public enum Token {
     DEFAULT,
     CONTINUE,
     BREAK,
-    RETURN,
+    CASTING,        // (Object)
 
     UNKNOWN,
 }

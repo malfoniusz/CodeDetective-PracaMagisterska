@@ -1,10 +1,7 @@
 ﻿
 3. Tokenizacja pliku:
 - przetestowac tokenizacje dla plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
-- przygotować test dla tokenizacji:
-    + scalic kilka plikow z roznych zrodel w jedne plik z kilkoma tysiacami linii kodu
-    + umiescic ten plik w projekcie
-    + przygotowac test tokenizacji
+
 
 4. Algorytm:
 - algorytm porównujący:
@@ -27,9 +24,18 @@
 - jesli token UNKNOWN nie jest uzywany to wyrzucic linijki z tym tokenem na procesie normalizacji
 - help - opis wszystkiego m.in. kolumn tabel
 
-5. Rozbudowa:
+
+5. Testy
+- test dla tokenizacji:
+    + scalic kilka plikow z roznych zrodel w jedne plik z kilkoma tysiacami linii kodu
+    + umiescic ten plik w projekcie
+    + przygotowac test tokenizacji
+
+
+6. Rozbudowa:
 - zmniejszyć interfejs
 - zmiana ustawień np. minimalna długość fragmentu
+- wybor tokenów jakie mają być używane - UWAGA przy wyłączaniu tokenów wpływających na wykrywanie funkcji i operatorów np. arytmentycznych 
 - modyfikacje tokenizacji
 	+ ogólna np. LICZBA = float, double, int, long, short
 	+ prezycyjna np. INT = int; class(int a, float b) - rozróżniać argumenty i kolejność argumentów jest ustalana na podstawie kolejności sprawdzania typów argumentów
@@ -37,4 +43,3 @@
 	+ "branie/nie branie" pod uwagę argumentow w np. if(), for(), while()
 	+ "branie/nie branie" pod uwage argumentow w definicjach u wywolaniach funkcji 
 - zmodyfikowac algorytm karpa-rabina (zeby bylo cos zrobionego wlasnego w tej pracy)
-
