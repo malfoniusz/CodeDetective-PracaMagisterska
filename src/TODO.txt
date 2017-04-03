@@ -1,7 +1,4 @@
 ﻿
-- normalizacja: fact.getFactSlot().toString() -> toString
-- normalizacja: usunac wszystko w (...) - uwzglednic w tokenizacji if()
-
 3. Tokenizacja pliku:
 - przetestowac tokenizacje dla plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
 - przygotować test dla tokenizacji:
@@ -27,6 +24,7 @@
     + wybór minimalnej długości łańcuchów lub wybór minimalnej liczby podobnych kolejnych tokenów
     + wybór procentu podobieństwa łańcuchów
     + wyświetlanie tylko par plików z minimalnym procentem podobieństwa
+- jesli token UNKNOWN nie jest uzywany to wyrzucic linijki z tym tokenem na procesie normalizacji
 - help - opis wszystkiego m.in. kolumn tabel
 
 5. Rozbudowa:

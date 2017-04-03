@@ -20,34 +20,35 @@ public final class Normalization {
 
             String combinedLine = "";
             int savedLineNumber = 0;
+            boolean isMultiComment = false;
 
             while (line != null) {
                 line = clearLine(line);
-                combinedLine += " " + line;
-                combinedLine = clearUnnecesarySpaces(combinedLine);
 
-                boolean lineEnd = codeLineEnds(combinedLine);
-                if (lineEnd) {
-                    if (savedLineNumber == 0) {
-                        savedLineNumber = lineNumber;
-                    }
-
-                    CodeLine codeLine = new CodeLine(savedLineNumber, combinedLine);
-                    codeLines.add(codeLine);
-
-                    combinedLine = "";
-                    savedLineNumber = 0;
+                // Wykrywanie komentarzy wielolinijkowych
+                if (line.indexOf("/*") != -1) {
+                    isMultiComment = true;
                 }
-                else if (combinedLine.isEmpty() == false) {
-                    boolean isMultiComment = isMultiComment(combinedLine);
-                    if (isMultiComment) {
-                        combinedLine = clearMultiComment(combinedLine);
-                    }
+                else if (line.indexOf("*/") != -1) {
+                    isMultiComment = false;
+                }
+                else if (isMultiComment == false) {
+                    combinedLine += " " + line;
+                    combinedLine = clearUnnecesarySpaces(combinedLine);
+                    boolean lineEnd = codeLineEnds(combinedLine);
+                    if (lineEnd) {
+                        if (savedLineNumber == 0) {
+                            savedLineNumber = lineNumber;
+                        }
 
-                    if (isMultiComment && savedLineNumber == 0) {
+                        CodeLine codeLine = new CodeLine(savedLineNumber, combinedLine);
+                        codeLines.add(codeLine);
+
+                        combinedLine = "";
                         savedLineNumber = 0;
                     }
-                    else if (savedLineNumber == 0) {
+                    // Kod jest kontunuowany w kolejnej linii
+                    else if (combinedLine.isEmpty() == false && savedLineNumber == 0) {
                         savedLineNumber = lineNumber;
                     }
                 }
@@ -96,6 +97,7 @@ public final class Normalization {
         // UWAGA przy przestawianiu kolejności wywoływanych instrukcji
         line = clearStrings(line);
         line = clearComment(line);
+        line = clearMultiComment(line);
         line = line.replace("}", "");
         line = clearAccess(line);
         line = clearLonelyNegativeNumbers(line);
