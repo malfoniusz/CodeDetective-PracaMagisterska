@@ -20,13 +20,8 @@ public final class Tokenization {
     final static boolean SKIP_ARG_IN_COMPOUND_STATEMENTS = true;
 
     public static TokenFile tokenization(File file) {
-        CodeFile codeFile = Normalization.codeNormalization(file);
-        TokenFile tokenFile = convertTokenFile(codeFile);
-
-        // TODO: usun
-        System.out.println(codeFile.toString());
-        System.out.println();
-        System.out.println(tokenFile.toString());
+        CodeFile normalizedCode = Normalization.codeNormalization(file);
+        TokenFile tokenFile = convertTokenFile(normalizedCode);
 
         return tokenFile;
     }
@@ -288,4 +283,38 @@ public final class Tokenization {
         return projectTokens;
     }
 
+    public static String toStringTokenization(Project project) {
+        StringBuilder sb = new StringBuilder();
+
+        for (File f : project.getFiles()) {
+            CodeFile normalizedCode = Normalization.codeNormalization(f);
+            TokenFile tokenFile = convertTokenFile(normalizedCode);
+
+            ArrayList<CodeLine> codeLines = normalizedCode.codeLines;
+            ArrayList<TokenLine> tokenLines = tokenFile.tokenLines;
+
+            sb.append("\tFILE: " + f.getName() + "\n");
+            for (int i = 0; i < codeLines.size(); i++) {
+                String strCode = codeLines.get(i).toString();
+                String strTokens = tokenLines.get(i).tokens.toString();
+                sb.append(strCode + "\t" + strTokens);
+                sb.append(System.lineSeparator());
+            }
+            sb.append(System.lineSeparator());
+            sb.append(System.lineSeparator());
+        }
+
+        return sb.toString();
+    }
+
+    public static String toStringTokenization(Projects projects) {
+        StringBuilder sb = new StringBuilder();
+
+        for (Project p : projects.getProjects()) {
+            String str = toStringTokenization(p);
+            sb.append(str);
+        }
+
+        return sb.toString();
+    }
 }

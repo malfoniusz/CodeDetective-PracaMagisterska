@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -8,7 +7,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import model.CompareFiles;
-import model.Project;
 
 public class MainController implements Initializable {
 
@@ -31,10 +29,6 @@ public class MainController implements Initializable {
         compareFilesController.setCompareCodesController(compareCodesController);
 
         compareFragmentsController.setCompareCodesController(compareCodesController);
-
-        // TODO: usun
-        algorithm.getAlgorithmData().setProject(new Project(new File("F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\Tic-Tac-Toe")));
-        runAlgorithm();
     }
 
     public void runAlgorithm() {

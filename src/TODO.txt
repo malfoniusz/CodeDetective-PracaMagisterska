@@ -1,8 +1,4 @@
 ﻿
-3. Tokenizacja pliku:
-- przetestowac tokenizacje dla plikow od różnych osób (wyświetlić i sprawdzić poprawność tokenizacji)
-
-
 4. Algorytm:
 - algorytm porównujący:
     + zasada działania:
