@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class TokenFile {
 
-    public File file;
-    public ArrayList<TokenLine> tokenLines;
+    private File file;
+    private ArrayList<TokenLine> tokenLines;
 
     public TokenFile(File file, ArrayList<TokenLine> tokenLines) {
         this.file = file;
@@ -25,6 +25,22 @@ public class TokenFile {
         String str = sb.toString();
         String noEndSpace = str.substring(0, str.length() - 1);
         return noEndSpace;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public ArrayList<TokenLine> getTokenLines() {
+        return tokenLines;
+    }
+
+    public void setTokenLines(ArrayList<TokenLine> tokenLines) {
+        this.tokenLines = tokenLines;
     }
 
 }

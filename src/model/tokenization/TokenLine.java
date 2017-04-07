@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class TokenLine {
 
-    public int lineNumber;
-    public ArrayList<Token> tokens;
+    private int lineNumber;
+    private ArrayList<Token> tokens;
 
     public TokenLine(int lineNumber, ArrayList<Token> tokens) {
         this.lineNumber = lineNumber;
@@ -25,6 +25,22 @@ public class TokenLine {
         String str = sb.toString();
         String noEndSpace = str.substring(0, str.length() - 1);
         return noEndSpace;
+    }
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
+    public ArrayList<Token> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(ArrayList<Token> tokens) {
+        this.tokens = tokens;
     }
 
 }

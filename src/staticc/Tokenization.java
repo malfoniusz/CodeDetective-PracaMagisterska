@@ -31,13 +31,13 @@ public final class Tokenization {
     private static TokenFile convertTokenFile(CodeFile codeFile) {
         ArrayList<TokenLine> tokenLines = new ArrayList<>();
 
-        for (CodeLine codeLine : codeFile.codeLines) {
-            ArrayList<Token> tokens = convertTokenLine(codeLine.code);
-            TokenLine tokenLine = new TokenLine(codeLine.lineNumber, tokens);
+        for (CodeLine codeLine : codeFile.getCodeLines()) {
+            ArrayList<Token> tokens = convertTokenLine(codeLine.getCode());
+            TokenLine tokenLine = new TokenLine(codeLine.getLineNumber(), tokens);
             tokenLines.add(tokenLine);
         }
 
-        return new TokenFile(codeFile.file, tokenLines);
+        return new TokenFile(codeFile.getFile(), tokenLines);
     }
 
     private static ArrayList<Token> convertTokenLine(String line) {
@@ -295,13 +295,13 @@ public final class Tokenization {
             CodeFile normalizedCode = Normalization.codeNormalization(f);
             TokenFile tokenFile = convertTokenFile(normalizedCode);
 
-            ArrayList<CodeLine> codeLines = normalizedCode.codeLines;
-            ArrayList<TokenLine> tokenLines = tokenFile.tokenLines;
+            ArrayList<CodeLine> codeLines = normalizedCode.getCodeLines();
+            ArrayList<TokenLine> tokenLines = tokenFile.getTokenLines();
 
             sb.append("\tFILE: " + f.getName() + "\n");
             for (int i = 0; i < codeLines.size(); i++) {
                 String strCode = codeLines.get(i).toString();
-                String strTokens = tokenLines.get(i).tokens.toString();
+                String strTokens = tokenLines.get(i).getTokens().toString();
                 sb.append(strCode + "\t" + strTokens);
                 sb.append(System.lineSeparator());
             }

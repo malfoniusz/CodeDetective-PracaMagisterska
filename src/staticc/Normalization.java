@@ -59,7 +59,7 @@ public final class Normalization {
 
             // Usuniecie linii zawierajacy samo { - problem z normalizacja: else <br> {
             for (int i = 0; i < codeLines.size(); i++) {
-                if (codeLines.get(i).code.equals("{")) {
+                if (codeLines.get(i).getCode().equals("{")) {
                     codeLines.remove(i);
                     i--;
                 }
