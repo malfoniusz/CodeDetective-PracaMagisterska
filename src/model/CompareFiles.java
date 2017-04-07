@@ -2,7 +2,6 @@ package model;
 import java.io.File;
 import java.util.ArrayList;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CompareFiles {
@@ -22,9 +21,6 @@ public class CompareFiles {
     private String fileName2;
     private int fileLines2;
 
-    // Column Lines
-    private final SimpleIntegerProperty rLines;
-
     // Column Matched
     private int matchedValue;
     private final SimpleStringProperty rMatched;
@@ -32,7 +28,7 @@ public class CompareFiles {
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<CompareFragments> compareFragments;
 
-    public CompareFiles(String project, File file1, int fileLines1, File file2, int fileLines2, int sLines, int matchedValue, ArrayList<CompareFragments> compareFragments) {
+    public CompareFiles(String project, File file1, int fileLines1, File file2, int fileLines2, int matchedValue, ArrayList<CompareFragments> compareFragments) {
         this.file1 = file1;
         this.fileName1 = file1.getName();
         this.fileLines1 = fileLines1;
@@ -46,8 +42,6 @@ public class CompareFiles {
         this.fileLines2 = fileLines2;
         this.rFile2 = new SimpleStringProperty();
         updateRFile2();
-
-        this.rLines = new SimpleIntegerProperty(sLines);
 
         this.matchedValue = matchedValue;
         this.rMatched = new SimpleStringProperty();
@@ -142,16 +136,6 @@ public class CompareFiles {
 
 
 
-    public int getRLines() {
-        return rLines.get();
-    }
-
-    public void setRLines(int value) {
-        rLines.set(value);
-    }
-
-
-
     public String getRMatched() {
         return rMatched.get();
     }
@@ -168,6 +152,7 @@ public class CompareFiles {
         matchedValue = value;
         updateRMatched();
     }
+
 
 
     public ArrayList<CompareFragments> getCompareFragments() {
