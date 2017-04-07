@@ -1,7 +1,4 @@
 ﻿
-- przechowac gdzies liczbe linii w pliku
-- fileFragments - poprawic sciezke
-
 4. Algorytm:
 - algorytm porównujący:
     + zasada działania:

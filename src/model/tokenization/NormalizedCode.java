@@ -3,12 +3,12 @@ package model.tokenization;
 import java.io.File;
 import java.util.ArrayList;
 
-public class CodeFile {
+public class NormalizedCode {
 
     private File file;
     private ArrayList<CodeLine> codeLines;
 
-    public CodeFile(File file, ArrayList<CodeLine> codeLines) {
+    public NormalizedCode(File file, ArrayList<CodeLine> codeLines) {
         this.file = file;
         this.codeLines = codeLines;
     }

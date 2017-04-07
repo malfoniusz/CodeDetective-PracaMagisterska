@@ -1,16 +1,37 @@
 package model.tokenization;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TokenFile {
 
     private File file;
+    private int totalLines;
     private ArrayList<TokenLine> tokenLines;
 
     public TokenFile(File file, ArrayList<TokenLine> tokenLines) {
         this.file = file;
+        this.totalLines = totalLines(this.file);
         this.tokenLines = tokenLines;
+    }
+
+    private int totalLines(File file) {
+        int totalLines = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            while (reader.readLine() != null) {
+                totalLines++;
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        return totalLines;
     }
 
     @Override
@@ -33,6 +54,14 @@ public class TokenFile {
 
     public void setFile(File file) {
         this.file = file;
+    }
+
+    public int getTotalLines() {
+        return totalLines;
+    }
+
+    public void setTotalLines(int totalLines) {
+        this.totalLines = totalLines;
     }
 
     public ArrayList<TokenLine> getTokenLines() {

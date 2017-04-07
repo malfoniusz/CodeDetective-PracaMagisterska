@@ -6,12 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import model.tokenization.CodeFile;
 import model.tokenization.CodeLine;
+import model.tokenization.NormalizedCode;
 
 public final class Normalization {
 
-    public static CodeFile codeNormalization(File file) {
+    public static NormalizedCode codeNormalization(File file) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             ArrayList<CodeLine> codeLines = new ArrayList<>();
 
@@ -65,8 +65,8 @@ public final class Normalization {
                 }
             }
 
-            CodeFile codeFile = new CodeFile(file, codeLines);
-            return codeFile;
+            NormalizedCode normalizedCode = new NormalizedCode(file, codeLines);
+            return normalizedCode;
         } catch (IOException e) {
             e.printStackTrace();
             return null;

@@ -9,8 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import model.Project;
 import model.Projects;
-import model.tokenization.CodeFile;
 import model.tokenization.CodeLine;
+import model.tokenization.NormalizedCode;
 import model.tokenization.Token;
 import model.tokenization.TokenFile;
 import model.tokenization.TokenLine;
@@ -22,22 +22,22 @@ public final class Tokenization {
     final static boolean SKIP_ARG_IN_COMPOUND_STATEMENTS = true;
 
     public static TokenFile tokenization(File file) {
-        CodeFile normalizedCode = Normalization.codeNormalization(file);
+        NormalizedCode normalizedCode = Normalization.codeNormalization(file);
         TokenFile tokenFile = convertTokenFile(normalizedCode);
 
         return tokenFile;
     }
 
-    private static TokenFile convertTokenFile(CodeFile codeFile) {
+    private static TokenFile convertTokenFile(NormalizedCode normalizedCode) {
         ArrayList<TokenLine> tokenLines = new ArrayList<>();
 
-        for (CodeLine codeLine : codeFile.getCodeLines()) {
+        for (CodeLine codeLine : normalizedCode.getCodeLines()) {
             ArrayList<Token> tokens = convertTokenLine(codeLine.getCode());
             TokenLine tokenLine = new TokenLine(codeLine.getLineNumber(), tokens);
             tokenLines.add(tokenLine);
         }
 
-        return new TokenFile(codeFile.getFile(), tokenLines);
+        return new TokenFile(normalizedCode.getFile(), tokenLines);
     }
 
     private static ArrayList<Token> convertTokenLine(String line) {
@@ -292,7 +292,7 @@ public final class Tokenization {
         StringBuilder sb = new StringBuilder();
 
         for (File f : project.getFiles()) {
-            CodeFile normalizedCode = Normalization.codeNormalization(f);
+            NormalizedCode normalizedCode = Normalization.codeNormalization(f);
             TokenFile tokenFile = convertTokenFile(normalizedCode);
 
             ArrayList<CodeLine> codeLines = normalizedCode.getCodeLines();
