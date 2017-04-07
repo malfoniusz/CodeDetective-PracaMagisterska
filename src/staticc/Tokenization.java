@@ -14,6 +14,8 @@ import model.tokenization.CodeLine;
 import model.tokenization.Token;
 import model.tokenization.TokenFile;
 import model.tokenization.TokenLine;
+import model.tokenization.TokenProject;
+import model.tokenization.TokenProjects;
 
 public final class Tokenization {
 
@@ -35,7 +37,7 @@ public final class Tokenization {
             tokenLines.add(tokenLine);
         }
 
-        return new TokenFile(tokenLines);
+        return new TokenFile(codeFile.file, tokenLines);
     }
 
     private static ArrayList<Token> convertTokenLine(String line) {
@@ -262,25 +264,28 @@ public final class Tokenization {
         return tokens;
     }
 
-    public static ArrayList<TokenFile> tokenProject(Project project) {
-        ArrayList<TokenFile> projectTokens = new ArrayList<>();
+    public static TokenProject tokenProject(Project project) {
+        ArrayList<TokenFile> tokenFiles = new ArrayList<>();
 
         for (File f : project.getFiles()) {
             TokenFile tokenFile = Tokenization.tokenization(f);
-            projectTokens.add(tokenFile);
+            tokenFiles.add(tokenFile);
         }
 
-        return projectTokens;
+        TokenProject tokenProject = new TokenProject(project.getDirectory(), tokenFiles);
+        return tokenProject;
     }
 
-    public static ArrayList<TokenFile> tokenProjects(Projects projects) {
-        ArrayList<TokenFile> projectTokens = new ArrayList<>();
+    public static TokenProjects tokenProjects(Projects projects) {
+        ArrayList<TokenProject> tokenProjectArray = new ArrayList<>();
 
         for (Project p : projects.getProjects()) {
-            projectTokens.addAll(Tokenization.tokenProject(p));
+            TokenProject tokenProject = Tokenization.tokenProject(p);
+            tokenProjectArray.add(tokenProject);
         }
 
-        return projectTokens;
+        TokenProjects tokenProjects = new TokenProjects(tokenProjectArray);
+        return tokenProjects;
     }
 
     public static String toStringTokenization(Project project) {

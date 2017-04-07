@@ -65,7 +65,7 @@ public final class Normalization {
                 }
             }
 
-            CodeFile codeFile = new CodeFile(codeLines);
+            CodeFile codeFile = new CodeFile(file, codeLines);
             return codeFile;
         } catch (IOException e) {
             e.printStackTrace();

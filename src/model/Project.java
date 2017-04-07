@@ -18,11 +18,6 @@ public class Project {
         this.files = searchForFiles(directory);
     }
 
-    public Project(File directory, ArrayList<File> files) {
-        this.directory = directory;
-        this.files = files;
-    }
-
     private ArrayList<File> searchForFiles(File directory) {
         ArrayList<File> javaFiles = new ArrayList<File>();
 

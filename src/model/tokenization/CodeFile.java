@@ -1,12 +1,15 @@
 package model.tokenization;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class CodeFile {
 
+    public File file;
     public ArrayList<CodeLine> codeLines;
 
-    public CodeFile(ArrayList<CodeLine> codeLines) {
+    public CodeFile(File file, ArrayList<CodeLine> codeLines) {
+        this.file = file;
         this.codeLines = codeLines;
     }
 

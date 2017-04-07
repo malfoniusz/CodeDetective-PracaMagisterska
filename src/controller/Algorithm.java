@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import model.AlgorithmData;
 import model.CompareFiles;
-import model.tokenization.TokenFile;
+import model.tokenization.TokenProject;
+import model.tokenization.TokenProjects;
 import staticc.Tokenization;
 
 public class Algorithm {
@@ -23,10 +24,8 @@ public class Algorithm {
             return null;
         }
 
-        ArrayList<TokenFile> projectTokens = Tokenization.tokenProject(algorithmData.getProject());
-        ArrayList<TokenFile> baseTokens = Tokenization.tokenProjects(algorithmData.getProjects());
-
-        // TODO: przerobic testCompareFiles z Main.java
+        TokenProject tokenProject = Tokenization.tokenProject(algorithmData.getProject());
+        TokenProjects tokenProjects = Tokenization.tokenProjects(algorithmData.getProjects());
 
         return compareFiles;
     }
