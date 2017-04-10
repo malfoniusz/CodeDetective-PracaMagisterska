@@ -61,12 +61,11 @@ public class Main extends Application {
     }
 
     // TODO: kod testow
-    final String PATH = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\";
-    final String FILE_1 = "Drawing.java";
-    final String FILE_2 = "Game.java";
+    final String PATH_PROJECT = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\Drawing\\";
+    final String PATH_BASE = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\";
     private void testMain() {
-        Project project = new Project(new File(PATH + FILE_1));
-        Projects projects = new Projects(new File(PATH));
+        Project project = new Project(new File(PATH_PROJECT));
+        Projects projects = new Projects(new File(PATH_BASE));
 
         Algorithm algorithm = mainController.getAlgorithm();
         algorithm.getAlgorithmData().setProject(project);
@@ -85,9 +84,11 @@ public class Main extends Application {
         }
     }
 
+    final String FILE_1 = "Drawing.java";
+    final String FILE_2 = "Game.java";
     private ArrayList<CompareFiles> testCompareFiles() {
-        File file1 = new File(PATH + FILE_1);
-        File file2 = new File(PATH + FILE_2);
+        File file1 = new File(PATH_PROJECT + FILE_1);
+        File file2 = new File(PATH_BASE + FILE_2);
 
         FileMarked fileMarked1a = new FileMarked(file1, 20, 38);
         FileMarked fileMarked1b = new FileMarked(file1, 30, 40);
@@ -107,8 +108,8 @@ public class Main extends Application {
         compareFragments2.add(fragments4);
 
         ArrayList<CompareFiles> compareFiles = new ArrayList<>();
-        CompareFiles compareFiles1 = new CompareFiles("Project1", file1, 365, file2, 566, 58, compareFragments1);
-        CompareFiles compareFiles2 = new CompareFiles("MassiveOnlineUtopia", new File("myPath/plik2"), 205, new File("myPath/plik3"), 566, 95, compareFragments2);
+        CompareFiles compareFiles1 = new CompareFiles("Project1", file1, 365, "Base1", file2, 566, 58, compareFragments1);
+        CompareFiles compareFiles2 = new CompareFiles("Ultima", new File("myPath/plik2"), 205, "MassiveOnlineUtopia", new File("myPath/plik3"), 566, 95, compareFragments2);
         compareFiles.add(compareFiles1);
         compareFiles.add(compareFiles2);
 

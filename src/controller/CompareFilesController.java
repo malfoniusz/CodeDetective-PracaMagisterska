@@ -22,18 +22,18 @@ public class CompareFilesController implements Initializable {
     private CompareCodesController compareCodesController;
 
     @FXML private TableView<CompareFiles> compareFiles;
-    @FXML private TableColumn<CompareFiles, String> iFileProject;
-    @FXML private TableColumn<CompareFiles, String> iProject;
+    @FXML private TableColumn<CompareFiles, String> iBaseName;
     @FXML private TableColumn<CompareFiles, String> iFileBase;
+    @FXML private TableColumn<CompareFiles, String> iFileProject;
     @FXML private TableColumn<CompareFiles, String> iMatched;
 
     private final ObservableList<CompareFiles> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        iFileProject.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rFileProject"));
-        iProject.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rProject"));
+        iBaseName.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rBaseName"));
         iFileBase.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rFileBase"));
+        iFileProject.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rFileProject"));
         iMatched.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rMatched"));
 
         compareFiles.setPlaceholder(new Label("From menu:\nChoose Base\nChoose Project\nPress Start"));
@@ -49,13 +49,8 @@ public class CompareFilesController implements Initializable {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     CompareFiles compareFiles = tableRow.getItem();
                     // Ustaw naglowek tabel
-                    String pathProject = compareFiles.getFileProject().getPath();
-                    int beginIndexProject = pathProject.indexOf(compareFiles.getRProject());
-                    int endIndexProject = pathProject.indexOf(compareFiles.getFileProject().getName());
-                    pathProject = ".\\" + pathProject.substring(beginIndexProject, endIndexProject);
-
-                    compareFragmentsController.setColumnName(1, pathProject);
-                    compareFragmentsController.setColumnName(2, compareFiles.getFileBase().getPath());
+                    compareFragmentsController.setColumnName(1, compareFiles.getFileProjectShortPath());
+                    compareFragmentsController.setColumnName(2, compareFiles.getFileBaseShortPath());
 
                     // Wyswietl fragmenty
                     compareFragmentsController.setData(compareFiles.getCompareFragments());

@@ -51,7 +51,7 @@ public class Algorithm {
 
         for (TokenFile baseFile : baseFiles) {
             for (TokenFile projectFile : projectFiles) {
-                CompareFiles compareFiles = compareFiles(projectFile, baseFile, baseProject.getName());
+                CompareFiles compareFiles = compareFiles(project.getName(), projectFile, baseProject.getName(), baseFile);
                 if (compareFiles == null) {
                     continue;
                 }
@@ -62,7 +62,7 @@ public class Algorithm {
         return compareProjects;
     }
 
-    private CompareFiles compareFiles(TokenFile projectFile, TokenFile baseFile, String projectName) {
+    private CompareFiles compareFiles(String projectName, TokenFile projectFile, String baseName, TokenFile baseFile) {
         ArrayList<CompareFragments> compareFragments = algorithm(projectFile, baseFile);
         if (compareFragments.isEmpty()) {
             return null;
@@ -71,10 +71,11 @@ public class Algorithm {
         int similarity = calculateSimilarity(compareFragments, projectFile.getTotalTokenLines(), baseFile.getTotalTokenLines());
 
         CompareFiles compareFiles = new CompareFiles(projectName,
-                                                     baseFile.getFile(),
-                                                     baseFile.getTotalLines(),
                                                      projectFile.getFile(),
                                                      projectFile.getTotalLines(),
+                                                     baseName,
+                                                     baseFile.getFile(),
+                                                     baseFile.getTotalLines(),
                                                      similarity,
                                                      compareFragments);
         return compareFiles;

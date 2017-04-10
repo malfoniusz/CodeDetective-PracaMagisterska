@@ -3,10 +3,6 @@
     -fx-padding: 3 5;
 }
 
-#column-lines {
-    -fx-alignment: top-right;
-}
-
 #column-matched {
     -fx-alignment: top-center;
 }

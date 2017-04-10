@@ -7,19 +7,20 @@ import javafx.beans.property.SimpleStringProperty;
 public class CompareFiles {
 
     // Column Project
-    private final SimpleStringProperty rProject;
+    private final SimpleStringProperty rBaseName;
 
     // Column FileProject
     private final SimpleStringProperty rFileProject;
+    private String projectName;
     private File fileProject;
-    private String fileNameProject;
-    private int fileLinesProject;
+    private String fileProjectShortPath;
+    private int fileProjectLines;
 
     // Column FileBase
     private final SimpleStringProperty rFileBase;
+    private String baseName;
     private File fileBase;
-    private String fileNameBase;
-    private int fileLinesBase;
+    private int fileBaseLines;
 
     // Column Matched
     private int matchedValue;
@@ -28,18 +29,18 @@ public class CompareFiles {
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<CompareFragments> compareFragments;
 
-    public CompareFiles(String project, File fileProject, int fileLinesProject, File fileBase, int fileLinesBase, int matchedValue, ArrayList<CompareFragments> compareFragments) {
+    public CompareFiles(String projectName, File fileProject, int fileProjectLines, String baseName, File fileBase, int fileBaseLines, int matchedValue, ArrayList<CompareFragments> compareFragments) {
+        this.rBaseName = new SimpleStringProperty(baseName);
+
+        this.projectName = projectName;
         this.fileProject = fileProject;
-        this.fileNameProject = fileProject.getName();
-        this.fileLinesProject = fileLinesProject;
+        this.fileProjectLines = fileProjectLines;
         this.rFileProject = new SimpleStringProperty();
         updateRFileProject();
 
-        this.rProject = new SimpleStringProperty(project);
-
+        this.baseName = baseName;
         this.fileBase = fileBase;
-        this.fileNameBase = fileBase.getName();
-        this.fileLinesBase = fileLinesBase;
+        this.fileBaseLines = fileBaseLines;
         this.rFileBase = new SimpleStringProperty();
         updateRFileBase();
 
@@ -50,12 +51,13 @@ public class CompareFiles {
         this.compareFragments = compareFragments;
     }
 
-    public String getRProject() {
-        return rProject.get();
+    public String getRBaseName() {
+        return rBaseName.get();
     }
 
-    public void setRProject(String value) {
-        rProject.set(value);
+    public void setRBaseName(String value) {
+        rBaseName.set(value);
+        this.baseName = value;
     }
 
 
@@ -65,7 +67,15 @@ public class CompareFiles {
     }
 
     private void updateRFileProject() {
-        rFileProject.set(fileNameProject + " (" + fileLinesProject + ")");
+        rFileProject.set(fileProject.getName() + " (" + fileProjectLines + ")");
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public File getFileProject() {
@@ -74,25 +84,15 @@ public class CompareFiles {
 
     public void setFileProject(File fileProject) {
         this.fileProject = fileProject;
-        this.fileNameProject = fileProject.getName();
         updateRFileProject();
     }
 
-    public String getFileNameProject() {
-        return fileNameProject;
+    public int getFileProjectLines() {
+        return fileProjectLines;
     }
 
-    public void setFileNameProject(String value) {
-        fileNameProject = value;
-        updateRFileProject();
-    }
-
-    public int getFileLinesProject() {
-        return fileLinesProject;
-    }
-
-    public void setFileLinesProject(int value) {
-        fileLinesProject = value;
+    public void setFileProjectLines(int value) {
+        fileProjectLines = value;
         updateRFileProject();
     }
 
@@ -103,7 +103,16 @@ public class CompareFiles {
     }
 
     private void updateRFileBase() {
-        rFileBase.set(fileNameBase + " (" + fileLinesBase + ")");
+        rFileBase.set(fileBase.getName() + " (" + fileBaseLines + ")");
+    }
+
+    public String getBaseName() {
+        return baseName;
+    }
+
+    public void setBaseName(String baseName) {
+        this.baseName = baseName;
+        rBaseName.set(baseName);
     }
 
     public File getFileBase() {
@@ -112,25 +121,15 @@ public class CompareFiles {
 
     public void setFileBase(File fileBase) {
         this.fileBase = fileBase;
-        this.fileNameBase = fileBase.getName();
         updateRFileBase();
     }
 
-    public String getFileNameBase() {
-        return fileNameBase;
+    public int getFileBaseLines() {
+        return fileBaseLines;
     }
 
-    public void setFileNameBase(String value) {
-        fileNameBase = value;
-        updateRFileBase();
-    }
-
-    public int getFileLinesBase() {
-        return fileLinesBase;
-    }
-
-    public void setFileLinesBase(int value) {
-        fileLinesBase = value;
+    public void setFileBaseLines(int value) {
+        fileBaseLines = value;
         updateRFileBase();
     }
 

@@ -1,7 +1,4 @@
 ﻿
-- do CompareFile dodac projectName, baseName
-- poprawic wyswietlanie sciezki do pliku
-
 - zmien nazwe klasy Algorithm na Compare i runAlgorithm() na runCompare()
 - usunac AlgorithmData
 - zaimplementuj ustawienia:
