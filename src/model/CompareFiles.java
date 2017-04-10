@@ -11,16 +11,15 @@ public class CompareFiles {
 
     // Column FileProject
     private final SimpleStringProperty rFileProject;
-    private String projectName;
     private File fileProject;
-    private String fileProjectShortPath;
     private int fileProjectLines;
+    private String fileProjectShortPath;
 
     // Column FileBase
     private final SimpleStringProperty rFileBase;
-    private String baseName;
     private File fileBase;
     private int fileBaseLines;
+    private String fileBaseShortPath;
 
     // Column Matched
     private int matchedValue;
@@ -32,15 +31,15 @@ public class CompareFiles {
     public CompareFiles(String projectName, File fileProject, int fileProjectLines, String baseName, File fileBase, int fileBaseLines, int matchedValue, ArrayList<CompareFragments> compareFragments) {
         this.rBaseName = new SimpleStringProperty(baseName);
 
-        this.projectName = projectName;
         this.fileProject = fileProject;
         this.fileProjectLines = fileProjectLines;
+        this.fileProjectShortPath = fileShortPath(fileProject, projectName);
         this.rFileProject = new SimpleStringProperty();
         updateRFileProject();
 
-        this.baseName = baseName;
         this.fileBase = fileBase;
         this.fileBaseLines = fileBaseLines;
+        this.fileBaseShortPath = fileShortPath(fileBase, baseName);
         this.rFileBase = new SimpleStringProperty();
         updateRFileBase();
 
@@ -51,13 +50,21 @@ public class CompareFiles {
         this.compareFragments = compareFragments;
     }
 
+    private String fileShortPath(File file, String folderName) {
+        String path = file.getPath();
+        int beginIndexBase = path.indexOf(folderName);
+        int endIndexBase = path.indexOf(file.getName());
+        String shortPath = ".\\" + path.substring(beginIndexBase, endIndexBase);
+        return shortPath;
+    }
+
+
     public String getRBaseName() {
         return rBaseName.get();
     }
 
     public void setRBaseName(String value) {
         rBaseName.set(value);
-        this.baseName = value;
     }
 
 
@@ -68,14 +75,6 @@ public class CompareFiles {
 
     private void updateRFileProject() {
         rFileProject.set(fileProject.getName() + " (" + fileProjectLines + ")");
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
     }
 
     public File getFileProject() {
@@ -96,6 +95,14 @@ public class CompareFiles {
         updateRFileProject();
     }
 
+    public String getFileProjectShortPath() {
+        return fileProjectShortPath;
+    }
+
+    public void setFileProjectShortPath(String fileProjectShortPath) {
+        this.fileProjectShortPath = fileProjectShortPath;
+    }
+
 
 
     public String getRFileBase() {
@@ -104,15 +111,6 @@ public class CompareFiles {
 
     private void updateRFileBase() {
         rFileBase.set(fileBase.getName() + " (" + fileBaseLines + ")");
-    }
-
-    public String getBaseName() {
-        return baseName;
-    }
-
-    public void setBaseName(String baseName) {
-        this.baseName = baseName;
-        rBaseName.set(baseName);
     }
 
     public File getFileBase() {
@@ -131,6 +129,14 @@ public class CompareFiles {
     public void setFileBaseLines(int value) {
         fileBaseLines = value;
         updateRFileBase();
+    }
+
+    public String getFileBaseShortPath() {
+        return fileBaseShortPath;
+    }
+
+    public void setFileBaseShortPath(String fileBaseShortPath) {
+        this.fileBaseShortPath = fileBaseShortPath;
     }
 
 
