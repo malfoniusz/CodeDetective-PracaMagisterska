@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class TokenProject {
 
     private File directory;
+    private String name;
     private ArrayList<TokenFile> tokenFiles;
 
     public TokenProject(File directory, ArrayList<TokenFile> tokenFiles) {
         this.directory = directory;
+        this.name = directory.getName();
         this.tokenFiles = tokenFiles;
     }
 
@@ -31,6 +33,14 @@ public class TokenProject {
 
     public void setDirectory(File directory) {
         this.directory = directory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ArrayList<TokenFile> getTokenFiles() {

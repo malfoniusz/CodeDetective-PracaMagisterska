@@ -1,10 +1,9 @@
 package model.tokenization;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
+
+import staticc.TotalLines;
 
 public class TokenFile {
 
@@ -14,24 +13,8 @@ public class TokenFile {
 
     public TokenFile(File file, ArrayList<TokenLine> tokenLines) {
         this.file = file;
-        this.totalLines = totalLines(this.file);
+        this.totalLines = TotalLines.totalLines(this.file);
         this.tokenLines = tokenLines;
-    }
-
-    private int totalLines(File file) {
-        int totalLines = 0;
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            while (reader.readLine() != null) {
-                totalLines++;
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return -1;
-        }
-
-        return totalLines;
     }
 
     @Override

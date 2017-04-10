@@ -19,6 +19,7 @@ import model.tokenization.TokenProjects;
 
 public final class Tokenization {
 
+    final static boolean USE_TOKEN_UNKNOWN = false;
     final static boolean SKIP_ARG_IN_COMPOUND_STATEMENTS = true;
 
     public static TokenFile tokenization(File file) {
@@ -40,6 +41,7 @@ public final class Tokenization {
         return new TokenFile(normalizedCode.getFile(), tokenLines);
     }
 
+    @SuppressWarnings("unused")
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
@@ -57,7 +59,7 @@ public final class Tokenization {
 
         tokens.addAll(othersTokenization(line));
 
-        if (tokens.isEmpty()) {
+        if (USE_TOKEN_UNKNOWN && tokens.isEmpty()) {
             tokens.add(Token.UNKNOWN);
         }
 

@@ -1,41 +1,44 @@
 ﻿
+- poprawic wyswietlanie sciezki do pliku
+- poprawic obliczanie podobieństwa; totalLines = number of tokenized lines
+- zmien nazwe klasy Algorithm na Compare i runAlgorithm() na runCompare()
+- usunac AlgorithmData
+- zaimplementuj ustawienia:
+    + wybór minimalnej długości łańcuchów
+    + wybór minimalnej liczby podobnych kolejnych tokenów
+    + zapamiętanie ustawień i możliwość ich modyfikacji
+- poczytac o algorytmie Karpa-Rabina
+
 4. Algorytm:
 - algorytm porównujący:
-    + zasada działania:
-        - z pary plików otrzymujemy dwa gigantyczne ciągi tokenów
-        - szukamy takich samych fragmentów tokenów pomiędzy obydwoma ciągami, np. Rabin–Karp algorithm - porównać mniejszy string z większym, Rabin fingerprint, Dynamic pattern matching and hashing to B buckets
-        - przeszukujemy gigantyczne ciągi i osobno zliczamy liczbę podobnych linii kodu (puste linii lub zawierające tylko nawias klamrowy, nie zaliczać do podobnych linii)
+    + np. Karp-Rabin algorithm - porównać mniejszy string z większym, Rabin fingerprint, Dynamic pattern matching and hashing to B buckets
     + bierze pod uwagę minimalną długość fragmentu
-    + raz znalezione identyczne tokeny, nie mogą być użyte do dalszych porównań
-    + bierze pod uwagę procentowe podobieństwo fragmentów (niepodobny kod na początku i końcu fragmentu jest pomijany)
-    + zwraca dane (numery linii z podobnymi fragmentami kodów)
-- (w przypadku zbyt dużej liczby fałszywych wyników):
-    + sprecyzować tokeny: NUMBER - NUMBER_WHOLE, NUMBER_DECIMAL - INT, LONG, FLOAT, DOUBLE
-    + sprawdzać argumenty w definiowanych i wywoływanych funkcjach i klasach - sprawdzać również kolejność argumentów
-    + sprawdzać argumenty w warunkach, np. if (i < 10), while (x == 0)
-- opcje:
-    + wybór minimalnej długości łańcuchów lub wybór minimalnej liczby podobnych kolejnych tokenów
-    + wybór procentu podobieństwa łańcuchów
-    + wyświetlanie tylko par plików z minimalnym procentem podobieństwa
-- jesli token UNKNOWN nie jest uzywany to wyrzucic linijki z tym tokenem na procesie normalizacji
-- help - opis wszystkiego m.in. kolumn tabel
+    + raz znalezione tokeny, nie mogą być użyte ponownie (w obydwu porównywanych plikach - UWAGA przy usuwaniu, żeby nie traktowało części kodu z przed i po usunięciu jako spójny)
 
 
 5. Testy
-- test dla tokenizacji:
-    + scalic kilka plikow z roznych zrodel w jedne plik z kilkoma tysiacami linii kodu
-    + umiescic ten plik w projekcie
-    + przygotowac test tokenizacji
+- napisać testy:
+    + normalizacji kodu
+    + tokenizacji:
+        - scalic kilka plikow z roznych zrodel w jedne plik z kilkoma tysiacami linii kodu
+        - umiescic ten plik w projekcie
+        - przygotowac test tokenizacji
+        - wykorzystać token UNKNOWN
+    + wykrywania plagiatu
 
 
-6. Rozbudowa:
-- zmniejszyć interfejs
-- zmiana ustawień np. minimalna długość fragmentu
-- wybor tokenów jakie mają być używane - UWAGA przy wyłączaniu tokenów wpływających na wykrywanie funkcji i operatorów np. arytmentycznych 
-- modyfikacje tokenizacji
-	+ ogólna np. LICZBA = float, double, int, long, short
-	+ prezycyjna np. INT = int; class(int a, float b) - rozróżniać argumenty i kolejność argumentów jest ustalana na podstawie kolejności sprawdzania typów argumentów
-	+ "branie/nie branie" pod uwagę początek { i koniec } np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
-	+ "branie/nie branie" pod uwagę argumentow w np. if(), for(), while()
-	+ "branie/nie branie" pod uwage argumentow w definicjach u wywolaniach funkcji 
-- zmodyfikowac algorytm karpa-rabina (zeby bylo cos zrobionego wlasnego w tej pracy)
+6. Rodzaje tokenizacji:
+- wybor tokenów jakie mają być używane - UWAGA przy wyłączaniu tokenów wpływających na wykrywanie funkcji i operatorów np. arytmentycznych
+- rodzaje:
+    + ogólna np. LICZBA = float, double, int, long, short
+    + prezycyjna np. INT = int; class(int a, float b) - rozróżniać argumenty i kolejność argumentów jest ustalana na podstawie kolejności sprawdzania typów argumentów
+    + "branie/nie branie" pod uwagę początek { i koniec } np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
+    + "branie/nie branie" pod uwagę argumentow w np. if(), for(), while()
+    + "branie/nie branie" pod uwage argumentow w definicjach u wywolaniach funkcji 
+
+
+7. Rozbudowa:
+- help - opis wszystkiego m.in. co oznaczają poszczególne kolumny tabel
+- branie pod uwagę procentowego podobieństwa fragmentów (niepodobny kod na początku i końcu fragmentu jest pomijany) + zaimplementować ustawienia
+- wyświetlanie tylko par plików z minimalnym procentem podobieństwa
+- zmodyfikowac algorytm karpa-rabina
