@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import model.AlgorithmData;
@@ -69,46 +68,35 @@ public class Algorithm {
             return null;
         }
 
-        int similarity = calculateSimilarity(compareFragments, projectFile, baseFile);
+        int similarity = calculateSimilarity(compareFragments, projectFile.getTotalTokenLines(), baseFile.getTotalTokenLines());
 
         CompareFiles compareFiles = new CompareFiles(projectName,
-                                                     projectFile.getFile(),
-                                                     projectFile.getTotalLines(),
                                                      baseFile.getFile(),
                                                      baseFile.getTotalLines(),
+                                                     projectFile.getFile(),
+                                                     projectFile.getTotalLines(),
                                                      similarity,
                                                      compareFragments);
         return compareFiles;
     }
 
-    private int calculateSimilarity(ArrayList<CompareFragments> compareFragments, TokenFile projectFile, TokenFile baseFile) {
-        if (compareFragments.isEmpty()) {
-            return 0;
-        }
-
-        // UWAGA pobranie indexu 0
-        File file1 = compareFragments.get(0).getFileMarked1().getFile();
-        File file2 = compareFragments.get(0).getFileMarked2().getFile();
-
-        int total1 = 0;
-        int total2 = 0;
+    private int calculateSimilarity(ArrayList<CompareFragments> compareFragments, int totalTokenLinesProject, int totalTokenLinesBase) {
+        int totalProject = 0;
+        int totalBase = 0;
         for (CompareFragments compareFragment : compareFragments) {
-            FileMarked fileMarked1 = compareFragment.getFileMarked1();
-            FileMarked fileMarked2 = compareFragment.getFileMarked2();
+            FileMarked fileMarkedProject = compareFragment.getFileMarkedProject();
+            FileMarked fileMarkedBase = compareFragment.getFileMarkedBase();
 
-            int difference1 = fileMarked1.getToLine() - fileMarked1.getFromLine();
-            total1 += difference1;
-            int difference2 = fileMarked2.getToLine() - fileMarked2.getFromLine();
-            total2 += difference2;
+            int differenceProject = fileMarkedProject.getToLine() - fileMarkedProject.getFromLine();
+            totalProject += differenceProject;
+            int differenceBase = fileMarkedBase.getToLine() - fileMarkedBase.getFromLine();
+            totalBase += differenceBase;
         }
 
-        int totalTokenLines1 = (projectFile.getFile().equals(file1) ? projectFile.getTotalTokenLines() : baseFile.getTotalTokenLines());
-        int totalTokenLines2 = (projectFile.getFile().equals(file2) ? projectFile.getTotalTokenLines() : baseFile.getTotalTokenLines());
+        int similarityProject = (totalProject*100) / totalTokenLinesProject;
+        int similarityBase = (totalBase*100) / totalTokenLinesBase;
 
-        int similarity1 = (total1*100) / totalTokenLines1;
-        int similarity2 = (total2*100) / totalTokenLines2;
-
-        int higher = (similarity1 > similarity2 ? similarity1 : similarity2);
+        int higher = (similarityProject > similarityBase ? similarityProject : similarityBase);
         return higher;
     }
 
@@ -117,10 +105,10 @@ public class Algorithm {
 
         // TODO: algorytm
 
-        FileMarked fileMarked1 = new FileMarked(projectFile.getFile(), 20, 38);
-        FileMarked fileMarked2 = new FileMarked(baseFile.getFile(), 15, 32);
-        CompareFragments fragments1 = new CompareFragments(fileMarked1, fileMarked2);
-        compareFragments.add(fragments1);
+        FileMarked fileMarkedProject = new FileMarked(projectFile.getFile(), 20, 38);
+        FileMarked fileMarkedBase = new FileMarked(baseFile.getFile(), 15, 32);
+        CompareFragments fragments = new CompareFragments(fileMarkedProject, fileMarkedBase);
+        compareFragments.add(fragments);
 
         return compareFragments;
     }

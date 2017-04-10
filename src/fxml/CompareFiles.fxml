@@ -5,9 +5,9 @@
 
 <TableView id="table-files" fx:id="compareFiles" stylesheets="@../css/CompareFiles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CompareFilesController"> 
   <columns>
-    <TableColumn fx:id="iProject" prefWidth="107.0" text="File1 Project" />
-    <TableColumn id="column-file1" fx:id="iFile1" prefWidth="150.0" text="File1 (Total lines)" />
-    <TableColumn id="column-file2" fx:id="iFile2" prefWidth="150.0" text="File2 (Total lines)" />
-    <TableColumn id="column-matched" fx:id="iMatched" prefWidth="89.0" sortType="DESCENDING" text="Matched" />
+    <TableColumn fx:id="iProject" prefWidth="107.0" text="BaseProject" />
+    <TableColumn fx:id="iFileProject" prefWidth="150.0" text="FileBase (Total lines)" />
+    <TableColumn fx:id="iFileBase" prefWidth="150.0" text="FileProject (Total lines)" />
+    <TableColumn fx:id="iMatched" prefWidth="89.0" sortType="DESCENDING" text="Matched" />
   </columns>
 </TableView>

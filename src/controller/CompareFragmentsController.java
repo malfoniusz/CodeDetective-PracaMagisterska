@@ -21,15 +21,15 @@ public class CompareFragmentsController implements Initializable {
     private CompareCodesController compareCodesController;
 
     @FXML private TableView<CompareFragments> compareFragments;
-    @FXML private TableColumn<CompareFragments, String> iFileFragment1;
-    @FXML private TableColumn<CompareFragments, String> iFileFragment2;
+    @FXML private TableColumn<CompareFragments, String> iFileFragmentProject;
+    @FXML private TableColumn<CompareFragments, String> iFileFragmentBase;
 
     private final ObservableList<CompareFragments> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        iFileFragment1.setCellValueFactory(new PropertyValueFactory<CompareFragments, String>("rFileFragment1"));
-        iFileFragment2.setCellValueFactory(new PropertyValueFactory<CompareFragments, String>("rFileFragment2"));
+        iFileFragmentProject.setCellValueFactory(new PropertyValueFactory<CompareFragments, String>("rFileFragmentProject"));
+        iFileFragmentBase.setCellValueFactory(new PropertyValueFactory<CompareFragments, String>("rFileFragmentBase"));
 
         compareFragments.setPlaceholder(new Label(""));
         compareFragments.setItems(data);
@@ -43,7 +43,7 @@ public class CompareFragmentsController implements Initializable {
             tableRow.setOnMouseClicked(event -> {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     CompareFragments compareFragments = tableRow.getItem();
-                    compareCodesController.setCodes(compareFragments.getFileMarked1(), compareFragments.getFileMarked2());
+                    compareCodesController.setCodes(compareFragments.getFileMarkedProject(), compareFragments.getFileMarkedBase());
                 }
             });
             return tableRow ;
@@ -58,10 +58,10 @@ public class CompareFragmentsController implements Initializable {
         Label headerLabel = new Label(title);
 
         if (columnNumber == 1) {
-            iFileFragment1.setGraphic(headerLabel);
+            iFileFragmentProject.setGraphic(headerLabel);
         }
         else if (columnNumber == 2) {
-            iFileFragment2.setGraphic(headerLabel);
+            iFileFragmentBase.setGraphic(headerLabel);
         }
     }
 

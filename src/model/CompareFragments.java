@@ -4,57 +4,57 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class CompareFragments {
 
-    // Column File1Fragment
-    private final SimpleStringProperty rFileFragment1;
-    private FileMarked fileMarked1;
+    // Column FileFragmentProject
+    private final SimpleStringProperty rFileFragmentProject;
+    private FileMarked fileMarkedProject;
 
-    // Column File2Fragment
-    private final SimpleStringProperty rFileFragment2;
-    private FileMarked fileMarked2;
+    // Column FileFragmentBase
+    private final SimpleStringProperty rFileFragmentBase;
+    private FileMarked fileMarkedBase;
 
-    public CompareFragments(FileMarked fileMarked1, FileMarked fileMarked2) {
-        this.fileMarked1 = fileMarked1;
-        this.rFileFragment1 = new SimpleStringProperty();
-        updateRFileFragment1();
+    public CompareFragments(FileMarked fileMarkedProject, FileMarked fileMarkedBase) {
+        this.fileMarkedProject = fileMarkedProject;
+        this.rFileFragmentProject = new SimpleStringProperty();
+        updateRFileFragmentProject();
 
-        this.fileMarked2 = fileMarked2;
-        this.rFileFragment2 = new SimpleStringProperty();
-        updateRFileFragment2();
+        this.fileMarkedBase = fileMarkedBase;
+        this.rFileFragmentBase = new SimpleStringProperty();
+        updateRFileFragmentBase();
     }
 
-    public String getRFileFragment1() {
-        return rFileFragment1.get();
+    public String getRFileFragmentProject() {
+        return rFileFragmentProject.get();
     }
 
-    private void updateRFileFragment1() {
-        this.rFileFragment1.set(fileMarked1.getFile().getName() + " [" + fileMarked1.getFromLine() + "-" + fileMarked1.getToLine() + "]");
+    private void updateRFileFragmentProject() {
+        this.rFileFragmentProject.set(fileMarkedProject.getFile().getName() + " [" + fileMarkedProject.getFromLine() + "-" + fileMarkedProject.getToLine() + "]");
     }
 
-    public FileMarked getFileMarked1() {
-        return fileMarked1;
+    public FileMarked getFileMarkedProject() {
+        return fileMarkedProject;
     }
 
-    public void setFileMarked1(FileMarked fileMarked1) {
-        this.fileMarked1 = fileMarked1;
-        updateRFileFragment1();
+    public void setFileMarkedProject(FileMarked fileMarkedProject) {
+        this.fileMarkedProject = fileMarkedProject;
+        updateRFileFragmentProject();
     }
 
 
-    public String getRFileFragment2() {
-        return rFileFragment2.get();
+    public String getRFileFragmentBase() {
+        return rFileFragmentBase.get();
     }
 
-    private void updateRFileFragment2() {
-        this.rFileFragment2.set(fileMarked2.getFile().getName() + " [" + fileMarked2.getFromLine() + "-" + fileMarked2.getToLine() + "]");
+    private void updateRFileFragmentBase() {
+        this.rFileFragmentBase.set(fileMarkedBase.getFile().getName() + " [" + fileMarkedBase.getFromLine() + "-" + fileMarkedBase.getToLine() + "]");
     }
 
-    public FileMarked getFileMarked2() {
-        return fileMarked2;
+    public FileMarked getFileMarkedBase() {
+        return fileMarkedBase;
     }
 
-    public void setFileMarked2(FileMarked fileMarked2) {
-        this.fileMarked2 = fileMarked2;
-        updateRFileFragment2();
+    public void setFileMarkedBase(FileMarked fileMarkedBase) {
+        this.fileMarkedBase = fileMarkedBase;
+        updateRFileFragmentBase();
     }
 
 }

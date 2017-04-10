@@ -5,7 +5,7 @@
 
 <TableView fx:id="compareFragments" prefHeight="200.0" stylesheets="@../css/CompareFragments.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CompareFragmentsController">
   <columns>
-    <TableColumn fx:id="iFileFragment1" prefWidth="247.0" />
-    <TableColumn fx:id="iFileFragment2" minWidth="0.0" prefWidth="247.0" />
+    <TableColumn fx:id="iFileFragmentProject" prefWidth="247.0" />
+    <TableColumn fx:id="iFileFragmentBase" minWidth="0.0" prefWidth="247.0" />
   </columns>
 </TableView>

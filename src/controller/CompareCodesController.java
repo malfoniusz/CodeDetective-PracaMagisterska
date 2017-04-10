@@ -19,27 +19,27 @@ import model.FileMarked;
 
 public class CompareCodesController implements Initializable {
 
-    @FXML private ScrollPane iScrollPane1;
-    @FXML private ScrollPane iScrollPane2;
+    @FXML private ScrollPane iScrollPaneProject;
+    @FXML private ScrollPane iScrollPaneBase;
 
-    @FXML private TextFlow iCode1;
-    @FXML private TextFlow iCode2;
+    @FXML private TextFlow iCodeProject;
+    @FXML private TextFlow iCodeBase;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void setCodes(FileMarked fileMarked1, FileMarked fileMarked2) {
-        setCode(iCode1, fileMarked1);
-        setCode(iCode2, fileMarked2);
+    public void setCodes(FileMarked fileMarkedProject, FileMarked fileMarkedBase) {
+        setCode(iCodeProject, fileMarkedProject);
+        setCode(iCodeBase, fileMarkedBase);
 
-        scrollToLine(fileMarked1.getFile(), fileMarked1.getFromLine(), iScrollPane1, iCode1);
-        scrollToLine(fileMarked2.getFile(), fileMarked2.getFromLine(), iScrollPane2, iCode2);
+        scrollToLine(fileMarkedProject.getFile(), fileMarkedProject.getFromLine(), iScrollPaneProject, iCodeProject);
+        scrollToLine(fileMarkedBase.getFile(), fileMarkedBase.getFromLine(), iScrollPaneBase, iCodeBase);
     }
 
     public void clearCodes() {
-        iCode1.getChildren().clear();
-        iCode2.getChildren().clear();
+        iCodeProject.getChildren().clear();
+        iCodeBase.getChildren().clear();
     }
 
     // UWAGA: okno musi być zainicializowane przed wywołaniem tej funkcji
@@ -69,7 +69,7 @@ public class CompareCodesController implements Initializable {
         File file = fileMarked.getFile();
         int fromLine = fileMarked.getFromLine();
         int toLine = fileMarked.getToLine();
-        
+
         Text textBefore = read(file, 1, fromLine - 1);
 
         Text textBetween = read(file, fromLine, toLine);
