@@ -1,6 +1,5 @@
 ﻿
 - poprawic wyswietlanie sciezki do pliku
-- poprawic obliczanie podobieństwa; totalLines = number of tokenized lines
 - zmien nazwe klasy Algorithm na Compare i runAlgorithm() na runCompare()
 - usunac AlgorithmData
 - zaimplementuj ustawienia:

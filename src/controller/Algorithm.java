@@ -11,7 +11,6 @@ import model.tokenization.TokenFile;
 import model.tokenization.TokenProject;
 import model.tokenization.TokenProjects;
 import staticc.Tokenization;
-import staticc.TotalLines;
 
 public class Algorithm {
 
@@ -70,7 +69,7 @@ public class Algorithm {
             return null;
         }
 
-        int similarity = calculateSimilarity(compareFragments);
+        int similarity = calculateSimilarity(compareFragments, projectFile, baseFile);
 
         CompareFiles compareFiles = new CompareFiles(projectName,
                                                      projectFile.getFile(),
@@ -82,7 +81,7 @@ public class Algorithm {
         return compareFiles;
     }
 
-    private int calculateSimilarity(ArrayList<CompareFragments> compareFragments) {
+    private int calculateSimilarity(ArrayList<CompareFragments> compareFragments, TokenFile projectFile, TokenFile baseFile) {
         if (compareFragments.isEmpty()) {
             return 0;
         }
@@ -90,9 +89,6 @@ public class Algorithm {
         // UWAGA pobranie indexu 0
         File file1 = compareFragments.get(0).getFileMarked1().getFile();
         File file2 = compareFragments.get(0).getFileMarked2().getFile();
-
-        int totalLines1 = TotalLines.totalLines(file1);
-        int totalLines2 = TotalLines.totalLines(file2);
 
         int total1 = 0;
         int total2 = 0;
@@ -106,8 +102,11 @@ public class Algorithm {
             total2 += difference2;
         }
 
-        int similarity1 = (total1*100) / totalLines1;
-        int similarity2 = (total2*100) / totalLines2;
+        int totalTokenLines1 = (projectFile.getFile().equals(file1) ? projectFile.getTotalTokenLines() : baseFile.getTotalTokenLines());
+        int totalTokenLines2 = (projectFile.getFile().equals(file2) ? projectFile.getTotalTokenLines() : baseFile.getTotalTokenLines());
+
+        int similarity1 = (total1*100) / totalTokenLines1;
+        int similarity2 = (total2*100) / totalTokenLines2;
 
         int higher = (similarity1 > similarity2 ? similarity1 : similarity2);
         return higher;
