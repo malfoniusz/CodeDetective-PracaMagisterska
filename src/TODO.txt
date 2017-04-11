@@ -1,10 +1,9 @@
 ﻿
-- zmien nazwe klasy Algorithm na Compare i runAlgorithm() na runCompare()
-- usunac AlgorithmData
 - zaimplementuj ustawienia:
     + wybór minimalnej długości łańcuchów
     + wybór minimalnej liczby podobnych kolejnych tokenów
     + zapamiętanie ustawień i możliwość ich modyfikacji
+    + dołączenie ustawień do algorytmu
 - poczytac o algorytmie Karpa-Rabina
 
 4. Algorytm:
@@ -37,6 +36,7 @@
 
 7. Rozbudowa:
 - help - opis wszystkiego m.in. co oznaczają poszczególne kolumny tabel
+- CompareFiles - wyświetlić długość najdłuższego znalezionego podobnego fragmentu
 - branie pod uwagę procentowego podobieństwa fragmentów (niepodobny kod na początku i końcu fragmentu jest pomijany) + zaimplementować ustawienia
 - wyświetlanie tylko par plików z minimalnym procentem podobieństwa
 - zmodyfikowac algorytm karpa-rabina

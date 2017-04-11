@@ -15,14 +15,14 @@ public class MainController implements Initializable {
     @FXML private CompareFragmentsController compareFragmentsController;
     @FXML private CompareCodesController compareCodesController;
 
-    private Algorithm algorithm;
+    private Compare compare;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        algorithm = new Algorithm();
+        compare = new Compare();
 
         menuController.setMainController(this);
-        menuController.setAlgorithm(algorithm);
+        menuController.setCompare(compare);
         menuController.updateIItemStart();
 
         compareFilesController.setCompareFragmentsController(compareFragmentsController);
@@ -32,7 +32,7 @@ public class MainController implements Initializable {
     }
 
     public void runAlgorithm() {
-        ArrayList<CompareFiles> compareFiles = algorithm.runAlgorithm();
+        ArrayList<CompareFiles> compareFiles = compare.runCompare();
 
         if (compareFiles != null) {
             compareFilesController.setData(compareFiles);
@@ -47,12 +47,12 @@ public class MainController implements Initializable {
         return this.compareFilesController;
     }
 
-    public Algorithm getAlgorithm() {
-        return algorithm;
+    public Compare getCompare() {
+        return compare;
     }
 
-    public void setAlgorithm(Algorithm algorithm) {
-        this.algorithm = algorithm;
+    public void setCompare(Compare compare) {
+        this.compare = compare;
     }
 
 }

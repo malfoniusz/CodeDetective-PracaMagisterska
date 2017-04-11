@@ -2,31 +2,31 @@ package controller;
 
 import java.util.ArrayList;
 
-import model.AlgorithmData;
 import model.CompareFiles;
 import model.CompareFragments;
 import model.FileMarked;
+import model.Settings;
 import model.tokenization.TokenFile;
 import model.tokenization.TokenProject;
 import model.tokenization.TokenProjects;
 import staticc.Tokenization;
 
-public class Algorithm {
+public class Compare {
 
-    private AlgorithmData algorithmData;
+    private Settings settings;
 
-    public Algorithm() {
+    public Compare() {
         super();
-        algorithmData = new AlgorithmData();
+        settings = new Settings();
     }
 
-    public ArrayList<CompareFiles> runAlgorithm() {
-        if (algorithmData.getProject() == null || algorithmData.getProjects() == null) {
+    public ArrayList<CompareFiles> runCompare() {
+        if (settings.getProject() == null || settings.getBase() == null) {
             return null;
         }
 
-        TokenProject tokenProject = Tokenization.tokenProject(algorithmData.getProject());
-        TokenProjects baseProjects = Tokenization.tokenProjects(algorithmData.getProjects());
+        TokenProject tokenProject = Tokenization.tokenProject(settings.getProject());
+        TokenProjects baseProjects = Tokenization.tokenProjects(settings.getBase());
 
         ArrayList<CompareFiles> compareFiles = compareMain(tokenProject, baseProjects);
         return compareFiles;
@@ -114,12 +114,12 @@ public class Algorithm {
         return compareFragments;
     }
 
-    public AlgorithmData getAlgorithmData() {
-        return algorithmData;
+    public Settings getSettings() {
+        return settings;
     }
 
-    public void setAlgorithmData(AlgorithmData algorithmData) {
-        this.algorithmData = algorithmData;
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 
 }

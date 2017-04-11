@@ -18,7 +18,7 @@ public class MenuController implements Initializable {
     @FXML private MenuItem iItemStart;
 
     private MainController mainController;
-    private Algorithm algorithm;
+    private Compare compare;
     private Stage mainStage;
 
     @Override
@@ -37,7 +37,7 @@ public class MenuController implements Initializable {
 
         if (directory != null) {
             Project project = new Project(directory);
-            algorithm.getAlgorithmData().setProject(project);
+            compare.getSettings().setProject(project);
             updateIItemStart();
         }
     }
@@ -48,7 +48,7 @@ public class MenuController implements Initializable {
 
         if (directory != null) {
             Projects projects = new Projects(directory);
-            algorithm.getAlgorithmData().setProjects(projects);
+            compare.getSettings().setBase(projects);
             updateIItemStart();
         }
     }
@@ -60,7 +60,7 @@ public class MenuController implements Initializable {
     }
 
     public void updateIItemStart() {
-        if (algorithm.getAlgorithmData().getProject() != null && algorithm.getAlgorithmData().getProjects() != null) {
+        if (compare.getSettings().getProject() != null && compare.getSettings().getBase() != null) {
             iItemStart.setDisable(false);
         } else {
             iItemStart.setDisable(true);
@@ -71,8 +71,8 @@ public class MenuController implements Initializable {
         this.mainController = mainController;
     }
 
-    public void setAlgorithm(Algorithm algorithm) {
-        this.algorithm = algorithm;
+    public void setCompare(Compare compare) {
+        this.compare = compare;
     }
 
     public void setMainStage(Stage mainStage) {

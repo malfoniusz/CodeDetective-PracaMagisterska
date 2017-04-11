@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import controller.Algorithm;
+import controller.Compare;
 import controller.CompareFilesController;
 import controller.MainController;
 import controller.MenuController;
@@ -65,18 +65,18 @@ public class Main extends Application {
     final String PATH_BASE = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\";
     private void testMain() {
         Project project = new Project(new File(PATH_PROJECT));
-        Projects projects = new Projects(new File(PATH_BASE));
+        Projects base = new Projects(new File(PATH_BASE));
 
-        Algorithm algorithm = mainController.getAlgorithm();
-        algorithm.getAlgorithmData().setProject(project);
-        algorithm.getAlgorithmData().setProjects(projects);
+        Compare compare = mainController.getCompare();
+        compare.getSettings().setProject(project);
+        compare.getSettings().setBase(base);
 
         // Print tokenization
         //AlgorithmData algorithmData = algorithm.getAlgorithmData();
         //System.out.println(Tokenization.toStringTokenization(algorithmData.getProject()));
         //System.out.println(Tokenization.toStringTokenization(algorithmData.getProjects()));
 
-        ArrayList<CompareFiles> compareFiles = algorithm.runAlgorithm();
+        ArrayList<CompareFiles> compareFiles = compare.runCompare();
         //ArrayList<CompareFiles> compareFiles = testCompareFiles();
         CompareFilesController compareFilesController = mainController.getCompareFilesController();
         if (compareFiles != null) {
