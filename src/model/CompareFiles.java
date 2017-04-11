@@ -2,6 +2,7 @@ package model;
 import java.io.File;
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CompareFiles {
@@ -22,8 +23,7 @@ public class CompareFiles {
     private String fileBaseShortPath;
 
     // Column Matched
-    private int matchedValue;
-    private final SimpleStringProperty rMatched;
+    private final SimpleIntegerProperty rMatched;
 
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<CompareFragments> compareFragments;
@@ -43,9 +43,7 @@ public class CompareFiles {
         this.rFileBase = new SimpleStringProperty();
         updateRFileBase();
 
-        this.matchedValue = matchedValue;
-        this.rMatched = new SimpleStringProperty();
-        updateRMatched();
+        this.rMatched = new SimpleIntegerProperty(matchedValue);
 
         this.compareFragments = compareFragments;
     }
@@ -141,21 +139,12 @@ public class CompareFiles {
 
 
 
-    public String getRMatched() {
+    public int getRMatched() {
         return rMatched.get();
     }
 
-    private void updateRMatched() {
-        rMatched.set(matchedValue + "%");;
-    }
-
-    public int getMatchedValue() {
-        return matchedValue;
-    }
-
-    public void setMatchedValue(int value) {
-        matchedValue = value;
-        updateRMatched();
+    public void setRMatched(int matchedValue) {
+        rMatched.set(matchedValue);;
     }
 
 
