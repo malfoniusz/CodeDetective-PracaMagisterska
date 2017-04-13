@@ -1,38 +1,33 @@
-package controller;
+package staticc;
 
 import java.util.ArrayList;
 
 import model.CompareFiles;
 import model.CompareFragments;
 import model.FileMarked;
-import model.Settings;
 import model.tokenization.TokenFile;
 import model.tokenization.TokenProject;
 import model.tokenization.TokenProjects;
-import staticc.Tokenization;
 
 public class Compare {
 
-    private Settings settings;
-
-    public Compare() {
-        super();
-        settings = new Settings();
+    private Compare() {
+        // Nothing
     }
 
-    public ArrayList<CompareFiles> runCompare() {
-        if (settings.getProject() == null || settings.getBase() == null) {
+    public static ArrayList<CompareFiles> runCompare() {
+        if (Settings.getProject() == null || Settings.getBase() == null) {
             return null;
         }
 
-        TokenProject tokenProject = Tokenization.tokenProject(settings.getProject());
-        TokenProjects baseProjects = Tokenization.tokenProjects(settings.getBase());
+        TokenProject tokenProject = Tokenization.tokenProject(Settings.getProject());
+        TokenProjects baseProjects = Tokenization.tokenProjects(Settings.getBase());
 
         ArrayList<CompareFiles> compareFiles = compareMain(tokenProject, baseProjects);
         return compareFiles;
     }
 
-    private ArrayList<CompareFiles> compareMain(TokenProject tokenProject, TokenProjects baseProjects) {
+    private static ArrayList<CompareFiles> compareMain(TokenProject tokenProject, TokenProjects baseProjects) {
         ArrayList<CompareFiles> compareFiles = new ArrayList<>();
 
         for (TokenProject baseProject : baseProjects.getTokenProjects()) {
@@ -43,7 +38,7 @@ public class Compare {
         return compareFiles;
     }
 
-    private ArrayList<CompareFiles> compareProjects(TokenProject project, TokenProject baseProject) {
+    private static ArrayList<CompareFiles> compareProjects(TokenProject project, TokenProject baseProject) {
         ArrayList<CompareFiles> compareProjects = new ArrayList<>();
 
         ArrayList<TokenFile> projectFiles = project.getTokenFiles();
@@ -62,7 +57,7 @@ public class Compare {
         return compareProjects;
     }
 
-    private CompareFiles compareFiles(String projectName, TokenFile projectFile, String baseName, TokenFile baseFile) {
+    private static CompareFiles compareFiles(String projectName, TokenFile projectFile, String baseName, TokenFile baseFile) {
         ArrayList<CompareFragments> compareFragments = algorithm(projectFile, baseFile);
         if (compareFragments.isEmpty()) {
             return null;
@@ -81,7 +76,7 @@ public class Compare {
         return compareFiles;
     }
 
-    private int calculateSimilarity(ArrayList<CompareFragments> compareFragments, int totalTokenLinesProject, int totalTokenLinesBase) {
+    private static int calculateSimilarity(ArrayList<CompareFragments> compareFragments, int totalTokenLinesProject, int totalTokenLinesBase) {
         int totalProject = 0;
         int totalBase = 0;
         for (CompareFragments compareFragment : compareFragments) {
@@ -101,7 +96,7 @@ public class Compare {
         return higher;
     }
 
-    private ArrayList<CompareFragments> algorithm(TokenFile projectFile, TokenFile baseFile) {
+    private static ArrayList<CompareFragments> algorithm(TokenFile projectFile, TokenFile baseFile) {
         ArrayList<CompareFragments> compareFragments = new ArrayList<>();
 
         // TODO: algorytm
@@ -112,14 +107,6 @@ public class Compare {
         compareFragments.add(fragments);
 
         return compareFragments;
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public void setSettings(Settings settings) {
-        this.settings = settings;
     }
 
 }

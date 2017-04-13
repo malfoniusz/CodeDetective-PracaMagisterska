@@ -11,6 +11,10 @@ import model.tokenization.NormalizedCode;
 
 public final class Normalization {
 
+    private Normalization() {
+
+    }
+
     public static NormalizedCode codeNormalization(File file) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             ArrayList<CodeLine> codeLines = new ArrayList<>();

@@ -19,8 +19,12 @@ import model.tokenization.TokenProjects;
 
 public final class Tokenization {
 
-    final static boolean USE_TOKEN_UNKNOWN = false;
-    final static boolean SKIP_ARG_IN_COMPOUND_STATEMENTS = true;
+    static final boolean USE_TOKEN_UNKNOWN = false;
+    static final boolean SKIP_ARG_IN_COMPOUND_STATEMENTS = true;
+
+    private Tokenization() {
+
+    }
 
     public static TokenFile tokenization(File file) {
         NormalizedCode normalizedCode = Normalization.codeNormalization(file);

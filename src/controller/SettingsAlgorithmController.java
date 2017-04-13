@@ -10,7 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.stage.Stage;
 import model.ConsecutiveOption;
-import model.Settings;
+import staticc.Settings;
 
 public class SettingsAlgorithmController implements Initializable {
 
@@ -19,24 +19,20 @@ public class SettingsAlgorithmController implements Initializable {
     @FXML private RadioButton iRadioLines;
     @FXML private RadioButton iRadioTokens;
 
-    private Settings settings;
     private Stage stage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.settings = new Settings();
-
-        int iSpinnerLinesValue = settings.getConsecutiveLinesValue();
+        int iSpinnerLinesValue = Settings.getConsecutiveLinesValue();
         iSpinnerLines.getValueFactory().setValue(iSpinnerLinesValue);
 
-        int iSpinnerTokensValue = settings.getConsecutiveTokensValue();
+        int iSpinnerTokensValue = Settings.getConsecutiveTokensValue();
         iSpinnerTokens.getValueFactory().setValue(iSpinnerTokensValue);
 
-        String consecutiveOption = settings.getConsecutiveOption();
+        String consecutiveOption = Settings.getConsecutiveOption();
         if (consecutiveOption.equals(ConsecutiveOption.LINES.toString())) {
             iRadioLines.setSelected(true);
             radioLinesSelected();
-
         }
         else {
             iRadioTokens.setSelected(true);
@@ -67,13 +63,13 @@ public class SettingsAlgorithmController implements Initializable {
     @FXML
     private void okAction(ActionEvent event) {
         int iSpinnerLinesValue = iSpinnerLines.getValue();
-        settings.setConsecutiveLinesValue(iSpinnerLinesValue);
+        Settings.setConsecutiveLinesValue(iSpinnerLinesValue);
 
         int iSpinnerTokensValue = iSpinnerTokens.getValue();
-        settings.setConsecutiveTokensValue(iSpinnerTokensValue);
+        Settings.setConsecutiveTokensValue(iSpinnerTokensValue);
 
         String consecutiveOption = iRadioLines.isSelected() ? ConsecutiveOption.LINES.toString() : ConsecutiveOption.TOKENS.toString();
-        settings.setConsecutiveOption(consecutiveOption);
+        Settings.setConsecutiveOption(consecutiveOption);
 
         stage.close();
     }

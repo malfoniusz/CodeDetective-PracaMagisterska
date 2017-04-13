@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Project;
 import model.Projects;
+import staticc.Settings;
 
 public class MenuController implements Initializable {
 
@@ -27,7 +28,6 @@ public class MenuController implements Initializable {
     @FXML private MenuItem iItemStart;
 
     private MainController mainController;
-    private Compare compare;
     private Stage mainStage;
 
     @Override
@@ -46,7 +46,7 @@ public class MenuController implements Initializable {
 
         if (directory != null) {
             Project project = new Project(directory);
-            compare.getSettings().setProject(project);
+            Settings.setProject(project);
             updateIItemStart();
         }
     }
@@ -57,7 +57,7 @@ public class MenuController implements Initializable {
 
         if (directory != null) {
             Projects projects = new Projects(directory);
-            compare.getSettings().setBase(projects);
+            Settings.setBase(projects);
             updateIItemStart();
         }
     }
@@ -92,7 +92,7 @@ public class MenuController implements Initializable {
     }
 
     public void updateIItemStart() {
-        if (compare.getSettings().getProject() != null && compare.getSettings().getBase() != null) {
+        if (Settings.getProject() != null && Settings.getBase() != null) {
             iItemStart.setDisable(false);
         } else {
             iItemStart.setDisable(true);
@@ -101,10 +101,6 @@ public class MenuController implements Initializable {
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
-    }
-
-    public void setCompare(Compare compare) {
-        this.compare = compare;
     }
 
     public void setMainStage(Stage mainStage) {

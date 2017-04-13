@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import controller.Compare;
 import controller.CompareFilesController;
 import controller.MainController;
 import controller.MenuController;
@@ -18,6 +17,8 @@ import model.CompareFragments;
 import model.FileMarked;
 import model.Project;
 import model.Projects;
+import staticc.Compare;
+import staticc.Settings;
 
 public class Main extends Application {
 
@@ -67,16 +68,15 @@ public class Main extends Application {
         Project project = new Project(new File(PATH_PROJECT));
         Projects base = new Projects(new File(PATH_BASE));
 
-        Compare compare = mainController.getCompare();
-        compare.getSettings().setProject(project);
-        compare.getSettings().setBase(base);
+        Settings.setProject(project);
+        Settings.setBase(base);
 
         // Print tokenization
         //AlgorithmData algorithmData = algorithm.getAlgorithmData();
         //System.out.println(Tokenization.toStringTokenization(algorithmData.getProject()));
         //System.out.println(Tokenization.toStringTokenization(algorithmData.getProjects()));
 
-        ArrayList<CompareFiles> compareFiles = compare.runCompare();
+        ArrayList<CompareFiles> compareFiles = Compare.runCompare();
         //ArrayList<CompareFiles> compareFiles = testCompareFiles();
         CompareFilesController compareFilesController = mainController.getCompareFilesController();
         if (compareFiles != null) {

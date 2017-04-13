@@ -1,7 +1,4 @@
 ﻿
-- usunac setPreferenceBasePath() z Settings.java
-- przerobić get, set na public static np. controllery? Poczytać o tym więcej
-- zrobic Settings static lub jakis inny sposob
 - usunąć hardcode (sprawdzić wszystkie pliki m.in. zdjecie) - http://stackoverflow.com/questions/19251324/how-to-avoid-hardcoding-in-java
 - poczytac o algorytmie Karpa-Rabina
 

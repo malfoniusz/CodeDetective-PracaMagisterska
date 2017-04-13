@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import model.CompareFiles;
+import staticc.Compare;
 
 public class MainController implements Initializable {
 
@@ -15,14 +16,9 @@ public class MainController implements Initializable {
     @FXML private CompareFragmentsController compareFragmentsController;
     @FXML private CompareCodesController compareCodesController;
 
-    private Compare compare;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        compare = new Compare();
-
         menuController.setMainController(this);
-        menuController.setCompare(compare);
         menuController.updateIItemStart();
 
         compareFilesController.setCompareFragmentsController(compareFragmentsController);
@@ -32,7 +28,7 @@ public class MainController implements Initializable {
     }
 
     public void runAlgorithm() {
-        ArrayList<CompareFiles> compareFiles = compare.runCompare();
+        ArrayList<CompareFiles> compareFiles = Compare.runCompare();
 
         if (compareFiles != null) {
             compareFilesController.setData(compareFiles);
@@ -45,14 +41,6 @@ public class MainController implements Initializable {
 
     public CompareFilesController getCompareFilesController() {
         return this.compareFilesController;
-    }
-
-    public Compare getCompare() {
-        return compare;
-    }
-
-    public void setCompare(Compare compare) {
-        this.compare = compare;
     }
 
 }
