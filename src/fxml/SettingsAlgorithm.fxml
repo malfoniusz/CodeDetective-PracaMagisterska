@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="iAnchorPane" prefHeight="200.0" prefWidth="180.0" stylesheets="@../css/SettingsAlgorithm.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SettingsAlgorithmController">
+   <children>
+      <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label text="Minimal consecutive lines" />
+            <Spinner fx:id="iSpinnerLines" initialValue="1" max="1000" min="1">
+		      <editable>true</editable>
+			</Spinner>
+            <Label text="Minimal consecutive tokens">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Label>
+            <Spinner fx:id="iSpinnerTokens" initialValue="1" max="1000" min="1">
+              <editable>true</editable>
+            </Spinner>
+            <RadioButton fx:id="iRadioLines" mnemonicParsing="false" onAction="#radioLinesAction" prefWidth="80.0" text="Use lines">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="iToggleGroupConsecutive" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="iRadioTokens" mnemonicParsing="false" onAction="#radioTokensAction" prefWidth="80.0" text="Use tokens" toggleGroup="$iToggleGroupConsecutive">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </RadioButton>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#okAction" prefWidth="60.0" text="OK">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cancelAction" prefWidth="60.0" text="Cancel">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

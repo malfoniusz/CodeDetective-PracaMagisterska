@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 
-<MenuBar fx:id="menu" prefHeight="25.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
+<MenuBar fx:id="menu" prefHeight="25.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
   <menus>
     <Menu mnemonicParsing="false" text="Program">
       <items>
@@ -16,9 +19,8 @@
     </Menu>
       <Menu mnemonicParsing="false" text="Settings">
         <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-            <MenuItem mnemonicParsing="false" text="Action 2" />
-            <MenuItem mnemonicParsing="false" text="Action 3" />
+          <MenuItem fx:id="iAlgorithmSettingAction" mnemonicParsing="false" onAction="#algorithmSettingAction" text="Algorithm" />
+            <MenuItem mnemonicParsing="false" text="Tokens" />
         </items>
       </Menu>
     <Menu mnemonicParsing="false" text="Help">
