@@ -19,11 +19,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Project;
 import model.Projects;
+import staticc.PropertiesReader;
 import staticc.Settings;
 
 public class MenuController implements Initializable {
-
-    private final String ALGORITHM_SETTINGS_FILE_PATH = "../fxml/SettingsAlgorithm.fxml";
 
     @FXML private MenuItem iItemStart;
 
@@ -70,7 +69,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void algorithmSettingAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(ALGORITHM_SETTINGS_FILE_PATH));
+        String algorithmSettingsFilePath = PropertiesReader.readProperty("algorithm_settings_file_path");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(algorithmSettingsFilePath));
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
 

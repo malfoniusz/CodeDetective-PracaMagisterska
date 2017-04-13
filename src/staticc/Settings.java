@@ -9,7 +9,7 @@ import model.Projects;
 
 public final class Settings {
 
-    private static final Preferences preferences = Preferences.userRoot();
+    private static final Preferences preferences = Preferences.userRoot().node(Settings.class.toString());
 
     private static final String PROJECT_PATH = "project_path";
     private static final String BASE_PATH = "base_path";
@@ -26,8 +26,6 @@ public final class Settings {
     private Settings() {
 
     }
-
-
 
     public static Project getProject() {
         if (project == null) {

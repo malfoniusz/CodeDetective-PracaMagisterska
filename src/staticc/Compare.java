@@ -12,7 +12,7 @@ import model.tokenization.TokenProjects;
 public class Compare {
 
     private Compare() {
-        // Nothing
+
     }
 
     public static ArrayList<CompareFiles> runCompare() {
