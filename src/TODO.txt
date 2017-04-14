@@ -1,6 +1,13 @@
 ﻿
-- usunąć hardcode (sprawdzić wszystkie pliki m.in. zdjecie) - http://stackoverflow.com/questions/19251324/how-to-avoid-hardcoding-in-java
-- poczytac o algorytmie Karpa-Rabina
+- zaimplementować GreedyStringTiling i przetestować dla testowych stringów - https://github.com/arunjeyapal/GreedyStringTiling
+- zmienić tokeny na stringi (jeśli się da), jeśli nie to dać możliwość zamiany tokenów na stringi
+- dodać do TokenLine number:
+	+ numer pierwszy token w linijki względem całego pliku
+	+ numer znormalizowanej linii względem całego znormalizowanego pliku
+- dodać do TokenFile metodę tworzącą jeden długi ciąg stringów z tokenów oddzielonych spacjami
+- sprawdzić działanie GreedyStringTiling (pattern - pierwszy strumień tokenów; text - drugi stumień tokenów)
+- zapisać podobieństwo i znalezione fragmenty
+
 
 4. Algorytm:
 - algorytm porównujący:

@@ -3,6 +3,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.nlputil.gst.GreedyStringTiling;
+import com.nlputil.gst.MatchVals;
+import com.nlputil.gst.PlagResult;
+
 import controller.CompareFilesController;
 import controller.MainController;
 import controller.MenuController;
@@ -81,6 +85,24 @@ public class Main extends Application {
         CompareFilesController compareFilesController = mainController.getCompareFilesController();
         if (compareFiles != null) {
             compareFilesController.setData(compareFiles);
+        }
+
+        testGreedyStringTiling();
+    }
+
+    private void testGreedyStringTiling() {
+//        String pattern = "with Hash table entries Hash table entries has Arun name is here, Arun name is here with Hash table entries Arun how is arun";
+//        String text = "Hash table entries has Arun name is here, Arun name is here with Hash table entries Arun how is arun Arun name is here with Hash table entries";
+        String pattern = "a b c d c b a d c b a d c b a d b";
+        String text = "a b c d d c b a d a c d a d c d a d b b b d a c b b d a d c b d a";
+//        String pattern = "a b c d";
+//        String text = "a b c d";
+
+        PlagResult result = GreedyStringTiling.run(pattern, text, 2, (float)0.5, false);
+        System.out.println("Similarity: "+result.getSimilarity());
+        System.out.print("Plagiriasm tiles: ");
+        for (MatchVals tiles : result.getTiles()){
+            System.out.print("(" + tiles.patternPostion + "," + tiles.textPosition + "," + tiles.length + ")");
         }
     }
 
