@@ -8,6 +8,8 @@
 - sprawdzić działanie GreedyStringTiling (pattern - pierwszy strumień tokenów; text - drugi stumień tokenów)
 - zapisać podobieństwo i znalezione fragmenty
 
+- zrobić taką samą kolejność File1, File2 dla wszystkich trzech okien
+- w przypadku wyłączenia typu tokena zastąpić go tokenem Unknown; w jednym ciągu tokenów użyć Unknown1, w drugim Unknown2, dzięki temu tokeny Unknown nie będą używane przy porównaniu
 
 4. Algorytm:
 - algorytm porównujący:
@@ -28,6 +30,7 @@
 
 
 6. Rodzaje tokenizacji:
+- znaleźć dużą liczbę podobnych prac (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
 - wybor tokenów jakie mają być używane - UWAGA przy wyłączaniu tokenów wpływających na wykrywanie funkcji i operatorów np. arytmentycznych
 - rodzaje:
     + ogólna np. LICZBA = float, double, int, long, short
@@ -39,6 +42,7 @@
 
 7. Rozbudowa:
 - help - opis wszystkiego m.in. co oznaczają poszczególne kolumny tabel
+- zrobić metodę 1 do 1
 - CompareFiles - wyświetlić długość najdłuższego znalezionego podobnego fragmentu
 - branie pod uwagę procentowego podobieństwa fragmentów (niepodobny kod na początku i końcu fragmentu jest pomijany) + zaimplementować ustawienia
 - wyświetlanie tylko par plików z minimalnym procentem podobieństwa

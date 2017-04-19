@@ -76,9 +76,8 @@ public class Main extends Application {
         Settings.setBase(base);
 
         // Print tokenization
-        //AlgorithmData algorithmData = algorithm.getAlgorithmData();
-        //System.out.println(Tokenization.toStringTokenization(algorithmData.getProject()));
-        //System.out.println(Tokenization.toStringTokenization(algorithmData.getProjects()));
+        //System.out.println(Tokenization.toStringTokenization(Settings.getProject()));
+        //System.out.println(Tokenization.toStringTokenization(Settings.getBase()));
 
         ArrayList<CompareFiles> compareFiles = Compare.runCompare();
         //ArrayList<CompareFiles> compareFiles = testCompareFiles();
@@ -106,6 +105,7 @@ public class Main extends Application {
         }
     }
 
+    // Nie działa, trzeba stworzyć pliki jako Project i Projects
     final String FILE_1 = "Drawing.java";
     final String FILE_2 = "Game.java";
     private ArrayList<CompareFiles> testCompareFiles() {
