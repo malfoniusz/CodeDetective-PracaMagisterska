@@ -20,6 +20,33 @@ public class TokenFile {
         this.tokenLines = tokenLines;
     }
 
+    public String createTokenStringStream() {
+        StringBuilder sb = new StringBuilder();
+
+        for (TokenLine tokenLine : tokenLines) {
+            sb.append(tokenLine.createTokenStringStream());
+        }
+
+        return sb.toString();
+    }
+
+    public int findNormalizedLineNumber(int tokenNumber) {
+        if (tokenNumber <= 0) {
+            return -1;
+        }
+
+        int normLineNumber = 1;
+        for (TokenLine tokenLine : tokenLines) {
+            if (tokenLine.getTokenNumber() >= tokenNumber) {
+                return normLineNumber;
+            }
+
+            normLineNumber++;
+        }
+
+        return -1;
+    }
+
     private int totalLines(File file) {
         int totalLines = 0;
 

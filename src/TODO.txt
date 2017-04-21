@@ -1,15 +1,14 @@
 ﻿
-- zaimplementować GreedyStringTiling i przetestować dla testowych stringów - https://github.com/arunjeyapal/GreedyStringTiling
-- zmienić tokeny na stringi (jeśli się da), jeśli nie to dać możliwość zamiany tokenów na stringi
-- dodać do TokenLine number:
-	+ numer pierwszy token w linijki względem całego pliku
-	+ numer znormalizowanej linii względem całego znormalizowanego pliku
 - dodać do TokenFile metodę tworzącą jeden długi ciąg stringów z tokenów oddzielonych spacjami
 - sprawdzić działanie GreedyStringTiling (pattern - pierwszy strumień tokenów; text - drugi stumień tokenów)
 - zapisać podobieństwo i znalezione fragmenty
+- usunąć stary system obliczania podobieństwa i atrybuty których ten system używał
+
 
 - zrobić taką samą kolejność File1, File2 dla wszystkich trzech okien
 - w przypadku wyłączenia typu tokena zastąpić go tokenem Unknown; w jednym ciągu tokenów użyć Unknown1, w drugim Unknown2, dzięki temu tokeny Unknown nie będą używane przy porównaniu
+- dodać tokenizacje argumentów przy wywoływaniu funkcji np. func(a, b) = [ARG, ARG]
+
 
 4. Algorytm:
 - algorytm porównujący:
@@ -30,6 +29,7 @@
 
 
 6. Rodzaje tokenizacji:
+- co zrobić z nieztokenizowanymi słowami? pominąć je, czy użyć token UNKONOW gdy linijka nie ma żadnego tokena?
 - znaleźć dużą liczbę podobnych prac (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
 - wybor tokenów jakie mają być używane - UWAGA przy wyłączaniu tokenów wpływających na wykrywanie funkcji i operatorów np. arytmentycznych
 - rodzaje:

@@ -1,47 +1,60 @@
 package model.tokenization;
 
 public enum Token {
-    CONDITIONAL_STATEMENT,  // if, else, else if
-    LOOP,                   // for, while, do
-    SWITCH,
-    TRY,
-    CATCH,
+    CONDITIONAL_STATEMENT("conditional_statment"),  // if, else, else if
+    LOOP("loop"),   // for, while, do
+    SWITCH("switch"),
+    TRY("try"),
+    CATCH("catch"),
 
-    FUNCTION_DEF,   // function def + constructor
-    FUNCTION_USE,
-    CONSTRUCTOR_USE,
+    FUNCTION_DEF("function_def"),   // function def + constructor
+    FUNCTION_USE("function_use"),
+    CONSTRUCTOR_USE("constructor_use"),
 
-    ENUM,
-    NEW,
-    CLASS,
-    EXTENDS,
-    IMPLEMENTS,
-    STATIC,
-    FINAL,
-    THROW,
-    VOID,
-    RETURN,
-    NUMBER_DEC,     // int, long, short
-    NUMBER_POINT,   // double, float
-    TEXT,           // String, char
-    BOOLEAN,
-    BYTE,
+    ENUM("enum"),
+    NEW("new"),
+    CLASS("class"),
+    EXTENDS("extends"),
+    IMPLEMENTS("implements"),
+    STATIC("static"),
+    FINAL("final"),
+    THROW("throw"),
+    VOID("void"),
+    RETURN("return"),
+    NUMBER_DEC("number_dec"),       // int, long, short
+    NUMBER_POINT("number_point"),   // double, float
+    TEXT("text"),                   // String, char
+    BOOLEAN("boolean"),
+    BYTE("byte"),
 
-    OP_RELATION,    // ==, !=, >=, <=, >, <
-    OP_LOGIC,       // &&, ||, !
-    OP_ASSIGN,      // <<=, >>=, +=, -=, *=, /=, %=, &=, ^=, |=, =
-    OP_ARITHMETIC,  // ++, --, +, -, *, /, %
-    OP_BITWISE,     // <<, >>>, >>, &, |, ^, ~
+    OP_RELATION("op_relation"),    // ==, !=, >=, <=, >, <
+    OP_LOGIC("op_logic"),       // &&, ||, !
+    OP_ASSIGN("op_assign"),      // <<=, >>=, +=, -=, *=, /=, %=, &=, ^=, |=, =
+    OP_ARITHMETIC("op_arithmetic"),  // ++, --, +, -, *, /, %
+    OP_BITWISE("op_bitwise"),     // <<, >>>, >>, &, |, ^, ~
 
-    CLASS_VAR,
+    CLASS_VAR("class_var"),
 
-    TABLE,
-    GENERIC,        // <...>
-    CASE,
-    DEFAULT,
-    CONTINUE,
-    BREAK,
-    CASTING,        // (Object)
+    TABLE("table"),
+    GENERIC("generic"),        // <...>
+    CASE("case"),
+    DEFAULT("default"),
+    CONTINUE("continue"),
+    BREAK("break"),
+    CAST("cast"),        // (Object)
 
-    UNKNOWN,
+    UNKNOWN("unknown"),
+    ;
+
+    private final String text;
+
+    private Token(final String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return text;
+    }
+
 }

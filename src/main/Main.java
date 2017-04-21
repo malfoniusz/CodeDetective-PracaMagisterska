@@ -66,8 +66,8 @@ public class Main extends Application {
     }
 
     // TODO: kod testow
-    final String PATH_PROJECT = "D:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\Drawing\\";
-    final String PATH_BASE = "D:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\";
+    final String PATH_PROJECT = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\Drawing\\";
+    final String PATH_BASE = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\";
     private void testMain() {
         Project project = new Project(new File(PATH_PROJECT));
         Projects base = new Projects(new File(PATH_BASE));
@@ -86,7 +86,7 @@ public class Main extends Application {
             compareFilesController.setData(compareFiles);
         }
 
-        testGreedyStringTiling();
+        //testGreedyStringTiling();
     }
 
     private void testGreedyStringTiling() {
