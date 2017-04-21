@@ -35,14 +35,11 @@ public final class Tokenization {
 
     private static TokenFile convertTokenFile(NormalizedCode normalizedCode) {
         ArrayList<TokenLine> tokenLines = new ArrayList<>();
-        int tokenNumber = 1;
 
         for (CodeLine codeLine : normalizedCode.getCodeLines()) {
             ArrayList<Token> tokens = convertTokenLine(codeLine.getCode());
-            TokenLine tokenLine = new TokenLine(codeLine.getLineNumber(), tokenNumber, tokens);
+            TokenLine tokenLine = new TokenLine(codeLine.getLineNumber(), tokens);
             tokenLines.add(tokenLine);
-
-            tokenNumber += tokens.size();
         }
 
         return new TokenFile(normalizedCode.getFile(), tokenLines);

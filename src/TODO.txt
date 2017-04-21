@@ -1,20 +1,19 @@
 ﻿
-- dodać do TokenFile metodę tworzącą jeden długi ciąg stringów z tokenów oddzielonych spacjami
-- sprawdzić działanie GreedyStringTiling (pattern - pierwszy strumień tokenów; text - drugi stumień tokenów)
-- zapisać podobieństwo i znalezione fragmenty
-- usunąć stary system obliczania podobieństwa i atrybuty których ten system używał
-
-
-- zrobić taką samą kolejność File1, File2 dla wszystkich trzech okien
-- w przypadku wyłączenia typu tokena zastąpić go tokenem Unknown; w jednym ciągu tokenów użyć Unknown1, w drugim Unknown2, dzięki temu tokeny Unknown nie będą używane przy porównaniu
-- dodać tokenizacje argumentów przy wywoływaniu funkcji np. func(a, b) = [ARG, ARG]
-
-
 4. Algorytm:
-- algorytm porównujący:
-    + np. Karp-Rabin algorithm - porównać mniejszy string z większym, Rabin fingerprint, Dynamic pattern matching and hashing to B buckets
-    + bierze pod uwagę minimalną długość fragmentu
-    + raz znalezione tokeny, nie mogą być użyte ponownie (w obydwu porównywanych plikach - UWAGA przy usuwaniu, żeby nie traktowało części kodu z przed i po usunięciu jako spójny)
+- doczytać i sprawdzić ponowne wykorzystywanie znalezionych ciągów przez algorytmu (ustawić minimalną liczbę linii kodu na 2)
+- użyć podobieństwa zwracanego przez algorytm i ustawienie wyświetlanego podobieństwa do dwóch miejsc po przecinku
+- usunąć stary system obliczania podobieństwa i atrybuty których ten system używał
+- jako pattern używać zawsze krótrzego Stringa
+
+
+- po pliknięciu start wyczysc okna CompareFragments i CompareCode
+- po kliknięciu start, dodać lub usunąć pliki i znów pliknąć start
+- CompareFiles - zmienic BaseFile na Base i ProjectFile na Project
+- zrobić taką samą kolejność File1, File2 dla wszystkich trzech okien
+- dodać tokenizacje argumentów przy wywoływaniu funkcji i konstruktorów np. func(a, b) = [FUNCTION_USE, ARG, ARG]
+- usunac mozliwosc wyboru minimalnej liczby tokenow + usunać ustawienia + usunac wzmiankę o tym w dokumentacji + implementacje tego w TokenFile i TokenLine
+- w CompareFiles wyświetlić długość najdłuższego znalezione fragmentu
+- przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
 
 
 5. Testy
@@ -30,7 +29,6 @@
 
 6. Rodzaje tokenizacji:
 - co zrobić z nieztokenizowanymi słowami? pominąć je, czy użyć token UNKONOW gdy linijka nie ma żadnego tokena?
-- znaleźć dużą liczbę podobnych prac (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
 - wybor tokenów jakie mają być używane - UWAGA przy wyłączaniu tokenów wpływających na wykrywanie funkcji i operatorów np. arytmentycznych
 - rodzaje:
     + ogólna np. LICZBA = float, double, int, long, short

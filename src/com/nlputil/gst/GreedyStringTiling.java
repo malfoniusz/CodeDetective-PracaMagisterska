@@ -39,6 +39,10 @@ public class GreedyStringTiling {
 			System.err
 			.println("NoValidArgumentError: input must be of type string not None");
 
+		// Clear data
+		tiles = new ArrayList<MatchVals>();
+		matchList = new ArrayList<Queue<MatchVals>>();
+
 		// Compute Tiles
 		tiles = RKR_GST(s1, s2, mML, 20);
 

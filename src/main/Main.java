@@ -66,8 +66,8 @@ public class Main extends Application {
     }
 
     // TODO: kod testow
-    final String PATH_PROJECT = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\Drawing\\";
-    final String PATH_BASE = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Tests\\";
+    final String PATH_PROJECT = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Project\\";
+    final String PATH_BASE = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Base\\";
     private void testMain() {
         Project project = new Project(new File(PATH_PROJECT));
         Projects base = new Projects(new File(PATH_BASE));
@@ -90,12 +90,8 @@ public class Main extends Application {
     }
 
     private void testGreedyStringTiling() {
-//        String pattern = "with Hash table entries Hash table entries has Arun name is here, Arun name is here with Hash table entries Arun how is arun";
-//        String text = "Hash table entries has Arun name is here, Arun name is here with Hash table entries Arun how is arun Arun name is here with Hash table entries";
         String pattern = "a b c d c b a d c b a d c b a d b";
         String text = "a b c d d c b a d a c d a d c d a d b b b d a c b b d a d c b d a";
-//        String pattern = "a b c d";
-//        String text = "a b c d";
 
         PlagResult result = GreedyStringTiling.run(pattern, text, 2, (float)0.5, false);
         System.out.println("Similarity: "+result.getSimilarity());

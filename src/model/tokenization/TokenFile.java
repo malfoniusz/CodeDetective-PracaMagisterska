@@ -20,31 +20,21 @@ public class TokenFile {
         this.tokenLines = tokenLines;
     }
 
-    public String createTokenStringStream() {
+    public String createTokenLineStrings() {
         StringBuilder sb = new StringBuilder();
 
         for (TokenLine tokenLine : tokenLines) {
-            sb.append(tokenLine.createTokenStringStream());
+            sb.append(tokenLine.createTokenLineStrings() + " ");
         }
 
         return sb.toString();
     }
 
-    public int findNormalizedLineNumber(int tokenNumber) {
-        if (tokenNumber <= 0) {
-            return -1;
-        }
+    public int codeLineDistance(int tokenLineIndex, int normDistance) {
+        TokenLine tokenLine1 = tokenLines.get(tokenLineIndex);
+        TokenLine tokenLine2 = tokenLines.get(tokenLineIndex + normDistance - 1);
 
-        int normLineNumber = 1;
-        for (TokenLine tokenLine : tokenLines) {
-            if (tokenLine.getTokenNumber() >= tokenNumber) {
-                return normLineNumber;
-            }
-
-            normLineNumber++;
-        }
-
-        return -1;
+        return tokenLine2.getLineNumber() - tokenLine1.getLineNumber();
     }
 
     private int totalLines(File file) {

@@ -2,6 +2,10 @@ package staticc;
 
 import java.util.ArrayList;
 
+import com.nlputil.gst.GreedyStringTiling;
+import com.nlputil.gst.MatchVals;
+import com.nlputil.gst.PlagResult;
+
 import model.CompareFiles;
 import model.CompareFragments;
 import model.FileMarked;
@@ -58,12 +62,12 @@ public class Compare {
     }
 
     private static CompareFiles compareFiles(String projectName, TokenFile projectFile, String baseName, TokenFile baseFile) {
-        ArrayList<CompareFragments> compareFragments = algorithm(projectFile, baseFile);
+        ArrayList<CompareFragments> compareFragments = runAlgorithm(projectFile, baseFile);
         if (compareFragments.isEmpty()) {
             return null;
         }
 
-        int similarity = calculateSimilarity(compareFragments, projectFile.getTotalTokenLines(), baseFile.getTotalTokenLines());
+        int similarity = calculateSimilarity(compareFragments, projectFile.getTotalLines(), baseFile.getTotalLines());
 
         CompareFiles compareFiles = new CompareFiles(projectName,
                                                      projectFile.getFile(),
@@ -76,7 +80,7 @@ public class Compare {
         return compareFiles;
     }
 
-    private static int calculateSimilarity(ArrayList<CompareFragments> compareFragments, int totalTokenLinesProject, int totalTokenLinesBase) {
+    private static int calculateSimilarity(ArrayList<CompareFragments> compareFragments, int totalinesProject, int totalLinesBase) {
         int totalProject = 0;
         int totalBase = 0;
         for (CompareFragments compareFragment : compareFragments) {
@@ -89,24 +93,41 @@ public class Compare {
             totalBase += differenceBase;
         }
 
-        int similarityProject = (totalProject*100) / totalTokenLinesProject;
-        int similarityBase = (totalBase*100) / totalTokenLinesBase;
+        int similarityProject = (totalProject*100) / totalinesProject;
+        int similarityBase = (totalBase*100) / totalLinesBase;
 
         int higher = (similarityProject > similarityBase ? similarityProject : similarityBase);
         return higher;
     }
 
-    private static ArrayList<CompareFragments> algorithm(TokenFile projectFile, TokenFile baseFile) {
+    private static ArrayList<CompareFragments> runAlgorithm(TokenFile projectFile, TokenFile baseFile) {
         ArrayList<CompareFragments> compareFragments = new ArrayList<>();
 
-        // TODO: algorytm
+        String pattern = projectFile.createTokenLineStrings();
+        String text = baseFile.createTokenLineStrings();
 
-        FileMarked fileMarkedProject = new FileMarked(projectFile.getFile(), 20, 38);
-        FileMarked fileMarkedBase = new FileMarked(baseFile.getFile(), 15, 32);
-        CompareFragments fragments = new CompareFragments(fileMarkedProject, fileMarkedBase);
-        compareFragments.add(fragments);
+        PlagResult result = GreedyStringTiling.run(pattern, text, Settings.getConsecutiveLinesValue(), (float)0.5, false);
+        for (MatchVals tiles : result.getTiles()){
+            CompareFragments fragments = createFragment(projectFile, baseFile, tiles);
+            compareFragments.add(fragments);
+        }
 
         return compareFragments;
+    }
+
+    private static CompareFragments createFragment(TokenFile projectFile, TokenFile baseFile, MatchVals tiles) {
+        int projectCodeLineStart = projectFile.getTokenLines().get(tiles.patternPostion).getLineNumber();
+        int projectCodeLineDistance = projectFile.codeLineDistance(tiles.patternPostion, tiles.length);
+        int projectCodeLineEnd = projectCodeLineStart + projectCodeLineDistance;
+
+        int baseCodeLineStart = baseFile.getTokenLines().get(tiles.textPosition).getLineNumber();
+        int baseCodeLineDistance = baseFile.codeLineDistance(tiles.textPosition, tiles.length);
+        int baseCodeLineEnd = baseCodeLineStart + baseCodeLineDistance;
+
+        FileMarked markedProject = new FileMarked(projectFile.getFile(), projectCodeLineStart, projectCodeLineEnd);
+        FileMarked markedBase = new FileMarked(baseFile.getFile(), baseCodeLineStart, baseCodeLineEnd);
+
+        return new CompareFragments(markedProject, markedBase);
     }
 
 }
