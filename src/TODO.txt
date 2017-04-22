@@ -1,6 +1,4 @@
 ﻿
-- CompareFiles - zmienic BaseFile na Base i ProjectFile na Project
-- zrobić taką samą kolejność File1, File2 dla wszystkich trzech okien
 - dodać tokenizacje argumentów przy wywoływaniu funkcji i konstruktorów np. func(a, b) = [FUNCTION_USE, ARG, ARG]
 - usunac mozliwosc wyboru minimalnej liczby tokenow + usunać ustawienia + usunac wzmiankę o tym w dokumentacji + implementacje tego w TokenFile i TokenLine
 - w CompareFiles wyświetlić długość najdłuższego znalezione fragmentu

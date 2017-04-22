@@ -22,18 +22,18 @@ public class CompareFilesController implements Initializable {
     private CompareCodesController compareCodesController;
 
     @FXML private TableView<CompareFiles> compareFiles;
-    @FXML private TableColumn<CompareFiles, String> iBaseName;
-    @FXML private TableColumn<CompareFiles, String> iFileBase;
     @FXML private TableColumn<CompareFiles, String> iFileProject;
+    @FXML private TableColumn<CompareFiles, String> iFileBase;
+    @FXML private TableColumn<CompareFiles, String> iBaseName;
     @FXML private TableColumn<CompareFiles, Float> iSimilarity;
 
     private final ObservableList<CompareFiles> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        iBaseName.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rBaseName"));
-        iFileBase.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rFileBase"));
         iFileProject.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rFileProject"));
+        iFileBase.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rFileBase"));
+        iBaseName.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rBaseName"));
         iSimilarity.setCellValueFactory(new PropertyValueFactory<CompareFiles, Float>("rSimilarity"));
 
         compareFiles.setPlaceholder(new Label("From menu:\nChoose Base\nChoose Project\nPress Start"));

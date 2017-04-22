@@ -7,9 +7,6 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class CompareFiles {
 
-    // Column Project
-    private final SimpleStringProperty rBaseName;
-
     // Column FileProject
     private final SimpleStringProperty rFileProject;
     private File fileProject;
@@ -21,6 +18,9 @@ public class CompareFiles {
     private File fileBase;
     private int fileBaseLines;
     private String fileBaseShortPath;
+
+    // Column Project
+    private final SimpleStringProperty rBaseName;
 
     // Column Matched
     private final SimpleFloatProperty rSimilarity;
@@ -56,15 +56,6 @@ public class CompareFiles {
         int endIndexBase = path.indexOf(file.getName());
         String shortPath = ".\\" + path.substring(beginIndexBase, endIndexBase);
         return shortPath;
-    }
-
-
-    public String getRBaseName() {
-        return rBaseName.get();
-    }
-
-    public void setRBaseName(String value) {
-        rBaseName.set(value);
     }
 
 
@@ -137,6 +128,16 @@ public class CompareFiles {
 
     public void setFileBaseShortPath(String fileBaseShortPath) {
         this.fileBaseShortPath = fileBaseShortPath;
+    }
+
+
+
+    public String getRBaseName() {
+        return rBaseName.get();
+    }
+
+    public void setRBaseName(String value) {
+        rBaseName.set(value);
     }
 
 
