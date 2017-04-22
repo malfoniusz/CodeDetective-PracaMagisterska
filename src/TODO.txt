@@ -1,8 +1,5 @@
 ﻿
 4. Algorytm:
-- doczytać i sprawdzić ponowne wykorzystywanie znalezionych ciągów przez algorytmu (ustawić minimalną liczbę linii kodu na 2)
-- użyć podobieństwa zwracanego przez algorytm i ustawienie wyświetlanego podobieństwa do dwóch miejsc po przecinku
-- usunąć stary system obliczania podobieństwa i atrybuty których ten system używał
 - jako pattern używać zawsze krótrzego Stringa
 
 

@@ -2,7 +2,7 @@ package model;
 import java.io.File;
 import java.util.ArrayList;
 
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CompareFiles {
@@ -23,12 +23,12 @@ public class CompareFiles {
     private String fileBaseShortPath;
 
     // Column Matched
-    private final SimpleIntegerProperty rMatched;
+    private final SimpleFloatProperty rSimilarity;
 
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<CompareFragments> compareFragments;
 
-    public CompareFiles(String projectName, File fileProject, int fileProjectLines, String baseName, File fileBase, int fileBaseLines, int matchedValue, ArrayList<CompareFragments> compareFragments) {
+    public CompareFiles(String projectName, File fileProject, int fileProjectLines, String baseName, File fileBase, int fileBaseLines, float similarity, ArrayList<CompareFragments> compareFragments) {
         this.rBaseName = new SimpleStringProperty(baseName);
 
         this.fileProject = fileProject;
@@ -43,7 +43,9 @@ public class CompareFiles {
         this.rFileBase = new SimpleStringProperty();
         updateRFileBase();
 
-        this.rMatched = new SimpleIntegerProperty(matchedValue);
+        // Zaokraglenie do dwoch miejsc po przecinku i zamiana na procenty
+        similarity = Math.round(similarity*10000) / (float) 100;
+        this.rSimilarity = new SimpleFloatProperty(similarity);
 
         this.compareFragments = compareFragments;
     }
@@ -139,12 +141,12 @@ public class CompareFiles {
 
 
 
-    public int getRMatched() {
-        return rMatched.get();
+    public float getRSimilarity() {
+        return rSimilarity.get();
     }
 
-    public void setRMatched(int matchedValue) {
-        rMatched.set(matchedValue);;
+    public void setRSimilarity(int value) {
+        rSimilarity.set(value);
     }
 
 

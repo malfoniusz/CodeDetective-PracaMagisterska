@@ -25,7 +25,7 @@ public class CompareFilesController implements Initializable {
     @FXML private TableColumn<CompareFiles, String> iBaseName;
     @FXML private TableColumn<CompareFiles, String> iFileBase;
     @FXML private TableColumn<CompareFiles, String> iFileProject;
-    @FXML private TableColumn<CompareFiles, Integer> iMatched;
+    @FXML private TableColumn<CompareFiles, Float> iSimilarity;
 
     private final ObservableList<CompareFiles> data = FXCollections.observableArrayList();
 
@@ -34,7 +34,7 @@ public class CompareFilesController implements Initializable {
         iBaseName.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rBaseName"));
         iFileBase.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rFileBase"));
         iFileProject.setCellValueFactory(new PropertyValueFactory<CompareFiles, String>("rFileProject"));
-        iMatched.setCellValueFactory(new PropertyValueFactory<CompareFiles, Integer>("rMatched"));
+        iSimilarity.setCellValueFactory(new PropertyValueFactory<CompareFiles, Float>("rSimilarity"));
 
         compareFiles.setPlaceholder(new Label("From menu:\nChoose Base\nChoose Project\nPress Start"));
         compareFiles.setItems(data);
@@ -69,7 +69,7 @@ public class CompareFilesController implements Initializable {
     }
 
     private void sortTableByMatched() {
-        compareFiles.getSortOrder().add(iMatched);
+        compareFiles.getSortOrder().add(iSimilarity);
     }
 
     public ObservableList<CompareFiles> getData() {

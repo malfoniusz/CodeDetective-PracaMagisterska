@@ -62,12 +62,14 @@ public class Compare {
     }
 
     private static CompareFiles compareFiles(String projectName, TokenFile projectFile, String baseName, TokenFile baseFile) {
-        ArrayList<CompareFragments> compareFragments = runAlgorithm(projectFile, baseFile);
+        PlagResult result = runAlgorithm(projectFile, baseFile);
+
+        ArrayList<CompareFragments> compareFragments = createFragments(projectFile, baseFile, result);
         if (compareFragments.isEmpty()) {
             return null;
         }
 
-        int similarity = calculateSimilarity(compareFragments, projectFile.getTotalLines(), baseFile.getTotalLines());
+        float similarity = result.getSimilarity();
 
         CompareFiles compareFiles = new CompareFiles(projectName,
                                                      projectFile.getFile(),
@@ -80,33 +82,17 @@ public class Compare {
         return compareFiles;
     }
 
-    private static int calculateSimilarity(ArrayList<CompareFragments> compareFragments, int totalinesProject, int totalLinesBase) {
-        int totalProject = 0;
-        int totalBase = 0;
-        for (CompareFragments compareFragment : compareFragments) {
-            FileMarked fileMarkedProject = compareFragment.getFileMarkedProject();
-            FileMarked fileMarkedBase = compareFragment.getFileMarkedBase();
-
-            int differenceProject = fileMarkedProject.getToLine() - fileMarkedProject.getFromLine();
-            totalProject += differenceProject;
-            int differenceBase = fileMarkedBase.getToLine() - fileMarkedBase.getFromLine();
-            totalBase += differenceBase;
-        }
-
-        int similarityProject = (totalProject*100) / totalinesProject;
-        int similarityBase = (totalBase*100) / totalLinesBase;
-
-        int higher = (similarityProject > similarityBase ? similarityProject : similarityBase);
-        return higher;
-    }
-
-    private static ArrayList<CompareFragments> runAlgorithm(TokenFile projectFile, TokenFile baseFile) {
-        ArrayList<CompareFragments> compareFragments = new ArrayList<>();
-
+    private static PlagResult runAlgorithm(TokenFile projectFile, TokenFile baseFile) {
         String pattern = projectFile.createTokenLineStrings();
         String text = baseFile.createTokenLineStrings();
-
         PlagResult result = GreedyStringTiling.run(pattern, text, Settings.getConsecutiveLinesValue(), (float)0.5, false);
+
+        return result;
+    }
+
+    private static ArrayList<CompareFragments> createFragments(TokenFile projectFile, TokenFile baseFile, PlagResult result) {
+        ArrayList<CompareFragments> compareFragments = new ArrayList<>();
+
         for (MatchVals tiles : result.getTiles()){
             CompareFragments fragments = createFragment(projectFile, baseFile, tiles);
             compareFragments.add(fragments);
