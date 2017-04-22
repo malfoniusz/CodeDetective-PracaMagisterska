@@ -1,6 +1,4 @@
 ﻿
-- po pliknięciu start wyczysc okna CompareFragments i CompareCode
-- po kliknięciu start, dodać lub usunąć pliki i znów pliknąć start
 - CompareFiles - zmienic BaseFile na Base i ProjectFile na Project
 - zrobić taką samą kolejność File1, File2 dla wszystkich trzech okien
 - dodać tokenizacje argumentów przy wywoływaniu funkcji i konstruktorów np. func(a, b) = [FUNCTION_USE, ARG, ARG]

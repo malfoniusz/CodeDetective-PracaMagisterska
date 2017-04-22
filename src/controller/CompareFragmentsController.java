@@ -54,6 +54,13 @@ public class CompareFragmentsController implements Initializable {
         data.setAll(items);
     }
 
+    public void clearData() {
+        setColumnName(1, "");
+        setColumnName(2, "");
+
+        data.clear();
+    }
+
     public void setColumnName(int columnNumber, String title) {
         Label headerLabel = new Label(title);
 

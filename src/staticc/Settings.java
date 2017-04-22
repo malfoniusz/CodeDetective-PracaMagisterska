@@ -20,25 +20,17 @@ public final class Settings {
     private static final String CONSECUTIVE_OPTION = "consecutive_option";
     private static final String CONSECUTIVE_OPTION_DEFAULT = ConsecutiveOption.LINES.toString();
 
-    private static Project project = null;
-    private static Projects base = null;
-
     private Settings() {
 
     }
 
     public static Project getProject() {
-        if (project == null) {
-            project = loadProject();
-        }
-
-        return project;
+        return loadProject();
     }
 
     public static void setProject(Project p) {
-        project = new Project(p.getDirectory());
-        String basePath = p.getDirectory().getAbsolutePath();
-        preferences.put(BASE_PATH, basePath);
+        String projectPath = p.getDirectory().getAbsolutePath();
+        preferences.put(PROJECT_PATH, projectPath);
     }
 
     private static Project loadProject() {
@@ -55,15 +47,15 @@ public final class Settings {
     }
 
     private static String getPreferencePath(final String PATH) {
-        String basePath = preferences.get(BASE_PATH, null);
+        String basePath = preferences.get(PATH, null);
 
         // Sprawdz czy preference jest ustawiony
         if (basePath != null) {
             // Sprawdz czy wskazany plik istnieje
             File fileBase = new File(basePath);
             if (fileBase.exists() == false) {
-                preferences.remove(BASE_PATH);
-                basePath = preferences.get(BASE_PATH, null);
+                preferences.remove(PATH);
+                basePath = preferences.get(PATH, null);
             }
         }
 
@@ -73,15 +65,10 @@ public final class Settings {
 
 
     public static Projects getBase() {
-        if (base == null) {
-            base = loadBase();
-        }
-
-        return base;
+        return loadBase();
     }
 
     public static void setBase(Projects b) {
-        base = new Projects(b.getDirectory());
         String basePath = b.getDirectory().getAbsolutePath();
         preferences.put(BASE_PATH, basePath);
     }

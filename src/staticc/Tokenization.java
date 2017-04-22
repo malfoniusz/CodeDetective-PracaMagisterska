@@ -59,7 +59,7 @@ public final class Tokenization {
 
         tokens.addAll(singleWordsTokenization(line));
         tokens.addAll(operatorsTokenization(line));
-        tokens.addAll(classVarTokenization(line, tokens));
+        tokens.addAll(classVarTokenization(line));
 
         tokens.addAll(othersTokenization(line));
 
@@ -145,7 +145,7 @@ public final class Tokenization {
         return tokens;
     }
 
-    private static ArrayList<Token> classVarTokenization(String line, ArrayList<Token> tokensSource) {
+    private static ArrayList<Token> classVarTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
         line = line.replace("String", "");

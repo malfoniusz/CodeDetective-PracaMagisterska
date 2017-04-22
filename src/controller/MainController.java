@@ -39,6 +39,14 @@ public class MainController implements Initializable {
         return this.menuController;
     }
 
+    public CompareFragmentsController getCompareFragmentsController() {
+        return this.compareFragmentsController;
+    }
+
+    public CompareCodesController getCompareCodesController() {
+        return this.compareCodesController;
+    }
+
     public CompareFilesController getCompareFilesController() {
         return this.compareFilesController;
     }

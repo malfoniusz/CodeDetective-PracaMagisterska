@@ -34,12 +34,15 @@ public class MenuController implements Initializable {
 
     }
 
-    @FXML
+    @FXML @SuppressWarnings("unused")
     private void startAction(ActionEvent event) {
+        mainController.getCompareFragmentsController().clearData();
+        mainController.getCompareCodesController().clearCodes();
+
         mainController.runAlgorithm();
     }
 
-    @FXML
+    @FXML @SuppressWarnings("unused")
     private void chooseProjectAction(ActionEvent event) {
         File directory = chooseDirectory("Open Project Folder");
 
@@ -50,7 +53,7 @@ public class MenuController implements Initializable {
         }
     }
 
-    @FXML
+    @FXML @SuppressWarnings("unused")
     private void chooseBaseAction(ActionEvent event) {
         File directory = chooseDirectory("Open Base Folder");
 
@@ -67,7 +70,7 @@ public class MenuController implements Initializable {
         return dirChooser.showDialog(mainStage);
     }
 
-    @FXML
+    @FXML @SuppressWarnings("unused")
     private void algorithmSettingAction(ActionEvent event) throws IOException {
         String algorithmSettingsFilePath = PropertiesReader.readProperty("algorithm_settings_file_path");
 

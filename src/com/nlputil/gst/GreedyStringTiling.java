@@ -120,7 +120,7 @@ public class GreedyStringTiling {
 			if (Lmax > 2 * s)
 				s = Lmax;
 			else {
-				markStrings(s, PList, TList);
+				markStrings(PList, TList);
 				if (s > (2 * minimalMatchingLength))
 					s = s/2;
 				else if (s > minimalMatchingLength)
@@ -282,7 +282,7 @@ public class GreedyStringTiling {
 		return longestMaxMatch;
 	}
 
-	private static void markStrings(int s, String[] P, String[] T) {
+	private static void markStrings(String[] P, String[] T) {
 		for(Queue<MatchVals> queue:matchList){
 			while (!queue.isEmpty()) {
 				MatchVals match = queue.poll();

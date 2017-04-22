@@ -40,7 +40,7 @@ public class SettingsAlgorithmController implements Initializable {
         }
     }
 
-    @FXML
+    @FXML @SuppressWarnings("unused")
     private void radioLinesAction(ActionEvent event) {
         radioLinesSelected();
     }
@@ -50,7 +50,7 @@ public class SettingsAlgorithmController implements Initializable {
         iSpinnerTokens.setDisable(true);
     }
 
-    @FXML
+    @FXML @SuppressWarnings("unused")
     private void radioTokensAction(ActionEvent event) {
         radioTokensSelected();
     }
@@ -60,7 +60,7 @@ public class SettingsAlgorithmController implements Initializable {
         iSpinnerTokens.setDisable(false);
     }
 
-    @FXML
+    @FXML @SuppressWarnings("unused")
     private void okAction(ActionEvent event) {
         int iSpinnerLinesValue = iSpinnerLines.getValue();
         Settings.setConsecutiveLinesValue(iSpinnerLinesValue);
@@ -74,7 +74,7 @@ public class SettingsAlgorithmController implements Initializable {
         stage.close();
     }
 
-    @FXML
+    @FXML @SuppressWarnings("unused")
     private void cancelAction(ActionEvent event) {
         stage.close();
     }
