@@ -3,7 +3,6 @@ package staticc;
 import java.io.File;
 import java.util.prefs.Preferences;
 
-import model.ConsecutiveOption;
 import model.Project;
 import model.Projects;
 
@@ -13,12 +12,8 @@ public final class Settings {
 
     private static final String PROJECT_PATH = "project_path";
     private static final String BASE_PATH = "base_path";
-    private static final String CONSECUTIVE_LINES_VALUE = "consecutive_lines_value";
-    private static final int CONSECUTIVE_LINES_VALUE_DEFAULT = 10;
-    private static final String CONSECUTIVE_TOKENS_VALUE = "consecutive_tokens_value";
-    private static final int CONSECUTIVE_TOKENS_VALUE_DEFAULT = 30;
-    private static final String CONSECUTIVE_OPTION = "consecutive_option";
-    private static final String CONSECUTIVE_OPTION_DEFAULT = ConsecutiveOption.LINES.toString();
+    private static final String MINIMAL_MATCHED_LINES_VALUE = "minimal_matched_lines_value";
+    private static final int MINIMAL_MATCHED_LINES_VALUE_DEFAULT = 5;
 
     private Settings() {
 
@@ -88,28 +83,12 @@ public final class Settings {
 
 
 
-    public static int getConsecutiveLinesValue() {
-        return preferences.getInt(CONSECUTIVE_LINES_VALUE, CONSECUTIVE_LINES_VALUE_DEFAULT);
+    public static int getMinimalMatchedLinesValue() {
+        return preferences.getInt(MINIMAL_MATCHED_LINES_VALUE, MINIMAL_MATCHED_LINES_VALUE_DEFAULT);
     }
 
-    public static void setConsecutiveLinesValue(int value) {
-        preferences.putInt(CONSECUTIVE_LINES_VALUE, value);
-    }
-
-    public static int getConsecutiveTokensValue() {
-        return preferences.getInt(CONSECUTIVE_TOKENS_VALUE, CONSECUTIVE_TOKENS_VALUE_DEFAULT);
-    }
-
-    public static void setConsecutiveTokensValue(int value) {
-        preferences.putInt(CONSECUTIVE_TOKENS_VALUE, value);
-    }
-
-    public static String getConsecutiveOption() {
-        return preferences.get(CONSECUTIVE_OPTION, CONSECUTIVE_OPTION_DEFAULT);
-    }
-
-    public static void setConsecutiveOption(String str) {
-        preferences.put(CONSECUTIVE_OPTION, str);
+    public static void setMinimalMatchedLinesValue(int value) {
+        preferences.putInt(MINIMAL_MATCHED_LINES_VALUE, value);
     }
 
 }

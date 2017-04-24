@@ -1,6 +1,4 @@
 ﻿
-- usunac mozliwosc wyboru minimalnej liczby tokenow + usunać ustawienia + usunac wzmiankę o tym w dokumentacji + implementacje tego w TokenFile i TokenLine
-- w CompareFiles wyświetlić długość najdłuższego znalezione fragmentu
 - przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
 - jeśli po uruchomieniu program nic nie znajdzie to wyświetlić komunikat
 

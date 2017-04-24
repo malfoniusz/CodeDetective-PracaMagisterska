@@ -78,6 +78,7 @@ public class Compare {
                                                      baseName,
                                                      baseFile.getFile(),
                                                      baseFile.getTotalLines(),
+                                                     findLongestMatch(compareFragments),
                                                      result.getSimilarity(),
                                                      compareFragments);
         return compareFiles;
@@ -86,7 +87,7 @@ public class Compare {
     private static PlagResult runAlgorithm(TokenFile projectFile, TokenFile baseFile, boolean switchPlaces) {
         String pattern = (switchPlaces ? baseFile.createTokenLineStrings() : projectFile.createTokenLineStrings());
         String text = (switchPlaces ? projectFile.createTokenLineStrings() : baseFile.createTokenLineStrings());
-        PlagResult result = GreedyStringTiling.run(pattern, text, Settings.getConsecutiveLinesValue(), (float)0.5, false);
+        PlagResult result = GreedyStringTiling.run(pattern, text, Settings.getMinimalMatchedLinesValue(), (float)0.5, false);
 
         return result;
     }
@@ -117,6 +118,26 @@ public class Compare {
         FileMarked markedBase = new FileMarked(baseFile.getFile(), baseCodeLineStart, baseCodeLineEnd);
 
         return new CompareFragments(markedProject, markedBase);
+    }
+
+    private static int findLongestMatch(ArrayList<CompareFragments> compareFragments) {
+        int longestMatch = 0;
+
+        for (CompareFragments fragment : compareFragments) {
+            FileMarked markedBase = fragment.getFileMarkedBase();
+            int distance = markedBase.getToLine() - markedBase.getFromLine() + 1;
+            if (distance > longestMatch) {
+                longestMatch = distance;
+            }
+
+            FileMarked markedProject = fragment.getFileMarkedProject();
+            distance = markedProject.getToLine() - markedProject.getFromLine() + 1;
+            if (distance > longestMatch) {
+                longestMatch = distance;
+            }
+        }
+
+        return longestMatch;
     }
 
 }

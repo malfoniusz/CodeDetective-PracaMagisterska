@@ -3,6 +3,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CompareFiles {
@@ -22,13 +23,16 @@ public class CompareFiles {
     // Column Project
     private final SimpleStringProperty rBaseName;
 
+    // Longest match
+    private final SimpleIntegerProperty rLongestMatch;
+
     // Column Matched
     private final SimpleFloatProperty rSimilarity;
 
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<CompareFragments> compareFragments;
 
-    public CompareFiles(String projectName, File fileProject, int fileProjectLines, String baseName, File fileBase, int fileBaseLines, float similarity, ArrayList<CompareFragments> compareFragments) {
+    public CompareFiles(String projectName, File fileProject, int fileProjectLines, String baseName, File fileBase, int fileBaseLines, int longestMatch, float similarity, ArrayList<CompareFragments> compareFragments) {
         this.rBaseName = new SimpleStringProperty(baseName);
 
         this.fileProject = fileProject;
@@ -42,6 +46,8 @@ public class CompareFiles {
         this.fileBaseShortPath = fileShortPath(fileBase, baseName);
         this.rFileBase = new SimpleStringProperty();
         updateRFileBase();
+
+        this.rLongestMatch = new SimpleIntegerProperty(longestMatch);
 
         // Zaokraglenie do dwoch miejsc po przecinku i zamiana na procenty
         similarity = Math.round(similarity*10000) / (float) 100;
@@ -138,6 +144,16 @@ public class CompareFiles {
 
     public void setRBaseName(String value) {
         rBaseName.set(value);
+    }
+
+
+
+    public int getRLongestMatch() {
+        return rLongestMatch.get();
+    }
+
+    public void setRLongestMatch(int value) {
+        rLongestMatch.set(value);
     }
 
 

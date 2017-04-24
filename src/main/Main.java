@@ -126,8 +126,8 @@ public class Main extends Application {
         compareFragments2.add(fragments4);
 
         ArrayList<CompareFiles> compareFiles = new ArrayList<>();
-        CompareFiles compareFiles1 = new CompareFiles("Project1", file1, 365, "Base1", file2, 566, 58, compareFragments1);
-        CompareFiles compareFiles2 = new CompareFiles("Ultima", new File("myPath/plik2"), 205, "MassiveOnlineUtopia", new File("myPath/plik3"), 566, 95, compareFragments2);
+        CompareFiles compareFiles1 = new CompareFiles("Project1", file1, 365, "Base1", file2, 566, 99, 58, compareFragments1);
+        CompareFiles compareFiles2 = new CompareFiles("Ultima", new File("myPath/plik2"), 205, "MassiveOnlineUtopia", new File("myPath/plik3"), 566, 99, 95, compareFragments2);
         compareFiles.add(compareFiles1);
         compareFiles.add(compareFiles2);
 

@@ -3,6 +3,6 @@
     -fx-padding: 3 5;
 }
 
-#column-matched {
+.column-top-center {
     -fx-alignment: top-center;
 }
