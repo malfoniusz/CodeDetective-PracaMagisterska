@@ -67,10 +67,6 @@ public class CompareFilesController implements Initializable {
 
     public void setData(ArrayList<CompareFiles> items) {
         data.setAll(items);
-        sortTableByMatched();
-    }
-
-    private void sortTableByMatched() {
         compareFiles.getSortOrder().add(iSimilarity);
     }
 

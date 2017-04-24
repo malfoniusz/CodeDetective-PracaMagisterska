@@ -1,20 +1,8 @@
 ﻿
 - przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
-- jeśli po uruchomieniu program nic nie znajdzie to wyświetlić komunikat
 
 
-5. Testy
-- napisać testy:
-    + normalizacji kodu
-    + tokenizacji:
-        - scalic kilka plikow z roznych zrodel w jedne plik z kilkoma tysiacami linii kodu
-        - umiescic ten plik w projekcie
-        - przygotowac test tokenizacji
-        - wykorzystać token UNKNOWN
-    + wykrywania plagiatu
-
-
-6. Rodzaje tokenizacji:
+5. Rodzaje tokenizacji:
 - co zrobić z nieztokenizowanymi słowami? pominąć je, czy użyć token UNKONOW gdy linijka nie ma żadnego tokena?
 - wybor tokenów jakie mają być używane - UWAGA przy wyłączaniu tokenów wpływających na wykrywanie funkcji i operatorów np. arytmentycznych
 - rodzaje:
@@ -23,6 +11,17 @@
     + "branie/nie branie" pod uwagę początek { i koniec } np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
     + "branie/nie branie" pod uwagę argumentow w np. if(), for(), while()
     + "branie/nie branie" pod uwage argumentow w definicjach u wywolaniach funkcji 
+
+
+6. Testy
+- napisać testy:
+    + normalizacji kodu
+    + tokenizacji:
+        - scalic kilka plikow z roznych zrodel w jedne plik z kilkoma tysiacami linii kodu
+        - umiescic ten plik w projekcie
+        - przygotowac test tokenizacji
+        - wykorzystać token UNKNOWN
+    + wykrywania plagiatu
 
 
 7. Rozbudowa:

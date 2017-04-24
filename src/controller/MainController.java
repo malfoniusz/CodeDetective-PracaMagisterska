@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import model.CompareFiles;
@@ -32,6 +34,10 @@ public class MainController implements Initializable {
 
         if (compareFiles != null) {
             compareFilesController.setData(compareFiles);
+
+            if (compareFiles.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No similarities found.");
+            }
         }
     }
 
