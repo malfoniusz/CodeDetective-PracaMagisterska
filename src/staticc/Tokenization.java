@@ -19,7 +19,6 @@ import model.tokenization.TokenProjects;
 
 public final class Tokenization {
 
-    static final boolean USE_TOKEN_UNKNOWN = false;
     static final boolean SKIP_ARG_IN_COMPOUND_STATEMENTS = true;
 
     private Tokenization() {
@@ -28,16 +27,21 @@ public final class Tokenization {
 
     public static TokenFile tokenization(File file) {
         NormalizedCode normalizedCode = Normalization.codeNormalization(file);
-        TokenFile tokenFile = convertTokenFile(normalizedCode);
+        TokenFile tokenFile = convertTokenFile(normalizedCode, true);
 
         return tokenFile;
     }
 
-    private static TokenFile convertTokenFile(NormalizedCode normalizedCode) {
+    private static TokenFile convertTokenFile(NormalizedCode normalizedCode, boolean skipUnknown) {
         ArrayList<TokenLine> tokenLines = new ArrayList<>();
 
         for (CodeLine codeLine : normalizedCode.getCodeLines()) {
             ArrayList<Token> tokens = convertTokenLine(codeLine.getCode());
+
+            if (skipUnknown == true && tokens.get(0) == Token.UNKNOWN) {
+                continue;
+            }
+
             TokenLine tokenLine = new TokenLine(codeLine.getLineNumber(), tokens);
             tokenLines.add(tokenLine);
         }
@@ -45,7 +49,6 @@ public final class Tokenization {
         return new TokenFile(normalizedCode.getFile(), tokenLines);
     }
 
-    @SuppressWarnings("unused")
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
@@ -63,7 +66,7 @@ public final class Tokenization {
 
         tokens.addAll(othersTokenization(line));
 
-        if (USE_TOKEN_UNKNOWN && tokens.isEmpty()) {
+        if (tokens.isEmpty()) {
             tokens.add(Token.UNKNOWN);
         }
 
@@ -74,12 +77,33 @@ public final class Tokenization {
         ArrayList<Token> tokens = new ArrayList<>();
 
         if (newTokens == false) {
-            boolean foundTokens = tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(.*\\).*\\{", Token.FUNCTION_DEF));
+            boolean functionDef = tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(.*\\).*\\{", Token.FUNCTION_DEF));
 
-            if (foundTokens == false) {
+            if (functionDef == false) {
                 tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*\\(", Token.FUNCTION_USE));
                 tokens.addAll(findTokensRegex(line, "(?<!\\w)[A-Z]\\w*\\(", Token.CONSTRUCTOR_USE));
             }
+
+            if (tokens.isEmpty() == false) {
+                tokens.addAll(functionArguments(line));
+            }
+        }
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> functionArguments(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        boolean noArgs = findRegex(line, "(?<!\\w)\\w*\\(\\)[;{]");
+        if (noArgs) {
+            return tokens;
+        }
+
+        int numberOfArgs = findRegexCount(line, ",");
+        numberOfArgs += 1;
+        for (int i = 0; i < numberOfArgs; i++) {
+            tokens.add(Token.ARG);
         }
 
         return tokens;
@@ -270,6 +294,29 @@ public final class Tokenization {
         return tokens;
     }
 
+    private static int findRegexCount(String str, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+        }
+
+        return count;
+    }
+
+    private static boolean findRegex(String str, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+
+        if (matcher.find()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static TokenProject tokenProject(Project project) {
         ArrayList<TokenFile> tokenFiles = new ArrayList<>();
 
@@ -299,17 +346,22 @@ public final class Tokenization {
 
         for (File f : project.getFiles()) {
             NormalizedCode normalizedCode = Normalization.codeNormalization(f);
-            TokenFile tokenFile = convertTokenFile(normalizedCode);
+            TokenFile tokenFile = convertTokenFile(normalizedCode, false);
 
             ArrayList<CodeLine> codeLines = normalizedCode.getCodeLines();
             ArrayList<TokenLine> tokenLines = tokenFile.getTokenLines();
 
             sb.append("\tFILE: " + f.getName() + "\n");
-            for (int i = 0; i < codeLines.size(); i++) {
-                String strCode = codeLines.get(i).toString();
-                String strTokens = tokenLines.get(i).getTokens().toString();
-                sb.append(strCode + "\t" + strTokens);
-                sb.append(System.lineSeparator());
+            for (int A = 0, B = 0; B < tokenLines.size(); A++, B++) {
+                if (codeLines.get(A).getLineNumber() == tokenLines.get(B).getLineNumber()) {
+                    String strCode = codeLines.get(A).toString();
+                    String strTokens = tokenLines.get(B).getTokens().toString();
+                    sb.append(strCode + "\t" + strTokens);
+                    sb.append(System.lineSeparator());
+                }
+                else {
+                    B--;
+                }
             }
             sb.append(System.lineSeparator());
             sb.append(System.lineSeparator());

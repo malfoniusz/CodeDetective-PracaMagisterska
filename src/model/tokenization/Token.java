@@ -7,9 +7,10 @@ public enum Token {
     TRY("try"),
     CATCH("catch"),
 
-    FUNCTION_DEF("function_def"),   // function def + constructor
+    FUNCTION_DEF("function_def"),   // function def + constructor def
     FUNCTION_USE("function_use"),
     CONSTRUCTOR_USE("constructor_use"),
+    ARG("arg"),
 
     ENUM("enum"),
     NEW("new"),
