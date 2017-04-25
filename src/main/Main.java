@@ -22,11 +22,12 @@ import model.FileMarked;
 import model.Project;
 import model.Projects;
 import staticc.Compare;
+import staticc.PropertiesReader;
 import staticc.Settings;
 
 public class Main extends Application {
 
-    private final String SCENE_FILE_NAME = "../fxml/Main.fxml";
+    private final String SCENE_FILE_NAME = PropertiesReader.readProperty("main_class");;
     private final String PROGRAM_NAME = "CodeDetective";
 
     private MainController mainController;

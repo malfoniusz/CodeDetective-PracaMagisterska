@@ -72,7 +72,7 @@ public class MenuController implements Initializable {
 
     @FXML @SuppressWarnings("unused")
     private void algorithmSettingAction(ActionEvent event) throws IOException {
-        String algorithmSettingsFilePath = PropertiesReader.readProperty("algorithm_settings_file_path");
+        String algorithmSettingsFilePath = PropertiesReader.readProperty("menuController_algorithmSettingAction");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(algorithmSettingsFilePath));
         Parent root = (Parent) loader.load();
