@@ -1,19 +1,30 @@
 ﻿
-- przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
+- usunąć z normalizacji switch, aby warunki if i switch były do siebie podobne tzn. if = case
 
 
 5. Rodzaje tokenizacji:
-- co zrobić z nieztokenizowanymi słowami? pominąć je, czy użyć token UNKONOW gdy linijka nie ma żadnego tokena?
-- wybor tokenów jakie mają być używane - UWAGA przy wyłączaniu tokenów wpływających na wykrywanie funkcji i operatorów np. arytmentycznych
-- rodzaje:
-    + ogólna np. LICZBA = float, double, int, long, short
-    + prezycyjna np. INT = int; class(int a, float b) - rozróżniać argumenty i kolejność argumentów jest ustalana na podstawie kolejności sprawdzania typów argumentów
-    + "branie/nie branie" pod uwagę początek { i koniec } np. BEGIN_CLASS, END_CLASS; sprawdzić przykład z JPlag
-    + "branie/nie branie" pod uwagę argumentow w np. if(), for(), while()
-    + "branie/nie branie" pod uwage argumentow w definicjach u wywolaniach funkcji 
+- UWAGA na poprawność działania programu po wyłączeniu niektórych tokenów
+- Ustawienia:
+    + LICZBA -> NUMBER_WHOLE -> INT, LONG, SHORT
+             -> NUMBER_DEC -> FLOAT, DOUBLE
+    + TEXT -> CHAR, STRING
+    + OPERATION -> OP_RELATION, OP_LOGIC, OP_ASSIGN, OP_ARITHMETIC, OP_BITWISE
+    + LOOP -> FOR, WHILE, DO
+    + STATEMENT -> STATEMENT_IF -> IF, ELSE
+                -> STATEMENT_SWITCH -> CASE, DEFAULT, BREAK
+    + FUNCTION -> FUNCTION_DEF, FUNCTION_USE, CONSTRUCTOR_USE
+    + STATIC, FINAL, VOID, BOOLEAN, BYTE, CLASS_VAR
+    + TABLE, CAST, GENERIC
+    + CLASS, NEW, EXTENDS, IMPLEMENTS, ENUM
+    + TRY, CATCH, THROW
+    + RETURN, CONTINUE
+    + (skip statement arguments)
+    + (skip loop arguments)
+    + (skip function arguments) ARG
 
 
 6. Testy
+- przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
 - napisać testy:
     + normalizacji kodu
     + tokenizacji:

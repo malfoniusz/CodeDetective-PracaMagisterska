@@ -22,8 +22,8 @@ public enum Token {
     THROW("throw"),
     VOID("void"),
     RETURN("return"),
-    NUMBER_DEC("number_dec"),       // int, long, short
-    NUMBER_POINT("number_point"),   // double, float
+    NUMBER_WHOLE("number_whole"),   // int, long, short
+    NUMBER_DEC("number_dec"),       // double, float
     TEXT("text"),                   // String, char
     BOOLEAN("boolean"),
     BYTE("byte"),

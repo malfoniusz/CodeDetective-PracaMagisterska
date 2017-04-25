@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -83,11 +82,30 @@ public class MenuController implements Initializable {
         controller.setStage(stage);
 
         stage.setTitle("Algorithm Settings");
-        Image secoundIcon = new Image(ClassLoader.getSystemResource("detective.png").toString());
-        stage.getIcons().add(secoundIcon);
         // Usuniecie przyciskow minimalizacji i maksymalizacji
         stage.initStyle(StageStyle.UTILITY);
         // Zablokowanie zamkniecia poprzedniego okna dopoki te okno nie zostanie zamkniete
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(mainStage);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void settingsTokensAction(ActionEvent event) throws IOException {
+        String settingsTokensFilePath = PropertiesReader.readProperty("menuController_settingsTokensAction");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(settingsTokensFilePath));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        SettingsTokensController controller = (SettingsTokensController) loader.getController();
+        controller.setStage(stage);
+
+        stage.setTitle("Tokens Settings");
+        stage.initStyle(StageStyle.UTILITY);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(mainStage);
         stage.setResizable(false);

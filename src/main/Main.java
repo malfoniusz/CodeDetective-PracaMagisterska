@@ -27,7 +27,7 @@ import staticc.Settings;
 
 public class Main extends Application {
 
-    private final String SCENE_FILE_NAME = PropertiesReader.readProperty("main_class");;
+    private final String SCENE_FILE_NAME = PropertiesReader.readProperty("main_class");
     private final String PROGRAM_NAME = "CodeDetective";
 
     private MainController mainController;
@@ -60,7 +60,7 @@ public class Main extends Application {
     private void prepareStage(Stage stage) {
         Scene scene = new Scene(root);
         stage.setTitle(PROGRAM_NAME);
-        Image icon = new Image(ClassLoader.getSystemResource("detective.png").toString());
+        Image icon = new Image(ClassLoader.getSystemResource(PropertiesReader.readProperty("icon")).toString());
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
