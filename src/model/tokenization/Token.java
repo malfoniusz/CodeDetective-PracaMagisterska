@@ -1,6 +1,8 @@
 package model.tokenization;
 
 public enum Token {
+    // Tokeny sa poukladane w kolejnosci ich wykrywania przez proces tokenizacji
+
     CONDITIONAL_STATEMENT("conditional_statment"),  // if, else, else if
     LOOP("loop"),   // for, while, do
     SWITCH("switch"),
@@ -20,6 +22,7 @@ public enum Token {
     STATIC("static"),
     FINAL("final"),
     THROW("throw"),
+    THROWS("throws"),
     VOID("void"),
     RETURN("return"),
     NUMBER_WHOLE("number_whole"),   // int, long, short

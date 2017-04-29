@@ -19,7 +19,7 @@ import model.tokenization.TokenProjects;
 
 public final class Tokenization {
 
-    static final boolean SKIP_ARG_IN_COMPOUND_STATEMENTS = true;
+    static final boolean SKIP_ARG_IN_STATEMENTS_AND_LOOPS = true;
 
     private Tokenization() {
 
@@ -54,7 +54,7 @@ public final class Tokenization {
 
         boolean newTokens = tokens.addAll(compoundStatmentsTokenization(line));
 
-        if (SKIP_ARG_IN_COMPOUND_STATEMENTS && newTokens) {
+        if (SKIP_ARG_IN_STATEMENTS_AND_LOOPS && newTokens) {
             return tokens;
         }
 
@@ -135,7 +135,8 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(implements)(?!\\w)", Token.IMPLEMENTS));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throw|throws)(?!\\w)", Token.THROW));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throw)(?!\\w)", Token.THROW));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throws)(?!\\w)", Token.THROWS));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(return)(?!\\w)", Token.RETURN));
 

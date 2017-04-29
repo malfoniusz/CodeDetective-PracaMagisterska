@@ -1,30 +1,11 @@
 ﻿
-- usunąć z normalizacji switch, aby warunki if i switch były do siebie podobne tzn. if = case
-
-
 5. Rodzaje tokenizacji:
 - UWAGA na poprawność działania programu po wyłączeniu niektórych tokenów
-- Ustawienia:
-    + LICZBA -> NUMBER_WHOLE -> INT, LONG, SHORT
-             -> NUMBER_DEC -> FLOAT, DOUBLE
-    + TEXT -> CHAR, STRING
-    + OPERATION -> OP_RELATION, OP_LOGIC, OP_ASSIGN, OP_ARITHMETIC, OP_BITWISE
-    + LOOP -> FOR, WHILE, DO
-    + STATEMENT -> STATEMENT_IF -> IF, ELSE
-                -> STATEMENT_SWITCH -> CASE, DEFAULT, BREAK
-    + FUNCTION -> FUNCTION_DEF, FUNCTION_USE, CONSTRUCTOR_USE
-    + STATIC, FINAL, VOID, BOOLEAN, BYTE, CLASS_VAR
-    + TABLE, CAST, GENERIC
-    + CLASS, NEW, EXTENDS, IMPLEMENTS, ENUM
-    + TRY, CATCH, THROW
-    + RETURN, CONTINUE
-    + (skip statement arguments)
-    + (skip loop arguments)
-    + (skip function arguments) ARG
+- (skip function arguments) ARG
 
 
 6. Testy
-- przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
+- nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
 - napisać testy:
     + normalizacji kodu
     + tokenizacji:
@@ -35,10 +16,15 @@
     + wykrywania plagiatu
 
 
-7. Rozbudowa:
-- help - opis wszystkiego m.in. co oznaczają poszczególne kolumny tabel
+7. Eksperymenty
+- przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
+- czas wykonania algorytmu zmierzyć za pomocą jakiejś funkcji
+
+
+8. Rozbudowa:
+- help - opisac m.in. w oknach - co oznaczają poszczególne kolumny tabel; w ustawieniach tokenow - co oznaczają poszczególne tokeny
+- zmodyfikować algorytm RKR-GST lub zaimplementować inne algorytmy i porównać czas ich wykonania (praw. par trzeba będzie liczyć ręcznie)
 - zrobić metodę 1 do 1
 - CompareFiles - wyświetlić długość najdłuższego znalezionego podobnego fragmentu
 - branie pod uwagę procentowego podobieństwa fragmentów (niepodobny kod na początku i końcu fragmentu jest pomijany) + zaimplementować ustawienia
 - wyświetlanie tylko par plików z minimalnym procentem podobieństwa
-- zmodyfikowac algorytm karpa-rabina
