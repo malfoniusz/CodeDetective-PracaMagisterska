@@ -5,6 +5,9 @@ public enum Token {
 
     CONDITIONAL_STATEMENT("CONDITIONAL_STATMENT"),  // if, else, else if
     LOOP("LOOP"),   // for, while, do
+    FOR("FOR"),
+    WHILE("WHILE"),
+    DO("DO"),
     SWITCH("SWITCH"),
     TRY("TRY"),
     CATCH("CATCH"),
@@ -25,17 +28,26 @@ public enum Token {
     THROWS("THROWS"),
     VOID("VOID"),
     RETURN("RETURN"),
+    NUMBER("NUMBER"),               // number_whole, number_decimal
     NUMBER_WHOLE("NUMBER_WHOLE"),   // int, long, short
+    INT("INT"),
+    LONG("LONG"),
+    SHORT("SHORT"),
     NUMBER_DEC("NUMBER_DEC"),       // double, float
+    FLOAT("FLOAT"),
+    DOUBLE("DOUBLE"),
     TEXT("TEXT"),                   // String, char
+    STRING("STRING"),
+    CHAR("CHAR"),
     BOOLEAN("BOOLEAN"),
     BYTE("BYTE"),
 
-    OP_RELATION("OP_RELATION"),    // ==, !=, >=, <=, >, <
-    OP_LOGIC("OP_LOGIC"),       // &&, ||, !
-    OP_ASSIGN("OP_ASSIGN"),      // <<=, >>=, +=, -=, *=, /=, %=, &=, ^=, |=, =
-    OP_ARITHMETIC("OP_ARITHMETIC"),  // ++, --, +, -, *, /, %
-    OP_BITWISE("OP_BITWISE"),     // <<, >>>, >>, &, |, ^, ~
+    OPERATOR("OPERATOR"),           // oo_relation, op_logic, op_assign, op_arithmetic, op_bitwise
+    OP_RELATION("OP_RELATION"),     // ==, !=, >=, <=, >, <
+    OP_LOGIC("OP_LOGIC"),           // &&, ||, !
+    OP_ASSIGN("OP_ASSIGN"),         // <<=, >>=, +=, -=, *=, /=, %=, &=, ^=, |=, =
+    OP_ARITHMETIC("OP_ARITHMETIC"), // ++, --, +, -, *, /, %
+    OP_BITWISE("OP_BITWISE"),       // <<, >>>, >>, &, |, ^, ~
 
     CLASS_VAR("CLASS_VAR"),
 

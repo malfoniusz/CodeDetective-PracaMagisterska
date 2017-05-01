@@ -15,7 +15,7 @@ public class SettingsTokensController implements Initializable {
     @FXML private CheckBox iNumber, iNumberWhole, iNumberDecimal, iInt, iLong, iShort, iFloat, iDouble;
     @FXML private CheckBox iClassVariable, iBoolean, iByte;
     @FXML private CheckBox iText, iString, iChar;
-    @FXML private CheckBox iOperation, iRelation, iAssign, iLogic, iArithmetic, iBitwise;
+    @FXML private CheckBox iOperator, iRelation, iAssign, iLogic, iArithmetic, iBitwise;
     @FXML private CheckBox iIfAndElse, iSwitch, iCase, iDefault;
     @FXML private CheckBox iLoop, iFor, iWhile, iDo;
     @FXML private CheckBox iFunctionDefine, iFunctionUse, iConstructorUse;
@@ -35,7 +35,7 @@ public class SettingsTokensController implements Initializable {
         iBoolean.setSelected(Settings.getIBoolean());
         iByte.setSelected(Settings.getIByte());
         updateText(Settings.getIText(), Settings.getIString(), Settings.getIChar());
-        updateOperation(Settings.getIOperation(), Settings.getIRelation(), Settings.getIAssign(), Settings.getILogic(), Settings.getIArithmetic(), Settings.getIBitwise());
+        updateOperator(Settings.getIOperator(), Settings.getIRelation(), Settings.getIAssign(), Settings.getILogic(), Settings.getIArithmetic(), Settings.getIBitwise());
         iIfAndElse.setSelected(Settings.getIIfAndElse());
         iSwitch.setSelected(Settings.getISwitch());
         iCase.setSelected(Settings.getICase());
@@ -173,14 +173,14 @@ public class SettingsTokensController implements Initializable {
     }
 
     @FXML @SuppressWarnings("unused")
-    private void actionOperation(ActionEvent event) {
-        updateOperation(iOperation.isSelected(), true, true, true, true, true);
+    private void actionOperator(ActionEvent event) {
+        updateOperator(iOperator.isSelected(), true, true, true, true, true);
     }
 
-    private void updateOperation(boolean _iOperation, boolean _iRelation, boolean _iAssign, boolean _iLogic, boolean _iArithmetic, boolean _iBitwise) {
-        iOperation.setSelected(_iOperation);
+    private void updateOperator(boolean _iOperation, boolean _iRelation, boolean _iAssign, boolean _iLogic, boolean _iArithmetic, boolean _iBitwise) {
+        iOperator.setSelected(_iOperation);
 
-        if (iOperation.isSelected()) {
+        if (iOperator.isSelected()) {
             iRelation.setDisable(true);
             iAssign.setDisable(true);
             iLogic.setDisable(true);
@@ -255,7 +255,7 @@ public class SettingsTokensController implements Initializable {
         Settings.setIText(iText.isSelected());
         Settings.setIString(iString.isSelected());
         Settings.setIChar(iChar.isSelected());
-        Settings.setIOperation(iOperation.isSelected());
+        Settings.setIOperator(iOperator.isSelected());
         Settings.setIRelation(iRelation.isSelected());
         Settings.setIAssign(iAssign.isSelected());
         Settings.setILogic(iLogic.isSelected());

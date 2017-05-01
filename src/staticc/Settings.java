@@ -18,7 +18,7 @@ public final class Settings {
     private static String I_NUMBER = "i_number", I_NUMBER_WHOLE = "i_number_whole", I_NUMBER_DECIMAL = "i_number_decimal", I_INT = "i_int", I_LONG = "i_long", I_SHORT = "i_short", I_FLOAT = "i_float", I_DOUBLE = "i_double";
     private static String I_CLASS_VARIABLE = "i_class_variable", I_BOOLEAN = "i_boolean", I_BYTE = "i_byte";
     private static String I_TEXT = "i_text", I_STRING = "i_string", I_CHAR = "i_char";
-    private static String I_OPERATION = "i_operation", I_RELATION = "i_relation", I_ASSIGN = "i_assign", I_LOGIC = "i_logic", I_ARITHMETIC = "i_arithmetic", I_BITWISE = "i_bitwise";
+    private static String I_OPERATOR = "i_operator", I_RELATION = "i_relation", I_ASSIGN = "i_assign", I_LOGIC = "i_logic", I_ARITHMETIC = "i_arithmetic", I_BITWISE = "i_bitwise";
     private static String I_IF_AND_ELSE = "i_if_and_else", I_SWITCH = "i_swtich", I_CASE = "i_case", I_DEFAULT = "i_default";
     private static String I_LOOP = "i_loop", I_FOR = "i_for", I_WHILE = "i_while", I_DO = "i_do";
     private static String I_FUNCTION_DEFINE = "i_function_define", I_FUNCTION_USE = "i_function_use", I_CONSTRUCTOR_USE = "i_constructor_use";
@@ -213,12 +213,12 @@ public final class Settings {
         preferences.putBoolean(I_CHAR, value);
     }
 
-    public static boolean getIOperation() {
-        return preferences.getBoolean(I_OPERATION, false);
+    public static boolean getIOperator() {
+        return preferences.getBoolean(I_OPERATOR, false);
     }
 
-    public static void setIOperation(boolean value) {
-        preferences.putBoolean(I_OPERATION, value);
+    public static void setIOperator(boolean value) {
+        preferences.putBoolean(I_OPERATOR, value);
     }
 
     public static boolean getIRelation() {

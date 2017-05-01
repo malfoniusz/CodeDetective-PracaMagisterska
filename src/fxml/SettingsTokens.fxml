@@ -67,7 +67,7 @@
             <CheckBox fx:id="iClassVariable" mnemonicParsing="false" selected="true" text="Class Variable" GridPane.rowIndex="5" />
             <CheckBox fx:id="iBoolean" mnemonicParsing="false" selected="true" text="boolean" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <CheckBox fx:id="iByte" mnemonicParsing="false" selected="true" text="byte" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <CheckBox fx:id="iOperation" mnemonicParsing="false" onAction="#actionOperation" text="Operation" GridPane.rowIndex="7">
+            <CheckBox fx:id="iOperator" mnemonicParsing="false" onAction="#actionOperator" text="Operator" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

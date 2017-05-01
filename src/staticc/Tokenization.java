@@ -140,9 +140,13 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(return)(?!\\w)", Token.RETURN));
 
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(int|short|long)(?!\\w)", Token.NUMBER_WHOLE));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(double|float)(?!\\w)", Token.NUMBER_DEC));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(String|char)(?!\\w)", Token.TEXT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(int)(?!\\w)", Token.INT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(long)(?!\\w)", Token.LONG));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(short)(?!\\w)", Token.SHORT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(float)(?!\\w)", Token.FLOAT));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(double)(?!\\w)", Token.DOUBLE));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(String)(?!\\w)", Token.STRING));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(char)(?!\\w)", Token.CHAR));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(boolean)(?!\\w)", Token.BOOLEAN));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(byte)(?!\\w)", Token.BYTE));
 
@@ -158,9 +162,9 @@ public final class Tokenization {
             tokens.add(Token.CONDITIONAL_STATEMENT);
         }
 
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)for\\(", Token.LOOP));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)while\\(", Token.LOOP));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)do\\{", Token.LOOP));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)for\\(", Token.FOR));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)while\\(", Token.WHILE));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)do\\{", Token.DO));
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)switch\\(", Token.SWITCH));
 
