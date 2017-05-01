@@ -3,51 +3,51 @@ package model.tokenization;
 public enum Token {
     // Tokeny sa poukladane w kolejnosci ich wykrywania przez proces tokenizacji
 
-    CONDITIONAL_STATEMENT("conditional_statment"),  // if, else, else if
-    LOOP("loop"),   // for, while, do
-    SWITCH("switch"),
-    TRY("try"),
-    CATCH("catch"),
+    CONDITIONAL_STATEMENT("CONDITIONAL_STATMENT"),  // if, else, else if
+    LOOP("LOOP"),   // for, while, do
+    SWITCH("SWITCH"),
+    TRY("TRY"),
+    CATCH("CATCH"),
 
-    FUNCTION_DEF("function_def"),   // function def + constructor def
-    FUNCTION_USE("function_use"),
-    CONSTRUCTOR_USE("constructor_use"),
-    ARG("arg"),
+    FUNCTION_DEF("FUNCTION_DEF"),   // function def + constructor def
+    FUNCTION_USE("FUNCTION_USE"),
+    CONSTRUCTOR_USE("CONSTRUCTOR_USE"),
+    ARG("ARG"),
 
-    ENUM("enum"),
-    NEW("new"),
-    CLASS("class"),
-    EXTENDS("extends"),
-    IMPLEMENTS("implements"),
-    STATIC("static"),
-    FINAL("final"),
-    THROW("throw"),
-    THROWS("throws"),
-    VOID("void"),
-    RETURN("return"),
-    NUMBER_WHOLE("number_whole"),   // int, long, short
-    NUMBER_DEC("number_dec"),       // double, float
-    TEXT("text"),                   // String, char
-    BOOLEAN("boolean"),
-    BYTE("byte"),
+    ENUM("ENUM"),
+    NEW("NEW"),
+    CLASS("CLASS"),
+    EXTENDS("EXTENDS"),
+    IMPLEMENTS("IMPLEMENTS"),
+    STATIC("STATIC"),
+    FINAL("FINAL"),
+    THROW("THROW"),
+    THROWS("THROWS"),
+    VOID("VOID"),
+    RETURN("RETURN"),
+    NUMBER_WHOLE("NUMBER_WHOLE"),   // int, long, short
+    NUMBER_DEC("NUMBER_DEC"),       // double, float
+    TEXT("TEXT"),                   // String, char
+    BOOLEAN("BOOLEAN"),
+    BYTE("BYTE"),
 
-    OP_RELATION("op_relation"),    // ==, !=, >=, <=, >, <
-    OP_LOGIC("op_logic"),       // &&, ||, !
-    OP_ASSIGN("op_assign"),      // <<=, >>=, +=, -=, *=, /=, %=, &=, ^=, |=, =
-    OP_ARITHMETIC("op_arithmetic"),  // ++, --, +, -, *, /, %
-    OP_BITWISE("op_bitwise"),     // <<, >>>, >>, &, |, ^, ~
+    OP_RELATION("OP_RELATION"),    // ==, !=, >=, <=, >, <
+    OP_LOGIC("OP_LOGIC"),       // &&, ||, !
+    OP_ASSIGN("OP_ASSIGN"),      // <<=, >>=, +=, -=, *=, /=, %=, &=, ^=, |=, =
+    OP_ARITHMETIC("OP_ARITHMETIC"),  // ++, --, +, -, *, /, %
+    OP_BITWISE("OP_BITWISE"),     // <<, >>>, >>, &, |, ^, ~
 
-    CLASS_VAR("class_var"),
+    CLASS_VAR("CLASS_VAR"),
 
-    TABLE("table"),
-    GENERIC("generic"),        // <...>
-    CASE("case"),
-    DEFAULT("default"),
-    CONTINUE("continue"),
-    BREAK("break"),
-    CAST("cast"),        // (Object)
+    TABLE("TABLE"),
+    GENERIC("GENERIC"),        // <...>
+    CASE("CASE"),
+    DEFAULT("DEFAULT"),
+    CONTINUE("CONTINUE"),
+    BREAK("BREAK"),
+    CAST("CAST"),        // (Object)
 
-    UNKNOWN("unknown"),
+    UNKNOWN("UNKNOWN"),
     ;
 
     private final String text;

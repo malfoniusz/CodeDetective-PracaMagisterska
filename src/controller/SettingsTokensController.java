@@ -14,6 +14,7 @@ public class SettingsTokensController implements Initializable {
 
     @FXML private CheckBox iNumber, iNumberWhole, iNumberDecimal, iInt, iLong, iShort, iFloat, iDouble;
     @FXML private CheckBox iClassVariable, iBoolean, iByte;
+    @FXML private CheckBox iText, iString, iChar;
     @FXML private CheckBox iOperation, iRelation, iAssign, iLogic, iArithmetic, iBitwise;
     @FXML private CheckBox iIfAndElse, iSwitch, iCase, iDefault;
     @FXML private CheckBox iLoop, iFor, iWhile, iDo;
@@ -29,31 +30,17 @@ public class SettingsTokensController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        iNumber.setSelected(Settings.getINunmber());
-        iNumberWhole.setSelected(Settings.getINumberWhole());
-        iNumberDecimal.setSelected(Settings.getINumberDecimal());
-        iInt.setSelected(Settings.getIInt());
-        iLong.setSelected(Settings.getILong());
-        iShort.setSelected(Settings.getIShort());
-        iFloat.setSelected(Settings.getIFloat());
-        iDouble.setSelected(Settings.getIDouble());
+        updateNumber(Settings.getINunmber(), Settings.getINumberWhole(), Settings.getIInt(), Settings.getILong(), Settings.getIShort(), Settings.getINumberDecimal(), Settings.getIFloat(), Settings.getIDouble());
         iClassVariable.setSelected(Settings.getIClassVariable());
         iBoolean.setSelected(Settings.getIBoolean());
         iByte.setSelected(Settings.getIByte());
-        iOperation.setSelected(Settings.getIOperation());
-        iRelation.setSelected(Settings.getIRelation());
-        iAssign.setSelected(Settings.getIAssign());
-        iLogic.setSelected(Settings.getILogic());
-        iArithmetic.setSelected(Settings.getIArithmetic());
-        iBitwise.setSelected(Settings.getIBitwise());
+        updateText(Settings.getIText(), Settings.getIString(), Settings.getIChar());
+        updateOperation(Settings.getIOperation(), Settings.getIRelation(), Settings.getIAssign(), Settings.getILogic(), Settings.getIArithmetic(), Settings.getIBitwise());
         iIfAndElse.setSelected(Settings.getIIfAndElse());
         iSwitch.setSelected(Settings.getISwitch());
         iCase.setSelected(Settings.getICase());
         iDefault.setSelected(Settings.getIDefault());
-        iLoop.setSelected(Settings.getILoop());
-        iFor.setSelected(Settings.getIFor());
-        iWhile.setSelected(Settings.getIWhile());
-        iDo.setSelected(Settings.getIDo());
+        updateLoopGroup(Settings.getILoop(), Settings.getIFor(), Settings.getIWhile(), Settings.getIDo());
         iFunctionDefine.setSelected(Settings.getIFunctionDefine());
         iFunctionUse.setSelected(Settings.getIFunctionUse());
         iConstructorUse.setSelected(Settings.getIConstructorUse());
@@ -78,26 +65,25 @@ public class SettingsTokensController implements Initializable {
         iSkipFunctionArgs.setSelected(Settings.getISkipFunctionArgs());
         iSkipStatmentArgs.setSelected(Settings.getISkipStatmentArgs());
         iSkipLoopArgs.setSelected(Settings.getISkipLoopArgs());
-
-        updateNumber();
-        updateOperation();
-        updateLoop();
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionNumber(ActionEvent event) {
-        updateNumber();
+        updateNumber(iNumber.isSelected(), true, true, true, true, true, true, true);
     }
 
-    private void updateNumber() {
+    private void updateNumber(boolean _iNumber,
+            boolean _iNumberWhole, boolean _iInt, boolean _iLong, boolean _iShort,
+            boolean _iNumberDecimal, boolean _iFloat, boolean _Double) {
+        iNumber.setSelected(_iNumber);
+
         if (iNumber.isSelected()) {
             iNumberWhole.setDisable(true);
             iNumberDecimal.setDisable(true);
 
-            iNumberWhole.setSelected(true);
-            iNumberDecimal.setSelected(true);
-            updateNumberWhole();
-            updateNumberDecimal();
+            updateNumberWhole(true, false, false, false);
+            updateNumberDecimal(true, false, false);
+
             iNumberWhole.setSelected(false);
             iNumberDecimal.setSelected(false);
         }
@@ -105,20 +91,19 @@ public class SettingsTokensController implements Initializable {
             iNumberWhole.setDisable(false);
             iNumberDecimal.setDisable(false);
 
-            iNumberWhole.setSelected(true);
-            iNumberDecimal.setSelected(true);
-
-            updateNumberWhole();
-            updateNumberDecimal();
+            updateNumberWhole(_iNumberWhole, _iInt, _iLong, _iShort);
+            updateNumberDecimal(_iNumberDecimal, _iFloat, _Double);
         }
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionNumberWhole(ActionEvent event) {
-        updateNumberWhole();
+        updateNumberWhole(iNumberWhole.isSelected(), true, true, true);
     }
 
-    private void updateNumberWhole() {
+    private void updateNumberWhole(boolean _iNumberWhole, boolean _iInt, boolean _iLong, boolean _iShort) {
+        iNumberWhole.setSelected(_iNumberWhole);
+
         if (iNumberWhole.isSelected()) {
             iInt.setDisable(true);
             iLong.setDisable(true);
@@ -133,18 +118,20 @@ public class SettingsTokensController implements Initializable {
             iLong.setDisable(false);
             iShort.setDisable(false);
 
-            iInt.setSelected(true);
-            iLong.setSelected(true);
-            iShort.setSelected(true);
+            iInt.setSelected(_iInt);
+            iLong.setSelected(_iLong);
+            iShort.setSelected(_iShort);
         }
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionNumberDecimal(ActionEvent event) {
-        updateNumberDecimal();
+        updateNumberDecimal(iNumberDecimal.isSelected(), true, true);
     }
 
-    private void updateNumberDecimal() {
+    private void updateNumberDecimal(boolean _iNumberDecimal, boolean _iFloat, boolean _iDouble) {
+        iNumberDecimal.setSelected(_iNumberDecimal);
+
         if (iNumberDecimal.isSelected()) {
             iFloat.setDisable(true);
             iDouble.setDisable(true);
@@ -156,17 +143,43 @@ public class SettingsTokensController implements Initializable {
             iFloat.setDisable(false);
             iDouble.setDisable(false);
 
-            iFloat.setSelected(true);
-            iDouble.setSelected(true);
+            iFloat.setSelected(_iFloat);
+            iDouble.setSelected(_iDouble);
+        }
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionText(ActionEvent event) {
+        updateText(iText.isSelected(), true, true);
+    }
+
+    private void updateText(boolean _iText, boolean _iString, boolean _iChar) {
+        iText.setSelected(_iText);
+
+        if (iText.isSelected()) {
+            iString.setDisable(true);
+            iChar.setDisable(true);
+
+            iString.setSelected(false);
+            iChar.setSelected(false);
+        }
+        else {
+            iString.setDisable(false);
+            iChar.setDisable(false);
+
+            iString.setSelected(_iString);
+            iChar.setSelected(_iChar);
         }
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionOperation(ActionEvent event) {
-        updateOperation();
+        updateOperation(iOperation.isSelected(), true, true, true, true, true);
     }
 
-    private void updateOperation() {
+    private void updateOperation(boolean _iOperation, boolean _iRelation, boolean _iAssign, boolean _iLogic, boolean _iArithmetic, boolean _iBitwise) {
+        iOperation.setSelected(_iOperation);
+
         if (iOperation.isSelected()) {
             iRelation.setDisable(true);
             iAssign.setDisable(true);
@@ -187,20 +200,22 @@ public class SettingsTokensController implements Initializable {
             iArithmetic.setDisable(false);
             iBitwise.setDisable(false);
 
-            iRelation.setSelected(true);
-            iAssign.setSelected(true);
-            iLogic.setSelected(true);
-            iArithmetic.setSelected(true);
-            iBitwise.setSelected(true);
+            iRelation.setSelected(_iRelation);
+            iAssign.setSelected(_iAssign);
+            iLogic.setSelected(_iLogic);
+            iArithmetic.setSelected(_iArithmetic);
+            iBitwise.setSelected(_iBitwise);
         }
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionLoop(ActionEvent event) {
-        updateLoop();
+        updateLoopGroup(iLoop.isSelected(), true, true, true);
     }
 
-    private void updateLoop() {
+    private void updateLoopGroup(boolean _iLoop, boolean _iFor, boolean _iWhile, boolean _iDo) {
+        iLoop.setSelected(_iLoop);
+
         if (iLoop.isSelected()) {
             iFor.setDisable(true);
             iWhile.setDisable(true);
@@ -215,11 +230,12 @@ public class SettingsTokensController implements Initializable {
             iWhile.setDisable(false);
             iDo.setDisable(false);
 
-            iFor.setSelected(true);
-            iWhile.setSelected(true);
-            iDo.setSelected(true);
+            iFor.setSelected(_iFor);
+            iWhile.setSelected(_iWhile);
+            iDo.setSelected(_iDo);
         }
     }
+
 
     @FXML @SuppressWarnings("unused")
     private void actionOk(ActionEvent event) {
@@ -236,6 +252,9 @@ public class SettingsTokensController implements Initializable {
         Settings.setIClassVariable(iClassVariable.isSelected());
         Settings.setIBoolean(iBoolean.isSelected());
         Settings.setIByte(iByte.isSelected());
+        Settings.setIText(iText.isSelected());
+        Settings.setIString(iString.isSelected());
+        Settings.setIChar(iChar.isSelected());
         Settings.setIOperation(iOperation.isSelected());
         Settings.setIRelation(iRelation.isSelected());
         Settings.setIAssign(iAssign.isSelected());

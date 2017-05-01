@@ -17,6 +17,7 @@ public final class Settings {
 
     private static String I_NUMBER = "i_number", I_NUMBER_WHOLE = "i_number_whole", I_NUMBER_DECIMAL = "i_number_decimal", I_INT = "i_int", I_LONG = "i_long", I_SHORT = "i_short", I_FLOAT = "i_float", I_DOUBLE = "i_double";
     private static String I_CLASS_VARIABLE = "i_class_variable", I_BOOLEAN = "i_boolean", I_BYTE = "i_byte";
+    private static String I_TEXT = "i_text", I_STRING = "i_string", I_CHAR = "i_char";
     private static String I_OPERATION = "i_operation", I_RELATION = "i_relation", I_ASSIGN = "i_assign", I_LOGIC = "i_logic", I_ARITHMETIC = "i_arithmetic", I_BITWISE = "i_bitwise";
     private static String I_IF_AND_ELSE = "i_if_and_else", I_SWITCH = "i_swtich", I_CASE = "i_case", I_DEFAULT = "i_default";
     private static String I_LOOP = "i_loop", I_FOR = "i_for", I_WHILE = "i_while", I_DO = "i_do";
@@ -186,6 +187,30 @@ public final class Settings {
 
     public static void setIByte(boolean value) {
         preferences.putBoolean(I_BYTE, value);
+    }
+
+    public static boolean getIText() {
+        return preferences.getBoolean(I_TEXT, true);
+    }
+
+    public static void setIText(boolean value) {
+        preferences.putBoolean(I_TEXT, value);
+    }
+
+    public static boolean getIString() {
+        return preferences.getBoolean(I_STRING, false);
+    }
+
+    public static void setIString(boolean value) {
+        preferences.putBoolean(I_STRING, value);
+    }
+
+    public static boolean getIChar() {
+        return preferences.getBoolean(I_CHAR, false);
+    }
+
+    public static void setIChar(boolean value) {
+        preferences.putBoolean(I_CHAR, value);
     }
 
     public static boolean getIOperation() {
