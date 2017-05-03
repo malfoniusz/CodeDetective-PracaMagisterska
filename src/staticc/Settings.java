@@ -101,7 +101,7 @@ public final class Settings {
         preferences.putInt(MINIMAL_MATCHED_LINES_VALUE, value);
     }
 
-    public static boolean getINunmber() {
+    public static boolean getINumber() {
         return preferences.getBoolean(I_NUMBER, false);
     }
 

@@ -3,7 +3,7 @@ package model.tokenization;
 public enum Token {
     // Tokeny sa poukladane w kolejnosci ich wykrywania przez proces tokenizacji
 
-    CONDITIONAL_STATEMENT("CONDITIONAL_STATMENT"),  // if, else, else if
+    IF_OR_ELSE("IF_OR_ELSE"),  // if, else, else if
     LOOP("LOOP"),   // for, while, do
     FOR("FOR"),
     WHILE("WHILE"),

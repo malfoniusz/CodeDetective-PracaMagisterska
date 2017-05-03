@@ -30,7 +30,7 @@ public class SettingsTokensController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        updateNumber(Settings.getINunmber(), Settings.getINumberWhole(), Settings.getIInt(), Settings.getILong(), Settings.getIShort(), Settings.getINumberDecimal(), Settings.getIFloat(), Settings.getIDouble());
+        updateNumber(Settings.getINumber(), Settings.getINumberWhole(), Settings.getIInt(), Settings.getILong(), Settings.getIShort(), Settings.getINumberDecimal(), Settings.getIFloat(), Settings.getIDouble());
         iClassVariable.setSelected(Settings.getIClassVariable());
         iBoolean.setSelected(Settings.getIBoolean());
         iByte.setSelected(Settings.getIByte());

@@ -1,8 +1,8 @@
 ﻿
 5. Rodzaje tokenizacji:
-- UWAGA na poprawność działania programu po wyłączeniu niektórych tokenów
+- po modyfikacji tokenow tokenizacja zle dziala dla tokenizacji: operacji i funkcji
 - (skip function arguments) ARG
-
+- dodac slowo final w Settings
 
 6. Testy
 - nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
