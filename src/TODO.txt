@@ -1,8 +1,8 @@
 ﻿
 5. Rodzaje tokenizacji:
-- po modyfikacji tokenow tokenizacja zle dziala dla tokenizacji: operacji i funkcji
-- (skip function arguments) ARG
-- dodac slowo final w Settings
+- dokonczyc podpiecie SettingsTokens pod Tokenization
+- naprawic: po modyfikacji tokenow tokenizacja zle dziala dla funkcji - w compoundStatmentsTokenization() dla wszystkiego o wzorcu xxx( zrobic: line = line.replace("<<", " ") i usunac: boolean newTokens
+
 
 6. Testy
 - nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
