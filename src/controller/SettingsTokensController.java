@@ -296,6 +296,21 @@ public class SettingsTokensController implements Initializable {
     }
 
     @FXML @SuppressWarnings("unused")
+    private void actionControlSkipStatmentArgs(ActionEvent event) {
+
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionControlSkipFuntionArgs(ActionEvent event) {
+
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionControlSkipLoopArgs(ActionEvent event) {
+
+    }
+
+    @FXML @SuppressWarnings("unused")
     private void actionCancel(ActionEvent event) {
         stage.close();
     }

@@ -77,21 +77,21 @@
             <CheckBox fx:id="iAssign" mnemonicParsing="false" selected="true" text="Assign" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <CheckBox fx:id="iArithmetic" mnemonicParsing="false" selected="true" text="Arithmetic" GridPane.columnIndex="2" GridPane.rowIndex="8" />
             <CheckBox fx:id="iBitwise" mnemonicParsing="false" selected="true" text="Bitwise" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-            <CheckBox fx:id="iLoop" mnemonicParsing="false" onAction="#actionLoop" text="Loop" GridPane.rowIndex="12">
+            <CheckBox fx:id="iLoop" mnemonicParsing="false" onAction="#actionControlSkipLoopArgs" text="Loop" GridPane.rowIndex="12">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iFor" mnemonicParsing="false" selected="true" text="for" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            <CheckBox fx:id="iWhile" mnemonicParsing="false" selected="true" text="while" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+            <CheckBox fx:id="iFor" mnemonicParsing="false" onAction="#actionControlSkipLoopArgs" selected="true" text="for" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <CheckBox fx:id="iWhile" mnemonicParsing="false" onAction="#actionControlSkipLoopArgs" selected="true" text="while" GridPane.columnIndex="2" GridPane.rowIndex="12" />
             <CheckBox fx:id="iDo" mnemonicParsing="false" selected="true" text="do" GridPane.columnIndex="2" GridPane.rowIndex="13" />
-            <CheckBox fx:id="iIfAndElse" mnemonicParsing="false" selected="true" text="if and else" GridPane.rowIndex="10" />
-            <CheckBox fx:id="iSwitch" mnemonicParsing="false" selected="true" text="switch" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <CheckBox fx:id="iIfAndElse" mnemonicParsing="false" onAction="#actionControlSkipStatmentArgs" selected="true" text="if and else" GridPane.rowIndex="10" />
+            <CheckBox fx:id="iSwitch" mnemonicParsing="false" onAction="#actionControlSkipStatmentArgs" selected="true" text="switch" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <CheckBox fx:id="iCase" mnemonicParsing="false" selected="true" text="case" GridPane.columnIndex="2" GridPane.rowIndex="10" />
             <CheckBox fx:id="iDefault" mnemonicParsing="false" selected="true" text="default" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-            <CheckBox fx:id="iFunctionDefine" mnemonicParsing="false" selected="true" text="Function define" GridPane.rowIndex="14" />
-            <CheckBox fx:id="iFunctionUse" mnemonicParsing="false" selected="true" text="Function use" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-            <CheckBox fx:id="iConstructorUse" mnemonicParsing="false" selected="true" text="Constructor use" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+            <CheckBox fx:id="iFunctionDefine" mnemonicParsing="false" onAction="#actionControlSkipFuntionArgs" selected="true" text="Function define" GridPane.rowIndex="14" />
+            <CheckBox fx:id="iFunctionUse" mnemonicParsing="false" onAction="#actionControlSkipFuntionArgs" selected="true" text="Function use" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <CheckBox fx:id="iConstructorUse" mnemonicParsing="false" onAction="#actionControlSkipFuntionArgs" selected="true" text="Constructor use" GridPane.columnIndex="2" GridPane.rowIndex="14" />
             <CheckBox fx:id="iStatic" mnemonicParsing="false" selected="true" text="static" GridPane.rowIndex="15" />
             <CheckBox fx:id="iFinal" mnemonicParsing="false" selected="true" text="final" GridPane.columnIndex="1" GridPane.rowIndex="15" />
             <CheckBox fx:id="iVoid" mnemonicParsing="false" selected="true" text="void" GridPane.columnIndex="2" GridPane.rowIndex="16" />

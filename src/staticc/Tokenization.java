@@ -63,6 +63,7 @@ public final class Tokenization {
         tokens.addAll(otherBlocksTokenization(line));
 
         tokens.addAll(functionsTokenization(line));
+        line = removeFunctionArgs(line);
 
         tokens.addAll(singleWordsTokenization(line));
         tokens.addAll(operatorsTokenization(line));
@@ -124,7 +125,7 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*(?<!if|for|while|switch|catch)\\(", Token.FUNCTION_USE, SettingsTokens.getIFunctionUse()));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)[A-Z]\\w*(?<!if|for|while|switch|catch)\\(", Token.CONSTRUCTOR_USE, SettingsTokens.getIConstructorUse()));
 
-        if (tokens.isEmpty() == false && SettingsTokens.getISkipFunctionArgs()) {
+        if (tokens.isEmpty() == false && SettingsTokens.getISkipFunctionArgs() == false) {
             tokens.addAll(functionArguments(line));
         }
 
@@ -146,6 +147,16 @@ public final class Tokenization {
         }
 
         return tokens;
+    }
+
+    private static String removeFunctionArgs(String line) {
+        final String REMOVE_ARGS_REGEX = "\\([^\\(]*?\\)";
+
+        while (findRegex(line, REMOVE_ARGS_REGEX)) {
+            line = line.replaceAll(REMOVE_ARGS_REGEX, "");
+        }
+
+        return line;
     }
 
     private static ArrayList<Token> othersTokenization(String line) {

@@ -1,8 +1,9 @@
 ﻿
 5. Rodzaje tokenizacji:
-- zmienic rozkład SettingsTokens - przenieść skipy
-- sprawdzic czy czegos jeszcze nie trzeba naprawic
-- zmienic skipStatmentArgs na skipIfArgs
+- poprawić: removeFunctionArgs() - żeby nie usuwał np. if(args) - wziąć regex z functionsTokenization()
+- poprawić: functionArguments() - wydzielać po jednym (...) i sprawdzać ile jest w środku tokenów - wziąć regex z removeFunctionArgs()
+- sprawdzic czy czegos jeszcze nie trzeba naprawic w Tokenizacji
+- dokończyć actionSkip w SettingsTokensController
 - tokeny FUNCTION_USE i CONSTRUCTOR_USE scalić w jeden (można oszukać system zmieniając wielkość liter)
 - wykrywanie konstruktorów (function_def już ich nie wykrywa)
 - wyłączając po kolei tokeny sprawdzić czy wszystko działa dobrze
@@ -10,14 +11,7 @@
 
 6. Testy
 - nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
-- napisać testy:
-    + normalizacji kodu
-    + tokenizacji:
-        - scalic kilka plikow z roznych zrodel w jedne plik z kilkoma tysiacami linii kodu
-        - umiescic ten plik w projekcie
-        - przygotowac test tokenizacji
-        - wykorzystać token UNKNOWN
-    + wykrywania plagiatu
+- sprawdzić czy tokenizacja działa poprawnie (sprawdzić linijka po linijce, czy dobrze tokenizuje)
 
 
 7. Eksperymenty
