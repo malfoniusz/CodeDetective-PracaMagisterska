@@ -3,9 +3,9 @@
 - zmienic rozkład SettingsTokens - przenieść skipy
 - sprawdzic czy czegos jeszcze nie trzeba naprawic
 - zmienic skipStatmentArgs na skipIfArgs
-- wyłączając po kolei tokeny sprawdzić czy wszystko działa dobrze
 - tokeny FUNCTION_USE i CONSTRUCTOR_USE scalić w jeden (można oszukać system zmieniając wielkość liter)
 - wykrywanie konstruktorów (function_def już ich nie wykrywa)
+- wyłączając po kolei tokeny sprawdzić czy wszystko działa dobrze
 
 
 6. Testy
