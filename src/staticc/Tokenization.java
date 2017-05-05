@@ -19,8 +19,6 @@ import model.tokenization.TokenProjects;
 
 public final class Tokenization {
 
-    static final boolean SKIP_ARG_IN_STATEMENTS_AND_LOOPS = true;
-
     private Tokenization() {
 
     }
@@ -52,13 +50,19 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        boolean newTokens = tokens.addAll(compoundStatmentsTokenization(line));
-
-        if (SKIP_ARG_IN_STATEMENTS_AND_LOOPS && newTokens) {
+        boolean ifTokens = tokens.addAll(ifTokenization(line));
+        if (ifTokens && SettingsTokens.getISkipStatmentArgs()) {
             return tokens;
         }
 
-        tokens.addAll(functionsTokenization(line, newTokens));
+        boolean loopTokens = tokens.addAll(loopTokenization(line));
+        if (loopTokens && SettingsTokens.getISkipLoopArgs()) {
+            return tokens;
+        }
+
+        tokens.addAll(otherBlocksTokenization(line));
+
+        tokens.addAll(functionsTokenization(line));
 
         tokens.addAll(singleWordsTokenization(line));
         tokens.addAll(operatorsTokenization(line));
@@ -73,20 +77,55 @@ public final class Tokenization {
         return tokens;
     }
 
-    private static ArrayList<Token> functionsTokenization(String line, boolean newTokens) {
+    private static ArrayList<Token> ifTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        if (newTokens == false) {
-            boolean functionDef = tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+\\(.*\\).*\\{", Token.FUNCTION_DEF));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)else\\{", Token.IF_OR_ELSE, SettingsTokens.getIIfAndElse()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)if\\(", Token.IF_OR_ELSE, SettingsTokens.getIIfAndElse()));
+        if (line.equals("else") && SettingsTokens.getIIfAndElse()) {
+            tokens.add(Token.IF_OR_ELSE);
+        }
 
-            if (functionDef == false) {
-                tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*\\(", Token.FUNCTION_USE));
-                tokens.addAll(findTokensRegex(line, "(?<!\\w)[A-Z]\\w*\\(", Token.CONSTRUCTOR_USE));
+        return tokens;
+    }
 
-                if (tokens.isEmpty() == false) {
-                    tokens.addAll(functionArguments(line));
-                }
-            }
+    private static ArrayList<Token> loopTokenization(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)for\\(", Token.LOOP, SettingsTokens.getILoop()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)for\\(", Token.FOR, SettingsTokens.getIFor()));
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)while\\(", Token.LOOP, SettingsTokens.getILoop()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)while\\(", Token.WHILE, SettingsTokens.getIWhile()));
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)do\\{", Token.LOOP, SettingsTokens.getILoop()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)do\\{", Token.DO, SettingsTokens.getIDo()));
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> otherBlocksTokenization(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)switch\\(", Token.SWITCH, SettingsTokens.getISwitch()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)try\\{", Token.TRY, SettingsTokens.getITry()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)catch\\(", Token.CATCH, SettingsTokens.getICatch()));
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> functionsTokenization(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        final String FUNCTION_DEF_REGEX = "\\s\\w+(?<!if|for|while|switch|catch)\\(.*\\).*\\{";
+        tokens.addAll(findTokensRegex(line, FUNCTION_DEF_REGEX, Token.FUNCTION_DEF, SettingsTokens.getIFunctionDefine()));
+        line = line.replaceAll(FUNCTION_DEF_REGEX, "");
+
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*(?<!if|for|while|switch|catch)\\(", Token.FUNCTION_USE, SettingsTokens.getIFunctionUse()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)[A-Z]\\w*(?<!if|for|while|switch|catch)\\(", Token.CONSTRUCTOR_USE, SettingsTokens.getIConstructorUse()));
+
+        if (tokens.isEmpty() == false && SettingsTokens.getISkipFunctionArgs()) {
+            tokens.addAll(functionArguments(line));
         }
 
         return tokens;
@@ -112,15 +151,15 @@ public final class Tokenization {
     private static ArrayList<Token> othersTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE));
+        tokens.addAll(findTokensRegex(line, "\\[\\w*\\]", Token.TABLE, SettingsTokens.getITable()));
 
         tokens.addAll(findTokensRegex(line, "case.*:", Token.CASE, SettingsTokens.getICase()));
         tokens.addAll(findTokensRegex(line, "default:", Token.DEFAULT, SettingsTokens.getIDefault()));
 
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)continue;", Token.CONTINUE));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)break;", Token.BREAK));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)continue;", Token.CONTINUE, SettingsTokens.getIContinue()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)break;", Token.BREAK, SettingsTokens.getIBreak()));
 
-        tokens.addAll(findTokensRegex(line, "[^\\w]\\(\\w+\\)", Token.CAST));
+        tokens.addAll(findTokensRegex(line, "[^\\w]\\(\\w+\\)", Token.CAST, SettingsTokens.getICast()));
 
         return tokens;
     }
@@ -128,17 +167,17 @@ public final class Tokenization {
     private static ArrayList<Token> singleWordsTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(enum)(?!\\w)", Token.ENUM));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(new)(?!\\w)", Token.NEW));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(class)(?!\\w)", Token.CLASS));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(extends)(?!\\w)", Token.EXTENDS));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(implements)(?!\\w)", Token.IMPLEMENTS));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throw)(?!\\w)", Token.THROW));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throws)(?!\\w)", Token.THROWS));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)(return)(?!\\w)", Token.RETURN));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(enum)(?!\\w)", Token.ENUM, SettingsTokens.getIEnum()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(new)(?!\\w)", Token.NEW, SettingsTokens.getINew()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(class)(?!\\w)", Token.CLASS, SettingsTokens.getIClass()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(extends)(?!\\w)", Token.EXTENDS, SettingsTokens.getIExtends()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(implements)(?!\\w)", Token.IMPLEMENTS, SettingsTokens.getIImplements()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(static)(?!\\w)", Token.STATIC, SettingsTokens.getIStatic()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(final)(?!\\w)", Token.FINAL, SettingsTokens.getIFinal()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throw)(?!\\w)", Token.THROW, SettingsTokens.getIThrow()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(throws)(?!\\w)", Token.THROWS, SettingsTokens.getIThrows()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(void)(?!\\w)", Token.VOID, SettingsTokens.getIVoid()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)(return)(?!\\w)", Token.RETURN, SettingsTokens.getIReturn()));
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(int)(?!\\w)", Token.NUMBER, SettingsTokens.getINumber()));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)(int)(?!\\w)", Token.NUMBER_WHOLE, SettingsTokens.getINumberWhole()));
@@ -172,32 +211,6 @@ public final class Tokenization {
         return tokens;
     }
 
-    private static ArrayList<Token> compoundStatmentsTokenization(String line) {
-        ArrayList<Token> tokens = new ArrayList<>();
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)else\\{", Token.IF_OR_ELSE, SettingsTokens.getIIfAndElse()));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)if\\(", Token.IF_OR_ELSE, SettingsTokens.getIIfAndElse()));
-        if (line.equals("else") && SettingsTokens.getIIfAndElse()) {
-            tokens.add(Token.IF_OR_ELSE);
-        }
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)for\\(", Token.LOOP, SettingsTokens.getILoop()));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)for\\(", Token.FOR, SettingsTokens.getIFor()));
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)while\\(", Token.LOOP, SettingsTokens.getILoop()));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)while\\(", Token.WHILE, SettingsTokens.getIWhile()));
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)do\\{", Token.LOOP, SettingsTokens.getILoop()));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)do\\{", Token.DO, SettingsTokens.getIDo()));
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)switch\\(", Token.SWITCH, SettingsTokens.getISwitch()));
-
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)try\\{", Token.TRY));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)catch\\(", Token.CATCH));
-
-        return tokens;
-    }
-
     private static ArrayList<Token> classVarTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
@@ -212,7 +225,6 @@ public final class Tokenization {
 
         // UWAGA: przy zmianie kolejnosci wywolan
         // Assign 1
-
         tokens.addAll(findTokensSequence(line, "<<=", Token.OPERATOR, SettingsTokens.getIOperator()));
         tokens.addAll(findTokensSequence(line, "<<=", Token.OP_ASSIGN, SettingsTokens.getIAssign()));
         line = line.replace("<<=", " ");
@@ -231,7 +243,7 @@ public final class Tokenization {
         line = line.replace(">>", " ");
 
         // Generic
-        tokens.addAll(findTokensRegex(line, "<\\w*>", Token.GENERIC));
+        tokens.addAll(findTokensRegex(line, "<\\w*>", Token.GENERIC, SettingsTokens.getIGeneric()));
         line = line.replaceAll("<\\w*>", "");
 
         // Relation
@@ -343,20 +355,6 @@ public final class Tokenization {
 
         int count = StringUtils.countMatches(str, charSequence);
         for (int i = 0; i < count; i++) {
-            tokens.add(token);
-        }
-
-        return tokens;
-    }
-
-    // TODO: usun
-    private static ArrayList<Token> findTokensRegex(String str, String regex, Token token) {
-        ArrayList<Token> tokens = new ArrayList<>();
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(str);
-
-        while (matcher.find()) {
             tokens.add(token);
         }
 

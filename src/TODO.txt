@@ -1,7 +1,11 @@
 ﻿
 5. Rodzaje tokenizacji:
-- dokonczyc podpiecie SettingsTokens pod Tokenization
-- naprawic: po modyfikacji tokenow tokenizacja zle dziala dla funkcji - w compoundStatmentsTokenization() dla wszystkiego o wzorcu xxx( zrobic: line = line.replace("<<", " ") i usunac: boolean newTokens
+- zmienic rozkład SettingsTokens - przenieść skipy
+- sprawdzic czy czegos jeszcze nie trzeba naprawic
+- zmienic skipStatmentArgs na skipIfArgs
+- wyłączając po kolei tokeny sprawdzić czy wszystko działa dobrze
+- tokeny FUNCTION_USE i CONSTRUCTOR_USE scalić w jeden (można oszukać system zmieniając wielkość liter)
+- wykrywanie konstruktorów (function_def już ich nie wykrywa)
 
 
 6. Testy
