@@ -12,9 +12,8 @@ public enum Token {
     TRY("TRY"),
     CATCH("CATCH"),
 
-    FUNCTION_DEF("FUNCTION_DEF"),   // function def + constructor def
+    FUNCTION_DEF("FUNCTION_DEF"),
     FUNCTION_USE("FUNCTION_USE"),
-    CONSTRUCTOR_USE("CONSTRUCTOR_USE"),
 
     ENUM("ENUM"),
     NEW("NEW"),
@@ -41,7 +40,7 @@ public enum Token {
     BOOLEAN("BOOLEAN"),
     BYTE("BYTE"),
 
-    OPERATOR("OPERATOR"),           // oo_relation, op_logic, op_assign, op_arithmetic, op_bitwise
+    OPERATOR("OPERATOR"),           // op_relation, op_logic, op_assign, op_arithmetic, op_bitwise
     OP_RELATION("OP_RELATION"),     // ==, !=, >=, <=, >, <
     OP_LOGIC("OP_LOGIC"),           // &&, ||, !
     OP_ASSIGN("OP_ASSIGN"),         // <<=, >>=, +=, -=, *=, /=, %=, &=, ^=, |=, =

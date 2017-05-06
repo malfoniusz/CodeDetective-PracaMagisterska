@@ -12,7 +12,7 @@ public class SettingsTokens {
     private static final String I_OPERATOR = "i_operator", I_RELATION = "i_relation", I_ASSIGN = "i_assign", I_LOGIC = "i_logic", I_ARITHMETIC = "i_arithmetic", I_BITWISE = "i_bitwise";
     private static final String I_IF_AND_ELSE = "i_if_and_else", I_SWITCH = "i_switch", I_CASE = "i_case", I_DEFAULT = "i_default";
     private static final String I_LOOP = "i_loop", I_FOR = "i_for", I_WHILE = "i_while", I_DO = "i_do";
-    private static final String I_FUNCTION_DEFINE = "i_function_define", I_FUNCTION_USE = "i_function_use", I_CONSTRUCTOR_USE = "i_constructor_use";
+    private static final String I_FUNCTION_DEFINE = "i_function_define", I_FUNCTION_USE = "i_function_use";
     private static final String I_STATIC = "i_static", I_FINAL = "i_final", I_THROWS = "i_throws", I_VOID = "i_void";
     private static final String I_TABLE = "i_table", I_CAST = "i_cast", I_GENERIC = "i_generic";
     private static final String I_CLASS = "i_class", I_NEW = "i_new", I_ENUM = "i_enum", I_EXTENDS = "i_extends", I_IMPLEMENTS = "i_implements";
@@ -56,7 +56,6 @@ public class SettingsTokens {
 
     private static boolean i_function_define = preferences.getBoolean(I_FUNCTION_DEFINE, true);
     private static boolean i_function_use = preferences.getBoolean(I_FUNCTION_USE, true);
-    private static boolean i_constructor_use = preferences.getBoolean(I_CONSTRUCTOR_USE, true);
 
     private static boolean i_static = preferences.getBoolean(I_STATIC, true);
     private static boolean i_final = preferences.getBoolean(I_FINAL, true);
@@ -357,15 +356,6 @@ public class SettingsTokens {
     public static void setIFunctionUse(boolean value) {
         i_function_use = value;
         preferences.putBoolean(I_FUNCTION_USE, value);
-    }
-
-    public static boolean getIConstructorUse() {
-        return i_constructor_use;
-    }
-
-    public static void setIConstructorUse(boolean value) {
-        i_constructor_use = value;
-        preferences.putBoolean(I_CONSTRUCTOR_USE, value);
     }
 
     public static boolean getIStatic() {

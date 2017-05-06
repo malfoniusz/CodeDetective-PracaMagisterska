@@ -18,7 +18,7 @@ public class SettingsTokensController implements Initializable {
     @FXML private CheckBox iOperator, iRelation, iAssign, iLogic, iArithmetic, iBitwise;
     @FXML private CheckBox iIfAndElse, iSwitch, iCase, iDefault;
     @FXML private CheckBox iLoop, iFor, iWhile, iDo;
-    @FXML private CheckBox iFunctionDefine, iFunctionUse, iConstructorUse;
+    @FXML private CheckBox iFunctionDefine, iFunctionUse;
     @FXML private CheckBox iStatic, iFinal, iThrows, iVoid;
     @FXML private CheckBox iTable, iCast, iGeneric;
     @FXML private CheckBox iClass, iNew, iEnum, iExtends, iImplements;
@@ -43,7 +43,6 @@ public class SettingsTokensController implements Initializable {
         updateLoopGroup(SettingsTokens.getILoop(), SettingsTokens.getIFor(), SettingsTokens.getIWhile(), SettingsTokens.getIDo());
         iFunctionDefine.setSelected(SettingsTokens.getIFunctionDefine());
         iFunctionUse.setSelected(SettingsTokens.getIFunctionUse());
-        iConstructorUse.setSelected(SettingsTokens.getIConstructorUse());
         iStatic.setSelected(SettingsTokens.getIStatic());
         iFinal.setSelected(SettingsTokens.getIFinal());
         iThrows.setSelected(SettingsTokens.getIThrows());
@@ -277,7 +276,6 @@ public class SettingsTokensController implements Initializable {
         SettingsTokens.setIDo(iDo.isSelected());
         SettingsTokens.setIFunctionDefine(iFunctionDefine.isSelected());
         SettingsTokens.setIFunctionUse(iFunctionUse.isSelected());
-        SettingsTokens.setIConstructorUse(iConstructorUse.isSelected());
         SettingsTokens.setIStatic(iStatic.isSelected());
         SettingsTokens.setIFinal(iFinal.isSelected());
         SettingsTokens.setIThrows(iThrows.isSelected());
@@ -307,7 +305,7 @@ public class SettingsTokensController implements Initializable {
     }
 
     private void updateSkipFunctionArgs() {
-        if (iFunctionDefine.isSelected() == false && iFunctionUse.isSelected() == false && iConstructorUse.isSelected() == false) {
+        if (iFunctionDefine.isSelected() == false && iFunctionUse.isSelected() == false) {
             iSkipFunctionArgs.setDisable(true);
             iSkipFunctionArgs.setSelected(true);
         }

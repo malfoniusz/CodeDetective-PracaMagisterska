@@ -61,8 +61,10 @@ public final class Tokenization {
         }
 
         tokens.addAll(otherBlocksTokenization(line));
+        line = removeCatchArgs(line);
 
         tokens.addAll(functionsTokenization(line));
+        tokens.addAll(castTokenization(line));
         if (SettingsTokens.getISkipFunctionArgs()) {
             line = removeFunctionArgs(line);
         }
@@ -137,15 +139,32 @@ public final class Tokenization {
         return tokens;
     }
 
+    private static String removeCatchArgs(String line) {
+        final String CATCH_ARGS_REGEX = "(^catch)\\(.*\\)";
+
+        while (findRegex(line, CATCH_ARGS_REGEX)) {
+            line = line.replaceAll(CATCH_ARGS_REGEX, "");
+        }
+
+        return line;
+    }
+
     private static ArrayList<Token> functionsTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        final String FUNCTION_DEF_REGEX = "\\s\\w+(?<!^if|^else if|^for|^while|^switch|^catch)\\(.*\\).*\\{";
+        final String FUNCTION_DEF_REGEX = "\\w+(?<!^if|^else if|^for|^while|^switch|^catch)\\(.*\\).*\\{";
         tokens.addAll(findTokensRegex(line, FUNCTION_DEF_REGEX, Token.FUNCTION_DEF, SettingsTokens.getIFunctionDefine()));
         line = line.replaceAll(FUNCTION_DEF_REGEX, "");
 
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)[a-z]\\w*(?<!^if|^else if|^for|^while|^switch|^catch)\\(", Token.FUNCTION_USE, SettingsTokens.getIFunctionUse()));
-        tokens.addAll(findTokensRegex(line, "(?<!\\w)[A-Z]\\w*(?<!^if|^else if|^for|^while|^switch|^catch)\\(", Token.CONSTRUCTOR_USE, SettingsTokens.getIConstructorUse()));
+        tokens.addAll(findTokensRegex(line, "(?<!\\w)\\w+(?<!^if|^else if|^for|^while|^switch|^catch)\\(", Token.FUNCTION_USE, SettingsTokens.getIFunctionUse()));
+
+        return tokens;
+    }
+
+    private static ArrayList<Token> castTokenization(String line) {
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        tokens.addAll(findTokensRegex(line, "[^\\w]\\(\\w+\\)", Token.CAST, SettingsTokens.getICast()));
 
         return tokens;
     }
@@ -170,8 +189,6 @@ public final class Tokenization {
 
         tokens.addAll(findTokensRegex(line, "(?<!\\w)continue;", Token.CONTINUE, SettingsTokens.getIContinue()));
         tokens.addAll(findTokensRegex(line, "(?<!\\w)break;", Token.BREAK, SettingsTokens.getIBreak()));
-
-        tokens.addAll(findTokensRegex(line, "[^\\w]\\(\\w+\\)", Token.CAST, SettingsTokens.getICast()));
 
         return tokens;
     }
