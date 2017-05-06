@@ -1,6 +1,5 @@
 ﻿
 5. Rodzaje tokenizacji:
-- dokończyć actionSkip w SettingsTokensController
 - tokeny FUNCTION_USE i CONSTRUCTOR_USE scalić w jeden (można oszukać system zmieniając wielkość liter)
 - wykrywanie konstruktorów (function_def już ich nie wykrywa)
 - wyłączając po kolei tokeny sprawdzić czy wszystko działa dobrze

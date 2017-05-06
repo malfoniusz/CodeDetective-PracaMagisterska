@@ -50,14 +50,14 @@ public final class Tokenization {
     private static ArrayList<Token> convertTokenLine(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        boolean ifTokens = tokens.addAll(ifTokenization(line));
-        if (ifTokens && SettingsTokens.getISkipStatmentArgs()) {
-            return tokens;
+        tokens.addAll(ifTokenization(line));
+        if (SettingsTokens.getISkipIfArgs()) {
+            line = removeIfArgs(line);
         }
 
-        boolean loopTokens = tokens.addAll(loopTokenization(line));
-        if (loopTokens && SettingsTokens.getISkipLoopArgs()) {
-            return tokens;
+        tokens.addAll(loopTokenization(line));
+        if (SettingsTokens.getISkipLoopArgs()) {
+            line = removeLoopArgs(line);
         }
 
         tokens.addAll(otherBlocksTokenization(line));
@@ -92,6 +92,16 @@ public final class Tokenization {
         return tokens;
     }
 
+    private static String removeIfArgs(String line) {
+        final String IF_ARGS_REGEX = "(^if|^else if)\\(.*\\)";
+
+        while (findRegex(line, IF_ARGS_REGEX)) {
+            line = line.replaceAll(IF_ARGS_REGEX, "");
+        }
+
+        return line;
+    }
+
     private static ArrayList<Token> loopTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
@@ -105,6 +115,16 @@ public final class Tokenization {
         tokens.addAll(findTokensRegex(line, "(?<!\\w)do\\{", Token.DO, SettingsTokens.getIDo()));
 
         return tokens;
+    }
+
+    private static String removeLoopArgs(String line) {
+        final String LOOP_ARGS_REGEX = "(^for|^while)\\(.*\\)";
+
+        while (findRegex(line, LOOP_ARGS_REGEX)) {
+            line = line.replaceAll(LOOP_ARGS_REGEX, "");
+        }
+
+        return line;
     }
 
     private static ArrayList<Token> otherBlocksTokenization(String line) {

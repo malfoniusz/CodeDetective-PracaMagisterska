@@ -18,7 +18,7 @@ public class SettingsTokens {
     private static final String I_CLASS = "i_class", I_NEW = "i_new", I_ENUM = "i_enum", I_EXTENDS = "i_extends", I_IMPLEMENTS = "i_implements";
     private static final String I_TRY = "i_try", I_CATCH = "i_catch", I_THROW = "i_throw";
     private static final String I_BREAK = "i_break", I_CONTINUE = "i_continue", I_RETURN = "i_return";
-    private static final String I_SKIP_FUNCTION_ARGS = "i_skip_function_args", I_SKIP_STATMENT_ARGS = "i_skip_statment_args", I_SKIP_LOOP_ARGS = "i_skip_loop_args";
+    private static final String I_SKIP_FUNCTION_ARGS = "i_skip_function_args", I_SKIP_IF_ARGS = "i_skip_if_args", I_SKIP_LOOP_ARGS = "i_skip_loop_args";
 
     private static boolean i_number = preferences.getBoolean(I_NUMBER, false);
     private static boolean i_number_whole = preferences.getBoolean(I_NUMBER_WHOLE, true);
@@ -82,7 +82,7 @@ public class SettingsTokens {
     private static boolean i_return = preferences.getBoolean(I_RETURN, true);
 
     private static boolean i_skip_function_args = preferences.getBoolean(I_SKIP_FUNCTION_ARGS, false);
-    private static boolean i_skip_statment_args = preferences.getBoolean(I_SKIP_STATMENT_ARGS, true);
+    private static boolean i_skip_if_args = preferences.getBoolean(I_SKIP_IF_ARGS, true);
     private static boolean i_skip_loop_args = preferences.getBoolean(I_SKIP_LOOP_ARGS, true);
 
     private SettingsTokens() {
@@ -539,13 +539,13 @@ public class SettingsTokens {
         preferences.putBoolean(I_SKIP_FUNCTION_ARGS, value);
     }
 
-    public static boolean getISkipStatmentArgs() {
-        return i_skip_statment_args;
+    public static boolean getISkipIfArgs() {
+        return i_skip_if_args;
     }
 
-    public static void setISkipStatmentArgs(boolean value) {
-        i_skip_statment_args = value;
-        preferences.putBoolean(I_SKIP_STATMENT_ARGS, value);
+    public static void setISkipIfArgs(boolean value) {
+        i_skip_if_args = value;
+        preferences.putBoolean(I_SKIP_IF_ARGS, value);
     }
 
     public static boolean getISkipLoopArgs() {

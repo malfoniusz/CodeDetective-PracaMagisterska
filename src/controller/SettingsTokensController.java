@@ -24,7 +24,7 @@ public class SettingsTokensController implements Initializable {
     @FXML private CheckBox iClass, iNew, iEnum, iExtends, iImplements;
     @FXML private CheckBox iTry, iCatch, iThrow;
     @FXML private CheckBox iBreak, iContinue, iReturn;
-    @FXML private CheckBox iSkipFunctionArgs, iSkipStatmentArgs, iSkipLoopArgs;
+    @FXML private CheckBox iSkipFunctionArgs, iSkipIfArgs, iSkipLoopArgs;
 
     private Stage stage;
 
@@ -63,8 +63,12 @@ public class SettingsTokensController implements Initializable {
         iContinue.setSelected(SettingsTokens.getIContinue());
         iReturn.setSelected(SettingsTokens.getIReturn());
         iSkipFunctionArgs.setSelected(SettingsTokens.getISkipFunctionArgs());
-        iSkipStatmentArgs.setSelected(SettingsTokens.getISkipStatmentArgs());
+        iSkipIfArgs.setSelected(SettingsTokens.getISkipIfArgs());
         iSkipLoopArgs.setSelected(SettingsTokens.getISkipLoopArgs());
+
+        updateSkipFunctionArgs();
+        updateSkipIfArgs();
+        updateSkipLoopArgs();
     }
 
     @FXML @SuppressWarnings("unused")
@@ -209,8 +213,10 @@ public class SettingsTokensController implements Initializable {
     }
 
     @FXML @SuppressWarnings("unused")
-    private void actionLoop(ActionEvent event) {
+    private void actionLoopAndSkip(ActionEvent event) {
         updateLoopGroup(iLoop.isSelected(), true, true, true);
+
+        updateSkipLoopArgs();
     }
 
     private void updateLoopGroup(boolean _iLoop, boolean _iFor, boolean _iWhile, boolean _iDo) {
@@ -291,23 +297,53 @@ public class SettingsTokensController implements Initializable {
         SettingsTokens.setIContinue(iContinue.isSelected());
         SettingsTokens.setIReturn(iReturn.isSelected());
         SettingsTokens.setISkipFunctionArgs(iSkipFunctionArgs.isSelected());
-        SettingsTokens.setISkipStatmentArgs(iSkipStatmentArgs.isSelected());
+        SettingsTokens.setISkipIfArgs(iSkipIfArgs.isSelected());
         SettingsTokens.setISkipLoopArgs(iSkipLoopArgs.isSelected());
     }
 
     @FXML @SuppressWarnings("unused")
-    private void actionControlSkipStatmentArgs(ActionEvent event) {
+    private void actionControlSkipFuntionArgs(ActionEvent event) {
+        updateSkipFunctionArgs();
+    }
 
+    private void updateSkipFunctionArgs() {
+        if (iFunctionDefine.isSelected() == false && iFunctionUse.isSelected() == false && iConstructorUse.isSelected() == false) {
+            iSkipFunctionArgs.setDisable(true);
+            iSkipFunctionArgs.setSelected(true);
+        }
+        else {
+            iSkipFunctionArgs.setDisable(false);
+        }
     }
 
     @FXML @SuppressWarnings("unused")
-    private void actionControlSkipFuntionArgs(ActionEvent event) {
+    private void actionControlSkipStatmentArgs(ActionEvent event) {
+        updateSkipIfArgs();
+    }
 
+    private void updateSkipIfArgs() {
+        if (iIfAndElse.isSelected() == false) {
+            iSkipIfArgs.setDisable(true);
+            iSkipIfArgs.setSelected(true);
+        }
+        else {
+            iSkipIfArgs.setDisable(false);
+        }
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionControlSkipLoopArgs(ActionEvent event) {
+        updateSkipLoopArgs();
+    }
 
+    private void updateSkipLoopArgs() {
+        if (iLoop.isSelected() == false && iFor.isSelected() == false && iWhile.isSelected() == false) {
+            iSkipLoopArgs.setDisable(true);
+            iSkipLoopArgs.setSelected(true);
+        }
+        else {
+            iSkipLoopArgs.setDisable(false);
+        }
     }
 
     @FXML @SuppressWarnings("unused")
