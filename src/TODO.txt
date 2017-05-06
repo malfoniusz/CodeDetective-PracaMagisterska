@@ -1,12 +1,10 @@
 ﻿
 5. Rodzaje tokenizacji:
-- poprawić: removeFunctionArgs() - żeby nie usuwał np. if(args) - wziąć regex z functionsTokenization()
-- poprawić: functionArguments() - wydzielać po jednym (...) i sprawdzać ile jest w środku tokenów - wziąć regex z removeFunctionArgs()
-- sprawdzic czy czegos jeszcze nie trzeba naprawic w Tokenizacji
 - dokończyć actionSkip w SettingsTokensController
 - tokeny FUNCTION_USE i CONSTRUCTOR_USE scalić w jeden (można oszukać system zmieniając wielkość liter)
 - wykrywanie konstruktorów (function_def już ich nie wykrywa)
 - wyłączając po kolei tokeny sprawdzić czy wszystko działa dobrze
+- rozbijanie linijek: repaint();repaint(); na dwie
 
 
 6. Testy

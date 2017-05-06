@@ -15,7 +15,6 @@ public enum Token {
     FUNCTION_DEF("FUNCTION_DEF"),   // function def + constructor def
     FUNCTION_USE("FUNCTION_USE"),
     CONSTRUCTOR_USE("CONSTRUCTOR_USE"),
-    ARG("ARG"),
 
     ENUM("ENUM"),
     NEW("NEW"),
