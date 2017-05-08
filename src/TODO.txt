@@ -1,11 +1,9 @@
 ﻿
-5. Rodzaje tokenizacji:
-- poprawić pomijanie argumentów funkcji - funkcja w funkcji nie jest pomijana - wykryć funkcje znajdujące się w funkcjach i je usunąć
-
-
 6. Testy
+- normalizacja
+- tokenizacja
+- wykrywanie podobienstwa (algorytm)
 - nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
-- sprawdzić czy tokenizacja działa poprawnie (sprawdzić linijka po linijce, czy dobrze tokenizuje)
 
 
 7. Eksperymenty
