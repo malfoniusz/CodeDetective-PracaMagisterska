@@ -1,6 +1,6 @@
 ﻿
 5. Rodzaje tokenizacji:
-- rozbijanie linijek: repaint();repaint(); na dwie
+- poprawić pomijanie argumentów funkcji - funkcja w funkcji nie jest pomijana - wykryć funkcje znajdujące się w funkcjach i je usunąć
 
 
 6. Testy

@@ -57,7 +57,7 @@ public enum Token {
     BREAK("BREAK"),
     CAST("CAST"),        // (Object)
 
-    UNKNOWN("UNKNOWN"),
+    UNKNOWN_SKIP("UNKNOWN_SKIP"),
     ;
 
     private final String text;

@@ -36,7 +36,7 @@ public final class Tokenization {
         for (CodeLine codeLine : normalizedCode.getCodeLines()) {
             ArrayList<Token> tokens = convertTokenLine(codeLine.getCode());
 
-            if (skipUnknown == true && tokens.get(0) == Token.UNKNOWN) {
+            if (skipUnknown == true && tokens.get(0) == Token.UNKNOWN_SKIP) {
                 continue;
             }
 
@@ -76,7 +76,7 @@ public final class Tokenization {
         tokens.addAll(othersTokenization(line));
 
         if (tokens.isEmpty()) {
-            tokens.add(Token.UNKNOWN);
+            tokens.add(Token.UNKNOWN_SKIP);
         }
 
         return tokens;
@@ -417,7 +417,6 @@ public final class Tokenization {
         return tokens;
     }
 
-    @SuppressWarnings("unused")
     private static int findRegexCount(String str, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str);

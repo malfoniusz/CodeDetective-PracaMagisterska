@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import model.tokenization.CodeLine;
 import model.tokenization.NormalizedCode;
@@ -37,6 +39,12 @@ public final class Normalization {
                     isMultiComment = false;
                 }
                 else if (isMultiComment == false) {
+                    // Sprawdzenie czy nie ma kilku instrukcji w jednej linijce
+                    ArrayList<String> instructions = findInstructions(line);
+                    if (instructions.size() > 1) {
+                        line = instructions.get(0);
+                    }
+
                     combinedLine += " " + line;
                     combinedLine = clearUnnecesarySpaces(combinedLine);
                     boolean lineEnd = codeLineEnds(combinedLine);
@@ -50,6 +58,11 @@ public final class Normalization {
 
                         combinedLine = "";
                         savedLineNumber = 0;
+
+                        if (instructions.size() > 1) {
+                            line = instructions.get(1);
+                            continue;
+                        }
                     }
                     // Kod jest kontunuowany w kolejnej linii
                     else if (combinedLine.isEmpty() == false && savedLineNumber == 0) {
@@ -87,10 +100,18 @@ public final class Normalization {
         else if (line.startsWith("if(") || line.startsWith("else{") || line.equals("else")) {
             return true;
         }
-        else if (line.startsWith("for(") || line.startsWith("while(")) {
+        else if (hasForLoop(line) || line.startsWith("while(")) {
             return true;
         }
         else if (line.startsWith("case") || line.startsWith("default:")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static boolean hasForLoop(String line) {
+        if (line.startsWith("for(")) {
             return true;
         }
 
@@ -177,6 +198,33 @@ public final class Normalization {
         }
 
         return line;
+    }
+
+    private static ArrayList<String> findInstructions(String line) {
+        ArrayList<String> instructions = new ArrayList<>();
+        line = clearUnnecesarySpaces(line);
+
+        if (hasForLoop(line)) {
+            return instructions;
+        }
+
+        Pattern pattern = Pattern.compile("[^;]*;");
+        Matcher matcher = pattern.matcher(line);
+
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+            if (count > 1) {
+                String str = line.substring(matcher.start());
+                instructions.add(str);
+                break;
+            }
+
+            String str = line.substring(matcher.start(), matcher.end());
+            instructions.add(str);
+        }
+
+        return instructions;
     }
 
 }
