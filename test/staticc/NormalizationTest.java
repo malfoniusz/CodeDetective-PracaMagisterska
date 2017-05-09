@@ -2,43 +2,27 @@ package staticc;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
+import model.tokenization.CodeLine;
 import model.tokenization.NormalizedCode;
 import utilities.Constants;
+import utilities.Utilities;
 
 public class NormalizationTest {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
     @Test
     public void test() {
-        // TODO: sczytac kod z pliku P1_Normalized do obiektu NormalizedCode i porownac oba obiekty (najlepiej linijka po linijce)
+        NormalizedCode normCodeT = Normalization.codeNormalization(Constants.FILE_T);
+        NormalizedCode normCodeTNorm = Utilities.loadNormalizedFile(Constants.FILE_T_NORMALIZED);
 
-        NormalizedCode normCode = Normalization.codeNormalization(Constants.FILE_P1);
+        for (int i = 0; i < normCodeT.getCodeLines().size(); i++) {
+            CodeLine tCodeLine = normCodeT.getCodeLines().get(i);
+            CodeLine tNormCodeLine = normCodeTNorm.getCodeLines().get(i);
 
-        System.out.println(normCode.toString());
-
-        assertEquals(1, 1);
+            assertEquals(tCodeLine.getLineNumber(), tNormCodeLine.getLineNumber());
+            assertEquals(tCodeLine.getCode(), tNormCodeLine.getCode());
+        }
     }
 
 }
