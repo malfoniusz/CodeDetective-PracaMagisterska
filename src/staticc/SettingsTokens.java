@@ -2,10 +2,13 @@ package staticc;
 
 import java.util.prefs.Preferences;
 
+import model.SetttingsTokensRadioGroup;
+
 public class SettingsTokens {
 
     private static final Preferences preferences = Preferences.userRoot().node(SettingsTokens.class.toString());
 
+    private static final String I_RADIO_GROUP = "i_radio_group";
     private static final String I_NUMBER = "i_number", I_NUMBER_WHOLE = "i_number_whole", I_NUMBER_DECIMAL = "i_number_decimal", I_INT = "i_int", I_LONG = "i_long", I_SHORT = "i_short", I_FLOAT = "i_float", I_DOUBLE = "i_double";
     private static final String I_CLASS_VARIABLE = "i_class_variable", I_BOOLEAN = "i_boolean", I_BYTE = "i_byte";
     private static final String I_TEXT = "i_text", I_STRING = "i_string", I_CHAR = "i_char";
@@ -19,6 +22,8 @@ public class SettingsTokens {
     private static final String I_TRY = "i_try", I_CATCH = "i_catch", I_THROW = "i_throw";
     private static final String I_BREAK = "i_break", I_CONTINUE = "i_continue", I_RETURN = "i_return";
     private static final String I_SKIP_FUNCTION_ARGS = "i_skip_function_args", I_SKIP_IF_ARGS = "i_skip_if_args", I_SKIP_LOOP_ARGS = "i_skip_loop_args";
+
+    private static String i_radio_group = preferences.get(I_RADIO_GROUP, SetttingsTokensRadioGroup.CUSTOM.toString());
 
     private static boolean i_number = preferences.getBoolean(I_NUMBER, false);
     private static boolean i_number_whole = preferences.getBoolean(I_NUMBER_WHOLE, true);
@@ -86,6 +91,15 @@ public class SettingsTokens {
 
     private SettingsTokens() {
 
+    }
+
+    public static String getIRadioGroup() {
+        return i_radio_group;
+    }
+
+    public static void setIRadioGroup(SetttingsTokensRadioGroup radioGroup) {
+        i_radio_group = radioGroup.toString();
+        preferences.put(I_RADIO_GROUP, radioGroup.toString());
     }
 
     public static boolean getINumber() {

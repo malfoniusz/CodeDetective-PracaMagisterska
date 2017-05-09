@@ -7,10 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
+import model.SetttingsTokensRadioGroup;
 import staticc.SettingsTokens;
 
 public class SettingsTokensController implements Initializable {
+
+    @FXML private RadioButton iRadioFull, iRadioNormal, iRadioBroad, iRadioMinimalistic, iRadioCustom;
 
     @FXML private CheckBox iNumber, iNumberWhole, iNumberDecimal, iInt, iLong, iShort, iFloat, iDouble;
     @FXML private CheckBox iClassVariable, iBoolean, iByte;
@@ -30,54 +34,145 @@ public class SettingsTokensController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        updateNumber(SettingsTokens.getINumber(), SettingsTokens.getINumberWhole(), SettingsTokens.getIInt(), SettingsTokens.getILong(), SettingsTokens.getIShort(), SettingsTokens.getINumberDecimal(), SettingsTokens.getIFloat(), SettingsTokens.getIDouble());
-        iClassVariable.setSelected(SettingsTokens.getIClassVariable());
-        iBoolean.setSelected(SettingsTokens.getIBoolean());
-        iByte.setSelected(SettingsTokens.getIByte());
+        setRadioSelected(SettingsTokens.getIRadioGroup());
+
+        updateNumber(SettingsTokens.getINumber(), SettingsTokens.getINumberWhole(), SettingsTokens.getINumberDecimal(), SettingsTokens.getIInt(), SettingsTokens.getILong(), SettingsTokens.getIShort(), SettingsTokens.getIFloat(), SettingsTokens.getIDouble());
+        setOptions1(SettingsTokens.getIClassVariable(), SettingsTokens.getIBoolean(), SettingsTokens.getIByte());
         updateText(SettingsTokens.getIText(), SettingsTokens.getIString(), SettingsTokens.getIChar());
         updateOperator(SettingsTokens.getIOperator(), SettingsTokens.getIRelation(), SettingsTokens.getIAssign(), SettingsTokens.getILogic(), SettingsTokens.getIArithmetic(), SettingsTokens.getIBitwise());
-        iIfAndElse.setSelected(SettingsTokens.getIIfAndElse());
-        iSwitch.setSelected(SettingsTokens.getISwitch());
-        iCase.setSelected(SettingsTokens.getICase());
-        iDefault.setSelected(SettingsTokens.getIDefault());
+        setOptions2(SettingsTokens.getIIfAndElse(), SettingsTokens.getISwitch(), SettingsTokens.getICase(), SettingsTokens.getIDefault());
         updateLoopGroup(SettingsTokens.getILoop(), SettingsTokens.getIFor(), SettingsTokens.getIWhile(), SettingsTokens.getIDo());
-        iFunctionDefine.setSelected(SettingsTokens.getIFunctionDefine());
-        iFunctionUse.setSelected(SettingsTokens.getIFunctionUse());
-        iStatic.setSelected(SettingsTokens.getIStatic());
-        iFinal.setSelected(SettingsTokens.getIFinal());
-        iThrows.setSelected(SettingsTokens.getIThrows());
-        iVoid.setSelected(SettingsTokens.getIVoid());
-        iTable.setSelected(SettingsTokens.getITable());
-        iCast.setSelected(SettingsTokens.getICast());
-        iGeneric.setSelected(SettingsTokens.getIGeneric());
-        iClass.setSelected(SettingsTokens.getIClass());
-        iNew.setSelected(SettingsTokens.getINew());
-        iEnum.setSelected(SettingsTokens.getIEnum());
-        iExtends.setSelected(SettingsTokens.getIExtends());
-        iImplements.setSelected(SettingsTokens.getIImplements());
-        iTry.setSelected(SettingsTokens.getITry());
-        iCatch.setSelected(SettingsTokens.getICatch());
-        iThrow.setSelected(SettingsTokens.getIThrow());
-        iBreak.setSelected(SettingsTokens.getIBreak());
-        iContinue.setSelected(SettingsTokens.getIContinue());
-        iReturn.setSelected(SettingsTokens.getIReturn());
-        iSkipFunctionArgs.setSelected(SettingsTokens.getISkipFunctionArgs());
-        iSkipIfArgs.setSelected(SettingsTokens.getISkipIfArgs());
-        iSkipLoopArgs.setSelected(SettingsTokens.getISkipLoopArgs());
+        setOptions3(SettingsTokens.getIFunctionDefine(), SettingsTokens.getIFunctionUse());
+        setOptions4(SettingsTokens.getIStatic(), SettingsTokens.getIFinal(), SettingsTokens.getIThrows(), SettingsTokens.getIVoid());
+        setOptions5(SettingsTokens.getITable(), SettingsTokens.getICast(), SettingsTokens.getIGeneric());
+        setOptions6(SettingsTokens.getIClass(), SettingsTokens.getINew(), SettingsTokens.getIEnum(), SettingsTokens.getIExtends(), SettingsTokens.getIImplements());
+        setOptions7(SettingsTokens.getITry(), SettingsTokens.getICatch(), SettingsTokens.getIThrow());
+        setOptions8(SettingsTokens.getIBreak(), SettingsTokens.getIContinue(), SettingsTokens.getIReturn());
+        setOptions9(SettingsTokens.getISkipFunctionArgs(), SettingsTokens.getISkipIfArgs(), SettingsTokens.getISkipLoopArgs());
 
-        updateSkipFunctionArgs();
-        updateSkipIfArgs();
-        updateSkipLoopArgs();
+        updateSkips();
+    }
+
+    private void setRadioSelected(String strRadio) {
+        if (SetttingsTokensRadioGroup.FULL.toString().equals(strRadio)) {
+            iRadioFull.setSelected(true);
+        }
+        else if (SetttingsTokensRadioGroup.NORMAL.toString().equals(strRadio)) {
+            iRadioNormal.setSelected(true);
+        }
+        else if (SetttingsTokensRadioGroup.BROAD.toString().equals(strRadio)) {
+            iRadioBroad.setSelected(true);
+        }
+        else if (SetttingsTokensRadioGroup.MINIMALISTIC.toString().equals(strRadio)) {
+            iRadioMinimalistic.setSelected(true);
+        }
+        else if (SetttingsTokensRadioGroup.CUSTOM.toString().equals(strRadio)) {
+            iRadioCustom.setSelected(true);
+        }
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionRadioFull(ActionEvent event) {
+        updateNumber(false, false, false, true, true, true, true, true);
+        setOptions1(true, true, true);
+        updateText(false, true, true);
+        updateOperator(false, true, true, true, true, true);
+        setOptions2(true, true, true, true);
+        updateLoopGroup(false, true, true, true);
+        setOptions3(true, true);
+        setOptions4(true, true, true, true);
+        setOptions5(true, true, true);
+        setOptions6(true, true, true, true, true);
+        setOptions7(true, true, true);
+        setOptions8(true, true, true);
+        setOptions9(false, false, false);
+
+        updateSkips();
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionRadioNormal(ActionEvent event) {
+        // TODO: dokoncz
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionRadioBroad(ActionEvent event) {
+     // TODO: dokoncz
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionRadioMinimalistic(ActionEvent event) {
+     // TODO: dokoncz
+    }
+
+    private void setOptions1(boolean iClassVariable, boolean iBoolean, boolean iByte) {
+        this.iClassVariable.setSelected(iClassVariable);
+        this.iBoolean.setSelected(iBoolean);
+        this.iByte.setSelected(iByte);
+    }
+
+    private void setOptions2(boolean iIfAndElse, boolean iSwitch, boolean iCase, boolean iDefault) {
+        this.iIfAndElse.setSelected(iIfAndElse);
+        this.iSwitch.setSelected(iSwitch);
+        this.iCase.setSelected(iCase);
+        this.iDefault.setSelected(iDefault);
+    }
+
+    private void setOptions3(boolean iFunctionDefine, boolean iFunctionUse) {
+        this.iFunctionDefine.setSelected(iFunctionDefine);
+        this.iFunctionUse.setSelected(iFunctionUse);
+    }
+
+    private void setOptions4(boolean iStatic, boolean iFinal, boolean iThrows, boolean iVoid) {
+        this.iStatic.setSelected(iStatic);
+        this.iFinal.setSelected(iFinal);
+        this.iThrows.setSelected(iThrows);
+        this.iVoid.setSelected(iVoid);
+    }
+
+    private void setOptions5(boolean iTable, boolean iCast, boolean iGeneric) {
+        this.iTable.setSelected(iTable);
+        this.iCast.setSelected(iCast);
+        this.iGeneric.setSelected(iGeneric);
+    }
+
+    private void setOptions6(boolean iClass, boolean iNew, boolean iEnum, boolean iExtends, boolean iImplements) {
+        this.iClass.setSelected(iClass);
+        this.iNew.setSelected(iNew);
+        this.iEnum.setSelected(iEnum);
+        this.iExtends.setSelected(iExtends);
+        this.iImplements.setSelected(iImplements);
+    }
+
+    private void setOptions7(boolean iTry, boolean iCatch, boolean iThrow) {
+        this.iTry.setSelected(iTry);
+        this.iCatch.setSelected(iCatch);
+        this.iThrow.setSelected(iThrow);
+    }
+
+    private void setOptions8(boolean iBreak, boolean iContinue, boolean iReturn) {
+        this.iBreak.setSelected(iBreak);
+        this.iContinue.setSelected(iContinue);
+        this.iReturn.setSelected(iReturn);
+    }
+
+    private void setOptions9(boolean iSkipFunctionArgs, boolean iSkipIfArgs, boolean iSkipLoopArgs) {
+        this.iSkipFunctionArgs.setSelected(iSkipFunctionArgs);
+        this.iSkipIfArgs.setSelected(iSkipIfArgs);
+        this.iSkipLoopArgs.setSelected(iSkipLoopArgs);
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionNumber(ActionEvent event) {
         updateNumber(iNumber.isSelected(), true, true, true, true, true, true, true);
+
+        selectRadioCustom();
     }
 
     private void updateNumber(boolean _iNumber,
-            boolean _iNumberWhole, boolean _iInt, boolean _iLong, boolean _iShort,
-            boolean _iNumberDecimal, boolean _iFloat, boolean _Double) {
+            boolean _iNumberWhole, boolean _iNumberDecimal,
+            boolean _iInt, boolean _iLong, boolean _iShort,
+            boolean _iFloat, boolean _Double) {
         iNumber.setSelected(_iNumber);
 
         if (iNumber.isSelected()) {
@@ -102,6 +197,8 @@ public class SettingsTokensController implements Initializable {
     @FXML @SuppressWarnings("unused")
     private void actionNumberWhole(ActionEvent event) {
         updateNumberWhole(iNumberWhole.isSelected(), true, true, true);
+
+        selectRadioCustom();
     }
 
     private void updateNumberWhole(boolean _iNumberWhole, boolean _iInt, boolean _iLong, boolean _iShort) {
@@ -130,6 +227,8 @@ public class SettingsTokensController implements Initializable {
     @FXML @SuppressWarnings("unused")
     private void actionNumberDecimal(ActionEvent event) {
         updateNumberDecimal(iNumberDecimal.isSelected(), true, true);
+
+        selectRadioCustom();
     }
 
     private void updateNumberDecimal(boolean _iNumberDecimal, boolean _iFloat, boolean _iDouble) {
@@ -154,6 +253,8 @@ public class SettingsTokensController implements Initializable {
     @FXML @SuppressWarnings("unused")
     private void actionText(ActionEvent event) {
         updateText(iText.isSelected(), true, true);
+
+        selectRadioCustom();
     }
 
     private void updateText(boolean _iText, boolean _iString, boolean _iChar) {
@@ -178,6 +279,8 @@ public class SettingsTokensController implements Initializable {
     @FXML @SuppressWarnings("unused")
     private void actionOperator(ActionEvent event) {
         updateOperator(iOperator.isSelected(), true, true, true, true, true);
+
+        selectRadioCustom();
     }
 
     private void updateOperator(boolean _iOperation, boolean _iRelation, boolean _iAssign, boolean _iLogic, boolean _iArithmetic, boolean _iBitwise) {
@@ -212,10 +315,12 @@ public class SettingsTokensController implements Initializable {
     }
 
     @FXML @SuppressWarnings("unused")
-    private void actionLoopAndSkip(ActionEvent event) {
+    private void actionLoop(ActionEvent event) {
         updateLoopGroup(iLoop.isSelected(), true, true, true);
 
         updateSkipLoopArgs();
+
+        selectRadioCustom();
     }
 
     private void updateLoopGroup(boolean _iLoop, boolean _iFor, boolean _iWhile, boolean _iDo) {
@@ -241,10 +346,68 @@ public class SettingsTokensController implements Initializable {
         }
     }
 
+    @FXML @SuppressWarnings("unused")
+    private void actionControlSkipFuntionArgs(ActionEvent event) {
+        updateSkipFunctionArgs();
+
+        selectRadioCustom();
+    }
+
+    private void updateSkipFunctionArgs() {
+        if (iFunctionDefine.isSelected() == false && iFunctionUse.isSelected() == false) {
+            iSkipFunctionArgs.setDisable(true);
+            iSkipFunctionArgs.setSelected(true);
+        }
+        else {
+            iSkipFunctionArgs.setDisable(false);
+        }
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionControlSkipStatmentArgs(ActionEvent event) {
+        updateSkipIfArgs();
+
+        selectRadioCustom();
+    }
+
+    private void updateSkipIfArgs() {
+        if (iIfAndElse.isSelected() == false) {
+            iSkipIfArgs.setDisable(true);
+            iSkipIfArgs.setSelected(true);
+        }
+        else {
+            iSkipIfArgs.setDisable(false);
+        }
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionControlSkipLoopArgs(ActionEvent event) {
+        updateSkipLoopArgs();
+
+        selectRadioCustom();
+    }
+
+    private void updateSkipLoopArgs() {
+        if (iLoop.isSelected() == false && iFor.isSelected() == false && iWhile.isSelected() == false) {
+            iSkipLoopArgs.setDisable(true);
+            iSkipLoopArgs.setSelected(true);
+        }
+        else {
+            iSkipLoopArgs.setDisable(false);
+        }
+    }
+
+    private void updateSkips() {
+        updateSkipFunctionArgs();
+        updateSkipIfArgs();
+        updateSkipLoopArgs();
+    }
 
     @FXML @SuppressWarnings("unused")
     private void actionOk(ActionEvent event) {
         stage.close();
+
+        SettingsTokens.setIRadioGroup(getRadioGroup());
 
         SettingsTokens.setINumber(iNumber.isSelected());
         SettingsTokens.setINumberWhole(iNumberWhole.isSelected());
@@ -300,53 +463,37 @@ public class SettingsTokensController implements Initializable {
     }
 
     @FXML @SuppressWarnings("unused")
-    private void actionControlSkipFuntionArgs(ActionEvent event) {
-        updateSkipFunctionArgs();
-    }
-
-    private void updateSkipFunctionArgs() {
-        if (iFunctionDefine.isSelected() == false && iFunctionUse.isSelected() == false) {
-            iSkipFunctionArgs.setDisable(true);
-            iSkipFunctionArgs.setSelected(true);
-        }
-        else {
-            iSkipFunctionArgs.setDisable(false);
-        }
-    }
-
-    @FXML @SuppressWarnings("unused")
-    private void actionControlSkipStatmentArgs(ActionEvent event) {
-        updateSkipIfArgs();
-    }
-
-    private void updateSkipIfArgs() {
-        if (iIfAndElse.isSelected() == false) {
-            iSkipIfArgs.setDisable(true);
-            iSkipIfArgs.setSelected(true);
-        }
-        else {
-            iSkipIfArgs.setDisable(false);
-        }
-    }
-
-    @FXML @SuppressWarnings("unused")
-    private void actionControlSkipLoopArgs(ActionEvent event) {
-        updateSkipLoopArgs();
-    }
-
-    private void updateSkipLoopArgs() {
-        if (iLoop.isSelected() == false && iFor.isSelected() == false && iWhile.isSelected() == false) {
-            iSkipLoopArgs.setDisable(true);
-            iSkipLoopArgs.setSelected(true);
-        }
-        else {
-            iSkipLoopArgs.setDisable(false);
-        }
-    }
-
-    @FXML @SuppressWarnings("unused")
     private void actionCancel(ActionEvent event) {
         stage.close();
+    }
+
+    private SetttingsTokensRadioGroup getRadioGroup() {
+        if (iRadioFull.isSelected()) {
+            return SetttingsTokensRadioGroup.FULL;
+        }
+        else if (iRadioNormal.isSelected()) {
+            return SetttingsTokensRadioGroup.NORMAL;
+        }
+        else if (iRadioBroad.isSelected()) {
+            return SetttingsTokensRadioGroup.BROAD;
+        }
+        else if (iRadioMinimalistic.isSelected()) {
+            return SetttingsTokensRadioGroup.MINIMALISTIC;
+        }
+        else if (iRadioCustom.isSelected()) {
+            return SetttingsTokensRadioGroup.CUSTOM;
+        }
+
+        return null;
+    }
+
+    @FXML @SuppressWarnings("unused")
+    private void actionSelectRadioCustom(ActionEvent event) {
+        selectRadioCustom();
+    }
+
+    private void selectRadioCustom() {
+        iRadioCustom.setSelected(true);
     }
 
     public void setStage(Stage stage) {

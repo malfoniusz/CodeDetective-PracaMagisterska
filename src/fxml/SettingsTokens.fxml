@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="650.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SettingsTokensController">
+<BorderPane prefHeight="680.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SettingsTokensController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -15,6 +15,9 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -40,93 +43,102 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox fx:id="iNumber" mnemonicParsing="false" onAction="#actionNumber" text="Number">
+            <CheckBox fx:id="iNumber" mnemonicParsing="false" onAction="#actionNumber" text="Number" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iNumberWhole" mnemonicParsing="false" onAction="#actionNumberWhole" selected="true" text="Number Whole" GridPane.columnIndex="1">
+            <CheckBox fx:id="iNumberWhole" mnemonicParsing="false" onAction="#actionNumberWhole" selected="true" text="Number Whole" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iNumberDecimal" mnemonicParsing="false" onAction="#actionNumberDecimal" selected="true" text="Number Decimal" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <CheckBox fx:id="iNumberDecimal" mnemonicParsing="false" onAction="#actionNumberDecimal" selected="true" text="Number Decimal" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iInt" disable="true" mnemonicParsing="false" text="int" GridPane.columnIndex="2" />
-            <CheckBox fx:id="iLong" disable="true" mnemonicParsing="false" text="long" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <CheckBox fx:id="iShort" disable="true" mnemonicParsing="false" text="short" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <CheckBox fx:id="iFloat" disable="true" mnemonicParsing="false" text="float" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <CheckBox fx:id="iDouble" disable="true" mnemonicParsing="false" text="double" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <CheckBox fx:id="iClassVariable" mnemonicParsing="false" selected="true" text="Class Variable" GridPane.rowIndex="5" />
-            <CheckBox fx:id="iBoolean" mnemonicParsing="false" selected="true" text="boolean" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <CheckBox fx:id="iByte" mnemonicParsing="false" selected="true" text="byte" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <CheckBox fx:id="iOperator" mnemonicParsing="false" onAction="#actionOperator" text="Operator" GridPane.rowIndex="7">
+            <CheckBox fx:id="iInt" disable="true" mnemonicParsing="false" onAction="#actionSelectRadioCustom" text="int" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <CheckBox fx:id="iLong" disable="true" mnemonicParsing="false" onAction="#actionSelectRadioCustom" text="long" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <CheckBox fx:id="iShort" disable="true" mnemonicParsing="false" onAction="#actionSelectRadioCustom" text="short" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <CheckBox fx:id="iFloat" disable="true" mnemonicParsing="false" onAction="#actionSelectRadioCustom" text="float" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <CheckBox fx:id="iDouble" disable="true" mnemonicParsing="false" onAction="#actionSelectRadioCustom" text="double" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <CheckBox fx:id="iClassVariable" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Class Variable" GridPane.rowIndex="8" />
+            <CheckBox fx:id="iBoolean" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="boolean" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <CheckBox fx:id="iByte" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="byte" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <CheckBox fx:id="iOperator" mnemonicParsing="false" onAction="#actionOperator" text="Operator" GridPane.rowIndex="10">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iRelation" mnemonicParsing="false" selected="true" text="Relation" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <CheckBox fx:id="iLogic" mnemonicParsing="false" selected="true" text="Logic" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <CheckBox fx:id="iAssign" mnemonicParsing="false" selected="true" text="Assign" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <CheckBox fx:id="iArithmetic" mnemonicParsing="false" selected="true" text="Arithmetic" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <CheckBox fx:id="iBitwise" mnemonicParsing="false" selected="true" text="Bitwise" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-            <CheckBox fx:id="iLoop" mnemonicParsing="false" onAction="#actionLoopAndSkip" text="Loop" GridPane.rowIndex="12">
+            <CheckBox fx:id="iRelation" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Relation" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <CheckBox fx:id="iLogic" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Logic" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+            <CheckBox fx:id="iAssign" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Assign" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <CheckBox fx:id="iArithmetic" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Arithmetic" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+            <CheckBox fx:id="iBitwise" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Bitwise" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+            <CheckBox fx:id="iLoop" mnemonicParsing="false" onAction="#actionLoop" text="Loop" GridPane.rowIndex="15">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iFor" mnemonicParsing="false" onAction="#actionControlSkipLoopArgs" selected="true" text="for" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            <CheckBox fx:id="iWhile" mnemonicParsing="false" onAction="#actionControlSkipLoopArgs" selected="true" text="while" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-            <CheckBox fx:id="iDo" mnemonicParsing="false" selected="true" text="do" GridPane.columnIndex="2" GridPane.rowIndex="13" />
-            <CheckBox fx:id="iIfAndElse" mnemonicParsing="false" onAction="#actionControlSkipStatmentArgs" selected="true" text="if and else" GridPane.rowIndex="10" />
-            <CheckBox fx:id="iSwitch" mnemonicParsing="false" selected="true" text="switch" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <CheckBox fx:id="iCase" mnemonicParsing="false" selected="true" text="case" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-            <CheckBox fx:id="iDefault" mnemonicParsing="false" selected="true" text="default" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-            <CheckBox fx:id="iFunctionDefine" mnemonicParsing="false" onAction="#actionControlSkipFuntionArgs" selected="true" text="Function define" GridPane.rowIndex="14" />
-            <CheckBox fx:id="iFunctionUse" mnemonicParsing="false" onAction="#actionControlSkipFuntionArgs" selected="true" text="Function use" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-            <CheckBox fx:id="iStatic" mnemonicParsing="false" selected="true" text="static" GridPane.rowIndex="15" />
-            <CheckBox fx:id="iFinal" mnemonicParsing="false" selected="true" text="final" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-            <CheckBox fx:id="iVoid" mnemonicParsing="false" selected="true" text="void" GridPane.columnIndex="2" GridPane.rowIndex="16" />
-            <CheckBox fx:id="iTable" mnemonicParsing="false" selected="true" text="Table" GridPane.rowIndex="17" />
-            <CheckBox fx:id="iCast" mnemonicParsing="false" selected="true" text="Cast" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-            <CheckBox fx:id="iGeneric" mnemonicParsing="false" selected="true" text="Generic" GridPane.columnIndex="2" GridPane.rowIndex="17" />
-            <CheckBox fx:id="iClass" mnemonicParsing="false" selected="true" text="class" GridPane.rowIndex="18" />
-            <CheckBox fx:id="iNew" mnemonicParsing="false" selected="true" text="new" GridPane.columnIndex="1" GridPane.rowIndex="18" />
-            <CheckBox fx:id="iExtends" mnemonicParsing="false" selected="true" text="extends" GridPane.columnIndex="2" GridPane.rowIndex="18" />
-            <CheckBox fx:id="iEnum" mnemonicParsing="false" selected="true" text="enum" GridPane.columnIndex="1" GridPane.rowIndex="19" />
-            <CheckBox fx:id="iImplements" mnemonicParsing="false" selected="true" text="implements" GridPane.columnIndex="2" GridPane.rowIndex="19" />
-            <CheckBox fx:id="iTry" mnemonicParsing="false" selected="true" text="try" GridPane.rowIndex="20" />
-            <CheckBox fx:id="iCatch" mnemonicParsing="false" selected="true" text="catch" GridPane.columnIndex="1" GridPane.rowIndex="20" />
-            <CheckBox fx:id="iThrow" mnemonicParsing="false" selected="true" text="throw" GridPane.columnIndex="2" GridPane.rowIndex="20" />
-            <CheckBox fx:id="iBreak" mnemonicParsing="false" selected="true" text="break" GridPane.rowIndex="21" />
-            <CheckBox fx:id="iContinue" mnemonicParsing="false" selected="true" text="continue" GridPane.columnIndex="1" GridPane.rowIndex="21" />
-            <CheckBox fx:id="iReturn" mnemonicParsing="false" selected="true" text="return" GridPane.columnIndex="2" GridPane.rowIndex="21" />
-            <CheckBox fx:id="iSkipIfArgs" mnemonicParsing="false" selected="true" text="Skip if args." GridPane.columnIndex="1" GridPane.rowIndex="22">
+            <CheckBox fx:id="iFor" mnemonicParsing="false" onAction="#actionControlSkipLoopArgs" selected="true" text="for" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+            <CheckBox fx:id="iWhile" mnemonicParsing="false" onAction="#actionControlSkipLoopArgs" selected="true" text="while" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+            <CheckBox fx:id="iDo" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="do" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+            <CheckBox fx:id="iIfAndElse" mnemonicParsing="false" onAction="#actionControlSkipStatmentArgs" selected="true" text="if and else" GridPane.rowIndex="13" />
+            <CheckBox fx:id="iSwitch" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="switch" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <CheckBox fx:id="iCase" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="case" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+            <CheckBox fx:id="iDefault" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="default" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+            <CheckBox fx:id="iFunctionDefine" mnemonicParsing="false" onAction="#actionControlSkipFuntionArgs" selected="true" text="Function define" GridPane.rowIndex="17" />
+            <CheckBox fx:id="iFunctionUse" mnemonicParsing="false" onAction="#actionControlSkipFuntionArgs" selected="true" text="Function use" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+            <CheckBox fx:id="iStatic" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="static" GridPane.rowIndex="18" />
+            <CheckBox fx:id="iFinal" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="final" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+            <CheckBox fx:id="iVoid" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="void" GridPane.columnIndex="2" GridPane.rowIndex="19" />
+            <CheckBox fx:id="iTable" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Table" GridPane.rowIndex="20" />
+            <CheckBox fx:id="iCast" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Cast" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+            <CheckBox fx:id="iGeneric" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Generic" GridPane.columnIndex="2" GridPane.rowIndex="20" />
+            <CheckBox fx:id="iClass" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="class" GridPane.rowIndex="21" />
+            <CheckBox fx:id="iNew" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="new" GridPane.columnIndex="1" GridPane.rowIndex="21" />
+            <CheckBox fx:id="iExtends" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="extends" GridPane.columnIndex="2" GridPane.rowIndex="21" />
+            <CheckBox fx:id="iEnum" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="enum" GridPane.columnIndex="1" GridPane.rowIndex="22" />
+            <CheckBox fx:id="iImplements" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="implements" GridPane.columnIndex="2" GridPane.rowIndex="22" />
+            <CheckBox fx:id="iTry" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="try" GridPane.rowIndex="23" />
+            <CheckBox fx:id="iCatch" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="catch" GridPane.columnIndex="1" GridPane.rowIndex="23" />
+            <CheckBox fx:id="iThrow" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="throw" GridPane.columnIndex="2" GridPane.rowIndex="23" />
+            <CheckBox fx:id="iBreak" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="break" GridPane.rowIndex="24" />
+            <CheckBox fx:id="iContinue" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="continue" GridPane.columnIndex="1" GridPane.rowIndex="24" />
+            <CheckBox fx:id="iReturn" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="return" GridPane.columnIndex="2" GridPane.rowIndex="24" />
+            <CheckBox fx:id="iSkipIfArgs" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Skip if args." GridPane.columnIndex="1" GridPane.rowIndex="25">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iSkipLoopArgs" mnemonicParsing="false" selected="true" text="Skip loop args." GridPane.columnIndex="2" GridPane.rowIndex="22">
+            <CheckBox fx:id="iSkipLoopArgs" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="Skip loop args." GridPane.columnIndex="2" GridPane.rowIndex="25">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iSkipFunctionArgs" mnemonicParsing="false" text="Skip function args." GridPane.rowIndex="22">
+            <CheckBox fx:id="iSkipFunctionArgs" mnemonicParsing="false" onAction="#actionSelectRadioCustom" text="Skip function args." GridPane.rowIndex="25">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iThrows" mnemonicParsing="false" selected="true" text="throws" GridPane.columnIndex="2" GridPane.rowIndex="15" />
-            <CheckBox fx:id="iText" mnemonicParsing="false" onAction="#actionText" selected="true" text="Text" GridPane.rowIndex="6">
+            <CheckBox fx:id="iThrows" mnemonicParsing="false" onAction="#actionSelectRadioCustom" selected="true" text="throws" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+            <CheckBox fx:id="iText" mnemonicParsing="false" onAction="#actionText" selected="true" text="Text" GridPane.rowIndex="9">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="iString" disable="true" mnemonicParsing="false" text="String" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <CheckBox fx:id="iChar" disable="true" mnemonicParsing="false" text="char" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <CheckBox fx:id="iString" disable="true" mnemonicParsing="false" onAction="#actionSelectRadioCustom" text="String" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <CheckBox fx:id="iChar" disable="true" mnemonicParsing="false" onAction="#actionSelectRadioCustom" text="char" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+            <RadioButton fx:id="iRadioFull" mnemonicParsing="false" onAction="#actionRadioFull" text="Full">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tokenPrecision" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="iRadioNormal" mnemonicParsing="false" onAction="#actionRadioNormal" text="Normal" toggleGroup="$tokenPrecision" GridPane.rowIndex="1" />
+            <RadioButton fx:id="iRadioBroad" mnemonicParsing="false" onAction="#actionRadioBroad" text="Broad" toggleGroup="$tokenPrecision" GridPane.columnIndex="1" />
+            <RadioButton fx:id="iRadioMinimalistic" mnemonicParsing="false" onAction="#actionRadioMinimalistic" text="Minimalistic" toggleGroup="$tokenPrecision" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <RadioButton fx:id="iRadioCustom" mnemonicParsing="false" text="Custom" toggleGroup="$tokenPrecision" GridPane.columnIndex="2" />
          </children>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
