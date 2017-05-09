@@ -63,11 +63,11 @@ public final class Tokenization {
         tokens.addAll(otherBlocksTokenization(line));
         line = removeCatchArgs(line);
 
-        tokens.addAll(functionsTokenization(line));
         tokens.addAll(castTokenization(line));
         if (SettingsTokens.getISkipFunctionArgs()) {
             line = removeFunctionArgs(line);
         }
+        tokens.addAll(functionsTokenization(line));
 
         tokens.addAll(singleWordsTokenization(line));
         tokens.addAll(operatorsTokenization(line));
@@ -152,7 +152,7 @@ public final class Tokenization {
     private static ArrayList<Token> functionsTokenization(String line) {
         ArrayList<Token> tokens = new ArrayList<>();
 
-        final String FUNCTION_DEF_REGEX = "\\w+(?<!^if|^else if|^for|^while|^switch|^catch)\\(.*\\).*\\{";
+        final String FUNCTION_DEF_REGEX = "\\w+\\s\\w+(?<!^if|^else if|^for|^while|^switch|^catch)\\(.*\\).*\\{";
         tokens.addAll(findTokensRegex(line, FUNCTION_DEF_REGEX, Token.FUNCTION_DEF, SettingsTokens.getIFunctionDefine()));
         line = line.replaceAll(FUNCTION_DEF_REGEX, "");
 
@@ -170,11 +170,14 @@ public final class Tokenization {
     }
 
     private static String removeFunctionArgs(String line) {
-        final String FUNCTION_ARGS_REGEX = "(?<!^if|^else if|^for|^while|^switch|^catch)\\([^\\(]*?\\)";
-
-        while (findRegex(line, FUNCTION_ARGS_REGEX)) {
-            line = line.replaceAll(FUNCTION_ARGS_REGEX, "");
+        // Remove functions in function
+        final String FUNCTIONS_IN_FUNCTIONS_REGEX = "(?<!^if|^else if|^for|^while|^switch|^catch)\\(([^\\)\\(]*\\([^\\)\\(]*?\\))";
+        while (findRegex(line, FUNCTIONS_IN_FUNCTIONS_REGEX)) {
+            line = line.replaceAll(FUNCTIONS_IN_FUNCTIONS_REGEX, "(");
         }
+
+        // Remove arguments in function
+        line = line.replaceAll("(?<!^if|^else if|^for|^while|^switch|^catch)\\([^\\(]*?\\)", "()");
 
         return line;
     }

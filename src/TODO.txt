@@ -1,7 +1,6 @@
 ﻿
 6. Testy
-- normalizacja
-- tokenizacja
+- tokenizacja - wykrycie każdego tokenu przy różnych rodzajach tokenizacji
 - wykrywanie podobienstwa (algorytm)
 - nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
 
