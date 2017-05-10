@@ -54,16 +54,16 @@ public class SettingsTokensController implements Initializable {
     }
 
     private void setRadioSelected(String strRadio) {
-        if (SetttingsTokensRadioGroup.FULL.toString().equals(strRadio)) {
+        if (SetttingsTokensRadioGroup.FULL.equals(SetttingsTokensRadioGroup.valueOf(strRadio))) {
             iRadioFull.setSelected(true);
         }
-        else if (SetttingsTokensRadioGroup.NORMAL.toString().equals(strRadio)) {
+        else if (SetttingsTokensRadioGroup.NORMAL.equals(SetttingsTokensRadioGroup.valueOf(strRadio))) {
             iRadioNormal.setSelected(true);
         }
-        else if (SetttingsTokensRadioGroup.MINIMALISTIC.toString().equals(strRadio)) {
+        else if (SetttingsTokensRadioGroup.MINIMALISTIC.equals(SetttingsTokensRadioGroup.valueOf(strRadio))) {
             iRadioMinimalistic.setSelected(true);
         }
-        else if (SetttingsTokensRadioGroup.CUSTOM.toString().equals(strRadio)) {
+        else if (SetttingsTokensRadioGroup.CUSTOM.equals(SetttingsTokensRadioGroup.valueOf(strRadio))) {
             iRadioCustom.setSelected(true);
         }
     }
