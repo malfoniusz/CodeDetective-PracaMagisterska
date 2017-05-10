@@ -4,7 +4,6 @@ public enum SetttingsTokensRadioGroup {
 
     FULL("full"),
     NORMAL("normal"),
-    BROAD("broad"),
     MINIMALISTIC("minimalistic"),
     CUSTOM("custom"),
     ;

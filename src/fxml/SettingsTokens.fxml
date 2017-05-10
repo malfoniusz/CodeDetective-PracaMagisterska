@@ -135,10 +135,9 @@
                   <ToggleGroup fx:id="tokenPrecision" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="iRadioNormal" mnemonicParsing="false" onAction="#actionRadioNormal" text="Normal" toggleGroup="$tokenPrecision" GridPane.rowIndex="1" />
-            <RadioButton fx:id="iRadioBroad" mnemonicParsing="false" onAction="#actionRadioBroad" text="Broad" toggleGroup="$tokenPrecision" GridPane.columnIndex="1" />
-            <RadioButton fx:id="iRadioMinimalistic" mnemonicParsing="false" onAction="#actionRadioMinimalistic" text="Minimalistic" toggleGroup="$tokenPrecision" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <RadioButton fx:id="iRadioCustom" mnemonicParsing="false" text="Custom" toggleGroup="$tokenPrecision" GridPane.columnIndex="2" />
+            <RadioButton fx:id="iRadioNormal" mnemonicParsing="false" onAction="#actionRadioNormal" text="Normal" toggleGroup="$tokenPrecision" GridPane.columnIndex="1" />
+            <RadioButton fx:id="iRadioMinimalistic" mnemonicParsing="false" onAction="#actionRadioMinimalistic" text="Minimalistic" toggleGroup="$tokenPrecision" GridPane.columnIndex="2" />
+            <RadioButton fx:id="iRadioCustom" mnemonicParsing="false" text="Custom" toggleGroup="$tokenPrecision" GridPane.rowIndex="1" />
          </children>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

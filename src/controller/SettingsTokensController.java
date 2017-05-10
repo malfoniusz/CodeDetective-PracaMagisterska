@@ -14,7 +14,7 @@ import staticc.SettingsTokens;
 
 public class SettingsTokensController implements Initializable {
 
-    @FXML private RadioButton iRadioFull, iRadioNormal, iRadioBroad, iRadioMinimalistic, iRadioCustom;
+    @FXML private RadioButton iRadioFull, iRadioNormal, iRadioMinimalistic, iRadioCustom;
 
     @FXML private CheckBox iNumber, iNumberWhole, iNumberDecimal, iInt, iLong, iShort, iFloat, iDouble;
     @FXML private CheckBox iClassVariable, iBoolean, iByte;
@@ -60,9 +60,6 @@ public class SettingsTokensController implements Initializable {
         else if (SetttingsTokensRadioGroup.NORMAL.toString().equals(strRadio)) {
             iRadioNormal.setSelected(true);
         }
-        else if (SetttingsTokensRadioGroup.BROAD.toString().equals(strRadio)) {
-            iRadioBroad.setSelected(true);
-        }
         else if (SetttingsTokensRadioGroup.MINIMALISTIC.toString().equals(strRadio)) {
             iRadioMinimalistic.setSelected(true);
         }
@@ -86,23 +83,43 @@ public class SettingsTokensController implements Initializable {
         setOptions7(true, true, true);
         setOptions8(true, true, true);
         setOptions9(false, false, false);
-
         updateSkips();
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionRadioNormal(ActionEvent event) {
-        // TODO: dokoncz
-    }
-
-    @FXML @SuppressWarnings("unused")
-    private void actionRadioBroad(ActionEvent event) {
-     // TODO: dokoncz
+    	updateNumber(false, true, true, false, false, false, false, false);
+        setOptions1(true, true, true);
+        updateText(true, false, false);
+        updateOperator(true, false, false, false, false, false);
+        setOptions2(true, true, true, true);
+        updateLoopGroup(true, false, false, false);
+        setOptions3(true, true);
+        setOptions4(true, true, true, true);
+        setOptions5(true, true, true);
+        setOptions6(true, true, true, true, true);
+        setOptions7(true, true, true);
+        setOptions8(true, true, true);
+        setOptions9(false, true, true);
+        updateSkips();
     }
 
     @FXML @SuppressWarnings("unused")
     private void actionRadioMinimalistic(ActionEvent event) {
-     // TODO: dokoncz
+    	updateNumber(true, false, false, false, false, false, false, false);
+        setOptions1(true, true, true);
+        updateText(true, false, false);
+        updateOperator(true, false, false, false, false, false);
+        setOptions2(true, true, false, false);
+        updateLoopGroup(true, false, false, false);
+        setOptions3(true, true);
+        setOptions4(false, false, false, true);
+        setOptions5(false, false, false);
+        setOptions6(true, false, false, false, false);
+        setOptions7(true, true, false);
+        setOptions8(false, false, false);
+        setOptions9(true, true, true);
+        updateSkips();
     }
 
     private void setOptions1(boolean iClassVariable, boolean iBoolean, boolean iByte) {
@@ -473,9 +490,6 @@ public class SettingsTokensController implements Initializable {
         }
         else if (iRadioNormal.isSelected()) {
             return SetttingsTokensRadioGroup.NORMAL;
-        }
-        else if (iRadioBroad.isSelected()) {
-            return SetttingsTokensRadioGroup.BROAD;
         }
         else if (iRadioMinimalistic.isSelected()) {
             return SetttingsTokensRadioGroup.MINIMALISTIC;
