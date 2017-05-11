@@ -28,7 +28,7 @@ import staticc.Settings;
 public class Main extends Application {
 
     private final String SCENE_FILE_NAME = PropertiesReader.readProperty("main_class");
-    private final String PROGRAM_NAME = "CodeDetective";
+    private final String PROGRAM_NAME = PropertiesReader.readProperty("program_name");
 
     private MainController mainController;
     private MenuController menuController;

@@ -1,4 +1,6 @@
 ﻿
+- recznie sprawdzic plik T_Tokenized.java
+
 6. Testy
 - tokenizacja - wykrycie każdego tokenu przy różnych rodzajach tokenizacji
 - wykrywanie podobienstwa (algorytm)
