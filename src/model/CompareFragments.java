@@ -57,4 +57,10 @@ public class CompareFragments {
         updateRFileFragmentBase();
     }
 
+
+    @Override
+    public String toString() {
+        String str = this.rFileFragmentProject.getValue() + " " + this.rFileFragmentBase.getValue();
+        return str;
+    }
 }

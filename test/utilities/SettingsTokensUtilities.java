@@ -1,5 +1,6 @@
 package utilities;
 
+import model.SetttingsTokensRadioGroup;
 import staticc.SettingsTokens;
 
 public class SettingsTokensUtilities {
@@ -9,6 +10,8 @@ public class SettingsTokensUtilities {
 	}
 
 	public static void tokenizationTypeFull() {
+	    SettingsTokens.setIRadioGroup(SetttingsTokensRadioGroup.FULL);
+
     	setOptions1(false, false, false, true, true, true, true, true);
         setOptions2(true, true, true);
         setOptions3(false, true, true);
@@ -25,6 +28,8 @@ public class SettingsTokensUtilities {
     }
 
     public static void tokenizationTypeNormal() {
+        SettingsTokens.setIRadioGroup(SetttingsTokensRadioGroup.NORMAL);
+
     	setOptions1(false, true, true, false, false, false, false, false);
     	setOptions2(true, true, true);
     	setOptions3(true, false, false);
@@ -41,6 +46,8 @@ public class SettingsTokensUtilities {
 	}
 
 	public static void tokenizationTypeMinimalistic() {
+	    SettingsTokens.setIRadioGroup(SetttingsTokensRadioGroup.MINIMALISTIC);
+
 		setOptions1(true, false, false, false, false, false, false, false);
 		setOptions2(true, true, true);
 		setOptions3(true, false, false);

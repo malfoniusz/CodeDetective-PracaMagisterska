@@ -32,18 +32,18 @@ public class CompareFiles {
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<CompareFragments> compareFragments;
 
-    public CompareFiles(String projectName, File fileProject, int fileProjectLines, String baseName, File fileBase, int fileBaseLines, int longestMatch, float similarity, ArrayList<CompareFragments> compareFragments) {
-        this.rBaseName = new SimpleStringProperty(baseName);
+    public CompareFiles(File projectDir, File fileProject, int fileProjectLines, File baseDir, File fileBase, int fileBaseLines, int longestMatch, float similarity, ArrayList<CompareFragments> compareFragments) {
+        this.rBaseName = new SimpleStringProperty(baseDir.getName());
 
         this.fileProject = fileProject;
         this.fileProjectLines = fileProjectLines;
-        this.fileProjectShortPath = fileShortPath(fileProject, projectName);
+        this.fileProjectShortPath = fileShortPath(fileProject, projectDir);
         this.rFileProject = new SimpleStringProperty();
         updateRFileProject();
 
         this.fileBase = fileBase;
         this.fileBaseLines = fileBaseLines;
-        this.fileBaseShortPath = fileShortPath(fileBase, baseName);
+        this.fileBaseShortPath = fileShortPath(fileBase, baseDir);
         this.rFileBase = new SimpleStringProperty();
         updateRFileBase();
 
@@ -56,11 +56,12 @@ public class CompareFiles {
         this.compareFragments = compareFragments;
     }
 
-    private String fileShortPath(File file, String folderName) {
-        String path = file.getPath();
-        int beginIndexBase = path.indexOf(folderName);
-        int endIndexBase = path.indexOf(file.getName());
-        String shortPath = ".\\" + path.substring(beginIndexBase, endIndexBase);
+    private String fileShortPath(File file, File dir) {
+        String filePath = file.getPath();
+        String dirPath = dir.getPath();
+        String dirName = dir.getName();
+
+        String shortPath = ".\\" + filePath.replace(dirPath, dirName);
         return shortPath;
     }
 
@@ -175,4 +176,24 @@ public class CompareFiles {
     public void setCompareFragments(ArrayList<CompareFragments> compareFragments) {
         this.compareFragments = compareFragments;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.rFileProject.getValue() + " ");
+        sb.append(this.rFileBase.getValue() + " ");
+        sb.append(this.rBaseName.getValue() + " ");
+        sb.append(this.rLongestMatch.getValue() + " ");
+        sb.append(this.rSimilarity.getValue() + " ");
+        sb.append(this.fileProjectShortPath + " ");
+        sb.append(this.fileBaseShortPath + " ");
+
+        for (CompareFragments compareFragment : this.compareFragments) {
+            sb.append(System.lineSeparator() + compareFragment.toString());
+        }
+
+        return sb.toString();
+    }
+
 }

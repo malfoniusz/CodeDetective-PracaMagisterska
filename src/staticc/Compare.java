@@ -1,5 +1,6 @@
 package staticc;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import com.nlputil.gst.GreedyStringTiling;
@@ -50,7 +51,7 @@ public class Compare {
 
         for (TokenFile baseFile : baseFiles) {
             for (TokenFile projectFile : projectFiles) {
-                CompareFiles compareFiles = compareFiles(project.getName(), projectFile, baseProject.getName(), baseFile);
+                CompareFiles compareFiles = compareFiles(project.getDirectory(), projectFile, baseProject.getDirectory(), baseFile);
                 if (compareFiles == null) {
                     continue;
                 }
@@ -61,7 +62,7 @@ public class Compare {
         return compareProjects;
     }
 
-    private static CompareFiles compareFiles(String projectName, TokenFile projectFile, String baseName, TokenFile baseFile) {
+    private static CompareFiles compareFiles(File projectDir, TokenFile projectFile, File baseDir, TokenFile baseFile) {
         // false - pattern = project, text = base; true - odwrotnie
         boolean switchPlaces = projectFile.getTotalTokenLines() >= baseFile.getTotalTokenLines() ? false : true;
 
@@ -72,10 +73,10 @@ public class Compare {
             return null;
         }
 
-        CompareFiles compareFiles = new CompareFiles(projectName,
+        CompareFiles compareFiles = new CompareFiles(projectDir,
                                                      projectFile.getFile(),
                                                      projectFile.getTotalLines(),
-                                                     baseName,
+                                                     baseDir,
                                                      baseFile.getFile(),
                                                      baseFile.getTotalLines(),
                                                      findLongestMatch(result),
