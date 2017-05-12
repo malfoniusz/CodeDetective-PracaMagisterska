@@ -9,66 +9,64 @@
 15  Drawing(int width,int height,Game g){
 16  size=new Dimension(width,height);
 17  game=g;
-18  int asdfreturn;
-19  sign=rand.nextInt(2)+1;
-20  if(game.getGameMode()==1&&game.getFirst()==1)
-21  moveComputer();
-23  game.startGame();
-23  game.startGame();
-23  game.startGame();
-26  void reverseSign()throws IOException,IndexOutOfBoundsException{
-27  if(sign==1)
-28  sign=2;
-29  else if(sign==1){
-30  sign=2;
-32  else
-34  sign=2;
-36  else{
-37  sign=2;
-39  else
-40  sign=2;
-42  do{
-44  System.out.print(number+"");
-45  number++;
-46  while(number<=20);
-49  try{
+18  sign=rand.nextInt(2)+1;
+19  if(game.getGameMode()==1&&game.getFirst()==1)
+20  moveComputer();
+22  game.startGame();
+22  game.startGame();
+22  game.startGame();
+25  void reverseSign()throws IOException,IndexOutOfBoundsException{
+26  if(sign==1)
+27  sign=2;
+28  else if(sign==1){
+29  sign=2;
+31  else
+33  sign=2;
+35  else{
+36  sign=2;
+38  else
+39  sign=2;
+41  do{
+43  System.out.print(number+"");
+44  number++;
+45  while(number<=20);
+48  try{
+49  if(sign==1)
 50  if(sign==1)
-51  if(sign==1)
-52  liczba++;
-53  catch(IndexOutOfBoundsException e){
-54  System.err.println(""+e.getMessage());
-58  void paintComponent(Graphics g){
-59  super.paintComponent(g);
-61  String[]words=line.split("");
-63  char s='';
-64  String str="";
-65  byte b=0xa;
-67  g.drawLine(size.width/3,0,size.width/3,size.height);
-69  Graphics2D d2=(Graphics2D)g;
-71  for(int A=0;A<3;A++)
-72  for(int B=0;B<3;B++){
-73  x=size.width/6+B*size.width/3;
-74  y=size.height/6+A*size.height/3;
-77  if(map[0][2]==map[1][1]&&map[1][1]==map[2][0]&&map[1][1]!=0){
-78  return;
-82  static void test(String args[]){
-84  switch(grade){
-85  case'':
-86  System.out.println("");
-87  break;
-88  case'':
-89  case'':
-90  break;
-91  default:
-92  System.out.println("");
-97  void mouseEntered(MouseEvent arg0){
-100 +,-;
-101 ++,--;
-102 *,/,%;
-103 <<,>>,>>>;
-104 <,>,<=,>=;
-105 !,==,!=;
-106 &,^,|;
-107 =,+=,-=,*=;
-108 /=,%=,&=,^=,|=;
-109 <<=,>>=,>>>=;
+51  liczba++;
+52  catch(IndexOutOfBoundsException e){
+53  System.err.println(""+e.getMessage());
+57  void paintComponent(Graphics g){
+58  super.paintComponent(g);
+60  String[]words=line.split("");
+62  char s='';
+63  String str="";
+64  byte b=0xa;
+66  g.drawLine(size.width/3,0,size.width/3,size.height);
+68  Graphics2D d2=(Graphics2D)g;
+70  for(int A=0;A<3;A++)
+71  for(int B=0;B<3;B++){
+72  x=size.width/6+B*size.width/3;
+75  if(map[0][2]==map[1][1]&&map[1][1]==map[2][0]&&map[1][1]!=0){
+76  return;
+80  static void test(String args[]){
+82  switch(grade){
+83  case'':
+84  System.out.println("");
+85  break;
+86  case'':
+87  case'':
+88  break;
+89  default:
+90  System.out.println("");
+95  void mouseEntered(MouseEvent arg0){
+98 +,-;
+99 ++,--;
+100 *,/,%;
+101 <<,>>,>>>;
+102 <,>,<=,>=;
+103 !,==,!=;
+104 &,^,|;
+105 =,+=,-=,*=;
+106 /=,%=,&=,^=,|=;
+107 <<=,>>=,>>>=;

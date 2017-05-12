@@ -1,9 +1,7 @@
 ﻿
-- recznie sprawdzic plik T_Tokenized.java
-
 6. Testy
-- tokenizacja - wykrycie każdego tokenu przy różnych rodzajach tokenizacji
 - wykrywanie podobienstwa (algorytm)
+- CompareFile - zmienić Longest z liczby linii kodu na liczbę podobnych linii kodu
 - nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
 
 

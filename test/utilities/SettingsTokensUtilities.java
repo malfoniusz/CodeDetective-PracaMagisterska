@@ -28,7 +28,7 @@ public class SettingsTokensUtilities {
     	setOptions1(false, true, true, false, false, false, false, false);
     	setOptions2(true, true, true);
     	setOptions3(true, false, false);
-    	setOptions4(true, false, false, false, false, false);
+    	setOptions4(false, true, true, true, true, true);
     	setOptions5(true, true, true, true);
     	setOptions6(true, false, false, false);
     	setOptions7(true, true);
@@ -37,7 +37,7 @@ public class SettingsTokensUtilities {
     	setOptions10(true, true, true, true, true);
     	setOptions11(true, true, true);
     	setOptions12(true, true, true);
-    	setOptions13(false, true, true);
+    	setOptions13(true, true, true);
 	}
 
 	public static void tokenizationTypeMinimalistic() {

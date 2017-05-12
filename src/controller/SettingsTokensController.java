@@ -91,7 +91,7 @@ public class SettingsTokensController implements Initializable {
     	updateNumber(false, true, true, false, false, false, false, false);
         setOptions1(true, true, true);
         updateText(true, false, false);
-        updateOperator(true, false, false, false, false, false);
+        updateOperator(false, true, true, true, true, true);
         setOptions2(true, true, true, true);
         updateLoopGroup(true, false, false, false);
         setOptions3(true, true);
@@ -100,7 +100,7 @@ public class SettingsTokensController implements Initializable {
         setOptions6(true, true, true, true, true);
         setOptions7(true, true, true);
         setOptions8(true, true, true);
-        setOptions9(false, true, true);
+        setOptions9(true, true, true);
         updateSkips();
     }
 
