@@ -78,7 +78,7 @@ public class Compare {
                                                      baseName,
                                                      baseFile.getFile(),
                                                      baseFile.getTotalLines(),
-                                                     findLongestMatch(compareFragments),
+                                                     findLongestMatch(result),
                                                      result.getSimilarity(),
                                                      compareFragments);
         return compareFiles;
@@ -95,23 +95,23 @@ public class Compare {
     private static ArrayList<CompareFragments> createFragments(TokenFile projectFile, TokenFile baseFile, PlagResult result, boolean switchPlaces) {
         ArrayList<CompareFragments> compareFragments = new ArrayList<>();
 
-        for (MatchVals tiles : result.getTiles()){
-            CompareFragments fragments = createFragment(projectFile, baseFile, tiles, switchPlaces);
+        for (MatchVals tile : result.getTiles()){
+            CompareFragments fragments = createFragment(projectFile, baseFile, tile, switchPlaces);
             compareFragments.add(fragments);
         }
 
         return compareFragments;
     }
 
-    private static CompareFragments createFragment(TokenFile projectFile, TokenFile baseFile, MatchVals tiles, boolean switchPlaces) {
-        int projectPosition = (switchPlaces ? tiles.textPosition : tiles.patternPostion);
+    private static CompareFragments createFragment(TokenFile projectFile, TokenFile baseFile, MatchVals tile, boolean switchPlaces) {
+        int projectPosition = (switchPlaces ? tile.textPosition : tile.patternPostion);
         int projectCodeLineStart = projectFile.getTokenLines().get(projectPosition).getLineNumber();
-        int projectCodeLineDistance = projectFile.codeLineDistance(projectPosition, tiles.length);
+        int projectCodeLineDistance = projectFile.codeLineDistance(projectPosition, tile.length);
         int projectCodeLineEnd = projectCodeLineStart + projectCodeLineDistance;
 
-        int basePosition = (switchPlaces ? tiles.patternPostion : tiles.textPosition);
+        int basePosition = (switchPlaces ? tile.patternPostion : tile.textPosition);
         int baseCodeLineStart = baseFile.getTokenLines().get(basePosition).getLineNumber();
-        int baseCodeLineDistance = baseFile.codeLineDistance(basePosition, tiles.length);
+        int baseCodeLineDistance = baseFile.codeLineDistance(basePosition, tile.length);
         int baseCodeLineEnd = baseCodeLineStart + baseCodeLineDistance;
 
         FileMarked markedProject = new FileMarked(projectFile.getFile(), projectCodeLineStart, projectCodeLineEnd);
@@ -120,20 +120,12 @@ public class Compare {
         return new CompareFragments(markedProject, markedBase);
     }
 
-    private static int findLongestMatch(ArrayList<CompareFragments> compareFragments) {
+    private static int findLongestMatch(PlagResult result) {
         int longestMatch = 0;
 
-        for (CompareFragments fragment : compareFragments) {
-            FileMarked markedBase = fragment.getFileMarkedBase();
-            int distance = markedBase.getToLine() - markedBase.getFromLine() + 1;
-            if (distance > longestMatch) {
-                longestMatch = distance;
-            }
-
-            FileMarked markedProject = fragment.getFileMarkedProject();
-            distance = markedProject.getToLine() - markedProject.getFromLine() + 1;
-            if (distance > longestMatch) {
-                longestMatch = distance;
+        for (MatchVals tile : result.getTiles()) {
+            if (tile.length > longestMatch) {
+                longestMatch = tile.length;
             }
         }
 

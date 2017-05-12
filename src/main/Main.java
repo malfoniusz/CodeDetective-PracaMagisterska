@@ -17,8 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.CompareFiles;
-import model.CompareFragments;
-import model.FileMarked;
 import model.Project;
 import model.Projects;
 import staticc.Compare;
@@ -76,18 +74,11 @@ public class Main extends Application {
         Settings.setProject(project);
         Settings.setBase(base);
 
-        // Print tokenization
-        //System.out.println(Tokenization.toStringTokenization(Settings.getProject()));
-        //System.out.println(Tokenization.toStringTokenization(Settings.getBase()));
-
         ArrayList<CompareFiles> compareFiles = Compare.runCompare();
-        //ArrayList<CompareFiles> compareFiles = testCompareFiles();
         CompareFilesController compareFilesController = mainController.getCompareFilesController();
         if (compareFiles != null) {
             compareFilesController.setData(compareFiles);
         }
-
-        //testGreedyStringTiling();
     }
 
     private void testGreedyStringTiling() {
@@ -100,39 +91,6 @@ public class Main extends Application {
         for (MatchVals tiles : result.getTiles()){
             System.out.print("(" + tiles.patternPostion + "," + tiles.textPosition + "," + tiles.length + ")");
         }
-    }
-
-    // Nie działa, trzeba stworzyć pliki jako Project i Projects
-    final String FILE_1 = "Drawing.java";
-    final String FILE_2 = "Game.java";
-    private ArrayList<CompareFiles> testCompareFiles() {
-        File file1 = new File(PATH_PROJECT + FILE_1);
-        File file2 = new File(PATH_BASE + FILE_2);
-
-        FileMarked fileMarked1a = new FileMarked(file1, 20, 38);
-        FileMarked fileMarked1b = new FileMarked(file1, 30, 40);
-        FileMarked fileMarked2a = new FileMarked(file2, 15, 32);
-        FileMarked fileMarked2b = new FileMarked(file2, 74, 100);
-
-        ArrayList<CompareFragments> compareFragments1 = new ArrayList<>();
-        CompareFragments fragments1 = new CompareFragments(fileMarked1a, fileMarked2a);
-        CompareFragments fragments2 = new CompareFragments(fileMarked1b, fileMarked2b);
-        compareFragments1.add(fragments1);
-        compareFragments1.add(fragments2);
-
-        ArrayList<CompareFragments> compareFragments2 = new ArrayList<>();
-        CompareFragments fragments3 = new CompareFragments(fileMarked2a, fileMarked1a);
-        CompareFragments fragments4 = new CompareFragments(fileMarked2b, fileMarked1b);
-        compareFragments2.add(fragments3);
-        compareFragments2.add(fragments4);
-
-        ArrayList<CompareFiles> compareFiles = new ArrayList<>();
-        CompareFiles compareFiles1 = new CompareFiles("Project1", file1, 365, "Base1", file2, 566, 99, 58, compareFragments1);
-        CompareFiles compareFiles2 = new CompareFiles("Ultima", new File("myPath/plik2"), 205, "MassiveOnlineUtopia", new File("myPath/plik3"), 566, 99, 95, compareFragments2);
-        compareFiles.add(compareFiles1);
-        compareFiles.add(compareFiles2);
-
-        return compareFiles;
     }
 
 }
