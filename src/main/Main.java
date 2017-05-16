@@ -3,10 +3,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.nlputil.gst.GreedyStringTiling;
-import com.nlputil.gst.MatchVals;
-import com.nlputil.gst.PlagResult;
-
 import controller.CompareFilesController;
 import controller.MainController;
 import controller.MenuController;
@@ -25,6 +21,8 @@ import staticc.Settings;
 
 public class Main extends Application {
 
+    private final boolean PRELOAD = true;
+
     private final String SCENE_FILE_NAME = PropertiesReader.readProperty("main_class");
     private final String PROGRAM_NAME = PropertiesReader.readProperty("program_name");
 
@@ -42,7 +40,9 @@ public class Main extends Application {
         initialize(stage);
         prepareStage(stage);
 
-        testMain();
+        if (PRELOAD) {
+            preload();
+        }
     }
 
     private void initialize(Stage stage) throws IOException {
@@ -67,7 +67,7 @@ public class Main extends Application {
     // TODO: kod testow
     final String PATH_PROJECT = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Project\\";
     final String PATH_BASE = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Base\\";
-    private void testMain() {
+    private void preload() {
         Project project = new Project(new File(PATH_PROJECT));
         Projects base = new Projects(new File(PATH_BASE));
 
@@ -78,18 +78,6 @@ public class Main extends Application {
         CompareFilesController compareFilesController = mainController.getCompareFilesController();
         if (compareFiles != null) {
             compareFilesController.setData(compareFiles);
-        }
-    }
-
-    private void testGreedyStringTiling() {
-        String pattern = "a b c d c b a d c b a d c b a d b";
-        String text = "a b c d d c b a d a c d a d c d a d b b b d a c b b d a d c b d a";
-
-        PlagResult result = GreedyStringTiling.run(pattern, text, 2, (float)0.5, false);
-        System.out.println("Similarity: "+result.getSimilarity());
-        System.out.print("Plagiriasm tiles: ");
-        for (MatchVals tiles : result.getTiles()){
-            System.out.print("(" + tiles.patternPostion + "," + tiles.textPosition + "," + tiles.length + ")");
         }
     }
 

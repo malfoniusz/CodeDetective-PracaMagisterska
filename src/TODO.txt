@@ -1,6 +1,10 @@
 ﻿
-6. Testy
+- if distance to next tile £ s then advance t to first unmarked token after next tile - w jaki sposób jest liczony "distance to next tile"
+- if match not occluded then - sprawdzić jak jest sprawdzane "occluded"
+
 - nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
+- wyświetlanie tylko par plików z minimalnym procentem podobieństwa
+- help - opisac m.in. w oknach - co oznaczają poszczególne kolumny tabel; w ustawieniach tokenow - co oznaczają poszczególne tokeny
 
 
 7. Eksperymenty
@@ -9,9 +13,6 @@
 
 
 8. Rozbudowa:
-- help - opisac m.in. w oknach - co oznaczają poszczególne kolumny tabel; w ustawieniach tokenow - co oznaczają poszczególne tokeny
 - zmodyfikować algorytm RKR-GST lub zaimplementować inne algorytmy i porównać czas ich wykonania (praw. par trzeba będzie liczyć ręcznie)
 - zrobić metodę 1 do 1
-- CompareFiles - wyświetlić długość najdłuższego znalezionego podobnego fragmentu
 - branie pod uwagę procentowego podobieństwa fragmentów (niepodobny kod na początku i końcu fragmentu jest pomijany) + zaimplementować ustawienia
-- wyświetlanie tylko par plików z minimalnym procentem podobieństwa
