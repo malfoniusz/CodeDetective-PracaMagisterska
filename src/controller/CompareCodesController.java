@@ -42,17 +42,17 @@ public class CompareCodesController implements Initializable {
         iCodeBase.getChildren().clear();
     }
 
-    // UWAGA: okno musi być zainicializowane przed wywołaniem tej funkcji
+    // UWAGA: okno musi byc zainicializowane przed wywolaniem tej funkcji
     private void scrollToLine(File file, int lineNumber, ScrollPane scrollPane, TextFlow textFlow) {
-        int fixedLineNumber = lineNumber - 1;   // Zawsze scrolluje o jedną linijkę za dużo
+        int fixedLineNumber = lineNumber - 1;   // Zawsze scrolluje o jedna linijke za duzo
 
         int totalLines = totalLines(file);
-        double position = fixedLineNumber / (double) totalLines;    // Procentowy poziom, na którym jest linijka
+        double position = fixedLineNumber / (double) totalLines;    // Procentowy poziom, na ktorym jest linijka
 
-        double v = textFlow.getHeight();    // Wysokość całego tekstu
-        double t = position * v;            // Wysokość linijki
-        double o = scrollPane.getHeight();  // Wysokość pojedyńczego okna, na którym wyświetlany jest tekst
-        double s = t / (v-o);               // Wartość przesunięcia scrollbara
+        double v = textFlow.getHeight();    // Wysokosc calego tekstu
+        double t = position * v;            // Wysokosc linijki
+        double o = scrollPane.getHeight();  // Wysokosc pojedynczego okna, na ktorym wyswietlany jest tekst
+        double s = t / (v-o);               // Wartosc przesuniecia scrollbara
 
         scrollPane.setVvalue(s);
     }
@@ -70,41 +70,49 @@ public class CompareCodesController implements Initializable {
         int fromLine = fileMarked.getFromLine();
         int toLine = fileMarked.getToLine();
 
-        Text textBefore = read(file, 1, fromLine - 1);
+        String strFile = read(file);
+        String[] splited = strFile.split(System.lineSeparator());
 
-        Text textBetween = read(file, fromLine, toLine);
+        Text textBefore = new Text(partString(splited, 1, fromLine - 1));
+
+        Text textBetween = new Text(partString(splited, fromLine, toLine));
         textBetween.setFont(Font.font("Verdana", 11));
         textBetween.setFill(Color.CRIMSON);
 
-        Text textAfter = read(file, toLine + 1, -1);
+        Text textAfter = new Text(partString(splited, toLine + 1, splited.length));
         String strAfterTrimmed = textAfter.getText().trim();
         textAfter.setText(strAfterTrimmed);
 
         return new TextFlow(textBefore, textBetween, textAfter);
     }
 
-    private Text read(File file, final int fromLine, final int toLine) {
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+    private String partString(String[] strTable, final int fromLine, final int toLine) {
+    	StringBuilder sb = new StringBuilder();
+    	for (int i = fromLine; i <= toLine; i++) {
+    		sb.append(strTable[i-1]);
+			sb.append(System.lineSeparator());
+    	}
+
+    	return sb.toString();
+    }
+
+    private String read(File file) {
+    	try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             StringBuilder sb = new StringBuilder();
 
             String line = br.readLine();
             int lineNumber = 1;
 
             while (line != null) {
-                if (toLine > 0 && lineNumber > toLine) {
-                    break;
-                }
-                else if (lineNumber >= fromLine) {
-                    String lineFormated = String.format("%-10d%s", lineNumber, line);
-                    sb.append(lineFormated);
-                    sb.append(System.lineSeparator());
-                }
+                String lineFormated = String.format("%-10d%s", lineNumber, line);
+                sb.append(lineFormated);
+                sb.append(System.lineSeparator());
 
                 line = br.readLine();
                 lineNumber++;
             }
 
-            return new Text(sb.toString());
+            return sb.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }

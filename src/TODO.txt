@@ -1,8 +1,6 @@
 ﻿
-- if distance to next tile £ s then advance t to first unmarked token after next tile - w jaki sposób jest liczony "distance to next tile"
-- if match not occluded then - sprawdzić jak jest sprawdzane "occluded"
+- CompareCodes - poprawic autoscrollowanie dla kodu oznaczonego dalego w pliku
 
-- nauczyć się dokładnie jak działa algorytm RKR-GST i opisać sposób jego działania w dokumentacji
 - wyświetlanie tylko par plików z minimalnym procentem podobieństwa
 - help - opisac m.in. w oknach - co oznaczają poszczególne kolumny tabel; w ustawieniach tokenow - co oznaczają poszczególne tokeny
 
