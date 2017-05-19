@@ -113,6 +113,24 @@ public class MenuController implements Initializable {
         stage.show();
     }
 
+    @FXML @SuppressWarnings("unused")
+    private void helpAction(ActionEvent event) throws IOException {
+        String settingsTokensFilePath = PropertiesReader.readProperty("menuController_helpAction");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(settingsTokensFilePath));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        stage.setTitle("Help");
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(mainStage);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void updateIItemStart() {
         if (Settings.getProject() != null && Settings.getBase() != null) {
             iItemStart.setDisable(false);
