@@ -44,17 +44,16 @@ public class CompareCodesController implements Initializable {
 
     // UWAGA: okno musi byc zainicializowane przed wywolaniem tej funkcji
     private void scrollToLine(File file, int lineNumber, ScrollPane scrollPane, TextFlow textFlow) {
-        int fixedLineNumber = lineNumber - 1;   // Zawsze scrolluje o jedna linijke za duzo
+        double viewHeight = scrollPane.getHeight();  // Wysokosc pojedynczego okna
+        double windowHeight = textFlow.getHeight();  // Wysokosc calego tekstu
+        double scrollHeight = windowHeight - viewHeight;
 
-        int totalLines = totalLines(file);
-        double position = fixedLineNumber / (double) totalLines;    // Procentowy poziom, na ktorym jest linijka
+        final double pixelsPerLine = 15.92;
+        double lineHeight = (lineNumber-2) * pixelsPerLine; // -1 dla pierwszej linijki nie przesuwamy się, -1 aby pokazac linijke przed
 
-        double v = textFlow.getHeight();    // Wysokosc calego tekstu
-        double t = position * v;            // Wysokosc linijki
-        double o = scrollPane.getHeight();  // Wysokosc pojedynczego okna, na ktorym wyswietlany jest tekst
-        double s = t / (v-o);               // Wartosc przesuniecia scrollbara
+        double scrollValue = lineHeight / scrollHeight;
 
-        scrollPane.setVvalue(s);
+        scrollPane.setVvalue(scrollValue);
     }
 
     private void setCode(TextFlow textFlow, FileMarked fileMarked) {

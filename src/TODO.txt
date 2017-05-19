@@ -1,9 +1,7 @@
 ﻿
-- CompareCodes - poprawic autoscrollowanie dla kodu oznaczonego dalego w pliku
-
 - wyświetlanie tylko par plików z minimalnym procentem podobieństwa
 - help - opisac m.in. w oknach - co oznaczają poszczególne kolumny tabel; w ustawieniach tokenow - co oznaczają poszczególne tokeny
-
+- szablon dokumentacji: http://zio.iiar.pwr.wroc.pl/dydaktyka.html
 
 7. Eksperymenty
 - przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
