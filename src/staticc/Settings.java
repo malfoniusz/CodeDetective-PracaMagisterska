@@ -12,8 +12,12 @@ public final class Settings {
 
     private static final String PROJECT_PATH = "project_path";
     private static final String BASE_PATH = "base_path";
+
     private static final String MINIMAL_MATCHED_LINES_VALUE = "minimal_matched_lines_value";
     private static final int MINIMAL_MATCHED_LINES_VALUE_DEFAULT = 5;
+
+    private static final String MINIMAL_SIMILARITY = "minimal_similarity";
+    private static final double MINIMAL_SIMILARITY_DEFAULT = 0.0001; // <0, 1>
 
     private Settings() {
 
@@ -85,6 +89,22 @@ public final class Settings {
 
     public static void setMinimalMatchedLinesValue(int value) {
         preferences.putInt(MINIMAL_MATCHED_LINES_VALUE, value);
+    }
+
+    public static double getMinimalSimilarityAsPercentage() {
+        return 100*preferences.getDouble(MINIMAL_SIMILARITY, MINIMAL_SIMILARITY_DEFAULT);
+    }
+
+    public static void setMinimalSimilarityAsPercentage(double value) {
+        preferences.putDouble(MINIMAL_SIMILARITY, value/100);
+    }
+
+    public static double getMinimalSimilarityAsValue() {
+        return preferences.getDouble(MINIMAL_SIMILARITY, MINIMAL_SIMILARITY_DEFAULT);
+    }
+
+    public static void setMinimalSimilarityAsValue(double value) {
+        preferences.putDouble(MINIMAL_SIMILARITY, value);
     }
 
 }

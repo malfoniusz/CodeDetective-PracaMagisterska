@@ -27,7 +27,7 @@ public class CompareFiles {
     private final SimpleIntegerProperty rLongestMatch;
 
     // Column Matched
-    private final SimpleFloatProperty rSimilarity;
+    private final SimpleFloatProperty rSimilarity;  // <0, 100>
 
     // Informacje, które będą wyświetlone na kolejnym oknie
     private ArrayList<CompareFragments> compareFragments;
@@ -49,8 +49,7 @@ public class CompareFiles {
 
         this.rLongestMatch = new SimpleIntegerProperty(longestMatch);
 
-        // Zaokraglenie do dwoch miejsc po przecinku i zamiana na procenty
-        similarity = Math.round(similarity*10000) / (float) 100;
+        similarity = Math.round(similarity*10000) / (float) 100; // Zaokraglenie do dwoch miejsc po przecinku i zamiana na procenty
         this.rSimilarity = new SimpleFloatProperty(similarity);
 
         this.compareFragments = compareFragments;

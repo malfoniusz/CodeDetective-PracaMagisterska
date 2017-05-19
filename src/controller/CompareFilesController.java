@@ -26,7 +26,7 @@ public class CompareFilesController implements Initializable {
     @FXML private TableColumn<CompareFiles, String> iFileBase;
     @FXML private TableColumn<CompareFiles, String> iBaseName;
     @FXML private TableColumn<CompareFiles, Integer> iLongestMatch;
-    @FXML private TableColumn<CompareFiles, Float> iSimilarity;
+    @FXML private TableColumn<CompareFiles, Float> iSimilarity; // <0, 100>
 
     private final ObservableList<CompareFiles> data = FXCollections.observableArrayList();
 

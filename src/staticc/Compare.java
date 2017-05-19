@@ -68,6 +68,10 @@ public class Compare {
 
         PlagResult result = runAlgorithm(projectFile, baseFile, switchPlaces);
 
+        if (result.getSimilarity() < Settings.getMinimalSimilarityAsValue()) {
+            return null;
+        }
+
         ArrayList<CompareFragments> compareFragments = createFragments(projectFile, baseFile, result, switchPlaces);
         if (compareFragments.isEmpty()) {
             return null;
