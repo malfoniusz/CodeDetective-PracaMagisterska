@@ -37,13 +37,13 @@ public class CompareFiles {
 
         this.fileProject = fileProject;
         this.fileProjectLines = fileProjectLines;
-        this.fileProjectShortPath = fileShortPath(fileProject, projectDir);
+        this.fileProjectShortPath = fileShortProjectPath(fileProject, projectDir);
         this.rFileProject = new SimpleStringProperty();
         updateRFileProject();
 
         this.fileBase = fileBase;
         this.fileBaseLines = fileBaseLines;
-        this.fileBaseShortPath = fileShortPath(fileBase, baseDir);
+        this.fileBaseShortPath = fileShortBasePath(fileBase, baseDir);
         this.rFileBase = new SimpleStringProperty();
         updateRFileBase();
 
@@ -55,7 +55,15 @@ public class CompareFiles {
         this.compareFragments = compareFragments;
     }
 
-    private String fileShortPath(File file, File dir) {
+    private String fileShortProjectPath(File file, File dir) {
+        String filePath = file.getPath();
+        String dirPath = dir.getPath();
+
+        String shortPath = "." + filePath.replace(dirPath, "");
+        return shortPath;
+    }
+
+    private String fileShortBasePath(File file, File dir) {
         String filePath = file.getPath();
         String dirPath = dir.getPath();
         String dirName = dir.getName();
@@ -63,7 +71,6 @@ public class CompareFiles {
         String shortPath = ".\\" + filePath.replace(dirPath, dirName);
         return shortPath;
     }
-
 
 
     public String getRFileProject() {

@@ -50,9 +50,8 @@ public class CompareFilesController implements Initializable {
             tableRow.setOnMouseClicked(event -> {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     CompareFiles compareFiles = tableRow.getItem();
-                    // Ustaw naglowek tabel
-                    compareFragmentsController.setColumnName(1, compareFiles.getFileProjectShortPath());
-                    compareFragmentsController.setColumnName(2, compareFiles.getFileBaseShortPath());
+                    // Ustaw liste sciezek do plikow
+                    compareFragmentsController.setShortDir(compareFiles.getFileProjectShortPath(), compareFiles.getFileBaseShortPath());
 
                     // Wyswietl fragmenty
                     compareFragmentsController.setData(compareFiles.getCompareFragments());

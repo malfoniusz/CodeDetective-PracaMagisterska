@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -20,16 +21,29 @@ public class CompareFragmentsController implements Initializable {
 
     private CompareCodesController compareCodesController;
 
-    @FXML private TableView<CompareFragments> compareFragments;
-    @FXML private TableColumn<CompareFragments, String> iFileFragmentProject;
-    @FXML private TableColumn<CompareFragments, String> iFileFragmentBase;
+    @FXML private ListView<String> viewShortDir;
+    private final ObservableList<String> shortDir = FXCollections.observableArrayList();
 
+    @FXML private TableView<CompareFragments> compareFragments;
+    @FXML private TableColumn<CompareFragments, Integer> iProjectFrom;
+    @FXML private TableColumn<CompareFragments, Integer> iProjectTo;
+    @FXML private TableColumn<CompareFragments, Integer> iProjectLength;
+    @FXML private TableColumn<CompareFragments, Integer> iBaseFrom;
+    @FXML private TableColumn<CompareFragments, Integer> iBaseTo;
+    @FXML private TableColumn<CompareFragments, Integer> iBaseLength;
     private final ObservableList<CompareFragments> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        iFileFragmentProject.setCellValueFactory(new PropertyValueFactory<CompareFragments, String>("rFileFragmentProject"));
-        iFileFragmentBase.setCellValueFactory(new PropertyValueFactory<CompareFragments, String>("rFileFragmentBase"));
+        iProjectFrom.setCellValueFactory(new PropertyValueFactory<CompareFragments, Integer>("rProjectFrom"));
+        iProjectTo.setCellValueFactory(new PropertyValueFactory<CompareFragments, Integer>("rProjectTo"));
+        iProjectLength.setCellValueFactory(new PropertyValueFactory<CompareFragments, Integer>("rProjectLength"));
+
+        iBaseFrom.setCellValueFactory(new PropertyValueFactory<CompareFragments, Integer>("rBaseFrom"));
+        iBaseTo.setCellValueFactory(new PropertyValueFactory<CompareFragments, Integer>("rBaseTo"));
+        iBaseLength.setCellValueFactory(new PropertyValueFactory<CompareFragments, Integer>("rBaseLength"));
+
+        viewShortDir.setItems(shortDir);
 
         compareFragments.setPlaceholder(new Label(""));
         compareFragments.setItems(data);
@@ -55,21 +69,15 @@ public class CompareFragmentsController implements Initializable {
     }
 
     public void clearData() {
-        setColumnName(1, "");
-        setColumnName(2, "");
-
+        shortDir.clear();
         data.clear();
     }
 
-    public void setColumnName(int columnNumber, String title) {
-        Label headerLabel = new Label(title);
+    public void setShortDir(String projectShortDir, String baseShortDir) {
+        String projectStr = "Project:\t" + projectShortDir;
+        String baseStr = "Base:\t" + baseShortDir;
 
-        if (columnNumber == 1) {
-            iFileFragmentProject.setGraphic(headerLabel);
-        }
-        else if (columnNumber == 2) {
-            iFileFragmentBase.setGraphic(headerLabel);
-        }
+        shortDir.setAll(projectStr, baseStr);
     }
 
     public void setCompareCodesController(CompareCodesController compareCodesController) {

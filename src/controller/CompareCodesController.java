@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,8 +32,8 @@ public class CompareCodesController implements Initializable {
         setCode(iCodeProject, fileMarkedProject);
         setCode(iCodeBase, fileMarkedBase);
 
-        scrollToLine(fileMarkedProject.getFile(), fileMarkedProject.getFromLine(), iScrollPaneProject, iCodeProject);
-        scrollToLine(fileMarkedBase.getFile(), fileMarkedBase.getFromLine(), iScrollPaneBase, iCodeBase);
+        scrollToLine(fileMarkedProject.getFromLine(), iScrollPaneProject, iCodeProject);
+        scrollToLine(fileMarkedBase.getFromLine(), iScrollPaneBase, iCodeBase);
     }
 
     public void clearCodes() {
@@ -43,7 +42,7 @@ public class CompareCodesController implements Initializable {
     }
 
     // UWAGA: okno musi byc zainicializowane przed wywolaniem tej funkcji
-    private void scrollToLine(File file, int lineNumber, ScrollPane scrollPane, TextFlow textFlow) {
+    private void scrollToLine(int lineNumber, ScrollPane scrollPane, TextFlow textFlow) {
         double viewHeight = scrollPane.getHeight();  // Wysokosc pojedynczego okna
         double windowHeight = textFlow.getHeight();  // Wysokosc calego tekstu
         double scrollHeight = windowHeight - viewHeight;
@@ -119,18 +118,4 @@ public class CompareCodesController implements Initializable {
         return null;
     }
 
-    private int totalLines(File file) {
-        try {
-            LineNumberReader lnr = new LineNumberReader(new FileReader(file));
-            lnr.skip(Long.MAX_VALUE);
-
-            int lineNumber = lnr.getLineNumber() + 1;   // Add 1 because line index starts at 0
-            lnr.close();
-            return lineNumber;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return -1;
-    }
 }

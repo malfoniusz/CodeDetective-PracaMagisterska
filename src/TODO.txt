@@ -1,8 +1,10 @@
 ﻿
-- szablon dokumentacji: http://zio.iiar.pwr.wroc.pl/dydaktyka.html
+- usunac model CompareFragments i zmienic nazwe FileMarked na CompareFragments
+- pomyśleć o tym czy nie pominąć atrybutów (private, protected, etc.)
 
 7. Eksperymenty
-- przetestować program na dużej liczbie podobnych projektów (spytać prowadzącego, poszukać na internecie, poszukać w innych pracach o podobnej tematyce)
+- posegregowac projekty studentow
+- przetestowac program na projektach studentow
 - czas wykonania algorytmu zmierzyć za pomocą jakiejś funkcji
 
 

@@ -68,7 +68,10 @@ public class Compare {
 
         PlagResult result = runAlgorithm(projectFile, baseFile, switchPlaces);
 
-        if (result.getSimilarity() < Settings.getMinimalSimilarityAsValue()) {
+        if (result == null) {
+            return null;
+        }
+        else if (result.getSimilarity() < Settings.getMinimalSimilarityAsValue()) {
             return null;
         }
 
@@ -92,6 +95,10 @@ public class Compare {
     private static PlagResult runAlgorithm(TokenFile projectFile, TokenFile baseFile, boolean switchPlaces) {
         String pattern = (switchPlaces ? baseFile.createTokenLineStrings() : projectFile.createTokenLineStrings());
         String text = (switchPlaces ? projectFile.createTokenLineStrings() : baseFile.createTokenLineStrings());
+        if (pattern.isEmpty() || text.isEmpty()) {
+            return null;
+        }
+
         PlagResult result = GreedyStringTiling.run(pattern, text, Settings.getMinimalMatchedLinesValue(), (float)0.5, false);
 
         return result;
@@ -101,14 +108,14 @@ public class Compare {
         ArrayList<CompareFragments> compareFragments = new ArrayList<>();
 
         for (MatchVals tile : result.getTiles()){
-            CompareFragments fragments = createFragment(projectFile, baseFile, tile, switchPlaces);
+            CompareFragments fragments = createFragment(projectFile, baseFile, tile, switchPlaces, tile.length);
             compareFragments.add(fragments);
         }
 
         return compareFragments;
     }
 
-    private static CompareFragments createFragment(TokenFile projectFile, TokenFile baseFile, MatchVals tile, boolean switchPlaces) {
+    private static CompareFragments createFragment(TokenFile projectFile, TokenFile baseFile, MatchVals tile, boolean switchPlaces, int length) {
         int projectPosition = (switchPlaces ? tile.textPosition : tile.patternPostion);
         int projectCodeLineStart = projectFile.getTokenLines().get(projectPosition).getLineNumber();
         int projectCodeLineDistance = projectFile.codeLineDistance(projectPosition, tile.length);
@@ -119,8 +126,8 @@ public class Compare {
         int baseCodeLineDistance = baseFile.codeLineDistance(basePosition, tile.length);
         int baseCodeLineEnd = baseCodeLineStart + baseCodeLineDistance;
 
-        FileMarked markedProject = new FileMarked(projectFile.getFile(), projectCodeLineStart, projectCodeLineEnd);
-        FileMarked markedBase = new FileMarked(baseFile.getFile(), baseCodeLineStart, baseCodeLineEnd);
+        FileMarked markedProject = new FileMarked(projectFile.getFile(), projectCodeLineStart, projectCodeLineEnd, length);
+        FileMarked markedBase = new FileMarked(baseFile.getFile(), baseCodeLineStart, baseCodeLineEnd, length);
 
         return new CompareFragments(markedProject, markedBase);
     }

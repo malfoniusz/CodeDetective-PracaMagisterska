@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
 
-<TableView fx:id="compareFragments" prefHeight="200.0" stylesheets="@../css/CompareFragments.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CompareFragmentsController">
-  <columns>
-    <TableColumn fx:id="iFileFragmentProject" prefWidth="262.0" />
-    <TableColumn fx:id="iFileFragmentBase" prefWidth="262.0" />
-  </columns>
-</TableView>
+<VBox stylesheets="@../css/TableColumn.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CompareFragmentsController">
+   <children>
+      <TableView fx:id="compareFragments" stylesheets="@../css/CompareFragments.css">
+        <columns>
+          <TableColumn text="Project">
+               <columns>
+                  <TableColumn fx:id="iProjectFrom" prefWidth="87.0" styleClass="column-top-center" text="From" />
+                  <TableColumn fx:id="iProjectTo" prefWidth="87.0" styleClass="column-top-center" text="To" />
+                  <TableColumn fx:id="iProjectLength" prefWidth="87.0" styleClass="column-top-center" text="Length" />
+               </columns></TableColumn>
+          <TableColumn text="Base">
+               <columns>
+                  <TableColumn fx:id="iBaseFrom" prefWidth="87.0" styleClass="column-top-center" text="From" />
+                  <TableColumn fx:id="iBaseTo" prefWidth="87.0" styleClass="column-top-center" text="To" />
+                  <TableColumn fx:id="iBaseLength" prefWidth="87.0" styleClass="column-top-center" text="Length" />
+               </columns></TableColumn>
+        </columns>
+      </TableView>
+      <ListView fx:id="viewShortDir" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mouseTransparent="true" prefHeight="48.0" />
+   </children>
+</VBox>

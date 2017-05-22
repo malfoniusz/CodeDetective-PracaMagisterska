@@ -100,7 +100,7 @@ public class SettingsTokensController implements Initializable {
         setOptions6(true, true, true, true, true);
         setOptions7(true, true, true);
         setOptions8(true, true, true);
-        setOptions9(true, true, true);
+        setOptions9(false, true, true);
         updateSkips();
     }
 
