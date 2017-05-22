@@ -57,7 +57,7 @@ public class CompareFragmentsController implements Initializable {
             tableRow.setOnMouseClicked(event -> {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     CompareFragments compareFragments = tableRow.getItem();
-                    compareCodesController.setCodes(compareFragments.getFileMarkedProject(), compareFragments.getFileMarkedBase());
+                    compareCodesController.setCodes(compareFragments);
                 }
             });
             return tableRow ;

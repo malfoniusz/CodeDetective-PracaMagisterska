@@ -13,7 +13,6 @@ import com.nlputil.gst.PlagResult;
 
 import model.CompareFiles;
 import model.CompareFragments;
-import model.FileMarked;
 import model.Project;
 import model.Projects;
 import model.SetttingsTokensRadioGroup;
@@ -68,7 +67,7 @@ public class ComapreTest {
 
             switch (A) {
             case 0:
-                assertCompareFile(compareFile, "P1.java", 109, "B1.java", 101, "base1", 35, 95.77, ".\\project\\P1.java", ".\\base1\\B1.java");
+                assertCompareFile(compareFile, "P1.java", 109, "B1.java", 101, "base1", 35, 95.77, ".\\P1.java", ".\\base1\\B1.java");
 
                 for (int B = 0; B < compareFile.getCompareFragments().size(); B++) {
                     CompareFragments compareFragment = compareFile.getCompareFragments().get(B);
@@ -83,7 +82,7 @@ public class ComapreTest {
                 }
                 break;
             case 1:
-                assertCompareFile(compareFile, "P1.java", 109, "B2.java", 248, "base2", 11, 8.84, ".\\project\\P1.java", ".\\base2\\B2.java");
+                assertCompareFile(compareFile, "P1.java", 109, "B2.java", 248, "base2", 11, 8.84, ".\\P1.java", ".\\base2\\B2.java");
 
                 for (int B = 0; B < compareFile.getCompareFragments().size(); B++) {
                     CompareFragments compareFragment = compareFile.getCompareFragments().get(B);
@@ -125,15 +124,12 @@ public class ComapreTest {
     }
 
     private void assertCompareFragment(CompareFragments compareFragment, String fileProjectName, int pFromLine, int pToLine, String fileBaseName, int bFromLine, int bToLine) {
-        FileMarked markedProject = compareFragment.getFileMarkedProject();
-        FileMarked markedBase = compareFragment.getFileMarkedBase();
-
-        assertEquals(markedProject.getFile().getName(), fileProjectName);
-        assertEquals(markedProject.getFromLine(), pFromLine);
-        assertEquals(markedProject.getToLine(), pToLine);
-        assertEquals(markedBase.getFile().getName(), fileBaseName);
-        assertEquals(markedBase.getFromLine(), bFromLine);
-        assertEquals(markedBase.getToLine(), bToLine);
+        assertEquals(compareFragment.getProjectFile().getName(), fileProjectName);
+        assertEquals(compareFragment.getRProjectFrom(), pFromLine);
+        assertEquals(compareFragment.getRProjectTo(), pToLine);
+        assertEquals(compareFragment.getBaseFile().getName(), fileBaseName);
+        assertEquals(compareFragment.getRBaseFrom(), bFromLine);
+        assertEquals(compareFragment.getRBaseTo(), bToLine);
     }
 
     @SuppressWarnings("unused")

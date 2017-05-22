@@ -1,7 +1,4 @@
 ﻿
-- usunac model CompareFragments i zmienic nazwe FileMarked na CompareFragments
-- pomyśleć o tym czy nie pominąć atrybutów (private, protected, etc.)
-
 7. Eksperymenty
 - posegregowac projekty studentow
 - przetestowac program na projektach studentow

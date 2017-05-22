@@ -1,4 +1,5 @@
 package main;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,8 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.CompareFiles;
+import model.Project;
+import model.Projects;
 import staticc.Compare;
 import staticc.PropertiesReader;
+import staticc.Settings;
 
 public class Main extends Application {
 
@@ -61,7 +65,15 @@ public class Main extends Application {
     }
 
     // TODO: kod testow
+    final String PATH_PROJECT = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Project\\";
+    final String PATH_BASE = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Base\\";
     private void preload() {
+        Project project = new Project(new File(PATH_PROJECT));
+        Projects base = new Projects(new File(PATH_BASE));
+
+        Settings.setProject(project);
+        Settings.setBase(base);
+
         ArrayList<CompareFiles> compareFiles = Compare.runCompare();
         CompareFilesController compareFilesController = mainController.getCompareFilesController();
         if (compareFiles != null) {

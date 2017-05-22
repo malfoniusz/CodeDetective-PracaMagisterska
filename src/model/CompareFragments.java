@@ -1,47 +1,49 @@
 package model;
 
+import java.io.File;
+
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class CompareFragments {
 
     // Column Project
+    private File projectFile;
     private final SimpleIntegerProperty rProjectFrom;
     private final SimpleIntegerProperty rProjectTo;
     private final SimpleIntegerProperty rProjectLength;
-    private FileMarked fileMarkedProject;
 
     // Column Base
+    private File baseFile;
     private final SimpleIntegerProperty rBaseFrom;
     private final SimpleIntegerProperty rBaseTo;
     private final SimpleIntegerProperty rBaseLength;
-    private FileMarked fileMarkedBase;
 
     public CompareFragments(FileMarked fileMarkedProject, FileMarked fileMarkedBase) {
-        this.fileMarkedProject = fileMarkedProject;
+        this.projectFile = fileMarkedProject.getFile();
         this.rProjectFrom = new SimpleIntegerProperty(fileMarkedProject.getFromLine());
         this.rProjectTo = new SimpleIntegerProperty(fileMarkedProject.getToLine());
         this.rProjectLength = new SimpleIntegerProperty(fileMarkedProject.getLength());
 
-        this.fileMarkedBase = fileMarkedBase;
+        this.baseFile = fileMarkedBase.getFile();
         this.rBaseFrom = new SimpleIntegerProperty(fileMarkedBase.getFromLine());
         this.rBaseTo = new SimpleIntegerProperty(fileMarkedBase.getToLine());
         this.rBaseLength = new SimpleIntegerProperty(fileMarkedBase.getLength());
     }
 
-    public FileMarked getFileMarkedProject() {
-        return fileMarkedProject;
+    public File getProjectFile() {
+        return projectFile;
     }
 
-    public void setFileMarkedProject(FileMarked fileMarkedProject) {
-        this.fileMarkedProject = fileMarkedProject;
+    public void setProjectFile(File projectFile) {
+        this.projectFile = projectFile;
     }
 
-    public FileMarked getFileMarkedBase() {
-        return fileMarkedBase;
+    public File getBaseFile() {
+        return baseFile;
     }
 
-    public void setFileMarkedBase(FileMarked fileMarkedBase) {
-        this.fileMarkedBase = fileMarkedBase;
+    public void setBaseFile(File baseFile) {
+        this.baseFile = baseFile;
     }
 
     public int getRProjectFrom() {

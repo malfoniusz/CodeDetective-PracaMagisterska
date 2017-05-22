@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import model.CompareFragments;
 import model.FileMarked;
 
 public class CompareCodesController implements Initializable {
@@ -28,12 +29,15 @@ public class CompareCodesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void setCodes(FileMarked fileMarkedProject, FileMarked fileMarkedBase) {
+    public void setCodes(CompareFragments compareFragments) {
+        FileMarked fileMarkedProject = new FileMarked(compareFragments.getProjectFile(), compareFragments.getRProjectFrom(), compareFragments.getRProjectTo(), compareFragments.getRProjectLength());
+        FileMarked fileMarkedBase = new FileMarked(compareFragments.getBaseFile(), compareFragments.getRBaseFrom(), compareFragments.getRBaseTo(), compareFragments.getRBaseLength());
+
         setCode(iCodeProject, fileMarkedProject);
         setCode(iCodeBase, fileMarkedBase);
 
-        scrollToLine(fileMarkedProject.getFromLine(), iScrollPaneProject, iCodeProject);
-        scrollToLine(fileMarkedBase.getFromLine(), iScrollPaneBase, iCodeBase);
+        scrollToLine(compareFragments.getRProjectFrom(), iScrollPaneProject, iCodeProject);
+        scrollToLine(compareFragments.getRBaseFrom(), iScrollPaneBase, iCodeBase);
     }
 
     public void clearCodes() {
