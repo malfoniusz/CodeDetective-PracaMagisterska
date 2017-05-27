@@ -14,7 +14,7 @@ public final class Settings {
     private static final String BASE_PATH = "base_path";
 
     private static final String MINIMAL_MATCHED_LINES_VALUE = "minimal_matched_lines_value";
-    private static final int MINIMAL_MATCHED_LINES_VALUE_DEFAULT = 5;
+    private static final int MINIMAL_MATCHED_LINES_VALUE_DEFAULT = 10;
 
     private static final String MINIMAL_SIMILARITY = "minimal_similarity";
     private static final double MINIMAL_SIMILARITY_DEFAULT = 0.0001; // <0, 1>

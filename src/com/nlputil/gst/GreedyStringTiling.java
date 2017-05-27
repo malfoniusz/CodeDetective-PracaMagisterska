@@ -299,6 +299,41 @@ public class GreedyStringTiling {
 	}
 
 	/**
+     * Returns true if the match is already occluded by another match in the
+     * tiles list.
+     *
+     * "Note that "not occluded" is taken to mean that none of the tokens Pp to
+     * Pp+maxmatch-1 and Tt to Tt+maxmatch-1 has been marked during the creation
+     * of an earlier tile.
+     *
+     * !!!The original code has been changed.
+     * We only need to check if the start or end of Pp and Tt are marked to see
+     * if any token between them has been marked.
+     *
+     * @param match
+     * @param tiles2
+     * @return true or false
+     */
+    private static boolean isOccluded(MatchVals match, ArrayList<MatchVals> tiles) {
+        if(tiles.equals(null) || tiles == null || tiles.size() == 0)
+            return false;
+        for (MatchVals tile : tiles) {
+            int tilePEnd = tile.patternPostion + tile.length;
+            int tileTEnd = tile.textPosition + tile.length;
+
+            int matchPEnd = match.patternPostion + match.length;
+            int matchTEnd = match.textPosition + match.length;
+
+            if (match.patternPostion >= tile.patternPostion && match.patternPostion <= tilePEnd
+                    || matchPEnd >= tile.patternPostion && matchPEnd <= tilePEnd
+                    || match.textPosition >= tile.textPosition && match.textPosition <= tileTEnd
+                    || matchTEnd >= tile.textPosition && matchTEnd <= tileTEnd)
+                return true;
+        }
+        return false;
+    }
+
+	/**
 	 * Creates a Karp-Rabin Hash Value for the given substring and returns it.
 	 *
 	 * Based on: http://www-igm.univ-mlv.fr/~lecroq/string/node5.html
@@ -336,35 +371,6 @@ public class GreedyStringTiling {
 		sb.append("*");
 		sb.append(string);
 		return sb.toString();
-	}
-
-	/**
-	 * Returns true if the match is already occluded by another match in the
-	 * tiles list.
-	 *
-	 * "Note that "not occluded" is taken to mean that none of the tokens Pp to
-	 * Pp+maxmatch-1 and Tt to Tt+maxmatch-1 has been marked during the creation
-	 * of an earlier tile. However, given that smaller tiles cannot be created
-	 * before larger ones, it suffices that only the ends of each new putative
-	 * tile be testet for occlusion, rather than the whole maxmimal match." [
-	 * "String Similarity via Greedy String Tiling and Running Karp-Rabin Matching"
-	 * http://www.pam1.bcs.uwa.edu.au/~michaelw/ftp/doc/RKR_GST.ps]
-	 *
-	 * @param match
-	 * @param tiles2
-	 * @return true or false
-	 */
-	private static boolean isOccluded(MatchVals match, ArrayList<MatchVals> tiles) {
-		if(tiles.equals(null) || tiles == null || tiles.size() == 0)
-			return false;
-		for (MatchVals matches : tiles) {
-			if ((matches.patternPostion + matches.length == match.patternPostion
-					+ match.length)
-					&& (matches.textPosition + matches.length == match.textPosition
-					+ match.length))
-				return true;
-		}
-		return false;
 	}
 
 	/**

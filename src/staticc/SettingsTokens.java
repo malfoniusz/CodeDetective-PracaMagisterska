@@ -94,7 +94,8 @@ public class SettingsTokens {
     }
 
     public static String getIRadioGroup() {
-        return i_radio_group;
+        // Z nieznanych powodow wartosc domyslna jest zawsze zwracana malymi literami
+        return i_radio_group.toUpperCase();
     }
 
     public static void setIRadioGroup(SetttingsTokensRadioGroup radioGroup) {

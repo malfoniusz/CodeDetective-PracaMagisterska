@@ -1,9 +1,11 @@
 ﻿
+- sprawdzic jak algorytm wylicza procentowe podobienstwo
+
 7. Eksperymenty
 - posegregowac projekty studentow
 - przetestowac program na projektach studentow
 - czas wykonania algorytmu zmierzyć za pomocą jakiejś funkcji
-
+- sprawdzić czy aplikacja dobrze działa na czystym komputerze
 
 8. Rozbudowa:
 - zmodyfikować algorytm RKR-GST lub zaimplementować inne algorytmy i porównać czas ich wykonania (praw. par trzeba będzie liczyć ręcznie)
