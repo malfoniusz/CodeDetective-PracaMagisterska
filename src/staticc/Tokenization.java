@@ -335,6 +335,7 @@ public final class Tokenization {
         return tokens;
     }
 
+    @SuppressWarnings("unused")
     private static int findRegexCount(String str, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str);

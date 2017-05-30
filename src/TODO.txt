@@ -1,9 +1,14 @@
 ﻿
-- sprawdzic jak algorytm wylicza procentowe podobienstwo
+- po sprawdzeniu wszystkich projektów studenckich zapisz jakie masz (optymalne) ustawienia algorytmu: długość fragmentu i procent podobieństwa +++ ustawić te wartości jako wartości domyślne ustawień
+- poprawić automatyczne sortowanie CompareFiles
+- po kliknięciu na CompareFiles automatycznie kliknij na pierwszy CompareFragments
+- ustawienia algorytmu: minimalna wielkość pliku np. 30 linijek
+- ?(zdecydować po sprawdzeniu projektów zaawansowanych)? Tokenizacja - pominąć linijki kodu zawierające tylko FUNCTION_USE lub ASSIGN FUNCTION_USE
+- na podstawie testów zdecyduj jakie jeszcze tokeny pominąć, aby zmniejszyć liczbę wyników fałszywie pozytywnych: FUNCTION_USE, ASSIGN, NEW, CLASS_VAR
 
 7. Eksperymenty
-- posegregowac projekty studentow
-- przetestowac program na projektach studentow
+- znaleźć wszystkie plagiat i stworzyć grupę testową skłądającą się ze 100 projektów (w tym np. 20 plagiatów)
+- przeanalizować dane odnośnie plagiatów (minimalna wielkość plagiatu, minimalny procent podobieństwa)
 - czas wykonania algorytmu zmierzyć za pomocą jakiejś funkcji
 - sprawdzić czy aplikacja dobrze działa na czystym komputerze
 
