@@ -4,16 +4,32 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import model.tokenization.Token;
 import model.tokenization.TokenFile;
 import model.tokenization.TokenLine;
 import utilities.Constants;
-import utilities.SettingsTokensUtilities;
 import utilities.Utilities;
+import utilities.settings.SettingsLoadSave;
+import utilities.settings.SettingsTokensUtilities;
+import utilities.settings.model.SettingsAll;
 
 public class TokenizationTest {
+
+	public static SettingsAll settingsAll;
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		settingsAll = SettingsLoadSave.loadSettings();
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		SettingsLoadSave.saveSettings(settingsAll);
+	}
 
 	@Test
 	public void full() {

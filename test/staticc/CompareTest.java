@@ -2,9 +2,10 @@ package staticc;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.util.ArrayList;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.nlputil.gst.GreedyStringTiling;
@@ -13,13 +14,24 @@ import com.nlputil.gst.PlagResult;
 
 import model.CompareFiles;
 import model.CompareFragments;
-import model.Project;
-import model.Projects;
 import model.SetttingsTokensRadioGroup;
 import utilities.Constants;
-import utilities.SettingsTokensUtilities;
+import utilities.settings.SettingsLoadSave;
+import utilities.settings.model.SettingsAll;
 
-public class ComapreTest {
+public class CompareTest {
+
+	public static SettingsAll settingsAll;
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		settingsAll = SettingsLoadSave.loadSettings();
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		SettingsLoadSave.saveSettings(settingsAll);
+	}
 
     @Test
     public void algorithm() {
@@ -38,27 +50,24 @@ public class ComapreTest {
                 assertEquals(tile.length, 5);
                 break;
             case 1:
-                assertEquals(tile.textPosition, 4);
-                assertEquals(tile.patternPostion, 8);
-                assertEquals(tile.length, 5);
+                assertEquals(tile.textPosition, 12);
+                assertEquals(tile.patternPostion, 11);
+                assertEquals(tile.length, 3);
                 break;
             case 2:
-                assertEquals(tile.textPosition, 4);
-                assertEquals(tile.patternPostion, 12);
-                assertEquals(tile.length, 5);
-                break;
-            case 3:
-                assertEquals(tile.textPosition, 0);
-                assertEquals(tile.patternPostion, 1);
+                assertEquals(tile.textPosition, 16);
+                assertEquals(tile.patternPostion, 15);
                 assertEquals(tile.length, 3);
                 break;
             }
         }
+
+        assertEquals(result.similarity, 0.43137255, 0.01);
     }
 
     @Test
     public void compare() {
-        setSettings(Constants.PROJECT_FOLDER, Constants.BASE_FOLDER, 5, SetttingsTokensRadioGroup.NORMAL);
+        SettingsLoadSave.setSettings(Constants.PROJECT_FOLDER, Constants.BASE_FOLDER, 5, 0.01, SetttingsTokensRadioGroup.NORMAL);
 
         ArrayList<CompareFiles> compareFiles = Compare.runCompare();
 
@@ -67,7 +76,7 @@ public class ComapreTest {
 
             switch (A) {
             case 0:
-                assertCompareFile(compareFile, "P1.java", 109, "B1.java", 101, "base1", 35, 95.77, ".\\P1.java", ".\\base1\\B1.java");
+                assertCompareFile(compareFile, "P1.java", 109, "B1.java", 101, "base1", 34, 94.37, ".\\P1.java", ".\\base1\\B1.java");
 
                 for (int B = 0; B < compareFile.getCompareFragments().size(); B++) {
                     CompareFragments compareFragment = compareFile.getCompareFragments().get(B);
@@ -76,7 +85,7 @@ public class ComapreTest {
                         assertCompareFragment(compareFragment, "P1.java", 3, 46, "B1.java", 3, 46);
                         break;
                     case 1:
-                        assertCompareFragment(compareFragment, "P1.java", 58, 109, "B1.java", 50, 101);
+                        assertCompareFragment(compareFragment, "P1.java", 59, 109, "B1.java", 51, 101);
                         break;
                     }
                 }
@@ -94,19 +103,6 @@ public class ComapreTest {
                 }
                 break;
             }
-        }
-    }
-
-    private void setSettings(File fileProject, File fileBase, int minimalLines, SetttingsTokensRadioGroup tokenizationType) {
-        Project project = new Project(fileProject);
-        Projects base = new Projects(fileBase);
-
-        Settings.setProject(project);
-        Settings.setBase(base);
-        Settings.setMinimalMatchedLinesValue(minimalLines);
-
-        if (tokenizationType.equals(SetttingsTokensRadioGroup.NORMAL)) {
-            SettingsTokensUtilities.tokenizationTypeNormal();
         }
     }
 

@@ -1,4 +1,4 @@
-package utilities;
+package utilities.settings;
 
 import model.SetttingsTokensRadioGroup;
 import staticc.SettingsTokens;
