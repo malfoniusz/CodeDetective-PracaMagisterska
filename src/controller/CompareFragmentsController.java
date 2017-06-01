@@ -83,4 +83,5 @@ public class CompareFragmentsController implements Initializable {
     public void setCompareCodesController(CompareCodesController compareCodesController) {
         this.compareCodesController = compareCodesController;
     }
+
 }

@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -50,13 +51,8 @@ public class CompareFilesController implements Initializable {
             tableRow.setOnMouseClicked(event -> {
                 if (! tableRow.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     CompareFiles compareFiles = tableRow.getItem();
-                    // Ustaw liste sciezek do plikow
                     compareFragmentsController.setShortDir(compareFiles.getFileProjectShortPath(), compareFiles.getFileBaseShortPath());
-
-                    // Wyswietl fragmenty
                     compareFragmentsController.setData(compareFiles.getCompareFragments());
-
-                    // Wyczysc kod
                     compareCodesController.clearCodes();
                 }
             });
@@ -66,7 +62,12 @@ public class CompareFilesController implements Initializable {
 
     public void setData(ArrayList<CompareFiles> items) {
         data.setAll(items);
-        compareFiles.getSortOrder().add(iSimilarity);
+
+        if (compareFiles.getSortOrder().isEmpty()) {
+        	iSimilarity.setSortType(SortType.DESCENDING);
+        	compareFiles.getSortOrder().add(iSimilarity);
+        }
+        compareFiles.sort();
     }
 
     public ObservableList<CompareFiles> getData() {

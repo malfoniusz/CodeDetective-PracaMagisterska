@@ -1,8 +1,4 @@
 ﻿
-- po sprawdzeniu wszystkich projektów studenckich zapisz jakie masz (optymalne) ustawienia algorytmu: długość fragmentu i procent podobieństwa +++ ustawić te wartości jako wartości domyślne ustawień
-- poprawić automatyczne sortowanie CompareFiles
-- po kliknięciu na CompareFiles automatycznie kliknij na pierwszy CompareFragments
-- ustawienia algorytmu: minimalna wielkość pliku np. 30 linijek
 - ?(zdecydować po sprawdzeniu projektów zaawansowanych)? Tokenizacja - pominąć linijki kodu zawierające tylko FUNCTION_USE lub ASSIGN FUNCTION_USE
 - na podstawie testów zdecyduj jakie jeszcze tokeny pominąć, aby zmniejszyć liczbę wyników fałszywie pozytywnych: FUNCTION_USE, ASSIGN, NEW, CLASS_VAR
 
