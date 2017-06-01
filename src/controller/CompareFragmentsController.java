@@ -49,6 +49,7 @@ public class CompareFragmentsController implements Initializable {
         compareFragments.setItems(data);
 
         setRowFactory(compareFragments);
+        setSelectionListener();
     }
 
     private void setRowFactory(TableView<CompareFragments> tableView) {
@@ -62,6 +63,19 @@ public class CompareFragmentsController implements Initializable {
             });
             return tableRow ;
         });
+    }
+
+    private void setSelectionListener() {
+    	compareFragments.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+            	CompareFragments fragment = compareFragments.getSelectionModel().getSelectedItem();
+                compareCodesController.setCodes(fragment);
+            }
+        });
+    }
+
+    public void selectFirst() {
+    	compareFragments.getSelectionModel().selectFirst();
     }
 
     public void setData(ArrayList<CompareFragments> items) {

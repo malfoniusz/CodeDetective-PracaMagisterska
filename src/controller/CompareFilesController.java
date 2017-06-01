@@ -54,6 +54,7 @@ public class CompareFilesController implements Initializable {
                     compareFragmentsController.setShortDir(compareFiles.getFileProjectShortPath(), compareFiles.getFileBaseShortPath());
                     compareFragmentsController.setData(compareFiles.getCompareFragments());
                     compareCodesController.clearCodes();
+                    compareFragmentsController.selectFirst();
                 }
             });
             return tableRow ;
