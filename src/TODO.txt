@@ -1,10 +1,5 @@
 ﻿
-- ?(zdecydować po sprawdzeniu projektów zaawansowanych)? Tokenizacja - pominąć linijki kodu zawierające tylko FUNCTION_USE lub ASSIGN FUNCTION_USE
-- na podstawie testów zdecyduj jakie jeszcze tokeny pominąć, aby zmniejszyć liczbę wyników fałszywie pozytywnych: FUNCTION_USE, ASSIGN, NEW, CLASS_VAR
-
 7. Eksperymenty
-- znaleźć wszystkie plagiat i stworzyć grupę testową skłądającą się ze 100 projektów (w tym np. 20 plagiatów)
-- przeanalizować dane odnośnie plagiatów (minimalna wielkość plagiatu, minimalny procent podobieństwa)
 - czas wykonania algorytmu zmierzyć za pomocą jakiejś funkcji
 - sprawdzić czy aplikacja dobrze działa na czystym komputerze
 

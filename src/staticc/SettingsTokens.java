@@ -34,7 +34,7 @@ public class SettingsTokens {
     private static boolean i_float = preferences.getBoolean(I_FLOAT, false);
     private static boolean i_double = preferences.getBoolean(I_DOUBLE, false);
 
-    private static boolean i_class_variable = preferences.getBoolean(I_CLASS_VARIABLE, true);
+    private static boolean i_class_variable = preferences.getBoolean(I_CLASS_VARIABLE, false);
     private static boolean i_boolean = preferences.getBoolean(I_BOOLEAN, true);
     private static boolean i_byte = preferences.getBoolean(I_BYTE, true);
 
@@ -44,7 +44,7 @@ public class SettingsTokens {
 
     private static boolean i_operator = preferences.getBoolean(I_OPERATOR, false);
     private static boolean i_relation = preferences.getBoolean(I_RELATION, true);
-    private static boolean i_assign = preferences.getBoolean(I_ASSIGN, true);
+    private static boolean i_assign = preferences.getBoolean(I_ASSIGN, false);
     private static boolean i_logic = preferences.getBoolean(I_LOGIC, true);
     private static boolean i_arithmetic = preferences.getBoolean(I_ARITHMETIC, true);
     private static boolean i_bitwise = preferences.getBoolean(I_BITWISE, true);
@@ -60,7 +60,7 @@ public class SettingsTokens {
     private static boolean i_do = preferences.getBoolean(I_DO, true);
 
     private static boolean i_function_define = preferences.getBoolean(I_FUNCTION_DEFINE, true);
-    private static boolean i_function_use = preferences.getBoolean(I_FUNCTION_USE, true);
+    private static boolean i_function_use = preferences.getBoolean(I_FUNCTION_USE, false);
 
     private static boolean i_static = preferences.getBoolean(I_STATIC, true);
     private static boolean i_final = preferences.getBoolean(I_FINAL, true);
@@ -72,7 +72,7 @@ public class SettingsTokens {
     private static boolean i_generic = preferences.getBoolean(I_GENERIC, true);
 
     private static boolean i_class = preferences.getBoolean(I_CLASS, true);
-    private static boolean i_new = preferences.getBoolean(I_NEW, true);
+    private static boolean i_new = preferences.getBoolean(I_NEW, false);
     private static boolean i_enum = preferences.getBoolean(I_ENUM, true);
     private static boolean i_extends = preferences.getBoolean(I_EXTENDS, true);
     private static boolean i_implements = preferences.getBoolean(I_IMPLEMENTS, true);

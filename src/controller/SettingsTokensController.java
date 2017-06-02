@@ -89,15 +89,15 @@ public class SettingsTokensController implements Initializable {
     @FXML @SuppressWarnings("unused")
     private void actionRadioNormal(ActionEvent event) {
     	updateNumber(false, true, true, false, false, false, false, false);
-        setOptions1(true, true, true);
+        setOptions1(false, true, true);
         updateText(true, false, false);
-        updateOperator(false, true, true, true, true, true);
+        updateOperator(false, true, false, true, true, true);
         setOptions2(true, true, true, true);
         updateLoopGroup(true, false, false, false);
-        setOptions3(true, true);
+        setOptions3(true, false);
         setOptions4(true, true, true, true);
         setOptions5(true, true, true);
-        setOptions6(true, true, true, true, true);
+        setOptions6(true, false, true, true, true);
         setOptions7(true, true, true);
         setOptions8(true, true, true);
         setOptions9(false, true, true);
