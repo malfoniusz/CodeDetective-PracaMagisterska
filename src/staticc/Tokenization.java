@@ -23,7 +23,31 @@ public final class Tokenization {
 
     }
 
-    public static TokenFile tokenization(File file) {
+    public static TokenProject tokenProject(Project project) {
+        ArrayList<TokenFile> tokenFiles = new ArrayList<>();
+
+        for (File f : project.getFiles()) {
+            TokenFile tokenFile = Tokenization.tokenization(f);
+            tokenFiles.add(tokenFile);
+        }
+
+        TokenProject tokenProject = new TokenProject(project.getDirectory(), tokenFiles);
+        return tokenProject;
+    }
+
+    public static TokenProjects tokenProjects(Projects projects) {
+        ArrayList<TokenProject> tokenProjectArray = new ArrayList<>();
+
+        for (Project p : projects.getProjects()) {
+            TokenProject tokenProject = Tokenization.tokenProject(p);
+            tokenProjectArray.add(tokenProject);
+        }
+
+        TokenProjects tokenProjects = new TokenProjects(tokenProjectArray);
+        return tokenProjects;
+    }
+
+    private static TokenFile tokenization(File file) {
         NormalizedCode normalizedCode = Normalization.codeNormalization(file);
         TokenFile tokenFile = convertTokenFile(normalizedCode, true);
 
@@ -357,30 +381,6 @@ public final class Tokenization {
         }
 
         return false;
-    }
-
-    public static TokenProject tokenProject(Project project) {
-        ArrayList<TokenFile> tokenFiles = new ArrayList<>();
-
-        for (File f : project.getFiles()) {
-            TokenFile tokenFile = Tokenization.tokenization(f);
-            tokenFiles.add(tokenFile);
-        }
-
-        TokenProject tokenProject = new TokenProject(project.getDirectory(), tokenFiles);
-        return tokenProject;
-    }
-
-    public static TokenProjects tokenProjects(Projects projects) {
-        ArrayList<TokenProject> tokenProjectArray = new ArrayList<>();
-
-        for (Project p : projects.getProjects()) {
-            TokenProject tokenProject = Tokenization.tokenProject(p);
-            tokenProjectArray.add(tokenProject);
-        }
-
-        TokenProjects tokenProjects = new TokenProjects(tokenProjectArray);
-        return tokenProjects;
     }
 
     public static String toStringTokenization(Project project) {

@@ -315,7 +315,7 @@ public class GreedyStringTiling {
      * @return true or false
      */
     private static boolean isOccluded(MatchVals match, ArrayList<MatchVals> tiles) {
-        if(tiles.equals(null) || tiles == null || tiles.size() == 0)
+        if (tiles.equals(null) || tiles == null || tiles.size() == 0)
             return false;
         for (MatchVals tile : tiles) {
             int tilePEnd = tile.patternPostion + tile.length;

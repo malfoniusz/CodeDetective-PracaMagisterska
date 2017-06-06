@@ -8,9 +8,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import model.Project;
 import model.tokenization.Token;
 import model.tokenization.TokenFile;
 import model.tokenization.TokenLine;
+import model.tokenization.TokenProject;
 import utilities.Constants;
 import utilities.Utilities;
 import utilities.settings.SettingsLoadSave;
@@ -50,7 +52,10 @@ public class TokenizationTest {
     }
 
 	private void testTokenization(File tokenizedFile) {
-	    TokenFile tokenFileT = Tokenization.tokenization(Constants.FILE_T);
+	    Project project = new Project(Constants.FILE_T);
+	    TokenProject tokenProject = Tokenization.tokenProject(project);
+	    TokenFile tokenFileT = tokenProject.getTokenFiles().get(0);
+
         TokenFile tokenFileTTokenized = Utilities.loadTokenizedFile(tokenizedFile);
 
         for (int A = 0; A < tokenFileT.getTokenLines().size(); A++) {

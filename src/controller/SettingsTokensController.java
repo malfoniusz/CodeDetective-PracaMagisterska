@@ -107,12 +107,12 @@ public class SettingsTokensController implements Initializable {
     @FXML @SuppressWarnings("unused")
     private void actionRadioMinimalistic(ActionEvent event) {
     	updateNumber(true, false, false, false, false, false, false, false);
-        setOptions1(true, true, true);
+        setOptions1(false, true, true);
         updateText(true, false, false);
         updateOperator(true, false, false, false, false, false);
         setOptions2(true, true, false, false);
         updateLoopGroup(true, false, false, false);
-        setOptions3(true, true);
+        setOptions3(true, false);
         setOptions4(false, false, false, true);
         setOptions5(false, false, false);
         setOptions6(true, false, false, false, false);
