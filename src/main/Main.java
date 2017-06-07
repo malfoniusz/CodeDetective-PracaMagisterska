@@ -32,7 +32,7 @@ public class Main extends Application {
     private Parent root;
 
 	public static void main(String[] args) {
-	    launch(args);
+		launch(args);
 	}
 
     @Override

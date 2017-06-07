@@ -2,6 +2,7 @@ package staticc;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import com.nlputil.gst.GreedyStringTiling;
 import com.nlputil.gst.MatchVals;
@@ -16,6 +17,8 @@ import model.tokenization.TokenProjects;
 
 public class Compare {
 
+	private static boolean MEASURE_TIME = true;
+
     private Compare() {
 
     }
@@ -28,7 +31,14 @@ public class Compare {
         TokenProject tokenProject = Tokenization.tokenProject(Settings.getProject());
         TokenProjects baseProjects = Tokenization.tokenProjects(Settings.getBase());
 
+        TimeWatch watch = TimeWatch.start();
         ArrayList<CompareFiles> compareFiles = compareMain(tokenProject, baseProjects);
+
+        if (MEASURE_TIME == true) {
+        	long passedTimeInSeconds = watch.time(TimeUnit.MILLISECONDS);
+        	System.out.println("Compare Time: " + passedTimeInSeconds);
+        }
+
         return compareFiles;
     }
 
