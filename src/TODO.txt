@@ -1,9 +1,7 @@
 ﻿
-7. Eksperymenty
-- czas wykonania algorytmu zmierzyć za pomocą jakiejś funkcji
-- sprawdzić czy aplikacja dobrze działa na czystym komputerze
-
-8. Rozbudowa:
-- zmodyfikować algorytm RKR-GST lub zaimplementować inne algorytmy i porównać czas ich wykonania (praw. par trzeba będzie liczyć ręcznie)
-- zrobić metodę 1 do 1
-- branie pod uwagę procentowego podobieństwa fragmentów (niepodobny kod na początku i końcu fragmentu jest pomijany) + zaimplementować ustawienia
+- zrobić oddzielny model kontrolujący ustawienia startowe (w main i pomiar czasu)
+- sprawdzić poprawność tekstową help'a
+- Dokumnetacja - w implementacji Normalizacji zamiescic regex wykrywania int
+- Dokumentacja - instrukcja obsługi - wymagania: Java 1.8 (sprawdzić co jeszcze na czystym komputerze)
+- wyłączyć ustawienia końcowe przy oddawaniu programu
+- po wysłaniu dokumentacji wysłać sms do promotora (880201810), podpisać się w sms'ie
