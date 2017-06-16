@@ -21,8 +21,6 @@ import staticc.Settings;
 
 public class Main extends Application {
 
-    private final boolean PRELOAD = true;
-
     private final String SCENE_FILE_NAME = PropertiesReader.readProperty("main_class");
     private final String PROGRAM_NAME = PropertiesReader.readProperty("program_name");
 
@@ -40,7 +38,7 @@ public class Main extends Application {
         initialize(stage);
         prepareStage(stage);
 
-        if (PRELOAD) {
+        if (Start.AUTOSTART) {
             preload();
         }
     }
@@ -64,12 +62,9 @@ public class Main extends Application {
         stage.show();
     }
 
-    // TODO: kod testow
-    final String PATH_PROJECT = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Project\\";
-    final String PATH_BASE = "F:\\Documents\\_Praca magisterska\\ProjektyDoTestow\\_Base\\";
     private void preload() {
-        Project project = new Project(new File(PATH_PROJECT));
-        Projects base = new Projects(new File(PATH_BASE));
+        Project project = new Project(new File(Start.PATH_PROJECT));
+        Projects base = new Projects(new File(Start.PATH_BASE));
 
         Settings.setProject(project);
         Settings.setBase(base);

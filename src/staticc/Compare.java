@@ -8,6 +8,7 @@ import com.nlputil.gst.GreedyStringTiling;
 import com.nlputil.gst.MatchVals;
 import com.nlputil.gst.PlagResult;
 
+import main.Start;
 import model.CompareFiles;
 import model.CompareFragments;
 import model.FileMarked;
@@ -16,8 +17,6 @@ import model.tokenization.TokenProject;
 import model.tokenization.TokenProjects;
 
 public class Compare {
-
-	private static boolean MEASURE_TIME = true;
 
     private Compare() {
 
@@ -34,7 +33,7 @@ public class Compare {
         TimeWatch watch = TimeWatch.start();
         ArrayList<CompareFiles> compareFiles = compareMain(tokenProject, baseProjects);
 
-        if (MEASURE_TIME == true) {
+        if (Start.MEASURE_TIME) {
         	long passedTimeInMilliseconds = watch.time(TimeUnit.MILLISECONDS);
         	System.out.println("Compare Time: " + passedTimeInMilliseconds + " ms");
         }
