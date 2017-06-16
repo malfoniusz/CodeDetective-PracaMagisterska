@@ -44,7 +44,7 @@ public class GreedyStringTiling {
 		matchList = new ArrayList<Queue<MatchVals>>();
 
 		// Compute Tiles
-		tiles = RKR_GST(s1, s2, mML, 20);
+		tiles = RKR_GST(s1, s2, mML, mML);
 
 		// Compute Similarity
 		SimVal simResult = SimilarityCalculator.calcSimilarity(

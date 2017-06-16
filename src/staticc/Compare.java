@@ -35,8 +35,8 @@ public class Compare {
         ArrayList<CompareFiles> compareFiles = compareMain(tokenProject, baseProjects);
 
         if (MEASURE_TIME == true) {
-        	long passedTimeInSeconds = watch.time(TimeUnit.MILLISECONDS);
-        	System.out.println("Compare Time: " + passedTimeInSeconds);
+        	long passedTimeInMilliseconds = watch.time(TimeUnit.MILLISECONDS);
+        	System.out.println("Compare Time: " + passedTimeInMilliseconds + " ms");
         }
 
         return compareFiles;

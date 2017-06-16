@@ -1,7 +1,14 @@
 ﻿
-- zrobić oddzielny model kontrolujący ustawienia startowe (w main i pomiar czasu)
 - sprawdzić poprawność tekstową help'a
 - Dokumnetacja - w implementacji Normalizacji zamiescic regex wykrywania int
 - Dokumentacja - instrukcja obsługi - wymagania: Java 1.8 (sprawdzić co jeszcze na czystym komputerze)
-- wyłączyć ustawienia końcowe przy oddawaniu programu
+- Dokumentacja - dodać rozdział o instniejących rozwiązaniach. Wziąć programy z A.Stelmaszczyk
+- po zrobieniu testów ustawić nowe ustawienia algorytmu
+- zrobić oddzielny model kontrolujący ustawienia startowe (w main i pomiar czasu)
+- na koniec usunąć ustawienia startowe z main'a
+- sprawdzić testy jednostkowe
+- na płycie zamieścić również część projektów testowych
+- przeczytać Zasady pisania pracy
+- sprawdzić cała dokumentacje
+
 - po wysłaniu dokumentacji wysłać sms do promotora (880201810), podpisać się w sms'ie

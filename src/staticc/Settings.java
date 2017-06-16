@@ -17,7 +17,7 @@ public final class Settings {
     private static final int MINIMAL_MATCHED_LINES_VALUE_DEFAULT = 10;
 
     private static final String MINIMAL_SIMILARITY = "minimal_similarity";
-    private static final double MINIMAL_SIMILARITY_DEFAULT = 0.10; // <0, 1>
+    private static final double MINIMAL_SIMILARITY_DEFAULT = 0.20; // <0, 1>
 
     private Settings() {
 
